@@ -30,8 +30,8 @@ export default {
 }
 .splitpage p {
   text-align: center;
-  font-size: 20pt;
-  font-weight: bold //doesnt work?
+  width: 50%;
+  height:100%
 }
 
 .splitpage img {
@@ -53,6 +53,10 @@ export default {
     transform: scale(0.99);
 }
 
+.splitpage button:target{
+  background-color: yellow
+}
+
 .splitpage button{
   border:none;
   background: none;
@@ -61,6 +65,7 @@ export default {
   font-weight: bold;
   transition: background 250ms ease-in-out,
                 transform 150ms ease;
-  display: inline-block;
+  display: block;
+  width: 100%
 }
 </style>

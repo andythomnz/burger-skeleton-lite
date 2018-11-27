@@ -36,7 +36,17 @@ let router = new Router({
       // which is lazy-loaded when the route is visited.
       component: () => import(/* webpackChunkName: "read" */ './views/Welcome.vue')
     },
-  
+    {
+      path: '/payment',
+      meta: {
+        title: 'Payment',
+      },
+      name: 'payment',
+      // route level code-splitting
+      // this generates a separate chunk (read.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import(/* webpackChunkName: "read" */ './views/Payment.vue')
+    },
   ]
 })
 

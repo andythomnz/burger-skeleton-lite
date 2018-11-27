@@ -27,8 +27,8 @@ export default {
     return {
       text1:'Eat in',
       text2:'Take Away',
-      icon1:'https://cdn4.iconfinder.com/data/icons/kitchen-glyph-2/96/eat._restaurant_plate_utensil_kitchen-512.png',
-      icon2:'http://www.meathgoldcoast.com/ServicePics/CategoryIcons/takeaway.png'
+      icon1:require('../assets/eatin.jpg'),
+      icon2:require('../assets/takeaway.png')
     }
   },
   methods: {
