@@ -1,7 +1,7 @@
 <template>
   <div class="splitpage">
-    <p><button><img :src="icon1" width=300px> <br> {{text1}}</button></p>
-    <p><button><img :src="icon2" width=300px> <br> {{text2}}</button></p>
+    <p><button v-on:click="Button1Click()"><img :src="icon1" width=300px> <br> {{text1}}</button></p>
+    <p><button v-on:click="Button2Click()"><img :src="icon2" width=300px> <br> {{text2}}</button></p>
   </div>
 </template>
 <script>
@@ -19,19 +19,28 @@ export default {
     };
   },
   methods: {
-
+    Button1Click: function(){
+      this.$emit('button1click');
+    },
+    Button2Click: function(){
+      this.$emit('button2click');
+    },
     }
   }
 
 </script>
 <style scoped>
 .splitpage{
-  display: flex; justify-content:space-evenly; wrap:wrap; flex-wrap:wrap
+  display: flex; justify-content:space-evenly; wrap:wrap; flex-wrap:wrap;
 }
+
 .splitpage p {
   text-align: center;
   width: 50%;
-  height:100%
+  height:100%;
+
+
+
 }
 
 .splitpage img {
@@ -53,9 +62,7 @@ export default {
     transform: scale(0.99);
 }
 
-.splitpage button:target{
-  background-color: yellow
-}
+
 
 .splitpage button{
   border:none;

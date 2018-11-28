@@ -3,9 +3,11 @@
   <h1>Welcome to Kraft Burgers</h1>
   <div>
     <SplitPage
+      v-on:button1click="NextPage()"
       :text1="text1"
-      :text2="text2"
       :icon1="icon1"
+      v-on:button2click="NextPage()"
+      :text2="text2"
       :icon2="icon2">
     </SplitPage>
   </div>
@@ -13,26 +15,29 @@
 </template>
 <script>
 
-//import methods and data that are shared between ordering and kitchen views
+
 import SplitPage from '@/components/SplitPage.vue'
+import basicButton from '@/components/basicButton.vue'
 
 export default {
   name: 'Welcome',
   components: {
-    SplitPage
+    SplitPage,
+    basicButton
   },
-  // mixins: [sharedVueStuff], // include stuff that is used in both
-                            //the ordering system and the kitchen
+
   data: function(){
     return {
       text1:'Eat in',
       text2:'Take Away',
-      icon1:require('../assets/eatin.jpg'),
-      icon2:require('../assets/takeaway.png')
+      icon1:require('../assets/restaurant.png'),
+      icon2:require('../assets/takeaway.png'),
     }
   },
   methods: {
-
+    NextPage: function(){
+      this.$router.push({ name: "ordering" });
+    }
   }
 }
 </script>

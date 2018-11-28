@@ -27,8 +27,8 @@ export default {
     return {
       text1:'Cash',
       text2:'Credit Card',
-      icon1:'https://img.icons8.com/ios/1600/cash-in-hand-filled.png',
-      icon2:'https://cdn3.iconfinder.com/data/icons/business-and-finance-icons/512/Credit_Card-512.png'
+      icon1:require('../assets/Cash-Pay.png'),
+      icon2:require('../assets/credit-card.png')
     }
   },
   methods: {
