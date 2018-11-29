@@ -1,7 +1,9 @@
 <template>
   <div class="splitpage">
-    <p><button v-on:click="Button1Click()"><img :src="icon1" width=300px> <br> {{text1}}</button></p>
-    <p><button v-on:click="Button2Click()"><img :src="icon2" width=300px> <br> {{text2}}</button></p>
+    <slot name='left'></slot>
+    <slot name='right'></slot>
+    <!-- <p><button v-on:click="Button1Click()"><img :src="icon1" width=300px> <br> {{text1}}</button></p>
+    <p><button v-on:click="Button2Click()"><img :src="icon2" width=300px> <br> {{text2}}</button></p> -->
   </div>
 </template>
 <script>

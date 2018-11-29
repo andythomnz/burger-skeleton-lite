@@ -2,13 +2,13 @@
 <div >
   <h1>Welcome to Kraft Burgers</h1>
   <div>
-    <SplitPage
-      v-on:button1click="NextPage()"
-      :text1="text1"
-      :icon1="icon1"
-      v-on:button2click="NextPage()"
-      :text2="text2"
-      :icon2="icon2">
+    <SplitPage>
+      <template slot="left">
+        <basicButton :text="text1" :icon="icon1" v-on:buttonclick="NextPage()"></basicButton>
+      </template>
+      <template slot="right">
+        <basicButton :text="text2" :icon="icon2" v-on:buttonclick="NextPage()"></basicButton>
+      </template>
     </SplitPage>
   </div>
 </div>
