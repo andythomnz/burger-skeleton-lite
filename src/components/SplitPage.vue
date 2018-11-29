@@ -36,7 +36,7 @@ export default {
   display: flex; justify-content:space-evenly; wrap:wrap; flex-wrap:wrap;
 }
 
-.splitpage p {
+.splitpage slot {
   text-align: center;
   width: 50%;
   height:100%;

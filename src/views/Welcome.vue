@@ -1,7 +1,9 @@
 <template>
 <div >
-  <h1>Welcome to Kraft Burgers</h1>
-  <div>
+  <NavBar :text='headtext' id='textinbar'>
+    <template slot="back">
+      <basicButton :text='backtext'></basicButton></template></NavBar>
+  <div id='body'>
     <SplitPage>
       <template slot="left">
         <basicButton :text="text1" :icon="icon1" v-on:buttonclick="NextPage()"></basicButton>
@@ -18,12 +20,14 @@
 
 import SplitPage from '@/components/SplitPage.vue'
 import basicButton from '@/components/basicButton.vue'
+import NavBar from '@/components/NavBar.vue'
 
 export default {
   name: 'Welcome',
   components: {
     SplitPage,
-    basicButton
+    basicButton,
+    NavBar
   },
 
   data: function(){
@@ -32,11 +36,14 @@ export default {
       text2:'Take Away',
       icon1:require('../assets/restaurant.png'),
       icon2:require('../assets/takeaway.png'),
+      headtext:'Welcome to Kraft Burgers',
+      backtext: 'Back'
     }
   },
   methods: {
     NextPage: function(){
       this.$router.push({ name: "ordering" });
+      location.reload()
     }
   }
 }
@@ -48,4 +55,11 @@ export default {
     font-size: 1.4em;
     text-align:center;
   }
+
+#textinbar {
+    font-size: 20pt;
+  }
+
+
+
 </style>

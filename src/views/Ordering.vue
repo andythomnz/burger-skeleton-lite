@@ -85,7 +85,7 @@ export default {
       }
       this.price = 0;
       this.chosenIngredients = [];
-      // this.$router.push({ name: "payment" })
+      this.$router.push({ name: "payment" })
     }
   }
 }

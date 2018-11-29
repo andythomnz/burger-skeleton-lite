@@ -1,6 +1,6 @@
 <template>
 
-  <div><button v-on:click="ButtonClick()"><img :src="icon" width=300px> <br> {{text}}</button></div>
+  <div><button v-on:click="ButtonClick()"><img :src="icon" width=300px> <br> <p id='text'>{{text}}</p></button></div>
 
 </template>
 <script>
@@ -30,17 +30,15 @@ div {
   text-align: center;
   width: 50%;
   height:100%;
-
-
-
 }
 
 img {
   padding-bottom: 2em;
+  padding-top: 1em
 }
 
-button:hover,
-button:focus{
+
+button:hover{
   background: lightyellow; cursor: pointer;
 }
 
@@ -50,10 +48,12 @@ button:focus {
     outline-offset: -4px;
 }
 
+
+
 button:active {
     transform: scale(0.99);
+    outline:yellow auto 5
 }
-
 
 
 button{
@@ -67,4 +67,6 @@ button{
   display: block;
   width: 100%
 }
+
+
 </style>
