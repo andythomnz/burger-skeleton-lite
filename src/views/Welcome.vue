@@ -1,15 +1,17 @@
 <template>
 <div >
   <NavBar :text='headtext' id='textinbar'>
-    <template slot="back">
-      <basicButton :text='backtext'></basicButton></template></NavBar>
+    <span slot="back">
+      <basicButton :text='backtext' id='backbutton'></basicButton></span>
+    <span slot="next">
+      <basicButton :text='nexttext' id='nextbutton'></basicButton></span></NavBar>
   <div id='body'>
     <SplitPage>
       <template slot="left">
-        <basicButton :text="text1" :icon="icon1" v-on:buttonclick="NextPage()"></basicButton>
+        <basicButton id='buttons' :text="text1" :icon="icon1" v-on:buttonclick="NextPage()"></basicButton>
       </template>
       <template slot="right">
-        <basicButton :text="text2" :icon="icon2" v-on:buttonclick="NextPage()"></basicButton>
+        <basicButton id='buttons' :text="text2" :icon="icon2" v-on:buttonclick="NextPage()"></basicButton>
       </template>
     </SplitPage>
   </div>
@@ -37,7 +39,8 @@ export default {
       icon1:require('../assets/restaurant.png'),
       icon2:require('../assets/takeaway.png'),
       headtext:'Welcome to Kraft Burgers',
-      backtext: 'Back'
+      backtext: 'Back',
+      nexttext: 'Next'
     }
   },
   methods: {
@@ -60,6 +63,20 @@ export default {
     font-size: 20pt;
   }
 
+#buttons {
+  width:50%;
+}
+
+#backbutton {
+  width:auto;
+  font-size: 16pt;
+  padding-bottom: 0;
+}
+
+#nextbutton {
+  font-size: 16pt;
+  float:right
+}
 
 
 </style>

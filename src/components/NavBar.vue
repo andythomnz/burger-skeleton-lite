@@ -1,7 +1,9 @@
 <template>
 
   <div class='bar-wrapper'>
-    <slot name="back"></slot><span id="text">{{ text }}</span></div>
+    <span><slot name="back"></slot></span>
+    <span id="text">{{ text }}</span>
+    <span><slot name="next"></slot></span></div>
 
 </template>
 <script>

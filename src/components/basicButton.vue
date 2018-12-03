@@ -1,6 +1,6 @@
 <template>
 
-  <div><button v-on:click="ButtonClick()"><img :src="icon" width=300px> <br> <p id='text'>{{text}}</p></button></div>
+  <button v-on:click="ButtonClick()"><img :src="icon" width=300px> <br> <p id='text'>{{text}}</p></button>
 
 </template>
 <script>
@@ -26,11 +26,6 @@ export default {
 </script>
 <style scoped>
 
-div {
-  text-align: center;
-  width: 50%;
-  height:100%;
-}
 
 img {
   padding-bottom: 2em;
@@ -65,7 +60,6 @@ button{
   transition: background 250ms ease-in-out,
                 transform 150ms ease;
   display: block;
-  width: 100%
 }
 
 
