@@ -1,14 +1,24 @@
 <template>
-
-  <div class='bar-wrapper'>
-    <span><slot name="back"></slot></span>
-    <span id="text">{{ text }}</span>
-    <span><slot name="next"></slot></span></div>
-
+  <div class="bar-wrapper">
+    <!-- needs boolean for show,
+         an icon
+        and the parent component should pass a function
+        or URL to the page for the funtion -->
+    <basicButton text="back"></basicButton>
+    <slot name="center-component"></slot>
+    <basicButton text="Next"></basicButton>
+    <basicButton text="Cart">Cart</basicButton>
+  </div>
 </template>
 <script>
+
+import basicButton from '@/components/basicButton.vue'
+
 export default {
   name: 'NavBar',
+  components:{
+    basicButton
+  },
   props: {
     text: String,
     icon: String,
@@ -28,12 +38,15 @@ export default {
 <style scoped>
 
 .bar-wrapper {
-  text-align: center;
+  text-align: center ;
   width: 100%;
   padding-top:0;
   border-bottom-color: grey;
   border-bottom-style: solid;
-  padding-bottom: 0.5%
+  padding-bottom: 0.5%;
+  display: grid;
+	grid-gap: 10px;
+	grid-template-columns: auto auto auto auto;
 }
 
 #text {
