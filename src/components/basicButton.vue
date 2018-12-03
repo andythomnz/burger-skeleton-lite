@@ -1,7 +1,11 @@
 <template>
-
-  <div><button v-on:click="ButtonClick()"><img :src="icon" width=300px> <br> <p id='text'>{{text}}</p></button></div>
-
+  <div>
+    <button v-on:click="ButtonClick()">
+      <img :src="icon">
+      <br>
+      <p id="text">{{text}}</p>
+    </button>
+  </div>
 </template>
 <script>
 export default {
