@@ -2,7 +2,17 @@
   <div class="ingredient">
     <label>
       <button v-on:click="incrementCounter">{{ counter }}</button>
-      {{item["ingredient_"+ lang]}}, {{item.selling_price}}:-, {{item.stock}} pcs
+      <ul>
+        <img v-bind:src="item.image" width="20%">
+        <!--image can be changed by editing the "image colon" in ingredients.csv-->
+        <li>{{item["ingredient_"+ lang]}}</li>
+        <!--<li>{{item.selling_price}}:-</li>
+        <li>{{item.stock}} pcs</li>-->
+        <li v-if="item.addi_cost>0">+ {{item.addi_cost}}kr</li>
+        <span v-if="item.milk_free"><img src="../assets/milkfree.png" class="icon" /></span>
+        <span v-if="item.gluten_free"><img src="../assets/glutenfree.png" class="icon" /></span>
+        <span v-if="item.vegan"><img src="../assets/vegan.png" class="icon" width="10%"/></span>
+      </ul>
     </label>
   </div>
 </template>
@@ -32,5 +42,9 @@ export default {
 }
 </script>
 <style scoped>
-  
+
+.icon{
+  width:2em;
+}
+
 </style>
