@@ -37,6 +37,17 @@ let router = new Router({
       component: () => import(/* webpackChunkName: "read" */ './views/Welcome.vue')
     },
     {
+      path: '/MainMenu',
+      meta: {
+        title: 'MainMenu',
+      },
+      name: 'MainMenu',
+      // route level code-splitting
+      // this generates a separate chunk (read.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import(/* webpackChunkName: "read" */ './views/MainMenu.vue')
+    },
+    {
       path: '/payment',
       meta: {
         title: 'Payment',
@@ -46,6 +57,17 @@ let router = new Router({
       // this generates a separate chunk (read.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: () => import(/* webpackChunkName: "read" */ './views/Payment.vue')
+    },
+    {
+      path: '/MYOB',
+      meta: {
+        title: 'MYOB',
+      },
+      name: 'MYOB',
+      // route level code-splitting
+      // this generates a separate chunk (read.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import(/* webpackChunkName: "read" */ './views/MYOB.vue')
     }
   ]
 })

@@ -1,9 +1,12 @@
 <template>
   <div class="splitpage">
-    <slot name='left'></slot>
-    <slot name='right'></slot>
-    <!-- <p><button v-on:click="Button1Click()"><img :src="icon1" width=300px> <br> {{text1}}</button></p>
-    <p><button v-on:click="Button2Click()"><img :src="icon2" width=300px> <br> {{text2}}</button></p> -->
+    <div class="splitContainer">
+      <slot name='left'></slot>
+    </div>
+    <div class="splitContainer">
+      <slot name='right'></slot>
+    </div>
+
   </div>
 </template>
 <script>
@@ -33,16 +36,15 @@ export default {
 </script>
 <style scoped>
 .splitpage{
-  display: flex; justify-content:space-evenly; wrap:wrap; flex-wrap:wrap;
+  display: flex; 
+  justify-content:space-evenly; 
+  flex-wrap:wrap;
 }
 
-.splitpage slot {
+.splitContainer {
   text-align: center;
   width: 50%;
   height:100%;
-
-
-
 }
 
 .splitpage img {

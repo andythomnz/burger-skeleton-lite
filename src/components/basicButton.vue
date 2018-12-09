@@ -1,11 +1,9 @@
 <template>
-  <div>
     <button v-on:click="ButtonClick()">
       <img :src="icon">
       <br>
-      <p id="text">{{text}}</p>
+      <p class="buttonText" id="text">{{text}}</p>
     </button>
-  </div>
 </template>
 <script>
 export default {
@@ -30,35 +28,29 @@ export default {
 </script>
 <style scoped>
 
-div {
-  text-align: center;
-  width: 50%;
-  height:100%;
-}
-
 img {
-  padding-bottom: 2em;
+  padding-bottom: 0.5em;
   padding-top: 1em
 }
 
+.buttonText {
+      margin-block-start: 0em;
+    margin-block-end: 0em;
+}
 
 button:hover{
   background: lightyellow; cursor: pointer;
 }
-
 
 button:focus {
     outline: 1px solid #fff;
     outline-offset: -4px;
 }
 
-
-
 button:active {
     transform: scale(0.99);
     outline:yellow auto 5
 }
-
 
 button{
   border:none;

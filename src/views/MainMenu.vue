@@ -7,17 +7,27 @@
       <SplitPage>
         <template slot="left">
           <basicButton
-            text="Eat In"
+            text="Make Your Own Burger"
             :icon="require('../assets/restaurant.png')"
             v-on:buttonclick="NextPage('EatIn')"
           ></basicButton>
         </template>
         <template slot="right">
           <basicButton
-            text="Take Away"
+            text="Pre-Made Burgers"
             :icon="require('../assets/takeaway.png')"
             v-on:buttonclick="NextPage('TakeAway')"
           ></basicButton>
+          <basicButton
+            text="Drinks"
+            :icon="require('../assets/takeaway.png')"
+            v-on:buttonclick="NextPage('TakeAway')"
+          ></basicButton>
+          <basicButton
+            text="Sides"
+            :icon="require('../assets/takeaway.png')"
+            v-on:buttonclick="NextPage('TakeAway')"
+          ></basicButton>>
         </template>
       </SplitPage>
     </div>
