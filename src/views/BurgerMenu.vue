@@ -13,7 +13,6 @@
         {{ tab }}
       </button>
 
-
       <component
         v-bind:is="currentTabComponent"
         class="tab"
@@ -30,10 +29,12 @@
 //components
 import Ingredient from '@/components/Ingredient.vue'
 import OrderItem from '@/components/OrderItem.vue'
-import IngredientsSelection from '@/components/IngredientsSelection.vue'
-import MYOB from '@/components/MYOB.vue'
 import basicButton from "@/components/basicButton.vue";
 import NavBar from "@/components/NavBar.vue";
+
+//import the components for the tabs
+import MYOB from '@/components/MYOB.vue'
+import Buns from '@/components/Buns.vue'
 
 //import methods and data that are shared between ordering and kitchen views
 import sharedVueStuff from '@/components/sharedVueStuff.js'
@@ -45,17 +46,19 @@ export default {
   components: {
     Ingredient,
     OrderItem,
-    MYOB,
-    IngredientsSelection,
     basicButton,
-    NavBar
+    NavBar,
+
+    //Define the components for the tabs - Buns, Protein, Vegetables, Sauces, Extras,
+    MYOB,
+    Buns,
   },
   mixins: [sharedVueStuff], // include stuff that is used in both
                             // the ordering system and the kitchen
   data: function() { //Not that data is a function!
     return {
       currentTab: '',
-      tabs: ['Start', 'SelectionOverview', 'MYOB', 'IngredientsSelection'],
+      tabs: ['Buns', 'Protein', 'Vegetables', 'Sauces', 'Extras',  'MYOB'],
       chosenIngredients: [],
       price: 0,
       orderNumber: "",
