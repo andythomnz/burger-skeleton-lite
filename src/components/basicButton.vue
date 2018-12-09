@@ -3,6 +3,7 @@
       <img :src="icon">
       <br>
       <p class="buttonText" id="text">{{text}}</p>
+      <p>{{secondaryText}}</p>
     </button>
 </template>
 <script>
@@ -11,6 +12,7 @@ export default {
   props: {
     text: String,
     icon: String,
+    secondaryText: Number
   },
     data: function () {
     return {
