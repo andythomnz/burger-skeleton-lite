@@ -9,11 +9,14 @@
 
     also do something with the stock and price {{item.selling_price}}:-, {{item.stock}} pcs
     -->
+
     <basicButton
       :text="item.ingredient_en" 
       :secondaryText="item.selling_price"
       :icon="require('../assets/restaurant.png')"
     ></basicButton>
+    {{item["ingredient_"+ lang]}}, {{item.selling_price}}, {{item.stock}}
+
   </div>
 </template>
 
