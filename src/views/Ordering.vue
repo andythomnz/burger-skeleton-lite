@@ -15,8 +15,8 @@
     </Ingredient>
 
     <h1>{{ uiLabels.order }}</h1>
-    {{ chosenIngredients.map(item => item["ingredient_"+lang]).join(', ') }}, {{ price }} kr
-    <button v-on:click="placeOrder()">{{ uiLabels.placeOrder }}</button>
+    {{ cartDisplay }}, {{ price }} kr
+    <button v-on:click="placeOrder()"><img class="cart-img" src="@/assets/cart.png">{{ uiLabels.placeOrder }}</button>
 
     <h1>{{ uiLabels.ordersInQueue }}</h1>
     <div>
@@ -58,6 +58,8 @@ export default {
       chosenIngredients: [],
       price: 0,
       orderNumber: "",
+	  cartDisplay: "",
+	  commodity: {}
     }
   },
   created: function () {
@@ -69,6 +71,19 @@ export default {
     addToOrder: function (item) {
       this.chosenIngredients.push(item);
       this.price += +item.selling_price;
+      
+	  var itemName = item["ingredient_sv"];
+	  if(itemName in this.commodity){
+		this.commodity[itemName]+=1;
+	  }
+	  else{
+		this.commodity[itemName]=1;
+      }
+	  
+	  this.cartDisplay="";
+	  for(var i in this.commodity){
+	    this.cartDisplay += i+":"+this.commodity[i]+",";
+	  }
     },
     placeOrder: function () {
       var i,
@@ -108,5 +123,9 @@ export default {
   padding: 1em;
   background-image: url('~@/assets/exampleImage.jpg');
   color: white;
+}
+.cart-img {
+  width: 15px;
+  height: 15px;
 }
 </style>
