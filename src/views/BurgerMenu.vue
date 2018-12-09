@@ -24,6 +24,9 @@
 </template>
 <script>
 
+//import methods and data that are shared between ordering and kitchen views
+import sharedVueStuff from '@/components/sharedVueStuff.js'
+
 //import the components that are used in the template, the name that you
 //use for importing will be used in the template above and also below in
 //components
@@ -33,11 +36,12 @@ import basicButton from "@/components/basicButton.vue";
 import NavBar from "@/components/NavBar.vue";
 
 //import the components for the tabs
-import MYOB from '@/components/MYOB.vue'
+//import MYOB from '@/components/MYOB.vue' MYOB - Make your own burger is the old version
 import Buns from '@/components/Buns.vue'
-
-//import methods and data that are shared between ordering and kitchen views
-import sharedVueStuff from '@/components/sharedVueStuff.js'
+import Protein from '@/components/Protein.vue'
+import Vegetables from '@/components/Vegetables.vue'
+import Sauces from '@/components/Sauces.vue'
+import Extras from '@/components/Extras.vue'
 
 /* instead of defining a Vue instance, export default allows the only
 necessary Vue instance (found in main.js) to import your data and methods */
@@ -50,8 +54,12 @@ export default {
     NavBar,
 
     //Define the components for the tabs - Buns, Protein, Vegetables, Sauces, Extras,
-    MYOB,
+    //MYOB - Make your own burger is the old version
     Buns,
+    Protein, 
+    Vegetables,
+    Sauces,
+    Extras,
   },
   mixins: [sharedVueStuff], // include stuff that is used in both
                             // the ordering system and the kitchen
