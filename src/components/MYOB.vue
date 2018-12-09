@@ -10,6 +10,7 @@
         v-for="item in ingredients"
         v-on:increment="addToOrder(item)"
         :item="item"
+        v-if="item.category == 1" 
         :lang="lang"
         :key="item.ingredient_id"
       ></Ingredient>
@@ -26,7 +27,6 @@
     <div>
       <OrderItem
         v-for="(order, key) in orders"
-        v-if="order.status !== 'done'"
         :order-id="key"
         :order="order"
         :ui-labels="uiLabels"

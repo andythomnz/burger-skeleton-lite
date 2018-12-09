@@ -59,16 +59,21 @@ let router = new Router({
       component: () => import(/* webpackChunkName: "read" */ './views/Payment.vue')
     },
     {
-      path: '/MYOB',
+      path: '/Ordering',
       meta: {
-        title: 'MYOB',
+          title: 'Ordering',
       },
-      name: 'MYOB',
-      // route level code-splitting
-      // this generates a separate chunk (read.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "read" */ './views/MYOB.vue')
-    }
+      name: 'Ordering',
+      component: () => import(/* webpackChunkName: "read" */ './views/Ordering.vue')
+  },
+  {
+    path: '/BurgerMenu',
+    meta: {
+        title: 'BurgerMenu',
+    },
+    name: 'BurgerMenu',
+    component: () => import(/* webpackChunkName: "read" */ './views/BurgerMenu.vue')
+}
   ]
 })
 

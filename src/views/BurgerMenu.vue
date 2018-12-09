@@ -1,28 +1,9 @@
 <template>
   <div id="ordering" class="container">
-    <head>
-      <link href='https://fonts.googleapis.com/css?family=Amaranth' rel='stylesheet'>
-    </head>
-    <div class="header">
-      <div class="btn_cancel">
-        <button :class="['btn_header']" v-on:click="switchLang()">
-          <img src="https://img.icons8.com/material/52/FFE4B5/delete-sign.png" height="50vh">
-          </button>
-      </div>
-      <div class="btn_lang">
-        <button :class="['btn_header', lang]" v-on:click="switchLang()"></button>
-      </div>
-      <div class="title">
-        {{ uiLabels.welcome }}
-      </div>
-      <div class="btn_cart">
-        <button :class="['btn_header']" v-on:click="switchLang()">
-          <img src="https://img.icons8.com/material/52/FFE4B5/shopping-cart.png" height="50vh">
-          </button>
-      </div>
-    </div>
-
-
+    <NavBar text="Welcome to Kraft Burgers">
+      <p slot="center-component" style="text-align:center center;">Welcome to ...</p>
+    </NavBar>
+    
     <div class="page">
       <button
         v-for="tab in tabs"
@@ -49,10 +30,10 @@
 //components
 import Ingredient from '@/components/Ingredient.vue'
 import OrderItem from '@/components/OrderItem.vue'
-import Start from '@/views/Start.vue'
-import SelectionOverview from '@/views/selectionOverview.vue'
-import BurgerCreation from '@/views/burgerCreation.vue'
 import IngredientsSelection from '@/components/IngredientsSelection.vue'
+import MYOB from '@/components/MYOB.vue'
+import basicButton from "@/components/basicButton.vue";
+import NavBar from "@/components/NavBar.vue";
 
 //import methods and data that are shared between ordering and kitchen views
 import sharedVueStuff from '@/components/sharedVueStuff.js'
@@ -64,17 +45,17 @@ export default {
   components: {
     Ingredient,
     OrderItem,
-    Start,
-    SelectionOverview,
-    BurgerCreation,
-    IngredientsSelection
+    MYOB,
+    IngredientsSelection,
+    basicButton,
+    NavBar
   },
   mixins: [sharedVueStuff], // include stuff that is used in both
                             // the ordering system and the kitchen
   data: function() { //Not that data is a function!
     return {
       currentTab: '',
-      tabs: ['Start', 'SelectionOverview', 'BurgerCreation', 'IngredientsSelection'],
+      tabs: ['Start', 'SelectionOverview', 'MYOB', 'IngredientsSelection'],
       chosenIngredients: [],
       price: 0,
       orderNumber: "",
@@ -115,5 +96,4 @@ export default {
 }
 </script>
 <style scoped>
-
 </style>
