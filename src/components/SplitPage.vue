@@ -36,14 +36,15 @@ export default {
 </script>
 <style scoped>
 .splitpage{
-  display: flex; 
-  justify-content:space-evenly; 
-  flex-wrap:wrap;
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: 50% 50%;
+
 }
 
 .splitContainer {
   text-align: center;
-  width: 50%;
+
   height:100%;
 }
 
@@ -77,6 +78,7 @@ export default {
   transition: background 250ms ease-in-out,
                 transform 150ms ease;
   display: block;
-  width: 100%
+  width: 100%;
+  height: 100%;
 }
 </style>

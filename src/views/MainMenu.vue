@@ -12,22 +12,21 @@
             v-on:buttonclick="NextPage('BurgerMenu')"
           ></basicButton>
         </template>
-        <template slot="right">
-          <basicButton
+        <template slot="right" >
+          <div class="side-grid">
+          <basicButton 
             text="Pre-Made Burgers"
-            :icon="require('../assets/takeaway.png')"
             v-on:buttonclick="NextPage('TakeAway')"
           ></basicButton>
-          <basicButton
+          <basicButton 
             text="Drinks"
-            :icon="require('../assets/takeaway.png')"
             v-on:buttonclick="NextPage('TakeAway')"
           ></basicButton>
-          <basicButton
+          <basicButton 
             text="Sides"
-            :icon="require('../assets/takeaway.png')"
             v-on:buttonclick="NextPage('TakeAway')"
-          ></basicButton>>
+          ></basicButton>
+          </div>
         </template>
       </SplitPage>
     </div>
@@ -69,5 +68,21 @@ h1 {
   text-transform: uppercase;
   font-size: 1.4em;
   text-align: center;
+}
+
+.side-grid {  
+  text-align: center;
+  border-bottom-color: grey;
+  border-bottom-style: solid;
+  padding-bottom: 0.5%;
+  display: grid;
+  grid-gap: 10px;
+  grid-template-rows: 33% 33% 33%;
+}
+
+.center {
+  width: 100%;
+  height: 100%;
+  margin: auto auto;
 }
 </style>

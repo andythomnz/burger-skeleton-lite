@@ -65,7 +65,7 @@ export default {
                             // the ordering system and the kitchen
   data: function() { //Not that data is a function!
     return {
-      currentTab: '',
+      currentTab: 'Buns',
       tabs: ['Buns', 'Protein', 'Vegetables', 'Sauces', 'Extras',  'MYOB'],
       chosenIngredients: [],
       price: 0,
