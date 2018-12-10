@@ -1,7 +1,7 @@
 <template>
   <div>
     <NavBar text="Welcome to Kraft Burgers">
-      <p slot="center-component" style="text-align:center center;">Welcome to ...</p>
+      <h1 slot="center-component">Welcome to Kraft Burgers</h1>
     </NavBar>
     <div id="body">
       <SplitPage>

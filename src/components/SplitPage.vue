@@ -1,9 +1,9 @@
 <template>
   <div class="splitpage">
-    <div class="splitContainer">
+    <div>
       <slot name='left'></slot>
     </div>
-    <div class="splitContainer">
+    <div>
       <slot name='right'></slot>
     </div>
 
@@ -40,12 +40,6 @@ export default {
   grid-gap: 10px;
   grid-template-columns: 50% 50%;
 
-}
-
-.splitContainer {
-  text-align: center;
-
-  height:100%;
 }
 
 .splitpage img {

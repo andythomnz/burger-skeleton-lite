@@ -46,7 +46,7 @@ export default {
   padding-bottom: 0.5%;
   display: grid;
   grid-gap: 10px;
-  grid-template-columns: 13vh auto 13vh 13vh;
+  grid-template-columns: 10% auto 10% 10%;
 }
 
 #text {
