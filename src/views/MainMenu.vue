@@ -16,15 +16,15 @@
           <div class="side-grid">
           <basicButton 
             text="Pre-Made Burgers"
-            v-on:buttonclick="NextPage('TakeAway')"
+            v-on:buttonclick="NextPage('Drinks')"
           ></basicButton>
           <basicButton 
             text="Drinks"
-            v-on:buttonclick="NextPage('TakeAway')"
+            v-on:buttonclick="NextPage('Drinks')"
           ></basicButton>
           <basicButton 
             text="Sides"
-            v-on:buttonclick="NextPage('TakeAway')"
+            v-on:buttonclick="NextPage('Sides')"
           ></basicButton>
           </div>
         </template>
@@ -78,11 +78,5 @@ h1 {
   display: grid;
   grid-gap: 10px;
   grid-template-rows: 33% 33% 33%;
-}
-
-.center {
-  width: 100%;
-  height: 100%;
-  margin: auto auto;
 }
 </style>

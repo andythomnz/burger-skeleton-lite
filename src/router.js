@@ -61,19 +61,35 @@ let router = new Router({
     {
       path: '/Ordering',
       meta: {
-          title: 'Ordering',
+        title: 'Ordering',
       },
       name: 'Ordering',
       component: () => import(/* webpackChunkName: "read" */ './views/Ordering.vue')
-  },
-  {
-    path: '/BurgerMenu',
-    meta: {
-        title: 'BurgerMenu',
     },
-    name: 'BurgerMenu',
-    component: () => import(/* webpackChunkName: "read" */ './views/BurgerMenu.vue')
-}
+    {
+      path: '/BurgerMenu',
+      meta: {
+        title: 'BurgerMenu',
+      },
+      name: 'BurgerMenu',
+      component: () => import(/* webpackChunkName: "read" */ './views/BurgerMenu.vue')
+    },
+    {
+      path: '/Drinks',
+      meta: {
+        title: 'Drinks',
+      },
+      name: 'Drinks',
+      component: () => import(/* webpackChunkName: "read" */ './views/Drinks.vue')
+    },
+    {
+      path: '/Sides',
+      meta: {
+        title: 'Sides',
+      },
+      name: 'Sides',
+      component: () => import(/* webpackChunkName: "read" */ './views/Sides.vue')
+    }
   ]
 })
 
