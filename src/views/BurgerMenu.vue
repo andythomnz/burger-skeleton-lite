@@ -1,17 +1,20 @@
 <template>
   <div id="ordering" class="container">
     <NavBar text="Welcome to Kraft Burgers">
-      <button slot="center-component" v-on:click="switchLang()">{{ uiLabels.language }}</button>
-    </NavBar>
-    
-    <div class="page">
-      <button
+      <!--button slot="center-component" v-on:click="switchLang()">{{ uiLabels.language }}</button-->
+      <div slot="center-component">
+        <button
         v-for="tab in tabs"
         v-bind:key="tab"
         v-bind:class="['tab-button', { active: currentTab === tab }]"
         v-on:click="currentTab = tab">
         {{ tab }}
       </button>
+      </div>
+    </NavBar>
+    
+    <div class="page">
+
 
       <component
         v-bind:is="currentTabComponent"
