@@ -1,7 +1,13 @@
 <template>
   <div class="ingredient" v-on:click="incrementCounter">
     <label>
-      <button>{{ counter }}</button>
+      <button>
+        <img :src="require('../assets/restaurant.png')">
+        <p>{{item["ingredient_"+ lang]}}</p>
+        <p>Price: {{item.selling_price}}</p>
+        <p>Stock {{item.stock}}</p>
+        Number: {{ counter }}
+      </button>
     </label>
 
     <!-- TODO Change the text in the basicButton to be language sensitive 
@@ -9,14 +15,6 @@
 
     also do something with the stock and price {{item.selling_price}}:-, {{item.stock}} pcs
     -->
-
-    <basicButton
-      :text="item.ingredient_en" 
-      :secondaryText="item.selling_price"
-      :icon="require('../assets/restaurant.png')"
-    ></basicButton>
-    {{item["ingredient_"+ lang]}}, {{item.selling_price}}, {{item.stock}}
-
   </div>
 </template>
 
@@ -25,7 +23,7 @@ import sharedVueStuff from "@/components/sharedVueStuff.js";
 import basicButton from "@/components/basicButton.vue";
 
 export default {
-  name: 'Ingredient',
+  name: "Ingredient",
   components: {
     basicButton
   },
@@ -33,27 +31,60 @@ export default {
     item: Object,
     lang: String
   },
-    data: function () {
+  data: function() {
     return {
       counter: 0
     };
   },
   methods: {
-    //make a function that switches to another tab for the bread and burgers pages. 
+    //make a function that switches to another tab for the bread and burgers pages.
     //make the buttons highlihgt for the veggies and extras. with stylings and v-if
 
-    incrementCounter: function () {
+    incrementCounter: function() {
       this.counter += 1;
       // sending 'increment' message to parent component or view so that it
       // can catch it with v-on:increment in the component declaration
-      this.$emit('increment');
+      this.$emit("increment");
     },
-    resetCounter: function () {
+    resetCounter: function() {
       this.counter = 0;
     }
   }
-}
+};
 </script>
 <style scoped>
-  
+p {
+  margin: 0 0;
+}
+
+img {
+  padding-bottom: 0em;
+  padding-top: 0em;
+}
+
+button:hover {
+  background: lightyellow;
+  cursor: pointer;
+}
+
+button:focus {
+  outline: 1px solid #fff;
+  outline-offset: -4px;
+}
+
+button:active {
+  transform: scale(0.99);
+  outline: yellow auto 5;
+}
+
+button {
+  border: none;
+  background: none;
+  text-align: center;
+  font-size: 20pt;
+  font-weight: bold;
+  transition: background 250ms ease-in-out, transform 150ms ease;
+  display: block;
+  width: 100%;
+}
 </style>
