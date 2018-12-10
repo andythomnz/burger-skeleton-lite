@@ -16,9 +16,8 @@
       </div>
     </NavBar>
     
+    <h1> tab: {{currentTab}}</h1>
     <div class="page">
-
-
       <component
         v-bind:is="currentTabComponent"
         class="tab"
