@@ -1,7 +1,7 @@
 <template>
   <div id="ordering" class="container">
     <NavBar text="Welcome to Kraft Burgers">
-      <p slot="center-component" style="text-align:center center;">Welcome to ...</p>
+      <button slot="center-component" v-on:click="switchLang()">{{ uiLabels.language }}</button>
     </NavBar>
     
     <div class="page">

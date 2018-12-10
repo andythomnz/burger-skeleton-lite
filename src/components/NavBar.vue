@@ -8,7 +8,7 @@
       <basicButton text="back"></basicButton>
     </div>
     <div class="center">
-    <slot name="center-component"></slot>
+      <slot name="center-component"></slot>
     </div>
     <div>
       <basicButton text="Next"></basicButton>
@@ -36,6 +36,7 @@ export default {
   methods: {}
 };
 </script>
+
 <style scoped>
 .bar-wrapper {
   text-align: center;
@@ -54,6 +55,6 @@ export default {
 }
 
 .center {
-  margin: auto auto; 
+  margin: auto auto;
 }
 </style>
