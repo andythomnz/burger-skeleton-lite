@@ -7,6 +7,7 @@
     <div>
       <basicButton 
       text="back"
+      v-if="backRoute !== ''"
       v-on:buttonclick="NextPage(backRoute)"
       ></basicButton>
     </div>
@@ -14,7 +15,9 @@
       <slot name="center-component"></slot>
     </div>
     <div>
-      <basicButton text="Next"></basicButton>
+      <basicButton 
+      v-if="nextRoute !== ''"
+      text="Next"></basicButton>
     </div>
     <div>
       <basicButton text="Cart">Cart</basicButton>

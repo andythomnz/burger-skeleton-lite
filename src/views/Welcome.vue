@@ -1,6 +1,8 @@
 <template>
   <div>
-    <NavBar text="Welcome to Kraft Burgers">
+    <NavBar text="Welcome to Kraft Burgers"
+      nextRoute=""
+      backRoute="">>>
       <h1 slot="center-component">Welcome to Kraft Burgers</h1>
     </NavBar>
     <div id="body">
