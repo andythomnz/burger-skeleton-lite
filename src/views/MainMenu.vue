@@ -1,7 +1,7 @@
 <template>
   <div>
-    <NavBar text="Welcome to Kraft Burgers">
-      <p slot="center-component" style="text-align:center center;">Welcome to ...</p>
+    <NavBar>
+
     </NavBar>
     <div id="body">
       <SplitPage>
@@ -9,7 +9,7 @@
           <basicButton
             text="Make Your Own Burger"
             :icon="require('../assets/restaurant.png')"
-            v-on:buttonclick="NextPage('EatIn')"
+            v-on:buttonclick="NextPage('BurgerMenu')"
           ></basicButton>
         </template>
         <template slot="right">
@@ -54,11 +54,8 @@ export default {
     };
   },
   methods: {
-    NextPage: function(dO) {
-      this.diningOption = dO;
-      console.log("DO: " + dO);
-      //console.log("Dining Option: " + diningOption); <-- Issue with defining diningOption
-      this.$router.push({ name: "MainMenu" });
+    NextPage: function(route) {
+      this.$router.push({ name: route });
       location.reload()
     },
   }
