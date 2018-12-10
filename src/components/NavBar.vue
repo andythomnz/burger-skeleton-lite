@@ -3,54 +3,57 @@
     <!-- needs boolean for show, 
          an icon
         and the parent component should pass a function
-        or URL to the page for the funtion -->
-    <basicButton text="back"></basicButton>
+    or URL to the page for the funtion-->
+    <div>
+      <basicButton text="back"></basicButton>
+    </div>
+    <div class="center">
     <slot name="center-component"></slot>
-    <basicButton text="Next"></basicButton>
-    <basicButton text="Cart">Cart</basicButton>
+    </div>
+    <div>
+      <basicButton text="Next"></basicButton>
+    </div>
+    <div>
+      <basicButton text="Cart">Cart</basicButton>
+    </div>
   </div>
 </template>
 <script>
-
-import basicButton from '@/components/basicButton.vue'
+import basicButton from "@/components/basicButton.vue";
 
 export default {
-  name: 'NavBar',
-  components:{
+  name: "NavBar",
+  components: {
     basicButton
-  }, 
+  },
   props: {
     text: String,
-    icon: String,
+    icon: String
   },
-    data: function () {
-    return {
-
-    };
+  data: function() {
+    return {};
   },
-  methods: {
-
-
-    }
-  }
-
+  methods: {}
+};
 </script>
 <style scoped>
-
 .bar-wrapper {
-  text-align: center ;
+  text-align: center;
   width: 100%;
-  padding-top:0;
+  padding-top: 0;
   border-bottom-color: grey;
   border-bottom-style: solid;
   padding-bottom: 0.5%;
   display: grid;
-	grid-gap: 10px;
-	grid-template-columns: auto auto auto auto;
+  grid-gap: 10px;
+  grid-template-columns: 13vh auto 13vh 13vh;
 }
 
 #text {
-  font-weight: bold
+  font-weight: bold;
 }
 
+.center {
+  margin: auto auto; 
+}
 </style>
