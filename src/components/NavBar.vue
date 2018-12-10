@@ -5,7 +5,10 @@
         and the parent component should pass a function
     or URL to the page for the funtion-->
     <div>
-      <basicButton text="back"></basicButton>
+      <basicButton 
+      text="back"
+      v-on:buttonclick="NextPage(backRoute)"
+      ></basicButton>
     </div>
     <div class="center">
       <slot name="center-component"></slot>
@@ -28,12 +31,20 @@ export default {
   },
   props: {
     text: String,
-    icon: String
+    icon: String,
+    nextRoute: "",
+    backRoute: ""
   },
   data: function() {
     return {};
   },
-  methods: {}
+  methods: {
+     NextPage: function(route) {
+       console.log("Back route: " + this.backRoute);
+      this.$router.push({ name: route });
+      location.reload()
+    }
+  }
 };
 </script>
 

@@ -26,11 +26,11 @@ let router = new Router({
       component: () => import(/* webpackChunkName: "read" */ './views/Kitchen.vue')
     },
     {
-      path: '/welcome',
+      path: '/Welcome',
       meta: {
         title: 'Welcome',
       },
-      name: 'welcome',
+      name: 'Welcome',
       // route level code-splitting
       // this generates a separate chunk (read.[hash].js) for this route
       // which is lazy-loaded when the route is visited.

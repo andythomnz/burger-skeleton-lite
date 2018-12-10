@@ -1,7 +1,9 @@
 <template>
   <div id="ordering"> 
-    <NavBar>
-<h1 slot="center-component">Welcome to Kraft Burgers</h1>
+    <NavBar
+        nextRoute=""
+        backRoute="MainMenu">>
+        <h1 slot="center-component">Sides</h1>
     </NavBar>
     <button v-on:click="switchLang()">{{ uiLabels.language }}</button>
 

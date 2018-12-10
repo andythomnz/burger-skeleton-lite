@@ -1,6 +1,8 @@
 <template>
   <div id="ordering" class="container">
-    <NavBar text="Welcome to Kraft Burgers">
+    <NavBar text="Welcome to Kraft Burgers"
+      nextRoute=""
+      backRoute="MainMenu">>
       <!--button slot="center-component" v-on:click="switchLang()">{{ uiLabels.language }}</button-->
       <div slot="center-component">
         <button

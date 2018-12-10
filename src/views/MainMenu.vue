@@ -1,8 +1,9 @@
 <template>
   <div>
-    <NavBar>
-
-    </NavBar>
+    <NavBar
+      nextRoute=""
+      backRoute="Welcome"
+    ></NavBar>
     <div id="body">
       <SplitPage>
         <template slot="left">
@@ -34,7 +35,6 @@
 </template>
 <script>
 
-import sharedVueStuff from "@/components/sharedVueStuff.js";
 import SplitPage from "@/components/SplitPage.vue";
 import basicButton from "@/components/basicButton.vue";
 import NavBar from "@/components/NavBar.vue";
