@@ -3,6 +3,7 @@
     <NavBar
       nextRoute=""
       backRoute="Welcome"
+      showCart=false
     ></NavBar>
     <div id="body">
       <SplitPage>

@@ -2,7 +2,8 @@
   <div>
     <NavBar text="Welcome to Kraft Burgers"
       nextRoute=""
-      backRoute="">>>
+      backRoute=""
+      :showCart="Boolean.false">
       <h1 slot="center-component">Welcome to Kraft Burgers</h1>
     </NavBar>
     <div id="body">

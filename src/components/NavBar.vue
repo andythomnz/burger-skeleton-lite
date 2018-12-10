@@ -20,7 +20,9 @@
       text="Next"></basicButton>
     </div>
     <div>
-      <basicButton text="Cart">Cart</basicButton>
+      <basicButton 
+      v-if="showCart"
+      text="Cart">Cart</basicButton>
     </div>
   </div>
 </template>
@@ -36,7 +38,8 @@ export default {
     text: String,
     icon: String,
     nextRoute: "",
-    backRoute: ""
+    backRoute: "",
+    showCart: Boolean.true,
   },
   data: function() {
     return {};
