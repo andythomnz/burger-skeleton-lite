@@ -51,7 +51,7 @@ export default {
       console.log("DO: " + dO);
       //console.log("Dining Option: " + diningOption); <-- Issue with defining diningOption
       this.$router.push({ name: "MainMenu" });
-      location.reload()
+      //location.reload()
     },
   }
 

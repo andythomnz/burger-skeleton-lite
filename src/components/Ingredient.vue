@@ -4,8 +4,10 @@
       <button>
         <img :src="require('../assets/restaurant.png')">
         <p>{{item["ingredient_"+ lang]}}</p>
+        <!--p>{{uiLabels.price}}: {{item.selling_price}}</p>
+        <p>{{uiLabels.stock}}: {{item.stock}}</p-->
         <p>Price: {{item.selling_price}}</p>
-        <p>Stock {{item.stock}}</p>
+        <p>Stock: {{item.stock}}</p>
         Number: {{ counter }}
       </button>
     </label>
@@ -19,13 +21,11 @@
 </template>
 
 <script>
-import sharedVueStuff from "@/components/sharedVueStuff.js";
-import basicButton from "@/components/basicButton.vue";
-
+import sharedVueStuff from '@/components/sharedVueStuff.js'
 export default {
   name: "Ingredient",
   components: {
-    basicButton
+    sharedVueStuff,
   },
   props: {
     item: Object,

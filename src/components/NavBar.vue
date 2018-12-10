@@ -48,7 +48,7 @@ export default {
      NextPage: function(route) {
        console.log("Back route: " + this.backRoute);
       this.$router.push({ name: route });
-      location.reload()
+      //location.reload()
     }
   }
 };

@@ -56,7 +56,7 @@ export default {
   methods: {
     NextPage: function(route) {
       this.$router.push({ name: route });
-      location.reload()
+      //location.reload()
     },
   }
 
