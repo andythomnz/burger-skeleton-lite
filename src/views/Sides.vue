@@ -2,7 +2,8 @@
   <div id="ordering"> 
     <NavBar
         nextRoute=""
-        backRoute="MainMenu">>
+        backRoute="MainMenu"
+        showCart='true'>
         <h1 slot="center-component">Sides</h1>
     </NavBar>
     <button v-on:click="switchLang()">{{ uiLabels.language }}</button>

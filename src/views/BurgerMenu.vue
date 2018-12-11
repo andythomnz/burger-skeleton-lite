@@ -68,7 +68,7 @@ export default {
   },
   mixins: [sharedVueStuff], // include stuff that is used in both
                             // the ordering system and the kitchen
-  data: function() { //Not that data is a function!
+  data: function() {        //Not that data is a function!
     return {
       currentTab: 'Buns',
       tabs: ['Buns', 'Protein', 'Vegetables', 'Sauces', 'Extras',  'MYOB'],
