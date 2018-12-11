@@ -100,7 +100,7 @@ export default {
 <style scoped>
 .wrapper {
 	display: grid;
-	grid-gap: 10px;
-	grid-template-columns: auto auto auto ;
+	grid-gap: 1em;
+  grid-template-columns: repeat(auto-fit, calc(12em + 10px));
 }
 </style>

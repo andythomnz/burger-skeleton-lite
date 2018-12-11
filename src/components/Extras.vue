@@ -101,6 +101,6 @@ export default {
 .wrapper {
 	display: grid;
 	grid-gap: 10px;
-	grid-template-columns: auto auto auto ;
+	grid-template-columns: repeat(auto-fit, calc(12em + 10px));
 }
 </style>
