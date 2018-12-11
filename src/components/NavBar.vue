@@ -5,6 +5,9 @@
         and the parent component should pass a function
     or URL to the page for the funtion-->
     <div>
+      <!--button v-on:click="switchLang()">{{ uiLabels.language }}</button-->
+    </div>
+    <div>
       <basicButton 
       text="back"
       v-if="backRoute !== ''"
@@ -27,6 +30,9 @@
   </div>
 </template>
 <script>
+//import methods and data that are shared between ordering and kitchen views
+import sharedVueStuff from '@/components/sharedVueStuff.js'
+
 import basicButton from "@/components/basicButton.vue";
 
 export default {
@@ -46,7 +52,7 @@ export default {
   },
   methods: {
      NextPage: function(route) {
-       console.log("Back route: " + this.backRoute);
+     //console.log("Back route: " + this.backRoute);
       this.$router.push({ name: route });
       //location.reload()
     }
@@ -64,7 +70,7 @@ export default {
   padding-bottom: 0.5%;
   display: grid;
   grid-gap: 10px;
-  grid-template-columns: 10% auto 10% 10%;
+  grid-template-columns: 10% 10% auto 10% 10%;
 }
 
 #text {
