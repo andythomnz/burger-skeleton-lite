@@ -43,6 +43,9 @@
 import Ingredient from "@/components/Ingredient.vue";
 import OrderItem from "@/components/OrderItem.vue";
 
+//Importing global CSS
+require('@/assets/globalCSS.css')
+
 //import methods and data that are shared between ordering and kitchen views
 import sharedVueStuff from "@/components/sharedVueStuff.js";
 
@@ -98,9 +101,4 @@ export default {
 };
 </script>
 <style scoped>
-.wrapper {
-	display: grid;
-	grid-gap: 10px;
-	grid-template-columns: repeat(auto-fit, calc(12em + 10px));
-}
 </style>
