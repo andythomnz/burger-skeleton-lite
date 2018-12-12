@@ -15,8 +15,9 @@
     </Ingredient>
 
     <h1>{{ uiLabels.order }}</h1>
-    {{ cartDisplay }}, {{ price }} kr
-    <button v-on:click="placeOrder()"><img class="cart-img" src="@/assets/cart.png">{{ uiLabels.placeOrder }}</button>
+    {{ cartDisplay }}
+    <br/>
+    <button v-on:click="placeOrder()"><img class="cart-img" src="@/assets/cart.png">{{ uiLabels.placeOrder }}  {{ price }} kr</button>
 
     <h1>{{ uiLabels.ordersInQueue }}</h1>
     <div>
@@ -58,8 +59,8 @@ export default {
       chosenIngredients: [],
       price: 0,
       orderNumber: "",
-	  cartDisplay: "",
-	  commodity: {}
+    cartDisplay: "",
+    commodity: {}
     }
   },
   created: function () {
@@ -72,18 +73,18 @@ export default {
       this.chosenIngredients.push(item);
       this.price += +item.selling_price;
       
-	  var itemName = item["ingredient_sv"];
-	  if(itemName in this.commodity){
-		this.commodity[itemName]+=1;
-	  }
-	  else{
-		this.commodity[itemName]=1;
+    var itemName = item["ingredient_sv"];
+    if(itemName in this.commodity){
+    this.commodity[itemName]+=1;
+    }
+    else{
+    this.commodity[itemName]=1;
       }
-	  
-	  this.cartDisplay="";
-	  for(var i in this.commodity){
-	    this.cartDisplay += i+":"+this.commodity[i]+",";
-	  }
+    
+    this.cartDisplay="";
+    for(var i in this.commodity){
+      this.cartDisplay += i+":"+this.commodity[i]+",";
+    }
     },
     placeOrder: function () {
       var i,
