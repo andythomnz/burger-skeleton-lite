@@ -20,7 +20,7 @@
     <div>
       <basicButton
       v-if="nextRoute !== ''"
-      text="Next"></basicButton>
+      :text="uiLabels.next"></basicButton>
     </div>
     <div>
       <basicButton

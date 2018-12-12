@@ -61,4 +61,8 @@ export default {
   width:2em;
 }
 
+.ingredient {
+
+}
+
 </style>

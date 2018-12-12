@@ -91,8 +91,8 @@ export default {
     addToOrder: function (item) {
       this.chosenIngredients.push(item);
       this.price += +item.selling_price;
-      this.$store.state.myoB.push(item.ingredient_en);
-      console.log(this.$store.state.myoB);
+      this.$store.state.myoB.push(item);
+
     },
     placeOrder: function () {
       var i,

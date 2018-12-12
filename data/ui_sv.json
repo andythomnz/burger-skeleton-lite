@@ -19,5 +19,8 @@
   "language" : "English",
   "patty" : "Färsbiff",
   "back" : "Tillbaka",
-  "cart" : "Varukorgen"
+  "cart" : "Varukorgen",
+  "burgers" : "Hamburgare",
+  "drinks" : "Drycker",
+  "sides" : "Smårätter"
 }
