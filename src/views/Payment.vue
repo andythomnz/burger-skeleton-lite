@@ -1,8 +1,11 @@
 <template>
 <div >
-  <NavBar>
+  <NavBar
+    nextRoute=""
+    backRoute="MainMenu"
+    :showCart=false><h1 slot="center-component">Choose your payment method</h1>
   </NavBar>
-  <h1>Choose your payment method</h1>
+
   <div>
     <SplitPage>
       <template slot="left">
@@ -46,9 +49,4 @@ export default {
 </script>
 <style scoped>
 
-  h1 {
-    text-transform: uppercase;
-    font-size: 1.4em;
-    text-align:center;
-  }
 </style>
