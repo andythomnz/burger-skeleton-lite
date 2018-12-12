@@ -1,5 +1,8 @@
 <template>
   <div id="ordering">
+    <NavBar>
+    </NavBar>
+
     <img class="example-panel" src="@/assets/exampleImage.jpg">
     <button v-on:click="switchLang()">{{ uiLabels.language }}</button>
 
@@ -35,6 +38,9 @@
 </template>
 <script>
 
+//import nav bar
+import NavBar from '@/components/NavBar.vue'
+
 //import the components that are used in the template, the name that you
 //use for importing will be used in the template above and also below in
 //components
@@ -50,7 +56,8 @@ export default {
   name: 'Ordering',
   components: {
     Ingredient,
-    OrderItem
+    OrderItem,
+    NavBar
   },
   mixins: [sharedVueStuff], // include stuff that is used in both
                             // the ordering system and the kitchen

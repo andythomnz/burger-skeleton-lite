@@ -1,5 +1,7 @@
 <template>
 <div >
+  <NavBar>
+  </NavBar>
   <h1>Choose your payment method</h1>
   <div>
     <SplitPage>
@@ -18,13 +20,14 @@
 //import methods and data that are shared between ordering and kitchen views
 import SplitPage from '@/components/SplitPage.vue'
 import basicButton from '@/components/basicButton.vue'
-
+import NavBar from '@/components/NavBar.vue'
 
 export default {
   name: 'Payment',
   components: {
     SplitPage,
-    basicButton
+    basicButton,
+    NavBar
   },
   // mixins: [sharedVueStuff], // include stuff that is used in both
                             //the ordering system and the kitchen
