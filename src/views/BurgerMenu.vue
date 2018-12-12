@@ -3,7 +3,9 @@
     <NavBar text="Welcome to Kraft Burgers"
       nextRoute=""
       backRoute="MainMenu"
-      showCart='true'>
+      showCart='true'
+      :uiLabels='uiLabels'
+      @switchLang='switchLang()'>
       <!--button slot="center-component" v-on:click="switchLang()">{{ uiLabels.language }}</button-->
       <div slot="center-component">
         <button
