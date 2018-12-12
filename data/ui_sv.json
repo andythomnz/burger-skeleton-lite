@@ -17,5 +17,7 @@
   "ready" : "Klart",
   "order" : "Min burgare",
   "language" : "English",
-  "patty" : "Färsbiff"
+  "patty" : "Färsbiff",
+  "back" : "Tillbaka",
+  "cart" : "Varukorgen"
 }

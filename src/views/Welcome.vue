@@ -1,22 +1,25 @@
 <template>
   <div>
-    <NavBar :text="headtext" id="textinbar">
-      <p slot="center-component" style="text-align:center center;"> Welcome to ...</p>
+    <NavBar text="Welcome to Kraft Burgers"
+      nextRoute=""
+      backRoute=""
+      :showCart="Boolean.false">
+      <h1 slot="center-component">Welcome to Kraft Burgers</h1>
     </NavBar>
     <div id="body">
       <SplitPage>
         <template slot="left">
           <basicButton
-            :text="leftComponentText"
-            :icon="leftComponentIcon"
-            v-on:buttonclick="NextPage()"
+            text="Eat In"
+            :icon="require('../assets/restaurant.png')"
+            v-on:buttonclick="NextPage('EatIn')"
           ></basicButton>
         </template>
         <template slot="right">
           <basicButton
-            :text="rightComponentText"
-            :icon="rightComponentIcon"
-            v-on:buttonclick="NextPage()"
+            text="Take Away"
+            :icon="require('../assets/takeaway.png')"
+            v-on:buttonclick="NextPage('TakeAway')"
           ></basicButton>
         </template>
       </SplitPage>
@@ -25,48 +28,40 @@
 </template>
 <script>
 
-
-import SplitPage from '@/components/SplitPage.vue'
-import basicButton from '@/components/basicButton.vue'
-import NavBar from '@/components/NavBar.vue'
+import SplitPage from "@/components/SplitPage.vue";
+import basicButton from "@/components/basicButton.vue";
+import NavBar from "@/components/NavBar.vue";
 
 export default {
-  name: 'Welcome',
+  name: "Welcome",
   components: {
     SplitPage,
     basicButton,
     NavBar
   },
 
-  data: function(){
+  data: function() {
     return {
-      leftComponentText:'Eat in',
-      leftComponentIcon:require('../assets/restaurant.png'),
-      rightComponentText:'Take Away',
-      rightComponentIcon:require('../assets/takeaway.png'),
-      headtext:'Welcome to Kraft Burgers',
-    }
+      diningOption: ""
+    };
   },
   methods: {
-    NextPage: function(){
-      this.$router.push({ name: "ordering" });
-      location.reload()
-    }
+    NextPage: function(dO) {
+      this.diningOption = dO;
+      console.log("DO: " + dO);
+      //console.log("Dining Option: " + diningOption); <-- Issue with defining diningOption
+      this.$router.push({ name: "MainMenu" });
+      //location.reload()
+    },
   }
-}
+};
 </script>
 <style scoped>
-
-  h1 {
-    text-transform: uppercase;
-    font-size: 1.4em;
-    text-align:center;
-  }
-
-#textinbar {
-    font-size: 20pt;
-    text-align: auto auto;
-  }
+h1 {
+  text-transform: uppercase;
+  font-size: 1.4em;
+  text-align: center;
+}
 
 #buttons {
   width:50%;
@@ -82,6 +77,4 @@ export default {
   font-size: 16pt;
   float:right
 }
-
-
 </style>

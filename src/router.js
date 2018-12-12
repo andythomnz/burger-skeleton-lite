@@ -26,15 +26,26 @@ let router = new Router({
       component: () => import(/* webpackChunkName: "read" */ './views/Kitchen.vue')
     },
     {
-      path: '/welcome',
+      path: '/Welcome',
       meta: {
         title: 'Welcome',
       },
-      name: 'welcome',
+      name: 'Welcome',
       // route level code-splitting
       // this generates a separate chunk (read.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: () => import(/* webpackChunkName: "read" */ './views/Welcome.vue')
+    },
+    {
+      path: '/MainMenu',
+      meta: {
+        title: 'MainMenu',
+      },
+      name: 'MainMenu',
+      // route level code-splitting
+      // this generates a separate chunk (read.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import(/* webpackChunkName: "read" */ './views/MainMenu.vue')
     },
     {
       path: '/payment',
@@ -46,6 +57,46 @@ let router = new Router({
       // this generates a separate chunk (read.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: () => import(/* webpackChunkName: "read" */ './views/Payment.vue')
+    },
+    {
+      path: '/Ordering',
+      meta: {
+        title: 'Ordering',
+      },
+      name: 'Ordering',
+      component: () => import(/* webpackChunkName: "read" */ './views/Ordering.vue')
+    },
+    {
+      path: '/BurgerMenu',
+      meta: {
+        title: 'BurgerMenu',
+      },
+      name: 'BurgerMenu',
+      component: () => import(/* webpackChunkName: "read" */ './views/BurgerMenu.vue')
+    },
+    {
+      path: '/Drinks',
+      meta: {
+        title: 'Drinks',
+      },
+      name: 'Drinks',
+      component: () => import(/* webpackChunkName: "read" */ './views/Drinks.vue')
+    },
+    {
+      path: '/Sides',
+      meta: {
+        title: 'Sides',
+      },
+      name: 'Sides',
+      component: () => import(/* webpackChunkName: "read" */ './views/Sides.vue')
+    },
+    {
+      path: '/Cart',
+      meta: {
+        title: 'Cart',
+      },
+      name: 'Cart',
+      component: () => import(/* webpackChunkName: "read" */ './views/Cart.vue')
     }
   ]
 })

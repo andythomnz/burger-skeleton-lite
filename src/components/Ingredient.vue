@@ -1,5 +1,5 @@
 <template>
-  <div class="ingredient">
+  <div class="ingredient" >
     <label>
       <button v-on:click="incrementCounter">{{ counter }}</button>
       <ul>
@@ -14,32 +14,46 @@
         <span v-if="item.vegan"><img src="../assets/vegan.png" class="icon" width="10%"/></span>
       </ul>
     </label>
+
+    <!--  Change the text in the basicButton to be language sensitive
+    {{item["ingredient_"+ lang]}}
+
+    also do something with the stock and price {{item.selling_price}}:-, {{item.stock}} pcs
+    -->
   </div>
 </template>
+
 <script>
+import sharedVueStuff from '@/components/sharedVueStuff.js'
 export default {
-  name: 'Ingredient',
+  name: "Ingredient",
+  components: {
+    sharedVueStuff,
+  },
   props: {
     item: Object,
     lang: String
   },
-    data: function () {
+  data: function() {
     return {
       counter: 0
     };
   },
   methods: {
-    incrementCounter: function () {
+    //make a function that switches to another tab for the bread and burgers pages.
+    //make the buttons highlihgt for the veggies and extras. with stylings and v-if
+
+    incrementCounter: function() {
       this.counter += 1;
       // sending 'increment' message to parent component or view so that it
       // can catch it with v-on:increment in the component declaration
-      this.$emit('increment');
+      this.$emit("increment");
     },
-    resetCounter: function () {
+    resetCounter: function() {
       this.counter = 0;
     }
   }
-}
+};
 </script>
 <style scoped>
 

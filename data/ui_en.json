@@ -17,5 +17,7 @@
   "ready" : "Done",
   "order" : "My burger",
   "language" : "Svenska",
-  "patty" : "Patties"
+  "patty" : "Patties",
+  "back" : "Back",
+  "cart" : "Cart"
 }
