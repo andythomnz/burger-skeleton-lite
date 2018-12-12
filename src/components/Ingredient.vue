@@ -1,21 +1,37 @@
-<template>
+<tem<template>
+
+  <div class="ingredient" v-on:click="incrementCounter">
+    <label>
+      <button>
+
+        <img v-bind:src="item.image" width="50%">
+        <p>{{item["ingredient_"+ lang]}}</p>
+        <!--p>{{uiLabels.price}}: {{item.selling_price}}</p>
+        <p>{{uiLabels.stock}}: {{item.stock}}</p-->
+        <p v-if="item.addi_cost>0">+ {{item.addi_cost}}kr</p>
+        <p>Stock: {{item.stock}}</p>
+        Number: {{ counter }}
+        <span v-if="item.milk_free"><img src="../assets/milkfree.png" class="icon" /></span>
+        <span v-if="item.gluten_free"><img src="../assets/glutenfree.png" class="icon" /></span>
+        <span v-if="item.vegan"><img src="../assets/vegan.png" class="icon" width="10%"/></span>
+      </button>
+    </label>
+
+    <!-- TODO Change the text in the basicButton to be language sensitive 
+=======
   <div class="ingredient" >
     <label>
       <button v-on:click="incrementCounter">{{ counter }}</button>
       <ul>
         <img v-bind:src="item.image" width="20%">
-        <!--image can be changed by editing the "image colon" in ingredients.csv-->
+        
         <li>{{item["ingredient_"+ lang]}}</li>
-        <!--<li>{{item.selling_price}}:-</li>
-        <li>{{item.stock}} pcs</li>-->
-        <li v-if="item.addi_cost>0">+ {{item.addi_cost}}kr</li>
-        <span v-if="item.milk_free"><img src="../assets/milkfree.png" class="icon" /></span>
-        <span v-if="item.gluten_free"><img src="../assets/glutenfree.png" class="icon" /></span>
-        <span v-if="item.vegan"><img src="../assets/vegan.png" class="icon" width="10%"/></span>
-      </ul>
-    </label>
+        <li>{{item.selling_price}}:-</li><li>{{item.stock}} pcs</li>-->
+        
+      
 
     <!--  Change the text in the basicButton to be language sensitive
+>>>>>>> b10b3fb3f81ee9f1618b4b0bf8710f9cef9166b2
     {{item["ingredient_"+ lang]}}
 
     also do something with the stock and price {{item.selling_price}}:-, {{item.stock}} pcs
@@ -57,8 +73,39 @@ export default {
 </script>
 <style scoped>
 
-.icon{
-  width:2em;
+
+p {
+  margin: 0 0;
 }
 
+img {
+  padding-bottom: 0em;
+  padding-top: 0em;
+}
+
+button:hover {
+  background: lightyellow;
+  cursor: pointer;
+}
+
+button:focus {
+  outline: 1px solid #fff;
+  outline-offset: -4px;
+}
+
+button:active {
+  transform: scale(0.99);
+  outline: yellow auto 5;
+}
+
+button {
+  border: none;
+  background: none;
+  text-align: center;
+  font-size: 20pt;
+  font-weight: bold;
+  transition: background 250ms ease-in-out, transform 150ms ease;
+  display: block;
+  width: 100%;
+}
 </style>
