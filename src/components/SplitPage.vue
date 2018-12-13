@@ -13,10 +13,7 @@
 export default {
   name: 'SplitPage',
   props: {
-    text1: String,
-    text2: String,
-    icon1: String,
-    icon2: String
+
   },
     data: function () {
     return {
@@ -24,12 +21,7 @@ export default {
     };
   },
   methods: {
-    Button1Click: function(){
-      this.$emit('button1click');
-    },
-    Button2Click: function(){
-      this.$emit('button2click');
-    },
+    
     }
   }
 

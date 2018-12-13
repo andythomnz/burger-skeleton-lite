@@ -20,7 +20,7 @@
     <div>
       <basicButton
         v-if="nextButton"
-        :text="uiLabels.next"
+        :text="nextButtonTitle"
         v-on:buttonclick="NextPage(currentTab)"
       ></basicButton>
     </div>
@@ -67,9 +67,9 @@ export default {
     },
     nextButtonTitle () {
       if (this.currentTab === 'Vegetables' || this.currentTab === 'Sauces') {
-        return 'Next';
+        return this.uiLabels.next;
       } else if (this.currentTab === 'Extras') {
-        return 'Finish';
+        return this.uiLabels.ready;
       }
     }
   },
@@ -82,7 +82,7 @@ export default {
         this.$store.commit('changeCurrentTab', 'Extras');
       } else if (this.currentTab === 'Extras' && type !== 'back') {
         this.$store.commit('toggleClose');
-        this.$router.push({ name: 'Cart' });
+        this.$router.push({ name: 'Popup' });
       } else {
         this.$router.push({ name: route });
       }

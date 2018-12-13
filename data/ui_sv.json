@@ -24,5 +24,7 @@
   "drinks" : "Dryck",
   "sides" : "Tillbehör",
   "myob" : "Gör Din Egen Burgare",
-  "premade_burgers" : "Pre-Made Burgare"
+  "premade_burgers" : "Pre-Made Burgare",
+  "cancel" : "Annulera Artikel",
+  "confirm" : "Konfirmera Artikel"
 }

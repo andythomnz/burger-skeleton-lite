@@ -24,5 +24,7 @@
   "drinks" : "Drinks",
   "sides" : "Sides",
   "myob" : "Make Your Own Burger",
-  "premade_burgers" : "Pre-Made Burgers"
+  "premade_burgers" : "Pre-Made Burgers",
+  "cancel" : "Cancel Item",
+  "confirm" : "Confirm Item"
 }

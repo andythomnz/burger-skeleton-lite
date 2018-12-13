@@ -88,6 +88,9 @@ export default {
       this.chosenIngredients.push(item);
       this.price += +item.selling_price;
       this.$store.state.drinks.push(item);
+      this.$emit('popup', item, 'Drinks')
+      this.$router.push({ name: "Popup" })
+
     },
     placeOrder: function() {
       var i,
