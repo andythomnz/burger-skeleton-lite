@@ -9,7 +9,37 @@
     <div class='order'>
       <h1>{{ uiLabels.yourOrder}}</h1>
       <h2>{{ uiLabels.burgers }}</h2>
-      <p>{{ OrderedBurgers.map(item => item["ingredient_"+lang]).join(', ' ) }}
+      <ul>
+        <li>Buns: {{OrderedBurger.buns.ingredient_en}}</li>
+        <li>Protein: {{OrderedBurger.protein.ingredient_en}}</li>
+        <li>
+          Vegetables:
+          <ul>
+            <li
+              v-for="item in OrderedBurger.vegetables"
+              :key="item.ingredient_sv"
+            >{{item.ingredient_sv}}</li>
+          </ul>
+        </li>
+        <li>
+          Sauces:
+          <ul>
+            <li
+              v-for="item in OrderedBurger.sauces"
+              :key="item.ingredient_sv"
+            >{{item.ingredient_sv}}</li>
+          </ul>
+        </li>
+        <li>
+          Extras:
+          <ul>
+            <li
+              v-for="item in OrderedBurger.extras"
+              :key="item.ingredient_sv"
+            >{{item.ingredient_sv}}</li>
+          </ul>
+        </li>
+      </ul>
       <h2>{{ uiLabels.drinks }}</h2>
       <p>{{ OrderedDrinks.map(item => item["ingredient_"+lang]).join(', ' ) }}
       <!-- <button v-on:click='RemoveDrink(item)'>X</button> -->
@@ -38,8 +68,13 @@ export default {
     return {
       OrderedDrinks: this.$store.state.drinks,
       OrderedSides: this.$store.state.sides,
-      OrderedBurgers: this.$store.state.myoB
+
     };
+  },
+  computed: {
+    OrderedBurger () {
+      return this.$store.state.orders;
+    }
   },
   methods: {
     NextPage: function() {

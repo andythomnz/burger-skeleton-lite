@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-    <router-view/>
+    <keep-alive>
+      <router-view />
+    </keep-alive>
   </div>
 </template>
 
@@ -17,7 +19,7 @@ export default {
 
 <style>
 body {
-  height:100vh;
+  height: 100vh;
   background: radial-gradient(white, lightblue);
   background-size: 200% 200%;
   /* animation: Gradient 20s linear infinite; */
@@ -25,22 +27,22 @@ body {
 
 @keyframes Gradient {
   0% {
-    background-position: 10% 10%
+    background-position: 10% 10%;
   }
   20% {
-    background-position: 50% 50%
+    background-position: 50% 50%;
   }
   40% {
-    background-position: 10% 90%
+    background-position: 10% 90%;
   }
   60% {
-    background-position: 90% 90%
+    background-position: 90% 90%;
   }
   80% {
-    background-position: 90% 10%
+    background-position: 90% 10%;
   }
   100% {
-    background-position: 10% 10%
+    background-position: 10% 10%;
   }
 }
 </style>

@@ -1,5 +1,8 @@
 <template>
-  <div id="ordering">
+  <div
+    id="ordering"
+    v-if="buns"
+  >
     <button v-on:click="switchLang()">{{ uiLabels.language }}</button>
 
     <h1>{{ uiLabels.ingredients }}</h1>
@@ -9,19 +12,19 @@
         ref="ingredient"
         v-for="item in ingredients"
         v-on:increment="addToOrder(item)"
+        v-on:reset="resetToOrder(item)"
         :item="item"
-        v-if="item.category == 4" 
+        v-if="item.category == 4"
         :lang="lang"
         :key="item.ingredient_id"
+        :currentKey="currentKey"
       ></Ingredient>
     </div>
 
     <h1>{{ uiLabels.order }}</h1>
     {{ chosenIngredients.map(item => item["ingredient_"+lang]).join(', ') }},
     {{ price }} kr
-    <button
-      v-on:click="placeOrder()"
-    >{{ uiLabels.placeOrder }}</button>
+    <button v-on:click="placeOrder()">{{ uiLabels.placeOrder }}</button>
 
     <h1>{{ uiLabels.ordersInQueue }}</h1>
     <div>
@@ -59,28 +62,60 @@ export default {
   },
   mixins: [sharedVueStuff], // include stuff that is used in both
   // the ordering system and the kitchen
-  data: function() {
+  data: function () {
     //Not that data is a function!
     return {
       chosenIngredients: [],
       price: 0,
-      orderNumber: ""
+      orderNumber: "",
+      currentKey: '',
+      buns: true
     };
   },
-  created: function() {
+  created: function () {
     this.$store.state.socket.on(
       "orderNumber",
-      function(data) {
+      function (data) {
         this.orderNumber = data;
       }.bind(this)
     );
   },
+  computed: {
+    close () {
+      return this.$store.state.close;
+    }
+  },
+  watch: {
+    close () {
+      this.buns = false
+      this.chosenIngredients=[]
+      this.price=0
+      this.$nextTick(_ => {
+        this.buns = true;
+      })
+    }
+  },
   methods: {
-    addToOrder: function(item) {
+    addToOrder: function (item) {
+      this.chosenIngredients = [];
+      this.price = 0;
       this.chosenIngredients.push(item);
       this.price += +item.selling_price;
+      this.currentKey = item.ingredient_id;
+      this.$store.commit('changeOrders', {
+        type: 'buns',
+        value: Object(item)
+      })
     },
-    placeOrder: function() {
+    resetToOrder: function () {
+      this.chosenIngredients = [];
+      this.price = 0;
+      this.$store.commit('changeOrders', {
+        type: 'buns',
+        value: null
+      })
+    },
+    placeOrder: function () {
       var i,
         //Wrap the order in an object
         order = {

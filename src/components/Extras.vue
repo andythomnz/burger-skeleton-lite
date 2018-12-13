@@ -1,5 +1,8 @@
 <template>
-  <div id="ordering">
+  <div
+    id="ordering"
+    v-if="extras"
+  >
     <button v-on:click="switchLang()">{{ uiLabels.language }}</button>
 
     <h1>{{ uiLabels.ingredients }}</h1>
@@ -9,8 +12,9 @@
         ref="ingredient"
         v-for="item in ingredients"
         v-on:increment="addToOrder(item)"
+        @reset="resetToOrder(item)"
         :item="item"
-        v-if="item.category == 2" 
+        v-if="item.category == 2"
         :lang="lang"
         :key="item.ingredient_id"
       ></Ingredient>
@@ -19,9 +23,7 @@
     <h1>{{ uiLabels.order }}</h1>
     {{ chosenIngredients.map(item => item["ingredient_"+lang]).join(', ') }},
     {{ price }} kr
-    <button
-      v-on:click="placeOrder()"
-    >{{ uiLabels.placeOrder }}</button>
+    <button v-on:click="placeOrder()">{{ uiLabels.placeOrder }}</button>
 
     <h1>{{ uiLabels.ordersInQueue }}</h1>
     <div>
@@ -59,28 +61,67 @@ export default {
   },
   mixins: [sharedVueStuff], // include stuff that is used in both
   // the ordering system and the kitchen
-  data: function() {
+  data: function () {
     //Not that data is a function!
     return {
       chosenIngredients: [],
       price: 0,
-      orderNumber: ""
+      orderNumber: "",
+      extras: true
     };
   },
-  created: function() {
+  created: function () {
     this.$store.state.socket.on(
       "orderNumber",
-      function(data) {
+      function (data) {
         this.orderNumber = data;
       }.bind(this)
     );
   },
+  computed: {
+    close () {
+      return this.$store.state.close;
+    }
+  },
+  watch: {
+    close () {
+      this.extras = false
+      this.chosenIngredients=[]
+      this.price=0
+      this.$nextTick(_ => {
+        this.extras = true;
+      })
+    }
+  },
   methods: {
-    addToOrder: function(item) {
+    addToOrder: function (item) {
       this.chosenIngredients.push(item);
       this.price += +item.selling_price;
+      let store = this.$store.state.orders.extras;
+      store.push(item);
+      this.$store.commit('changeOrders', {
+        type: 'extras',
+        value: store
+      })
     },
-    placeOrder: function() {
+    resetToOrder (item) {
+      let store = this.$store.state.orders.extras;
+      let arr = this.chosenIngredients;
+      for (let i in store) {
+        if (store[i].ingredient_sv === item.ingredient_sv && item.ingredient_id === store[i].ingredient_id) {
+          store.splice(i, 1);
+          arr.splice(i, 1);
+          break;
+        }
+      }
+      this.chosenIngredients = arr;
+      this.price -= +item.selling_price;
+      this.$store.commit('changeOrders', {
+        type: 'extras',
+        value: store
+      })
+    },
+    placeOrder: function () {
       var i,
         //Wrap the order in an object
         order = {
