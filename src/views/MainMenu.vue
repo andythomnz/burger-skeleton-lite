@@ -9,23 +9,23 @@
       <SplitPage>
         <template slot="left">
           <basicButton
-            text="Make Your Own Burger"
+            :text="uiLabels.myob"
             :icon="require('../assets/restaurant.png')"
             v-on:buttonclick="NextPage('BurgerMenu')"
           ></basicButton>
         </template>
         <template slot="right" >
           <div class="side-grid">
-          <basicButton 
-            text="Pre-Made Burgers"
+          <basicButton
+            :text="uiLabels.premade_burgers"
             v-on:buttonclick="NextPage('Drinks')"
           ></basicButton>
-          <basicButton 
-            text="Drinks"
+          <basicButton
+            :text="uiLabels.drinks"
             v-on:buttonclick="NextPage('Drinks')"
           ></basicButton>
-          <basicButton 
-            text="Sides"
+          <basicButton
+            :text="uiLabels.sides"
             v-on:buttonclick="NextPage('Sides')"
           ></basicButton>
           </div>
@@ -39,6 +39,7 @@
 import SplitPage from "@/components/SplitPage.vue";
 import basicButton from "@/components/basicButton.vue";
 import NavBar from "@/components/NavBar.vue";
+import sharedVueStuff from "@/components/sharedVueStuff.js";
 
 export default {
   name: "Welcome",
@@ -47,7 +48,7 @@ export default {
     basicButton,
     NavBar
   },
-
+  mixins: [sharedVueStuff],
   data: function() {
     return {
       diningOption: ""
@@ -71,7 +72,7 @@ h1 {
   text-align: center;
 }
 
-.side-grid {  
+.side-grid {
   text-align: center;
   border-bottom-color: grey;
   border-bottom-style: solid;

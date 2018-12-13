@@ -20,7 +20,9 @@
   "patty" : "Färsbiff",
   "back" : "Tillbaka",
   "cart" : "Varukorgen",
-  "burgers" : "Hamburgare",
-  "drinks" : "Drycker",
-  "sides" : "Smårätter"
+  "burgers" : "Burgare",
+  "drinks" : "Dryck",
+  "sides" : "Tillbehör",
+  "myob" : "Gör Din Egen Burgare",
+  "premade_burgers" : "Pre-Made Burgare"
 }

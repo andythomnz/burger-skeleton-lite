@@ -159,5 +159,7 @@ button {
   display: block;
   width: 100%;
 }
+
+.icon {
+  width:10%}
 </style>
->>>>>>> margotCart
