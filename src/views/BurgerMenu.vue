@@ -1,28 +1,37 @@
 <template>
-  <div id="ordering" class="container">
-    <NavBar text="Welcome to Kraft Burgers"
+  <div
+    id="ordering"
+    class="container"
+  >
+    <NavBar
+      text="Welcome to Kraft Burgers"
       nextRoute=""
       backRoute="MainMenu"
-      showCart='true'>
+      showCart='true'
+    >
       <!--button slot="center-component" v-on:click="switchLang()">{{ uiLabels.language }}</button-->
       <div slot="center-component">
         <button
-        v-for="tab in tabs"
-        v-bind:key="tab"
-        v-bind:class="['tab-button', { active: currentTab === tab }]"
-        v-on:click="currentTab = tab">
-        {{ tab }}
-      </button>
+          v-for="tab in tabs"
+          v-bind:key="tab"
+          v-bind:class="['tab-button', { active: currentTab === tab }]"
+          v-on:click="changeTab(tab)"
+        >
+          {{ tab }}
+        </button>
       </div>
     </NavBar>
 
     <h1> tab: {{currentTab}}</h1>
     <div class="page">
-      <component
-        v-bind:is="currentTabComponent"
-        class="tab"
-        type="inline-template">
-      </component>
+      <keep-alive>
+        <component
+          v-bind:is="currentTab"
+          class="tab"
+          type="inline-template"
+        >
+        </component>
+      </keep-alive>
     </div>
 
   </div>
@@ -67,19 +76,22 @@ export default {
     Extras,
   },
   mixins: [sharedVueStuff], // include stuff that is used in both
-                            // the ordering system and the kitchen
-  data: function() {        //Not that data is a function!
+  // the ordering system and the kitchen
+  data: function () {        //Not that data is a function!
     return {
-      currentTab: 'Buns',
-      tabs: ['Buns', 'Protein', 'Vegetables', 'Sauces', 'Extras',  'MYOB'],
+      // currentTab: 'Buns',
+      tabs: ['Buns', 'Protein', 'Vegetables', 'Sauces', 'Extras', 'MYOB'],
       chosenIngredients: [],
       price: 0,
       orderNumber: "",
     }
   },
   computed: {
-    currentTabComponent: function () {
-      return this.currentTab;
+    currentTab: function () {
+      return this.$store.state.currentTab
+    },
+    nextButton () {
+      return this.currentTab === 'Vegetables' || this.currentTab === 'Sauces';
     }
   },
   created: function () {
@@ -88,6 +100,10 @@ export default {
     }.bind(this));
   },
   methods: {
+    changeTab (tab) {
+      this.$store.commit('changeCurrentTab', tab);
+      // this.currentTab = tab
+    },
     addToOrder: function (item) {
       this.chosenIngredients.push(item);
       this.price += +item.selling_price;
@@ -96,13 +112,13 @@ export default {
     },
     placeOrder: function () {
       var i,
-      //Wrap the order in an object
+        //Wrap the order in an object
         order = {
           ingredients: this.chosenIngredients,
           price: this.price
         };
       // make use of socket.io's magic to send the stuff to the kitchen via the server (app.js)
-      this.$store.state.socket.emit('order', {order: order});
+      this.$store.state.socket.emit('order', { order: order });
       //set all counters to 0. Notice the use of $refs
       for (i = 0; i < this.$refs.ingredient.length; i += 1) {
         this.$refs.ingredient[i].resetCounter();

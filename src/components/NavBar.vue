@@ -9,9 +9,9 @@
     </div>
     <div>
       <basicButton
-      :text="uiLabels.back"
-      v-if="backRoute !== ''"
-      v-on:buttonclick="NextPage(backRoute)"
+        :text="uiLabels.back"
+        v-if="backRoute !== ''"
+        v-on:buttonclick="NextPage(backRoute, 'back')"
       ></basicButton>
     </div>
     <div class="center">
@@ -19,14 +19,17 @@
     </div>
     <div>
       <basicButton
-      v-if="nextRoute !== ''"
-      text="Next"></basicButton>
+        v-if="nextButton"
+        :text="nextButtonTitle"
+        v-on:buttonclick="NextPage(currentTab)"
+      ></basicButton>
     </div>
     <div>
       <basicButton
-      v-if="showCart"
-      :text="uiLabels.cart"
-      v-on:buttonclick="NextPage('Cart')"></basicButton>
+        v-if="showCart"
+        :text="uiLabels.cart"
+        v-on:buttonclick="NextPage('Cart')"
+      ></basicButton>
     </div>
   </div>
 </template>
@@ -49,13 +52,40 @@ export default {
     backRoute: "",
     showCart: Boolean.true,
   },
-  data: function() {
+  data: function () {
     return {};
   },
+  computed: {
+    currentTab: function () {
+      return this.$store.state.currentTab
+    },
+    nextButton () {
+      if (this.$router.currentRoute.name !== 'BurgerMenu') {
+        return false;
+      }
+      return this.currentTab === 'Vegetables' || this.currentTab === 'Sauces' || this.currentTab === 'Extras';
+    },
+    nextButtonTitle () {
+      if (this.currentTab === 'Vegetables' || this.currentTab === 'Sauces') {
+        return 'Next';
+      } else if (this.currentTab === 'Extras') {
+        return 'Finish';
+      }
+    }
+  },
   methods: {
-     NextPage: function(route) {
-     //console.log("Back route: " + this.backRoute);
-      this.$router.push({ name: route });
+    NextPage: function (route, type) {
+      //console.log("Back route: " + this.backRoute);
+      if (this.currentTab === 'Vegetables') {
+        this.$store.commit('changeCurrentTab', 'Sauces');
+      } else if (this.currentTab === 'Sauces') {
+        this.$store.commit('changeCurrentTab', 'Extras');
+      } else if (this.currentTab === 'Extras' && type !== 'back') {
+        this.$store.commit('toggleClose');
+        this.$router.push({ name: 'Cart' });
+      } else {
+        this.$router.push({ name: route });
+      }
       //location.reload()
     }
   }

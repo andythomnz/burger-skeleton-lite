@@ -13,6 +13,15 @@ export default new Vuex.Store({
     sides: [],
     cartCount: 0,
     myoB: [],
+    close: false,
+    orders: {
+      buns: {},
+      protein: {},
+      vegetables: [],
+      sauces: [],
+      extras: []
+    },
+    currentTab: 'Buns'
   },
   getters: {
     getSocket: state => state.socket
@@ -23,6 +32,15 @@ export default new Vuex.Store({
     },
     switchLang: function (store, lang) {
       store.lang = lang;
+    },
+    changeCurrentTab: function (store, tab) {
+      store.currentTab = tab;
+    },
+    changeOrders: function (store, value) {
+      store.orders[value.type] = value.value;
+    },
+    toggleClose: function (store) {
+      store.close = !store.close;
     }
   },
   actions: {
