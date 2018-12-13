@@ -116,6 +116,7 @@ export default {
     },
     resetCounter: function () {
       this.counter = 0;
+      this.currentClass = ''
     }
   }
 };

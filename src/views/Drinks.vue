@@ -87,7 +87,9 @@ export default {
     addToOrder: function(item) {
       this.chosenIngredients.push(item);
       this.price += +item.selling_price;
-      this.$store.state.drinks.push(item);
+      this.$store.state.drinks.push(Object.assign(item, {counter:this.counter}));
+      console.log(this.$refs.ingredient)
+      console.log(this.$store.state.drinks[this.$store.state.drinks.indexOf(item)].counter)
     },
     placeOrder: function() {
       var i,
