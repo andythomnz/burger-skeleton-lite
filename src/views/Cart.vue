@@ -10,7 +10,7 @@
       <h1>{{ uiLabels.yourOrder}}</h1>
       <h2>{{ uiLabels.burgers }}</h2>
       <ul>
-        <li>Buns: {{OrderedBurger.buns.ingredient_en}}</li>
+        <li>Buns: {{ OrderedBurger.buns.ingredient_en}}</li>
         <li>Protein: {{OrderedBurger.protein.ingredient_en}}</li>
         <li>
           Vegetables:
@@ -47,7 +47,7 @@
       <h2>{{ uiLabels.sides }}</h2>
       <p>{{ OrderedSides.map(item => item["ingredient_"+lang]).join(', ' )}}</p>
       <button id='btn' v-on:click="Cancel()">{{ uiLabels.cancelOrder }}</button>
-      <button id='btn'>{{ uiLabels.placeOrder }}</button>
+      <button id='btn' v-on:click="placeOrder()">{{ uiLabels.placeOrder }}</button>
 
     </div>
   </div>
@@ -89,12 +89,27 @@ export default {
       this.$store.state.myoB.splice(0, this.$store.state.myoB.length);
       this.$store.state.drinks.splice(0, this.$store.state.drinks.length);
       this.$store.state.sides.splice(0, this.$store.state.sides.length);
+    },
+    placeOrder: function () {
+      var i,
+        //Wrap the order in an object
+        order = {
+          ingredients: this.chosenIngredients,
+          price: this.price
+        };
+      // make use of socket.io's magic to send the stuff to the kitchen via the server (app.js)
+      this.$store.state.socket.emit("order", { order: order });
+      //set all counters to 0. Notice the use of $refs
+      for (i = 0; i < this.$refs.ingredient.length; i += 1) {
+        this.$refs.ingredient[i].resetCounter();
+      }
+      this.price = 0;
+      this.chosenIngredients = [];
+      this.$router.push({ name: "payment" });
     }
+
   }
-
-
-
-};
+}
 </script>
 <style scoped>
 h1 {

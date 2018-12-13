@@ -12,14 +12,13 @@ export default new Vuex.Store({
     drinks: [],
     sides: [],
     cartCount: 0,
-    myoB: [],
     close: false,
     orders: {
       buns: {},
       protein: {},
       vegetables: [],
       sauces: [],
-      extras: []
+      extras: [],
     },
     currentTab: 'Buns'
   },
