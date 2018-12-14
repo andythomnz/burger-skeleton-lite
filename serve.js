@@ -41,7 +41,9 @@ io.on('connection', function (socket) {
     socket.emit('initialize', {
       orders: data.getAllOrders(),
       uiLabels: data.getUILabels(),
-      ingredients: data.getIngredients()
+      ingredients: data.getIngredients(),
+	  notDone: data.getNotDone(),
+	  isDone: data.getIsDone()
     });
   });
 

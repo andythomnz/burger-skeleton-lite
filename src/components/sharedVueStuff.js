@@ -7,7 +7,9 @@ var sharedVueStuff = {
       orders: {},
       uiLabels: {},
       ingredients: {},
-      lang: "en"
+      lang: "en",
+      notDone: [],
+      isDone: []
     }
   },
   created: function () {
@@ -15,6 +17,8 @@ var sharedVueStuff = {
 
     this.$store.state.socket.on('initialize', function (data) {
       this.orders = data.orders;
+      this.notDone = data.notDone;
+      this.isDone = data.isDone;
       this.uiLabels = data.uiLabels;
       this.ingredients = data.ingredients;
     }.bind(this));
@@ -25,6 +29,8 @@ var sharedVueStuff = {
 
     this.$store.state.socket.on('currentQueue', function (data) {
       this.orders = data.orders;
+      this.notDone = data.notDone;
+      this.isDone = data.isDone;
       if (typeof data.ingredients !== 'undefined') {
         this.ingredients = data.ingredients;
       }

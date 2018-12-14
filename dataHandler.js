@@ -16,6 +16,8 @@ fs.watch("./data/", (event_type, file_name) => {
 function Data() {
   this.data = {};
   this.orders = {};
+  this.notDone = [];
+  this.isDone = [];
   this.currentOrderNumber = 0;
 }
 
@@ -78,6 +80,9 @@ Data.prototype.addOrder = function (order) {
   this.orders[orderId] = order.order;
   this.orders[orderId].orderId = orderId;
   this.orders[orderId].status = "not-started";
+  this.orders[orderId].prepare = new Array(this.orders[orderId].length).fill(0);
+  this.notDone.push(orderId);
+  
   var transactions = this.data[transactionsDataName],
     //find out the currently highest transaction id
     transId =  transactions[transactions.length - 1].transaction_id,
@@ -104,8 +109,18 @@ Data.prototype.getAllOrders = function () {
   return this.orders;
 };
 
+Data.prototype.getNotDone = function () {
+  return this.notDone;
+};
+
+Data.prototype.getIsDone = function () {
+  return this.isDone;
+};
+
 Data.prototype.markOrderDone = function (orderId) {
   this.orders[orderId].status = "done";
+  this.notDone.splice( this.notDone.indexOf(orderId), 1 );
+  this.isDone.push(orderId);
 };
 
 Data.prototype.markOrderStarted = function (orderId) {
