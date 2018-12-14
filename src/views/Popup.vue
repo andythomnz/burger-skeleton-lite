@@ -1,5 +1,5 @@
 <template>
-  <div v-on:open='set(data,title)'>
+  <div v-on:popup='set(data,title)'>
     <NavBar
     nextRoute=""
     backRoute="MainMenu"
@@ -78,7 +78,10 @@ export default {
     resetToOrder: function() {
 
     },
-    set(data, title) {
+    confirmItem: function() {
+
+    },
+    set: function(data, title) {
       this.menuItem = data;
       this.title = title;
     }
