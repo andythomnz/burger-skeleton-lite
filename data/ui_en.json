@@ -17,5 +17,8 @@
   "ready" : "Done",
   "order" : "My burger",
   "language" : "Svenska",
-  "patty" : "Patties"
+  "patty" : "Patties",
+  "complete" : "Complete",
+  "hotKitchen" : "Hot kitchen",
+  "coldKitchen" : "Cold kitchen"
 }

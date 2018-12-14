@@ -1,6 +1,95 @@
 <template>
   <!-- Note in this component that it is using another component -->
 <div>
+  <table id="completeTable" >
+    <thead>
+      <tr>
+        <th colspan="3" class="tableName">Complete</th>
+        <th colspan="3">Hot drink</th>
+        <th colspan="3">Cold kitchen</th>
+        <th colspan="3">Sides drink</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td colspan="4" height="100">Burger</td>
+        <td colspan="4" height="100"></td>
+        <td colspan="4" height="100"></td>
+      </tr>
+      <tr>
+        <td colspan="4" height="100"></td>
+        <td colspan="4" height="100"></td>
+        <td colspan="4" height="100"></td>
+      </tr>
+    </tbody>
+  </table>
+  <table id="hotTable" >
+    <thead>
+      <tr>
+        <th colspan="3">Complete</th>
+        <th colspan="3" class="tableName">Hot drink</th>
+        <th colspan="3">Cold kitchen</th>
+        <th colspan="3">Sides drink</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td colspan="4" height="100">Burger</td>
+        <td colspan="4" height="100"></td>
+        <td colspan="4" height="100"></td>
+      </tr>
+      <tr>
+        <td colspan="4" height="100"></td>
+        <td colspan="4" height="100"></td>
+        <td colspan="4" height="100"></td>
+      </tr>
+    </tbody>
+  </table>
+  <table id="coldTable" >
+    <thead>
+      <tr>
+        <th colspan="3">Complete</th>
+        <th colspan="3">Hot drink</th>
+        <th colspan="3" class="tableName">Cold kitchen</th>
+        <th colspan="3">Sides drink</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td colspan="4" height="100">Burger</td>
+        <td colspan="4" height="100"></td>
+        <td colspan="4" height="100"></td>
+      </tr>
+      <tr>
+        <td colspan="4" height="100"></td>
+        <td colspan="4" height="100"></td>
+        <td colspan="4" height="100"></td>
+      </tr>
+    </tbody>
+  </table>
+  <table id="sideTable" >
+    <thead>
+      <tr>
+        <th colspan="3">Complete</th>
+        <th colspan="3">Hot drink</th>
+        <th colspan="3">Cold kitchen</th>
+        <th colspan="3" class="tableName">Sides drink</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td colspan="4" height="100">Burger</td>
+        <td colspan="4" height="100"></td>
+        <td colspan="4" height="100"></td>
+      </tr>
+      <tr>
+        <td colspan="4" height="100"></td>
+        <td colspan="4" height="100"></td>
+        <td colspan="4" height="100"></td>
+      </tr>
+    </tbody>
+  </table>
+
   <OrderItem
     :ui-labels="uiLabels"
     :lang="lang"
@@ -37,5 +126,15 @@ export default {
 }
 </script>
 <style scoped>
-	
+  table {
+    margin-left:auto; 
+    margin-right:auto;
+    display:none;
+  }
+  table, td, th{
+    border: 1px solid black;
+  }
+  .tableName {
+    color : red;
+  }
 </style>

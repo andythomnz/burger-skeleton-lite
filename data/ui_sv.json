@@ -17,5 +17,8 @@
   "ready" : "Klart",
   "order" : "Min burgare",
   "language" : "English",
-  "patty" : "Färsbiff"
+  "patty" : "Färsbiff",
+  "complete" : "Komplett",
+  "hotKitchen" : "Varmt kök",
+  "coldKitchen" : "Kallt kök"  
 }
