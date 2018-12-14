@@ -82,6 +82,11 @@ io.on('connection', function (socket) {
     data.changeStock(item, saldo);
     io.emit('currentQueue', { ingredients: data.getIngredients() });
   });
+
+  socket.on('popup', function (item, title) {
+    io.emit('openPopup', {data: item, type: title})
+  });
+
 });
 
 const port = 8080;
