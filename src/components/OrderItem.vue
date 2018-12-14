@@ -20,7 +20,9 @@ export default {
     orderDone: function (id) {
       // sending 'done' message to parent component or view so that it
       // can catch it with v-on:done in the component declaration
-      this.$store.state.socket.emit("orderDone", id);
+      if(this.order.status == "started"){
+        this.$store.state.socket.emit("orderDone", id);
+      }
     }  
   }
 }

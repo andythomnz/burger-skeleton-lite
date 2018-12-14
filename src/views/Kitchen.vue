@@ -1,13 +1,16 @@
 <template>
 <div id="orders">
   <h1>{{ uiLabels.ordersInQueue }}</h1>
-  <table id="completeTable" >
+  <table id="completeTable" class="orderQueue">
     <thead>
       <tr>
-        <th colspan="3" class="tableName" v-on:click="changeTable('completeTable')">Complete</th>
-        <th colspan="3" v-on:click="changeTable('hotTable')">Hot kitchen</th>
-        <th colspan="3" v-on:click="changeTable('coldTable')">Cold kitchen</th>
-        <th colspan="3" v-on:click="changeTable('sideTable')">Sides drink</th>
+        <th colspan="2" class="tableName" v-on:click="changeTable('completeTable')">Complete</th>
+        <th colspan="2" v-on:click="changeTable('MainTable')">Main course</th>
+        <th colspan="2" v-on:click="changeTable('sideTable')">Side</th>
+        <th colspan="2" v-on:click="changeTable('sauceTable')">Sauce</th>
+		<th colspan="2" v-on:click="changeTable('breadTable')">Bread</th>
+		<th colspan="1" v-on:click="changeTable('snackTable')">Snack</th>
+		<th colspan="1" v-on:click="changeTable('drinkTable')">Drink</th>
       </tr>
     </thead>
 	<tbody>
@@ -23,78 +26,162 @@
       </OrderItemToPrepare>
 	</tbody>
   </table>
-  <table id="hotTable" >
+  <table id="MainTable" class="orderQueue">
     <thead>
       <tr>
-        <th colspan="3"  v-on:click="changeTable('completeTable')">Complete</th>
-        <th colspan="3" class="tableName" v-on:click="changeTable('hotTable')">Hot kitchen</th>
-        <th colspan="3" v-on:click="changeTable('coldTable')">Cold kitchen</th>
-        <th colspan="3" v-on:click="changeTable('sideTable')">Sides drink</th>
+        <th colspan="2" v-on:click="changeTable('completeTable')">Complete</th>
+        <th colspan="2" class="tableName" v-on:click="changeTable('MainTable')">Main course</th>
+        <th colspan="2" v-on:click="changeTable('sideTable')">Side</th>
+        <th colspan="2" v-on:click="changeTable('sauceTable')">Sauce</th>
+		<th colspan="2" v-on:click="changeTable('breadTable')">Bread</th>
+		<th colspan="1" v-on:click="changeTable('snackTable')">Snack</th>
+		<th colspan="1" v-on:click="changeTable('drinkTable')">Drink</th>
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td colspan="3" height="100"></td>
-        <td colspan="3" height="100"></td>
-        <td colspan="3" height="100"></td>
-        <td colspan="3" height="100"></td>        
-      </tr>
-      <tr>
-        <td colspan="3" height="100"></td>
-        <td colspan="3" height="100"></td>
-        <td colspan="3" height="100"></td>
-        <td colspan="3" height="100"></td>        
-      </tr>
+      <DetailItemToPrepare
+        v-for="(val, key) in notDone"
+        v-if="key%4 == 0"
+        :order-id="key"
+        :ui-labels="uiLabels"
+        :lang="lang"
+		:not-done="notDone"
+		:orders="orders"
+		:category="1"
+        :key="key">
+      </DetailItemToPrepare>
     </tbody>
   </table>
-  <table id="coldTable" >
+  <table id="sideTable" class="orderQueue">
     <thead>
       <tr>
-        <th colspan="3" v-on:click="changeTable('completeTable')">Complete</th>
-        <th colspan="3" v-on:click="changeTable('hotTable')">Hot kitchen</th>
-        <th colspan="3" class="tableName" v-on:click="changeTable('coldTable')">Cold kitchen</th>
-        <th colspan="3" v-on:click="changeTable('sideTable')">Sides drink</th>
+        <th colspan="2" v-on:click="changeTable('completeTable')">Complete</th>
+        <th colspan="2" v-on:click="changeTable('MainTable')">Main course</th>
+        <th colspan="2" class="tableName" v-on:click="changeTable('sideTable')">Side</th>
+        <th colspan="2" v-on:click="changeTable('sauceTable')">Sauce</th>
+		<th colspan="2" v-on:click="changeTable('breadTable')">Bread</th>
+		<th colspan="1" v-on:click="changeTable('snackTable')">Snack</th>
+		<th colspan="1" v-on:click="changeTable('drinkTable')">Drink</th>
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td colspan="3" height="100"></td>
-        <td colspan="3" height="100"></td>
-        <td colspan="3" height="100"></td>
-        <td colspan="3" height="100"></td>
-      </tr>
-      <tr>
-        <td colspan="3" height="100"></td>
-        <td colspan="3" height="100"></td>
-        <td colspan="3" height="100"></td>
-        <td colspan="3" height="100"></td>
-      </tr>
+      <DetailItemToPrepare
+        v-for="(val, key) in notDone"
+        v-if="key%4 == 0"
+        :order-id="key"
+        :ui-labels="uiLabels"
+        :lang="lang"
+		:not-done="notDone"
+		:orders="orders"
+		:category="2"
+        :key="key">
+      </DetailItemToPrepare>
     </tbody>
   </table>
-  <table id="sideTable" >
+  <table id="sauceTable" class="orderQueue">
     <thead>
       <tr>
-        <th colspan="3" v-on:click="changeTable('completeTable')">Complete</th>
-        <th colspan="3" v-on:click="changeTable('hotTable')">Hot kitchen</th>
-        <th colspan="3" v-on:click="changeTable('coldTable')">Cold kitchen</th>
-        <th colspan="3" class="tableName" v-on:click="changeTable('sideTable')">Sides drink</th>
+        <th colspan="2" v-on:click="changeTable('completeTable')">Complete</th>
+        <th colspan="2" v-on:click="changeTable('MainTable')">Main course</th>
+        <th colspan="2" v-on:click="changeTable('sideTable')">Side</th>
+        <th colspan="2" class="tableName" v-on:click="changeTable('sauceTable')">Sauce</th>
+		<th colspan="2" v-on:click="changeTable('breadTable')">Bread</th>
+		<th colspan="1" v-on:click="changeTable('snackTable')">Snack</th>
+		<th colspan="1" v-on:click="changeTable('drinkTable')">Drink</th>
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td colspan="3" height="100"></td>
-        <td colspan="3" height="100"></td>
-        <td colspan="3" height="100"></td>
-        <td colspan="3" height="100"></td>
-      </tr>
-      <tr>
-        <td colspan="3" height="100"></td>
-        <td colspan="3" height="100"></td>
-        <td colspan="3" height="100"></td>
-        <td colspan="3" height="100"></td>
-      </tr>
+      <DetailItemToPrepare
+        v-for="(val, key) in notDone"
+        v-if="key%4 == 0"
+        :order-id="key"
+        :ui-labels="uiLabels"
+        :lang="lang"
+		:not-done="notDone"
+		:orders="orders"
+		:category="3"
+        :key="key">
+      </DetailItemToPrepare>
     </tbody>
-  </table>  
+  </table>
+  <table id="breadTable" class="orderQueue">
+    <thead>
+      <tr>
+        <th colspan="2" v-on:click="changeTable('completeTable')">Complete</th>
+        <th colspan="2" v-on:click="changeTable('MainTable')">Main course</th>
+        <th colspan="2" v-on:click="changeTable('sideTable')">Side</th>
+        <th colspan="2" v-on:click="changeTable('sauceTable')">Sauce</th>
+		<th colspan="2" class="tableName" v-on:click="changeTable('breadTable')">Bread</th>
+		<th colspan="1" v-on:click="changeTable('snackTable')">Snack</th>
+		<th colspan="1" v-on:click="changeTable('drinkTable')">Drink</th>
+      </tr>
+    </thead>
+    <tbody>
+      <DetailItemToPrepare
+        v-for="(val, key) in notDone"
+        v-if="key%4 == 0"
+        :order-id="key"
+        :ui-labels="uiLabels"
+        :lang="lang"
+		:not-done="notDone"
+		:orders="orders"
+		:category="4"
+        :key="key">
+      </DetailItemToPrepare>
+    </tbody>
+  </table> 
+  <table id="snackTable" class="orderQueue">
+    <thead>
+      <tr>
+        <th colspan="2" v-on:click="changeTable('completeTable')">Complete</th>
+        <th colspan="2" v-on:click="changeTable('MainTable')">Main course</th>
+        <th colspan="2" v-on:click="changeTable('sideTable')">Side</th>
+        <th colspan="2" v-on:click="changeTable('sauceTable')">Sauce</th>
+		<th colspan="2" v-on:click="changeTable('breadTable')">Bread</th>
+		<th colspan="1" class="tableName" v-on:click="changeTable('snackTable')">Snack</th>
+		<th colspan="1" v-on:click="changeTable('drinkTable')">Drink</th>
+      </tr>
+    </thead>
+    <tbody>
+      <DetailItemToPrepare
+        v-for="(val, key) in notDone"
+        v-if="key%4 == 0"
+        :order-id="key"
+        :ui-labels="uiLabels"
+        :lang="lang"
+		:not-done="notDone"
+		:orders="orders"
+		:category="5"
+        :key="key">
+      </DetailItemToPrepare>
+    </tbody>
+  </table> 
+  <table id="drinkTable" class="orderQueue">
+    <thead>
+      <tr>
+        <th colspan="2" v-on:click="changeTable('completeTable')">Complete</th>
+        <th colspan="2" v-on:click="changeTable('MainTable')">Main course</th>
+        <th colspan="2" v-on:click="changeTable('sideTable')">Side</th>
+        <th colspan="2" v-on:click="changeTable('sauceTable')">Sauce</th>
+		<th colspan="2" v-on:click="changeTable('breadTable')">Bread</th>
+		<th colspan="1" v-on:click="changeTable('snackTable')">Snack</th>
+		<th colspan="1" class="tableName" v-on:click="changeTable('drinkTable')">Drink</th>
+      </tr>
+    </thead>
+    <tbody>
+      <DetailItemToPrepare
+        v-for="(val, key) in notDone"
+        v-if="key%4 == 0"
+        :order-id="key"
+        :ui-labels="uiLabels"
+        :lang="lang"
+		:not-done="notDone"
+		:orders="orders"
+		:category="6"
+        :key="key">
+      </DetailItemToPrepare>
+    </tbody>
+  </table>   
   <h1>{{ uiLabels.ordersFinished }}</h1>
   <table id="finishTable" >	
 	<tbody>
@@ -116,6 +203,7 @@
 import OrderItem from '@/components/OrderItem.vue'
 import OrderItemToPrepare from '@/components/OrderItemToPrepare.vue'
 import OrderItemIsDone from '@/components/OrderItemIsDone.vue'
+import DetailItemToPrepare from '@/components/DetailItemToPrepare.vue'
 
 //import methods and data that are shared between ordering and kitchen views
 import sharedVueStuff from '@/components/sharedVueStuff.js'
@@ -125,7 +213,8 @@ export default {
   components: {
     OrderItem,
     OrderItemToPrepare,
-	OrderItemIsDone
+	OrderItemIsDone,
+	DetailItemToPrepare
   },
   mixins: [sharedVueStuff], // include stuff that is used in both 
                             //the ordering system and the kitchen
@@ -140,7 +229,7 @@ export default {
       this.$store.state.socket.emit("orderDone", orderid);
     },
     changeTable: function (id) {
-      var tables = document.getElementsByTagName("table")
+      var tables = document.getElementsByClassName("orderQueue")
       for(var i=0; i<tables.length; i++){
         tables[i].style.display = "none";
       }

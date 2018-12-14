@@ -80,7 +80,7 @@ Data.prototype.addOrder = function (order) {
   this.orders[orderId] = order.order;
   this.orders[orderId].orderId = orderId;
   this.orders[orderId].status = "not-started";
-  this.orders[orderId].prepare = new Array(this.orders[orderId].length).fill(0);
+  this.orders[orderId].prepare = new Array(7).fill(0);
   this.notDone.push(orderId);
   
   var transactions = this.data[transactionsDataName],
@@ -115,6 +115,16 @@ Data.prototype.getNotDone = function () {
 
 Data.prototype.getIsDone = function () {
   return this.isDone;
+};
+
+Data.prototype.markItemDone = function (orderId, category) {
+  this.orders[orderId].prepare[category] = 1;
+  for(var i=1;i<=this.orders[orderId].prepare.length;i++){
+    if(this.orders[orderId].prepare[i]==0){
+	  return;
+	}
+  }
+  this.orders[orderId].status = "started";
 };
 
 Data.prototype.markOrderDone = function (orderId) {

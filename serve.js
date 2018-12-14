@@ -67,6 +67,11 @@ io.on('connection', function (socket) {
     io.emit('currentQueue', { orders: data.getAllOrders() });
   });
 
+  socket.on('itemDone', function (orderId, category) {
+    data.markItemDone(orderId, category);
+    io.emit('currentQueue', { orders: data.getAllOrders() });
+  });  
+  
   socket.on('orderStarted', function (orderId) {
     data.markOrderStarted(orderId);
     io.emit('currentQueue', { orders: data.getAllOrders() });
