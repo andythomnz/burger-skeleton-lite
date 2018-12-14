@@ -4,20 +4,20 @@
     nextRoute=""
     backRoute="MainMenu"
     :showCart="Boolean.false">
-      <h1 slot="center-component">  {{ title }}</h1>
+      <h1 slot="center-component">  {{ menuItem["ingredient_"+lang] }}</h1>
     </NavBar>
     <div class='OrderItem'>
       <div class='wrapper'>
-        <div>
+        <div id='half'>
 
           <div><img v-bind:src="menuItem.image" width="50%"></div>
           <div><span><button v-on:click='resetToOrder()'>-</button> {{menuItem.counter}} <button v-on:click='addToOrder(menuItem)'>+</button></span></div>
         </div>
-        <div>
+        <div id='half'>
           <span v-if="menuItem.milk_free"><img
               src="../assets/milkfree.png"
-              class="icon"
-            /></span>
+              class="icon" id='info' v-on:click='clickInfo()'
+            /><p v-if='show'><span class="popuptext" id="myInfo">A Simple Popup!</span></p></span>
           <span v-if="menuItem.gluten_free"><img
               src="../assets/glutenfree.png"
               class="icon"
@@ -59,8 +59,15 @@ export default {
       vegan: Boolean,
       price: Number,
       menuItemName: String,
-      menuItem: Object
+      menuItem: Object,
+      show: false
     };
+  },
+  created: function() {
+    this.$store.state.socket.on('openPopup', function (data) {
+      this.menuItem = data.data;
+      this.title = data.category;
+    }.bind(this));
   },
   methods: {
     NextPage: function() {
@@ -81,9 +88,9 @@ export default {
     confirmItem: function() {
 
     },
-    set: function(data, title) {
-      this.menuItem = data;
-      this.title = title;
+    clickInfo: function() {
+      if(this.show==false) {this.show=true}
+      else this.show=false
     }
   }
 }
@@ -99,7 +106,73 @@ text-align: center}
   font-weight: bold
 }
 
-.order{
-  margin-left: 2%
+.icon {
+  width: 10%
 }
+
+.wrapper {
+  grid-template-columns: 50% 50%
+}
+
+#half  {
+  margin-left: 20%;
+  margin-top: 5%
+}
+
+#half button {
+  margin-top: 5%;
+  margin-left: 10%
+}
+
+#info {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+#myInfo {
+  visibility: visible;
+  -webkit-animation: fadeIn 1s;
+  animation: fadeIn 1s;
+}
+
+#info .popuptext {
+  visibility: hidden;
+  width: 160px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 8px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -80px;
+}
+
+#info .popuptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+@-webkit-keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity:1 ;}
+}
+
 </style>

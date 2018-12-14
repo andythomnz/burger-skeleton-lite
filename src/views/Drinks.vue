@@ -88,7 +88,7 @@ export default {
       this.chosenIngredients.push(item);
       this.price += +item.selling_price;
       this.$store.state.drinks.push(item);
-      this.$store.state.socket.emit('popup', {data : item, title: 'Drinks'})
+      this.$store.state.socket.emit('popup', {data: item, category: 'Drinks'})
       this.$router.push({ name: "Popup" })
 
     },

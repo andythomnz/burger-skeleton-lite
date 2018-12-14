@@ -83,8 +83,10 @@ io.on('connection', function (socket) {
     io.emit('currentQueue', { ingredients: data.getIngredients() });
   });
 
-  socket.on('popup', function (item, title) {
-    io.emit('openPopup', {data: item, type: title})
+  socket.on('popup', function (data) {
+    console.log(data.data);
+    console.log(data.category);
+    io.emit('openPopup', {data: data.data, category: data.category})
   });
 
 });
