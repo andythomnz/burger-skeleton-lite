@@ -86,8 +86,12 @@ export default {
       //location.reload()
     },
     RemoveDrinks: function(item) {
-      console.log(this.$store.state.drinks[this.$store.state.drinks.indexOf(item)].vmCount)
-      this.$store.state.drinks.splice(this.$store.state.drinks.indexOf(item), 1);
+      console.log(this.$store.state.drinks[this.$store.state.drinks.indexOf(item)].counter);
+      // this.$store.state.drinks.splice(this.$store.state.drinks.indexOf(item), 1);
+      // this.$store.state.drinks[this.$store.state.drinks.indexOf(item)].counter -=1;
+      this.$store.commit('decrementCounterDrinks', this.$store.state.drinks.indexOf(item))
+      console.log(this.$store.state.drinks)
+      // console.log(this.$store.state.drinks[this.$store.state.drinks.indexOf(item)].counter)
       // need to reset counter of item
     },
     RemoveSides: function(item) {

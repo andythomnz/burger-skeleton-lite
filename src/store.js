@@ -40,6 +40,10 @@ export default new Vuex.Store({
     },
     toggleClose: function (store) {
       store.close = !store.close;
+    },
+    decrementCounterDrinks: function (store, index){
+      store.drinks[index].counter -= 1
+      if (store.drinks[index].counter == 0) { store.drinks.splice(index, 1) }
     }
   },
   actions: {
