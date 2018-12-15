@@ -93,6 +93,10 @@ io.on('connection', function (socket) {
     io.emit('incrementCounter', {data: data.data})
   });
 
+  socket.on('decrementCounter', function (data) {
+    io.emit('decrementCounter', {data: data.data})
+  });
+
 });
 
 const port = 8080;
