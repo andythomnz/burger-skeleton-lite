@@ -51,11 +51,6 @@ export default {
   mixins: [sharedVueStuff],
   data: function() {
     return {
-      active: false,
-      title: null,
-      glutenfree: Boolean,
-      lastosefree: Boolean,
-      vegan: Boolean,
       price: Number,
       menuItemName: String,
       menuItem: Object,
