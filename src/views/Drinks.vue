@@ -72,7 +72,8 @@ export default {
     return {
       chosenIngredients: [],
       price: 0,
-      orderNumber: ""
+      orderNumber: "",
+      id: Number
     };
   },
   created: function() {
@@ -83,12 +84,24 @@ export default {
       }.bind(this)
     );
   },
+  mounted: function() {
+    this.$store.state.socket.on(
+      "incrementCounter", function(data) {
+        console.log('increment');
+        this.id=data.data.ingredient_id;
+        console.log(this.id);
+        console.log(this.$refs.ingredient);
+        this.$refs.ingredient[this.id -57].counter += 1;
+        console.log(this.$refs.ingredient[this.id].counter)
+      }.bind(this)
+    );
+  },
   methods: {
     addToOrder: function(item) {
       this.chosenIngredients.push(item);
       this.price += +item.selling_price;
-      this.$store.state.drinks.push(item);
-      this.$store.state.socket.emit('popup', {data: item, category: 'Drinks'})
+      this.$store.state.drinks.push(Object.assign(item, {counter:this.$refs.ingredient[item.ingredient_id -57].counter}));
+      this.$store.state.socket.emit('popup', {data: item, counter:this.$refs.ingredient[item.ingredient_id -57].counter})
       this.$router.push({ name: "Popup" })
 
     },

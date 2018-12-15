@@ -11,7 +11,9 @@
         <div id='half'>
 
           <div><img v-bind:src="menuItem.image" width="50%"></div>
-          <div><span><button v-on:click='resetToOrder()'>-</button> {{menuItem.counter}} <button v-on:click='addToOrder(menuItem)'>+</button></span></div>
+          <div><span><button v-on:click='decrement()'>-</button>
+            <span id='counter'>{{this.counter}}</span>
+            <button v-on:click='increment(menuItem)'>+</button></span></div>
         </div>
         <div id='half'>
           <span v-if="menuItem.milk_free" v-on:click="clickInfo('lactose')" id='info'>
@@ -29,7 +31,7 @@
           <div class='ingredients'></div>
           <div class="price">
             <p>{{ uiLabels.price }}: {{ menuItem.selling_price }} kr</p>
-            <p>{{ uiLabels.sum }}: kr </p>
+            <p>{{ uiLabels.sum }}: {{ menuItem.selling_price*this.counter }} kr </p>
           </div>
         </div>
       </div>
@@ -57,6 +59,7 @@ export default {
   data: function() {
     return {
       price: Number,
+      counter:0,
       menuItemName: String,
       menuItem: Object,
       showLactose: false,
@@ -67,7 +70,7 @@ export default {
   created: function() {
     this.$store.state.socket.on('openPopup', function (data) {
       this.menuItem = data.data;
-      this.title = data.category;
+      this.counter = data.counter;
     }.bind(this));
   },
   methods: {
@@ -80,11 +83,13 @@ export default {
     Cancel: function(){
 
     },
-    addToOrder: function(item) {
-
+    increment: function(item) {
+      this.counter +=1;
+      this.$store.state.socket.emit('incrementCounter', {data: item})
     },
-    resetToOrder: function() {
-
+    decrement: function() {
+      if (this.counter==0) {return}
+      else this.counter -=1
     },
     confirmItem: function() {
 
@@ -129,7 +134,7 @@ text-align: center}
 
 #half button {
   margin-top: 5%;
-  margin-left: 10%
+  margin-left: 8%
 }
 
 #info {
@@ -187,6 +192,12 @@ text-align: center}
   font-size: 16pt;
   font-weight: bold;
   margin-top: 5%
+}
+
+#counter {
+  margin-left: 8%;
+  border-color: grey;
+  border-width: medium;
 }
 
 </style>

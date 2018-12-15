@@ -85,8 +85,12 @@ io.on('connection', function (socket) {
 
   socket.on('popup', function (data) {
     console.log(data.data);
-    console.log(data.category);
-    io.emit('openPopup', {data: data.data, category: data.category})
+    console.log(data.counter);
+    io.emit('openPopup', {data: data.data, counter: data.counter})
+  });
+
+  socket.on('incrementCounter', function (data) {
+    io.emit('incrementCounter', {data: data.data})
   });
 
 });
