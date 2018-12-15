@@ -14,19 +14,18 @@
           <div><span><button v-on:click='resetToOrder()'>-</button> {{menuItem.counter}} <button v-on:click='addToOrder(menuItem)'>+</button></span></div>
         </div>
         <div id='half'>
-          <span v-if="menuItem.milk_free"><img
-              src="../assets/milkfree.png"
-              class="icon" id='info' v-on:click='clickInfo()'
-            /><p v-if='show'><span class="popuptext" id="myInfo">A Simple Popup!</span></p></span>
-          <span v-if="menuItem.gluten_free"><img
-              src="../assets/glutenfree.png"
-              class="icon"
-            /></span>
-          <span v-if="menuItem.vegan"><img
-              src="../assets/vegan.png"
-              class="icon"
-              width="10%"
-            /></span>
+          <span v-if="menuItem.milk_free" v-on:click="clickInfo('lactose')" id='info'>
+            <img src="../assets/milkfree.png" class="icon">
+            <p v-if='showLactose'><span class="popuptext" id="myInfo">This item is lactose-free</span></p>
+          </span>
+          <span v-if="menuItem.gluten_free" v-on:click="clickInfo('gluten')" id='info'>
+            <img src="../assets/glutenfree.png" class="icon">
+            <p v-if='showGluten'><span class="popuptext" id="myInfo">This item is gluten-free</span></p>
+          </span>
+          <span v-if="menuItem.vegan" v-on:click="clickInfo('vegan')" id='info'>
+            <img src="../assets/vegan.png" class="icon">
+            <p v-if='showVegan'><span class="popuptext" id="myInfo">This item is vegan</span></p>
+          </span>
         </div>
       </div>
       <button id='btn' v-on:click="finishOrder()">{{ uiLabels.ready }}</button>
@@ -60,7 +59,9 @@ export default {
       price: Number,
       menuItemName: String,
       menuItem: Object,
-      show: false
+      showLactose: false,
+      showGluten: false,
+      showVegan: false
     };
   },
   created: function() {
@@ -88,9 +89,16 @@ export default {
     confirmItem: function() {
 
     },
-    clickInfo: function() {
-      if(this.show==false) {this.show=true}
-      else this.show=false
+    clickInfo: function(category) {
+      if (category=='lactose'){
+        if(this.showLactose==false) {this.showLactose=true}
+        else this.showLactose=false }
+      else if (category=='gluten') {
+        if(this.showGluten==false) {this.showGluten=true}
+        else this.showGluten=false }
+      else
+        if(this.showVegan==false) {this.showVegan=true}
+        else this.showVegan=false
     }
   }
 }
@@ -106,7 +114,10 @@ text-align: center}
   font-weight: bold
 }
 
-
+.icon{
+  width: 3em;
+  margin-right: 5%
+}
 .wrapper {
   grid-template-columns: 50% 50%
 }
@@ -137,7 +148,7 @@ text-align: center}
   animation: fadeIn 1s;
 }
 
-#info .popuptext {
+.popuptext {
   visibility: hidden;
   width: 160px;
   background-color: #555;
