@@ -18,8 +18,9 @@ export default new Vuex.Store({
       protein: {},
       vegetables: [],
       sauces: [],
-      extras: [],
+      extras: []
     },
+    finish: false,
     currentTab: 'Buns'
   },
   getters: {
@@ -40,6 +41,9 @@ export default new Vuex.Store({
     },
     toggleClose: function (store) {
       store.close = !store.close;
+    },
+    toggleFinish: function (store) {
+      store.finish = !store.finish;
     }
   },
   actions: {

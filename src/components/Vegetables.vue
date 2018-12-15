@@ -87,8 +87,8 @@ export default {
   watch: {
     close () {
       this.vegetables = false
-      this.chosenIngredients=[]
-      this.price=0
+      this.chosenIngredients = []
+      this.price = 0
       this.$nextTick(_ => {
         this.vegetables = true;
       })

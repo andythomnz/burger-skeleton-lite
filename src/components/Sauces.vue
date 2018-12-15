@@ -17,7 +17,7 @@
         v-if="item.category == 3"
         :lang="lang"
         :key="item.ingredient_id"
-        :allCount="allCount"
+        :saucesCount="allCount"
       ></Ingredient>
     </div>
 
@@ -89,8 +89,9 @@ export default {
   watch: {
     close () {
       this.sauces = false
-      this.chosenIngredients=[]
-      this.price=0
+      this.chosenIngredients = []
+      this.price = 0
+      this.allCount = 0;
       this.$nextTick(_ => {
         this.sauces = true;
       })

@@ -11,7 +11,7 @@
       <basicButton
         :text="uiLabels.back"
         v-if="backRoute !== ''"
-        v-on:buttonclick="NextPage(backRoute, 'back')"
+        v-on:buttonclick="BackPage(backRoute)"
       ></basicButton>
     </div>
     <div class="center">
@@ -20,15 +20,20 @@
     <div>
       <basicButton
         v-if="nextButton"
-        :text="nextButtonTitle"
+        :text="uiLabels.next"
         v-on:buttonclick="NextPage(currentTab)"
+      ></basicButton>
+      <basicButton
+        v-else-if="finishButton"
+        :text="uiLabels.finish"
+        v-on:buttonclick="FinishPage(currentTab)"
       ></basicButton>
     </div>
     <div>
       <basicButton
         v-if="showCart"
         :text="uiLabels.cart"
-        v-on:buttonclick="NextPage('Cart')"
+        v-on:buttonclick="CartPage('Cart')"
       ></basicButton>
     </div>
   </div>
@@ -55,6 +60,9 @@ export default {
   data: function () {
     return {};
   },
+  activated () {
+    // console.log(this.currentTab);
+  },
   computed: {
     currentTab: function () {
       return this.$store.state.currentTab
@@ -63,14 +71,13 @@ export default {
       if (this.$router.currentRoute.name !== 'BurgerMenu') {
         return false;
       }
-      return this.currentTab === 'Vegetables' || this.currentTab === 'Sauces' || this.currentTab === 'Extras';
+      return this.currentTab === 'Vegetables' || this.currentTab === 'Sauces';
     },
-    nextButtonTitle () {
-      if (this.currentTab === 'Vegetables' || this.currentTab === 'Sauces') {
-        return this.uiLabels.next;
-      } else if (this.currentTab === 'Extras') {
-        return this.uiLabels.ready;
+    finishButton () {
+      if (this.$router.currentRoute.name !== 'BurgerMenu') {
+        return false;
       }
+      return this.currentTab === 'Extras';
     }
   },
   methods: {
@@ -80,13 +87,22 @@ export default {
         this.$store.commit('changeCurrentTab', 'Sauces');
       } else if (this.currentTab === 'Sauces') {
         this.$store.commit('changeCurrentTab', 'Extras');
-      } else if (this.currentTab === 'Extras' && type !== 'back') {
-        this.$store.commit('toggleClose');
-        this.$router.push({ name: 'Popup' });
-      } else {
-        this.$router.push({ name: route });
       }
-      //location.reload()
+      // else if (this.currentTab === 'Extras' && type !== 'back') {
+      //   this.$store.commit('toggleClose');
+      //   this.$router.push({ name: 'Cart' });
+      // }
+    },
+    BackPage (route) {
+      this.$router.push({ name: route });
+    },
+    FinishPage (route) {
+      this.$store.commit('toggleClose');
+      this.$store.commit('toggleFinish');
+      this.$router.push({ name: 'Cart' });
+    },
+    CartPage (route) {
+      this.$router.push({ name: route });
     }
   }
 };

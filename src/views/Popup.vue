@@ -106,9 +106,6 @@ text-align: center}
   font-weight: bold
 }
 
-.icon {
-  width: 10%
-}
 
 .wrapper {
   grid-template-columns: 50% 50%

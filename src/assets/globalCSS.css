@@ -24,3 +24,7 @@
     transform: scale(0.99);
     outline:yellow auto 5
 }
+
+.icon{
+  width:2em;
+}

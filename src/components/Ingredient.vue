@@ -66,7 +66,8 @@ export default {
     item: Object,
     lang: String,
     currentKey: [String, Number],
-    allCount: [String, Number]
+    saucesCount: [String, Number],
+    proteinCount: [String, Number]
   },
   data: function () {
     return {
@@ -100,7 +101,10 @@ export default {
         this.$emit("reset");
         return;
       }
-      if (+this.allCount >= 2) {
+      if (+this.saucesCount >= 2) {
+        return;
+      }
+      if (+this.proteinCount >= 1) {
         return;
       }
       this.counter = 1;
@@ -160,6 +164,5 @@ button {
   width: 100%;
 }
 
-.icon {
-  width:10%}
+
 </style>

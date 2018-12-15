@@ -26,5 +26,6 @@
   "myob" : "Make Your Own Burger",
   "premade_burgers" : "Pre-Made Burgers",
   "cancel" : "Cancel Item",
-  "confirm" : "Confirm Item"
+  "confirm" : "Confirm Item",
+  "finish" : "Finish"
 }

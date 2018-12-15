@@ -18,6 +18,7 @@
         :lang="lang"
         :key="item.ingredient_id"
         :currentKey="currentKey"
+        :proteinCount="allCount"
       ></Ingredient>
     </div>
 
@@ -69,7 +70,8 @@ export default {
       price: 0,
       orderNumber: "",
       currentKey: '',
-      protein: true
+      protein: true,
+      allCount: 0
     };
   },
   created: function () {
@@ -88,8 +90,9 @@ export default {
   watch: {
     close () {
       this.protein = false
-      this.chosenIngredients=[]
-      this.price=0
+      this.chosenIngredients = []
+      this.price = 0
+      this.allCount = 0
       this.$nextTick(_ => {
         this.protein = true;
       })
@@ -99,6 +102,9 @@ export default {
     addToOrder: function (item) {
       // this.chosenIngredients.push(item);
       // this.price += +item.selling_price;
+      if (this.allCount >= 1) {
+        return;
+      }
       this.chosenIngredients = [];
       this.price = 0;
       this.chosenIngredients.push(item);
@@ -107,15 +113,20 @@ export default {
       this.$store.commit('changeOrders', {
         type: 'protein',
         value: item
-      })
+      });
+      this.allCount++;
     },
     resetToOrder: function (item) {
+      if (this.allCount <= 0) {
+        return;
+      }
       this.chosenIngredients = [];
       this.price = 0;
       this.$store.commit('changeOrders', {
         type: 'protein',
         value: {}
-      })
+      });
+      this.allCount--;
     },
     placeOrder: function () {
       var i,

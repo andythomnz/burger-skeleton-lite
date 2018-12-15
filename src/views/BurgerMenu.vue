@@ -86,6 +86,9 @@ export default {
       orderNumber: "",
     }
   },
+  activated () {
+    this.$store.commit('changeCurrentTab', 'Buns');
+  },
   computed: {
     currentTab: function () {
       return this.$store.state.currentTab

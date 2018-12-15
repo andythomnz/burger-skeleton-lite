@@ -26,5 +26,6 @@
   "myob" : "Gör Din Egen Burgare",
   "premade_burgers" : "Pre-Made Burgare",
   "cancel" : "Annulera Artikel",
-  "confirm" : "Konfirmera Artikel"
+  "confirm" : "Konfirmera Artikel",
+  "finish" : "Slutföra"
 }
