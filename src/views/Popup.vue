@@ -28,7 +28,7 @@
           </span>
         </div>
       </div>
-      <button id='btn' v-on:click="finishOrder()">{{ uiLabels.ready }}</button>
+      <button id='btn' v-on:click="finishOrder()">{{ uiLabels.finish }}</button>
       <button id='btn' v-on:click="cancelItem()">{{ uiLabels.cancel }}</button>
       <button id='btn' v-on:click="confirmItem()">{{ uiLabels.confirm }}</button>
 
