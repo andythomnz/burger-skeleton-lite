@@ -26,6 +26,11 @@
             <img src="../assets/vegan.png" class="icon">
             <p v-if='showVegan'><span class="popuptext" id="myInfo">This item is vegan</span></p>
           </span>
+          <div class='ingredients'></div>
+          <div class="price">
+            <p>{{ uiLabels.price }}: {{ menuItem.selling_price }} kr</p>
+            <p>{{ uiLabels.sum }}: kr </p>
+          </div>
         </div>
       </div>
       <button id='btn' v-on:click="finishOrder()">{{ uiLabels.finish }}</button>
@@ -176,6 +181,12 @@ text-align: center}
 @keyframes fadeIn {
   from {opacity: 0;}
   to {opacity:1 ;}
+}
+
+.price {
+  font-size: 16pt;
+  font-weight: bold;
+  margin-top: 5%
 }
 
 </style>

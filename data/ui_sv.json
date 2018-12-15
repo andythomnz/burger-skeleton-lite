@@ -27,5 +27,6 @@
   "premade_burgers" : "Pre-Made Burgare",
   "cancel" : "Annulera Artikel",
   "confirm" : "Konfirmera Artikel",
-  "finish" : "Slutföra"
+  "finish" : "Slutföra",
+  "price" : "Pris"
 }

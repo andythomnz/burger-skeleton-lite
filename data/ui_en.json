@@ -27,5 +27,6 @@
   "premade_burgers" : "Pre-Made Burgers",
   "cancel" : "Cancel Item",
   "confirm" : "Confirm Item",
-  "finish" : "Finish"
+  "finish" : "Finish",
+  "price": "Price"
 }

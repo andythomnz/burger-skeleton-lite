@@ -118,6 +118,14 @@ export default {
         this.$store.commit('changeCurrentTab', 'Vegetables');
       }
     },
+    decrementCounter: function () {
+        this.counter -= 1;
+        if (this.counter==0) {this.currentClass=''}
+        // sending 'increment' message to parent component or view so that it
+        // can catch it with v-on:increment in the component declaration
+        this.$emit('decrement');
+
+    },
     resetCounter: function () {
       this.counter = 0;
     }
