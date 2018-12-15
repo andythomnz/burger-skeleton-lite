@@ -89,10 +89,14 @@ export default {
       "incrementCounter", function(data) {
         console.log('increment');
         this.id=data.data.ingredient_id;
-        console.log(this.id);
-        console.log(this.$refs.ingredient);
-        this.$refs.ingredient[this.id -57].counter += 1;
-        console.log(this.$refs.ingredient[this.id].counter)
+        this.$refs.ingredient[this.id -57].incrementCounter();
+      }.bind(this)
+    );
+    this.$store.state.socket.on(
+      "decrementCounter", function(data) {
+        console.log('decrement');
+        this.id=data.data.ingredient_id;
+        this.$refs.ingredient[this.id -57].decrementCounter();
       }.bind(this)
     );
   },

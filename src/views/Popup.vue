@@ -11,7 +11,7 @@
         <div id='half'>
 
           <div><img v-bind:src="menuItem.image" width="50%"></div>
-          <div><span><button v-on:click='decrement()'>-</button>
+          <div><span><button v-on:click='decrement(menuItem)'>-</button>
             <span id='counter'>{{this.counter}}</span>
             <button v-on:click='increment(menuItem)'>+</button></span></div>
         </div>
@@ -87,9 +87,10 @@ export default {
       this.counter +=1;
       this.$store.state.socket.emit('incrementCounter', {data: item})
     },
-    decrement: function() {
+    decrement: function(item) {
       if (this.counter==0) {return}
-      else this.counter -=1
+      else this.counter -=1;
+      this.$store.state.socket.emit('decrementCounter', {data: item})
     },
     confirmItem: function() {
 
