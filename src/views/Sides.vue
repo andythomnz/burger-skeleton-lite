@@ -83,11 +83,28 @@ export default {
       }.bind(this)
     );
   },
+  mounted: function() {
+    this.$store.state.socket.on(
+      "incrementCounter", function(data) {
+        console.log('increment');
+        this.id=data.data.ingredient_id;
+        this.$refs.ingredient[this.id -54].incrementCounter();
+      }.bind(this)
+    );
+    this.$store.state.socket.on(
+      "decrementCounter", function(data) {
+        console.log('decrement');
+        this.id=data.data.ingredient_id;
+        this.$refs.ingredient[this.id -54].decrementCounter();
+      }.bind(this)
+    );
+  },
   methods: {
     addToOrder: function(item) {
       this.chosenIngredients.push(item);
       this.price += +item.selling_price;
-      this.$store.state.sides.push(item);
+      this.$store.state.socket.emit('popup', {data: item, counter:this.$refs.ingredient[item.ingredient_id -54].counter})
+      this.$router.push({ name: "Popup" })
     },
     placeOrder: function() {
       var i,

@@ -97,14 +97,19 @@ export default {
     },
     confirm: function(route) {
       if (this.menuItem.category === 1) {}
-      else if (this.menuItem.category === 5) {}
+      else if (this.menuItem.category === 5) {
+        let i=0;
+        while (i < this.counter) {
+          this.$store.state.sides.push(this.menuItem);
+          i += 1
+        }
+      }
       else if (this.menuItem.category === 6) {
         let i=0;
         while (i < this.counter) {
           this.$store.state.drinks.push(this.menuItem);
           i += 1
         }
-        console.log(this.$store.state.drinks)
       }
       this.$router.push({ name: route });
     },
