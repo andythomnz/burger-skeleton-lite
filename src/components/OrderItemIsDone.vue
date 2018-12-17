@@ -8,8 +8,8 @@
       :lang="lang"
       :order-id="isDone[orderId+n-1]"
       :order="orders[isDone[orderId+n-1]]"
-	  :needDoneButton="false">
-	</OrderItem>
+      :needDoneButton="false">
+    </OrderItem>
   </tr>
 </template>
 <script>
@@ -22,8 +22,8 @@ export default {
     uiLabels: Object,
     orderId: Number,
     lang: String,
-	isDone: Array,
-	orders: Object
+    isDone: Array,
+    orders: Object
   },
   methods: {
 

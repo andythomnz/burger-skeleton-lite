@@ -8,8 +8,8 @@
       :lang="lang"
       :order-id="notDone[orderId+n-1]"
       :order="orders[notDone[orderId+n-1]]"
-	  :needDoneButton="true">
-	</OrderItem>
+      :needDoneButton="orders[notDone[orderId+n-1]].status == 'started'">
+    </OrderItem>
   </tr>
 </template>
 <script>

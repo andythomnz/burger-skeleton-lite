@@ -14,19 +14,17 @@ export default {
     order: Object,
     orderId: Number,
     lang: String,
-	needDoneButton: Boolean,
-	category: Number
+    category: Number
   },
   methods: {
     itemDone: function (id, item) {
       // sending 'done' message to parent component or view so that it
       // can catch it with v-on:done in the component declaration
       this.$store.state.socket.emit("itemDone", id, item);
-	  this.needDoneButton=false;
     }  
   }
 }
 </script>
 <style scoped>
-	
+
 </style>

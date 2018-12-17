@@ -8,23 +8,23 @@
         <th colspan="2" v-on:click="changeTable('MainTable')">Main course</th>
         <th colspan="2" v-on:click="changeTable('sideTable')">Side</th>
         <th colspan="2" v-on:click="changeTable('sauceTable')">Sauce</th>
-		<th colspan="2" v-on:click="changeTable('breadTable')">Bread</th>
-		<th colspan="1" v-on:click="changeTable('snackTable')">Snack</th>
-		<th colspan="1" v-on:click="changeTable('drinkTable')">Drink</th>
+        <th colspan="2" v-on:click="changeTable('breadTable')">Bread</th>
+        <th colspan="1" v-on:click="changeTable('snackTable')">Snack</th>
+        <th colspan="1" v-on:click="changeTable('drinkTable')">Drink</th>
       </tr>
     </thead>
-	<tbody>
-      <OrderItemToPrepare
-        v-for="(val, key) in notDone"
-        v-if="key%3 == 0"
-        :order-id="key"
-        :ui-labels="uiLabels"
-        :lang="lang"
-		:not-done="notDone"
-		:orders="orders"
-        :key="key">
-      </OrderItemToPrepare>
-	</tbody>
+  <tbody>
+    <OrderItemToPrepare
+      v-for="(val, key) in notDone"
+      v-if="key%3 == 0"
+      :order-id="key"
+      :ui-labels="uiLabels"
+      :lang="lang"
+      :not-done="notDone"
+      :orders="orders"
+      :key="key">
+    </OrderItemToPrepare>
+  </tbody>
   </table>
   <table id="MainTable" class="orderQueue">
     <thead>
@@ -33,9 +33,9 @@
         <th colspan="2" class="tableName" v-on:click="changeTable('MainTable')">Main course</th>
         <th colspan="2" v-on:click="changeTable('sideTable')">Side</th>
         <th colspan="2" v-on:click="changeTable('sauceTable')">Sauce</th>
-		<th colspan="2" v-on:click="changeTable('breadTable')">Bread</th>
-		<th colspan="1" v-on:click="changeTable('snackTable')">Snack</th>
-		<th colspan="1" v-on:click="changeTable('drinkTable')">Drink</th>
+        <th colspan="2" v-on:click="changeTable('breadTable')">Bread</th>
+        <th colspan="1" v-on:click="changeTable('snackTable')">Snack</th>
+        <th colspan="1" v-on:click="changeTable('drinkTable')">Drink</th>
       </tr>
     </thead>
     <tbody>
@@ -45,9 +45,9 @@
         :order-id="key"
         :ui-labels="uiLabels"
         :lang="lang"
-		:not-done="notDone"
-		:orders="orders"
-		:category="1"
+        :not-done="notDone"
+        :orders="orders"
+        :category="1"
         :key="key">
       </DetailItemToPrepare>
     </tbody>
@@ -59,9 +59,9 @@
         <th colspan="2" v-on:click="changeTable('MainTable')">Main course</th>
         <th colspan="2" class="tableName" v-on:click="changeTable('sideTable')">Side</th>
         <th colspan="2" v-on:click="changeTable('sauceTable')">Sauce</th>
-		<th colspan="2" v-on:click="changeTable('breadTable')">Bread</th>
-		<th colspan="1" v-on:click="changeTable('snackTable')">Snack</th>
-		<th colspan="1" v-on:click="changeTable('drinkTable')">Drink</th>
+        <th colspan="2" v-on:click="changeTable('breadTable')">Bread</th>
+        <th colspan="1" v-on:click="changeTable('snackTable')">Snack</th>
+        <th colspan="1" v-on:click="changeTable('drinkTable')">Drink</th>
       </tr>
     </thead>
     <tbody>
@@ -71,9 +71,9 @@
         :order-id="key"
         :ui-labels="uiLabels"
         :lang="lang"
-		:not-done="notDone"
-		:orders="orders"
-		:category="2"
+        :not-done="notDone"
+        :orders="orders"
+        :category="2"
         :key="key">
       </DetailItemToPrepare>
     </tbody>
@@ -85,9 +85,9 @@
         <th colspan="2" v-on:click="changeTable('MainTable')">Main course</th>
         <th colspan="2" v-on:click="changeTable('sideTable')">Side</th>
         <th colspan="2" class="tableName" v-on:click="changeTable('sauceTable')">Sauce</th>
-		<th colspan="2" v-on:click="changeTable('breadTable')">Bread</th>
-		<th colspan="1" v-on:click="changeTable('snackTable')">Snack</th>
-		<th colspan="1" v-on:click="changeTable('drinkTable')">Drink</th>
+        <th colspan="2" v-on:click="changeTable('breadTable')">Bread</th>
+        <th colspan="1" v-on:click="changeTable('snackTable')">Snack</th>
+        <th colspan="1" v-on:click="changeTable('drinkTable')">Drink</th>
       </tr>
     </thead>
     <tbody>
@@ -97,9 +97,9 @@
         :order-id="key"
         :ui-labels="uiLabels"
         :lang="lang"
-		:not-done="notDone"
-		:orders="orders"
-		:category="3"
+        :not-done="notDone"
+        :orders="orders"
+        :category="3"
         :key="key">
       </DetailItemToPrepare>
     </tbody>
@@ -111,9 +111,9 @@
         <th colspan="2" v-on:click="changeTable('MainTable')">Main course</th>
         <th colspan="2" v-on:click="changeTable('sideTable')">Side</th>
         <th colspan="2" v-on:click="changeTable('sauceTable')">Sauce</th>
-		<th colspan="2" class="tableName" v-on:click="changeTable('breadTable')">Bread</th>
-		<th colspan="1" v-on:click="changeTable('snackTable')">Snack</th>
-		<th colspan="1" v-on:click="changeTable('drinkTable')">Drink</th>
+        <th colspan="2" class="tableName" v-on:click="changeTable('breadTable')">Bread</th>
+        <th colspan="1" v-on:click="changeTable('snackTable')">Snack</th>
+        <th colspan="1" v-on:click="changeTable('drinkTable')">Drink</th>
       </tr>
     </thead>
     <tbody>
@@ -123,9 +123,9 @@
         :order-id="key"
         :ui-labels="uiLabels"
         :lang="lang"
-		:not-done="notDone"
-		:orders="orders"
-		:category="4"
+    :not-done="notDone"
+    :orders="orders"
+    :category="4"
         :key="key">
       </DetailItemToPrepare>
     </tbody>
@@ -137,9 +137,9 @@
         <th colspan="2" v-on:click="changeTable('MainTable')">Main course</th>
         <th colspan="2" v-on:click="changeTable('sideTable')">Side</th>
         <th colspan="2" v-on:click="changeTable('sauceTable')">Sauce</th>
-		<th colspan="2" v-on:click="changeTable('breadTable')">Bread</th>
-		<th colspan="1" class="tableName" v-on:click="changeTable('snackTable')">Snack</th>
-		<th colspan="1" v-on:click="changeTable('drinkTable')">Drink</th>
+        <th colspan="2" v-on:click="changeTable('breadTable')">Bread</th>
+        <th colspan="1" class="tableName" v-on:click="changeTable('snackTable')">Snack</th>
+        <th colspan="1" v-on:click="changeTable('drinkTable')">Drink</th>
       </tr>
     </thead>
     <tbody>
@@ -149,9 +149,9 @@
         :order-id="key"
         :ui-labels="uiLabels"
         :lang="lang"
-		:not-done="notDone"
-		:orders="orders"
-		:category="5"
+    :not-done="notDone"
+    :orders="orders"
+    :category="5"
         :key="key">
       </DetailItemToPrepare>
     </tbody>
@@ -163,9 +163,9 @@
         <th colspan="2" v-on:click="changeTable('MainTable')">Main course</th>
         <th colspan="2" v-on:click="changeTable('sideTable')">Side</th>
         <th colspan="2" v-on:click="changeTable('sauceTable')">Sauce</th>
-		<th colspan="2" v-on:click="changeTable('breadTable')">Bread</th>
-		<th colspan="1" v-on:click="changeTable('snackTable')">Snack</th>
-		<th colspan="1" class="tableName" v-on:click="changeTable('drinkTable')">Drink</th>
+    <th colspan="2" v-on:click="changeTable('breadTable')">Bread</th>
+    <th colspan="1" v-on:click="changeTable('snackTable')">Snack</th>
+    <th colspan="1" class="tableName" v-on:click="changeTable('drinkTable')">Drink</th>
       </tr>
     </thead>
     <tbody>
@@ -175,29 +175,29 @@
         :order-id="key"
         :ui-labels="uiLabels"
         :lang="lang"
-		:not-done="notDone"
-		:orders="orders"
-		:category="6"
+    :not-done="notDone"
+    :orders="orders"
+    :category="6"
         :key="key">
       </DetailItemToPrepare>
     </tbody>
   </table>   
   <h1>{{ uiLabels.ordersFinished }}</h1>
-  <table id="finishTable" >	
-	<tbody>
+  <table id="finishTable" >  
+  <tbody>
       <OrderItemIsDone
         v-for="(val, key) in isDone"
         v-if="key%3 == 0"
         :order-id="key"
         :ui-labels="uiLabels"
         :lang="lang"
-		:is-done="isDone"
-		:orders="orders"
+    :is-done="isDone"
+    :orders="orders"
         :key="key">
       </OrderItemIsDone>
-	</tbody>
+  </tbody>
   </table>  
-</div>	
+</div>  
 </template>
 <script>
 import OrderItem from '@/components/OrderItem.vue'
@@ -213,8 +213,8 @@ export default {
   components: {
     OrderItem,
     OrderItemToPrepare,
-	OrderItemIsDone,
-	DetailItemToPrepare
+  OrderItemIsDone,
+  DetailItemToPrepare
   },
   mixins: [sharedVueStuff], // include stuff that is used in both 
                             //the ordering system and the kitchen
@@ -234,12 +234,12 @@ export default {
         tables[i].style.display = "none";
       }
       document.getElementById(id).style.display = "table";
-    }	
+    }  
   }
 }
 </script>
 <style scoped>
-	#orders {
+  #orders {
     font-size:24pt;
   }
 
