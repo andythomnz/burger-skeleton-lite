@@ -95,27 +95,33 @@ export default {
     //make the buttons highlihgt for the veggies and extras. with stylings and v-if
 
     incrementCounter: function () {
-      if (this.counter === 1) {
-        this.currentClass = '';
-        this.counter = 0;
-        this.$emit("reset");
-        return;
-      }
-      if (+this.saucesCount >= 2) {
-        return;
-      }
-      if (+this.proteinCount >= 1) {
-        return;
-      }
-      this.counter = 1;
-      this.currentClass = 'yellow-bg';
-      // sending 'increment' message to parent component or view so that it
-      // can catch it with v-on:increment in the component declaration
-      this.$emit("increment");
-      if (this.currentTab === 'Buns') {
-        this.$store.commit('changeCurrentTab', 'Protein');
-      } else if (this.currentTab === 'Protein') {
-        this.$store.commit('changeCurrentTab', 'Vegetables');
+      if (this.item.category === 5 || this.item.category === 6 )
+        { this.counter += 1;
+          this.currentClass = 'yellow-bg';
+          this.$emit("increment") }
+      else {
+        if (this.counter === 1) {
+          this.currentClass = '';
+          this.counter = 0;
+          this.$emit("reset");
+          return;
+        }
+        if (+this.saucesCount >= 2) {
+          return;
+        }
+        if (+this.proteinCount >= 1) {
+          return;
+        }
+        this.counter = 1;
+        this.currentClass = 'yellow-bg';
+        // sending 'increment' message to parent component or view so that it
+        // can catch it with v-on:increment in the component declaration
+        this.$emit("increment");
+        if (this.currentTab === 'Buns') {
+          this.$store.commit('changeCurrentTab', 'Protein');
+        } else if (this.currentTab === 'Protein') {
+          this.$store.commit('changeCurrentTab', 'Vegetables');
+        }
       }
     },
     decrementCounter: function () {
@@ -123,7 +129,7 @@ export default {
         if (this.counter==0) {this.currentClass=''}
         // sending 'increment' message to parent component or view so that it
         // can catch it with v-on:increment in the component declaration
-        this.$emit('decrement');
+
 
     },
     resetCounter: function () {

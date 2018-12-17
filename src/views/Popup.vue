@@ -35,9 +35,9 @@
           </div>
         </div>
       </div>
-      <button id='btn' v-on:click="finishOrder()">{{ uiLabels.finish }}</button>
+      <button id='btn' v-on:click="confirm('Cart')">{{ uiLabels.finish }}</button>
       <button id='btn' v-on:click="cancelItem()">{{ uiLabels.cancel }}</button>
-      <button id='btn' v-on:click="confirmItem()">{{ uiLabels.confirm }}</button>
+      <button id='btn' v-on:click="confirm('MainMenu')">{{ uiLabels.confirm }}</button>
 
 
     </div>
@@ -60,11 +60,10 @@ export default {
     return {
       price: Number,
       counter:0,
-      menuItemName: String,
       menuItem: Object,
-      showLactose: false,
+      showVegan: false,
       showGluten: false,
-      showVegan: false
+      showLactose: false
     };
   },
   created: function() {
@@ -80,8 +79,12 @@ export default {
       //location.reload()
     },
 
-    Cancel: function(){
-
+    cancelItem: function(){
+      let i=0;
+      while (i < this.counter) {
+        this.decrement(this.menuItem)
+      }
+      this.$router.push({ name: "MainMenu" });
     },
     increment: function(item) {
       this.counter +=1;
@@ -92,8 +95,18 @@ export default {
       else this.counter -=1;
       this.$store.state.socket.emit('decrementCounter', {data: item})
     },
-    confirmItem: function() {
-
+    confirm: function(route) {
+      if (this.menuItem.category === 1) {}
+      else if (this.menuItem.category === 5) {}
+      else if (this.menuItem.category === 6) {
+        let i=0;
+        while (i < this.counter) {
+          this.$store.state.drinks.push(this.menuItem);
+          i += 1
+        }
+        console.log(this.$store.state.drinks)
+      }
+      this.$router.push({ name: route });
     },
     clickInfo: function(category) {
       if (category=='lactose'){
@@ -117,7 +130,7 @@ text-align: center}
   font-size: 18pt;
   float: right;
   margin-right: 5%;
-  font-weight: bold
+  font-weight: bold;
 }
 
 .icon{
@@ -192,7 +205,8 @@ text-align: center}
 .price {
   font-size: 16pt;
   font-weight: bold;
-  margin-top: 5%
+  bottom: 7em;
+  position: absolute;
 }
 
 #counter {
