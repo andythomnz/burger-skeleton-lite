@@ -33,23 +33,28 @@
             <div style="padding-left: 5px; padding-right: 5px">
             <p style="font-weight: bold; font-size: 16pt">{{ uiLabels.ingredients }}: </p>
             <p>{{ uiLabels.bun }}: {{ ingredients.buns["ingredient_"+lang] }}</p>
-            <p>{{ uiLabels.protein }}: {{ ingredients.protein['ingredient_'+lang]}}</p>
+            <p>{{ uiLabels.protein }}: {{ ingredients.protein['ingredient_'+lang]}}
+              <span v-if="ingredients.protein.addi_cost>0"> (+ {{ ingredients.protein.addi_cost }} kr)</span></p>
             <p>{{ uiLabels.vegetables }}:
               <ul v-for="item in ingredients.vegetables" :key="item.ingredient_id">
-                <li>{{ item['ingredient_'+lang] }}</li>
+                <li>{{ item['ingredient_'+lang] }} <span v-if="item.addi_cost>0"> (+ {{ item.addi_cost }} kr)</span></li>
               </ul></p>
             <p>{{ uiLabels.sauces }}:
               <ul v-for="item in ingredients.sauces" :key="item.ingredient_id">
-                <li>{{ item['ingredient_'+lang] }}</li>
+                <li>{{ item['ingredient_'+lang] }} <span v-if="item.addi_cost>0"> (+ {{ item.addi_cost }} kr)</span></li>
               </ul></p>
             <p>{{ uiLabels.extras }}:
               <ul v-for="item in ingredients.extras" :key="item.ingredient_id">
-                <li>{{ item['ingredient_'+lang] }}</li>
+                <li>{{ item['ingredient_'+lang] }} <span v-if="item.addi_cost>0"> (+ {{ item.addi_cost }} kr)</span></li>
               </ul></p></div>
           </div>
           <div class="price">
-            <p>{{ uiLabels.price }}: {{ menuItem.selling_price }} kr</p>
-            <p>{{ uiLabels.sum }}: {{ menuItem.selling_price*this.counter }} kr </p>
+            <p>{{ uiLabels.price }}:
+              <span v-if="itemCategory === 'CustomBurger'">{{ price }} kr</span>
+              <span v-else >{{ menuItem.selling_price }} kr</span></p>
+            <p>{{ uiLabels.sum }}:
+              <span v-if="itemCategory === 'CustomBurger'">{{ price*counter }} kr</span>
+              <span v-else >{{ menuItem.selling_price*this.counter }} kr</span></p>
           </div>
         </div>
       </div>
@@ -94,6 +99,16 @@ export default {
         this.itemCategory='CustomBurger';
         this.title=this.uiLabels.customBurger;
         this.ingredients=this.$store.state.orders;
+        this.price=this.$store.state.orders.buns.selling_price + this.$store.state.orders.protein.selling_price;
+        for (var i = 0; i < this.$store.state.orders.vegetables.length; i++) {
+          this.price += this.$store.state.orders.vegetables[i].selling_price;
+        }
+        for (var i = 0; i < this.$store.state.orders.sauces.length; i++) {
+          this.price += this.$store.state.orders.sauces[i].selling_price;
+        }
+        for (var i = 0; i < this.$store.state.orders.extras.length; i++) {
+          this.price += this.$store.state.orders.extras[i].selling_price;
+        }
         // this.ingredients= {bun: this.$store.state.orders.buns, protein: this.$store.state.orders.protein, vegetables: this.$store.state.orders.vegetables, sauces: this.$store.state.orders.sauces, extras: this.$store.state.orders.extras};
       }
       else if (data.data=='Drinks') {
