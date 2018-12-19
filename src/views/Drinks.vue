@@ -104,7 +104,8 @@ export default {
     addToOrder: function(item) {
       this.chosenIngredients.push(item);
       this.price += +item.selling_price;
-      this.$store.state.socket.emit('popup', {data: item, counter:this.$refs.ingredient[item.ingredient_id -57].counter})
+      this.$store.state.drinks=item;
+      this.$store.state.socket.emit('popup', {data: 'Drinks', counter:this.$refs.ingredient[item.ingredient_id -57].counter});
       this.$router.push({ name: "Popup" })
 
     },

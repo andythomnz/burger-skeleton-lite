@@ -8,14 +8,15 @@
     </NavBar>
     <div class='OrderItem'>
       <div class='wrapper'>
-        <div id='half'>
-
+        <div id='half1'>
+          <div v-if="itemCategory!= 'CustomBurger'" style="font-weight:bold; font-size:16pt; margin-bottom:10px"> {{ menuItem["ingredient_" +lang] }} </div>
           <div><img v-bind:src="menuItem.image" width="50%"></div>
           <div><span><button v-on:click='decrement(menuItem)'>-</button>
             <span id='counter'>{{this.counter}}</span>
             <button v-on:click='increment(menuItem)'>+</button></span></div>
         </div>
-        <div id='half'>
+        <div id='half2'>
+          <div class='icons'>
           <span v-if="menuItem.milk_free" v-on:click="clickInfo('lactose')" id='info'>
             <img src="../assets/milkfree.png" class="icon">
             <p v-if='showLactose'><span class="popuptext" id="myInfo">This item is lactose-free</span></p>
@@ -27,14 +28,22 @@
           <span v-if="menuItem.vegan" v-on:click="clickInfo('vegan')" id='info'>
             <img src="../assets/vegan.png" class="icon">
             <p v-if='showVegan'><span class="popuptext" id="myInfo">This item is vegan</span></p>
-          </span>
+          </span></div>
           <div v-if="itemCategory === 'CustomBurger'" class='ingredients'>
             <div style="padding-left: 5px; padding-right: 5px">
             <p style="font-weight: bold; font-size: 16pt">{{ uiLabels.ingredients }}: </p>
-            <p>{{ uiLabels.bun }}: {{ ingredients.bun['ingredient_'+lang] }}</p>
+            <p>{{ uiLabels.bun }}: {{ ingredients.buns["ingredient_"+lang] }}</p>
             <p>{{ uiLabels.protein }}: {{ ingredients.protein['ingredient_'+lang]}}</p>
             <p>{{ uiLabels.vegetables }}:
-              <ul v-for="item in ingredients.vegetables">
+              <ul v-for="item in ingredients.vegetables" :key="item.ingredient_id">
+                <li>{{ item['ingredient_'+lang] }}</li>
+              </ul></p>
+            <p>{{ uiLabels.sauces }}:
+              <ul v-for="item in ingredients.sauces" :key="item.ingredient_id">
+                <li>{{ item['ingredient_'+lang] }}</li>
+              </ul></p>
+            <p>{{ uiLabels.extras }}:
+              <ul v-for="item in ingredients.extras" :key="item.ingredient_id">
                 <li>{{ item['ingredient_'+lang] }}</li>
               </ul></p></div>
           </div>
@@ -84,11 +93,19 @@ export default {
         this.menuItem=this.$store.state.orders.buns;
         this.itemCategory='CustomBurger';
         this.title=this.uiLabels.customBurger;
-        console.log(this.$store.state.orders)
-        this.ingredients= {bun: this.$store.state.orders.buns, protein: this.$store.state.orders.protein, vegetables: this.$store.state.orders.vegetables, sauces: this.$store.state.orders.sauces, extras: this.$store.state.orders.extras};
+        this.ingredients=this.$store.state.orders;
+        // this.ingredients= {bun: this.$store.state.orders.buns, protein: this.$store.state.orders.protein, vegetables: this.$store.state.orders.vegetables, sauces: this.$store.state.orders.sauces, extras: this.$store.state.orders.extras};
+      }
+      else if (data.data=='Drinks') {
+        this.menuItem=this.$store.state.drinks;
+        this.itemCategory='Drinks';
+        this.title=this.uiLabels.drinks
       }
       this.counter = data.counter;
     }.bind(this));
+  },
+  computed: {
+
   },
   methods: {
     NextPage: function() {
@@ -160,16 +177,21 @@ text-align: center}
   width: 3em;
   margin-right: 5%
 }
+
+.icons {
+  margin-left: 20%
+}
+
 .wrapper {
   grid-template-columns: 50% 50%
 }
 
-#half  {
+#half1  {
   margin-left: 20%;
   margin-top: 5%
 }
 
-#half button {
+#half1 button {
   margin-top: 5%;
   margin-left: 8%
 }
@@ -228,8 +250,6 @@ text-align: center}
 .price {
   font-size: 16pt;
   font-weight: bold;
-  bottom: 7em;
-  position: absolute;
 }
 
 #counter {
@@ -239,10 +259,8 @@ text-align: center}
 }
 
 .ingredients {
-  position: absolute;
-  bottom: 25em;
-  left: 52em;
   border-style:dashed;
+  width: 70%
 }
 
 </style>

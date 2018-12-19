@@ -9,7 +9,7 @@ export default new Vuex.Store({
     socket: io(),
     uiLabels: {},
     lang: 'en',
-    drinks: [],
+    drinks: {},
     sides: [],
     cartCount: 0,
     close: false,
