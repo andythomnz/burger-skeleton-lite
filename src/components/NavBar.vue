@@ -99,8 +99,7 @@ export default {
     FinishPage (route) {
       this.$store.commit('toggleClose');
       this.$store.commit('toggleFinish');
-      let item= {ingredient_en: 'Customized burger', ingredient_sv: 'Skräddarsydd burger', image: "http://www.greektownpita.ca/wp-content/uploads/2015/04/Nutrition-un-hamburger-maison-equilibre.jpg"};
-      this.$store.state.socket.emit('popup', {data: item, counter: 1});
+      this.$store.state.socket.emit('popup', {data: 'CustomBurger', counter: 1});
       this.$router.push({ name: 'Popup' });
     },
     CartPage (route) {

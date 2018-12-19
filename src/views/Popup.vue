@@ -4,7 +4,7 @@
     nextRoute=""
     backRoute="MainMenu"
     :showCart="Boolean.false">
-      <h1 slot="center-component">  {{ menuItem["ingredient_"+lang] }}</h1>
+      <h1 slot="center-component">  {{ this.title }}</h1>
     </NavBar>
     <div class='OrderItem'>
       <div class='wrapper'>
@@ -28,7 +28,16 @@
             <img src="../assets/vegan.png" class="icon">
             <p v-if='showVegan'><span class="popuptext" id="myInfo">This item is vegan</span></p>
           </span>
-          <div class='ingredients'></div>
+          <div v-if="itemCategory === 'CustomBurger'" class='ingredients'>
+            <div style="padding-left: 5px; padding-right: 5px">
+            <p style="font-weight: bold; font-size: 16pt">{{ uiLabels.ingredients }}: </p>
+            <p>{{ uiLabels.bun }}: {{ ingredients.bun['ingredient_'+lang] }}</p>
+            <p>{{ uiLabels.protein }}: {{ ingredients.protein['ingredient_'+lang]}}</p>
+            <p>{{ uiLabels.vegetables }}:
+              <ul v-for="item in ingredients.vegetables">
+                <li>{{ item['ingredient_'+lang] }}</li>
+              </ul></p></div>
+          </div>
           <div class="price">
             <p>{{ uiLabels.price }}: {{ menuItem.selling_price }} kr</p>
             <p>{{ uiLabels.sum }}: {{ menuItem.selling_price*this.counter }} kr </p>
@@ -63,12 +72,21 @@ export default {
       menuItem: Object,
       showVegan: false,
       showGluten: false,
-      showLactose: false
+      showLactose: false,
+      itemCategory: String,
+      title: String,
+      ingredients: {}
     };
   },
   created: function() {
     this.$store.state.socket.on('openPopup', function (data) {
-      this.menuItem = data.data;
+      if (data.data=='CustomBurger') {
+        this.menuItem=this.$store.state.orders.buns;
+        this.itemCategory='CustomBurger';
+        this.title=this.uiLabels.customBurger;
+        console.log(this.$store.state.orders)
+        this.ingredients= {bun: this.$store.state.orders.buns, protein: this.$store.state.orders.protein, vegetables: this.$store.state.orders.vegetables, sauces: this.$store.state.orders.sauces, extras: this.$store.state.orders.extras};
+      }
       this.counter = data.counter;
     }.bind(this));
   },
@@ -218,6 +236,13 @@ text-align: center}
   margin-left: 8%;
   border-color: grey;
   border-width: medium;
+}
+
+.ingredients {
+  position: absolute;
+  bottom: 25em;
+  left: 52em;
+  border-style:dashed;
 }
 
 </style>

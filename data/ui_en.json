@@ -17,7 +17,11 @@
   "ready" : "Done",
   "order" : "My burger",
   "language" : "Svenska",
-  "patty" : "Patties",
+  "protein" : "Protein",
+  "bun" : "Bun",
+  "sauces" : "Sauces",
+  "vegetables" : "Vegetables",
+  "extras" : "Extras",
   "back" : "Back",
   "cart" : "Cart",
   "burgers" : "Burgers",
@@ -28,5 +32,6 @@
   "cancel" : "Cancel Item",
   "confirm" : "Confirm Item",
   "finish" : "Finish",
-  "price": "Price"
+  "price": "Price",
+  "customBurger" : "Customized Burger"
 }

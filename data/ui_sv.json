@@ -17,7 +17,11 @@
   "ready" : "Klart",
   "order" : "Min burgare",
   "language" : "English",
-  "patty" : "Färsbiff",
+  "protein" : "Protein",
+  "bun" : "Bröd",
+  "sauces" : "Såser",
+  "vegetables" : "Grönsaker",
+  "extras" : "Extra Tillbehör",
   "back" : "Tillbaka",
   "cart" : "Varukorgen",
   "burgers" : "Burgare",
@@ -28,5 +32,6 @@
   "cancel" : "Annulera Artikel",
   "confirm" : "Konfirmera Artikel",
   "finish" : "Slutföra",
-  "price" : "Pris"
+  "price" : "Pris",
+  "customBurger" : "Skräddarsydd Burgare"
 }
