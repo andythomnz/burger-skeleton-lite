@@ -10,7 +10,7 @@ export default new Vuex.Store({
     uiLabels: {},
     lang: 'en',
     drinks: {},
-    sides: [],
+    sides: {},
     cartCount: 0,
     close: false,
     orders: {

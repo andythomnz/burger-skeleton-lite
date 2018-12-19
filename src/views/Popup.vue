@@ -9,7 +9,7 @@
     <div class='OrderItem'>
       <div class='wrapper'>
         <div id='half1'>
-          <div v-if="itemCategory!= 'CustomBurger'" style="font-weight:bold; font-size:16pt; margin-bottom:10px"> {{ menuItem["ingredient_" +lang] }} </div>
+          <div v-if="itemCategory!= 'CustomBurger'" style="font-weight:bold; font-size:18pt; margin-bottom:10px"> {{ menuItem["ingredient_" +lang] }} </div>
           <div><img v-bind:src="menuItem.image" width="50%"></div>
           <div><span><button v-on:click='decrement(menuItem)'>-</button>
             <span id='counter'>{{this.counter}}</span>
@@ -99,7 +99,12 @@ export default {
       else if (data.data=='Drinks') {
         this.menuItem=this.$store.state.drinks;
         this.itemCategory='Drinks';
-        this.title=this.uiLabels.drinks
+        this.title=this.uiLabels.drinks;
+      }
+      else {
+        this.menuItem=this.$store.state.sides;
+        this.itemCategory='Sides';
+        this.title=this.uiLabels.sides;
       }
       this.counter = data.counter;
     }.bind(this));
@@ -179,7 +184,9 @@ text-align: center}
 }
 
 .icons {
-  margin-left: 20%
+  margin-left: 10%;
+  position: absolute;
+  top: 120px;
 }
 
 .wrapper {
@@ -250,6 +257,7 @@ text-align: center}
 .price {
   font-size: 16pt;
   font-weight: bold;
+  padding-top: 50px;
 }
 
 #counter {
@@ -260,7 +268,8 @@ text-align: center}
 
 .ingredients {
   border-style:dashed;
-  width: 70%
+  width: 70%;
+  margin-top: 70px
 }
 
 </style>
