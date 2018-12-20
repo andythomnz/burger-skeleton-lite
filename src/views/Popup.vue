@@ -32,19 +32,19 @@
           <div v-if="itemCategory === 'CustomBurger'" class='ingredients'>
             <div style="padding-left: 5px; padding-right: 5px">
             <p style="font-weight: bold; font-size: 16pt">{{ uiLabels.ingredients }}: </p>
-            <p>{{ uiLabels.bun }}: {{ ingredients.buns["ingredient_"+lang] }}</p>
-            <p>{{ uiLabels.protein }}: {{ ingredients.protein['ingredient_'+lang]}}
-              <span v-if="ingredients.protein.addi_cost>0"> (+ {{ ingredients.protein.addi_cost }} kr)</span></p>
+            <p>{{ uiLabels.bun }}: {{ bun["ingredient_"+lang] }}</p>
+            <p>{{ uiLabels.protein }}: {{ protein['ingredient_'+lang]}}
+              <span v-if="protein.addi_cost>0"> (+ {{ protein.addi_cost }} kr)</span></p>
             <p>{{ uiLabels.vegetables }}:
-              <ul v-for="item in ingredients.vegetables" :key="item.ingredient_id">
+              <ul v-for="item in vegetables" :key="item.ingredient_id">
                 <li>{{ item['ingredient_'+lang] }} <span v-if="item.addi_cost>0"> (+ {{ item.addi_cost }} kr)</span></li>
               </ul></p>
             <p>{{ uiLabels.sauces }}:
-              <ul v-for="item in ingredients.sauces" :key="item.ingredient_id">
+              <ul v-for="item in sauces" :key="item.ingredient_id">
                 <li>{{ item['ingredient_'+lang] }} <span v-if="item.addi_cost>0"> (+ {{ item.addi_cost }} kr)</span></li>
               </ul></p>
             <p>{{ uiLabels.extras }}:
-              <ul v-for="item in ingredients.extras" :key="item.ingredient_id">
+              <ul v-for="item in extras" :key="item.ingredient_id">
                 <li>{{ item['ingredient_'+lang] }} <span v-if="item.addi_cost>0"> (+ {{ item.addi_cost }} kr)</span></li>
               </ul></p></div>
           </div>
@@ -89,27 +89,37 @@ export default {
       showLactose: false,
       itemCategory: String,
       title: String,
-      ingredients: {}
+      ingredients: Object,
+      bun: Object,
+      protein:Object,
+      vegetables: Array,
+      sauces: Array,
+      extras: Array
     };
   },
   created: function() {
     this.$store.state.socket.on('openPopup', function (data) {
       if (data.data=='CustomBurger') {
-        this.menuItem=this.$store.state.orders.buns;
+        this.menuItem=this.$store.state.selectedBurger.bun;
         this.itemCategory='CustomBurger';
         this.title=this.uiLabels.customBurger;
         this.ingredients=this.$store.state.orders;
-        this.price=this.$store.state.orders.buns.selling_price + this.$store.state.orders.protein.selling_price;
-        for (var i = 0; i < this.$store.state.orders.vegetables.length; i++) {
-          this.price += this.$store.state.orders.vegetables[i].selling_price;
+        this.bun=this.$store.state.selectedBurger.bun;
+        this.protein=this.$store.state.selectedBurger.protein;
+        this.vegetables=this.$store.state.selectedBurger.vegetables;
+        this.sauces=this.$store.state.selectedBurger.sauces;
+        this.extras=this.$store.state.selectedBurger.extras;
+        this.price=this.$store.state.selectedBurger.bun.selling_price + this.$store.state.selectedBurger.protein.selling_price;
+        for (var i = 0; i < this.$store.state.selectedBurger.vegetables.length; i++) {
+          this.price += this.$store.state.selectedBurger.vegetables[i].selling_price;
         }
-        for (var i = 0; i < this.$store.state.orders.sauces.length; i++) {
-          this.price += this.$store.state.orders.sauces[i].selling_price;
+        for (var i = 0; i < this.$store.state.selectedBurger.sauces.length; i++) {
+          this.price += this.$store.state.selectedBurger.sauces[i].selling_price;
         }
-        for (var i = 0; i < this.$store.state.orders.extras.length; i++) {
-          this.price += this.$store.state.orders.extras[i].selling_price;
+        for (var i = 0; i < this.$store.state.selectedBurger.extras.length; i++) {
+          this.price += this.$store.state.selectedBurger.extras[i].selling_price;
         }
-        // this.ingredients= {bun: this.$store.state.orders.buns, protein: this.$store.state.orders.protein, vegetables: this.$store.state.orders.vegetables, sauces: this.$store.state.orders.sauces, extras: this.$store.state.orders.extras};
+        // this.ingredients= {bun: this.$store.state.selectedBurger.buns, protein: this.$store.state.selectedBurger.protein, vegetables: this.$store.state.selectedBurger.vegetables, sauces: this.$store.state.selectedBurger.sauces, extras: this.$store.state.selectedBurger.extras};
       }
       else if (data.data=='Drinks') {
         this.menuItem=this.$store.state.drinks;
@@ -137,7 +147,13 @@ export default {
     cancelItem: function(){
       let i=0;
       while (i < this.counter) {
-        this.decrement(this.menuItem)
+        this.decrement(this.menuItem);
+      }
+      if (this.itemCategory=='CustomBurger') {
+        this.$store.state.selectedBurger.vegetables.splice(0, this.$store.state.selectedBurger.vegetables.length);
+        this.$store.state.selectedBurger.sauces.splice(0, this.$store.state.selectedBurger.sauces.length);
+        this.$store.state.selectedBurger.extras.splice(0, this.$store.state.selectedBurger.extras.length);
+
       }
       this.$router.push({ name: "MainMenu" });
     },
@@ -151,18 +167,40 @@ export default {
       this.$store.state.socket.emit('decrementCounter', {data: item})
     },
     confirm: function(route) {
-      if (this.menuItem.category === 1) {}
+      if (this.itemCategory=='CustomBurger') {
+        this.$store.commit('changeOrders', {
+          type: 'buns',
+          value: Object(this.bun)
+        });
+        this.$store.commit('changeOrders', {
+          type: 'protein',
+          value: this.protein
+        });
+        this.$store.commit('changeOrders', {
+          type: 'vegetables',
+          value: this.vegetables
+        });
+        this.$store.commit('changeOrders', {
+          type: 'sauces',
+          value: this.sauces
+        });
+        this.$store.commit('changeOrders', {
+          type: 'extras',
+          value: this.extras
+        });
+        console.log('save');
+      }
       else if (this.menuItem.category === 5) {
         let i=0;
         while (i < this.counter) {
-          this.$store.state.sides.push(this.menuItem);
+          this.$store.state.orderedSides.push(this.menuItem);
           i += 1
         }
       }
       else if (this.menuItem.category === 6) {
         let i=0;
         while (i < this.counter) {
-          this.$store.state.drinks.push(this.menuItem);
+          this.$store.state.orderedDrinks.push(this.menuItem);
           i += 1
         }
       }

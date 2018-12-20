@@ -11,17 +11,17 @@
       <h2>{{ uiLabels.burgers }}</h2>
       <div style="width: 100%;height: auto;">
         <ul
-          v-for="(OrderedBurger, index) in OrderedBurgers"
-          :key="OrderedBurger.buns['ingredient_'+lang] + index"
+          v-for="(orderedBurger, index) in orderedBurgers"
+          :key="orderedBurger.buns['ingredient_'+lang] + index"
           style="display: inline-block; width: 300px;vertical-align: top;"
         >
-          <li>Buns: {{OrderedBurger.buns['ingredient_'+lang]}} <button v-on:click='' v-if='Object.keys(OrderedBurger.buns).length>0'>X</button></li>
-          <li>Protein: {{OrderedBurger.protein['ingredient_'+lang]}} <button v-if='Object.keys(OrderedBurger.protein).length>0'>X</button></li>
+          <li>Buns: {{orderedBurger.buns['ingredient_'+lang]}} <button v-on:click='' v-if='Object.keys(orderedBurger.buns).length>0'>X</button></li>
+          <li>Protein: {{orderedBurger.protein['ingredient_'+lang]}} <button v-if='Object.keys(orderedBurger.protein).length>0'>X</button></li>
           <li>
             Vegetables:
             <ul>
               <li
-                v-for="item in OrderedBurger.vegetables"
+                v-for="item in orderedBurger.vegetables"
                 :key="item['ingredient_'+lang]"
               >{{item['ingredient_'+lang]}} <button>X</button></li>
             </ul>
@@ -30,7 +30,7 @@
             Sauces:
             <ul>
               <li
-                v-for="item in OrderedBurger.sauces"
+                v-for="item in orderedBurger.sauces"
                 :key="item['ingredient_'+lang]"
               >{{item['ingredient_'+lang]}} <button>X</button></li>
             </ul>
@@ -39,7 +39,7 @@
             Extras:
             <ul>
               <li
-                v-for="item in OrderedBurger.extras"
+                v-for="item in orderedBurger.extras"
                 :key="item['ingredient_'+lang]"
               >{{item['ingredient_'+lang]}} <button>X</button></li>
             </ul>
@@ -75,9 +75,9 @@ export default {
   mixins: [sharedVueStuff],
   data: function() {
     return {
-      OrderedBurgers: [],
-      OrderedDrinks: this.$store.state.drinks,
-      OrderedSides: this.$store.state.sides,
+      orderedBurgers: [],
+      OrderedDrinks: this.$store.state.orderedDrinks,
+      OrderedSides: this.$store.state.orderedSides,
 
     };
   },
@@ -88,14 +88,14 @@ export default {
   },
   mounted () {
     if (this.finish) {
-      this.OrderedBurgers.push(Object.assign({}, this.$store.state.orders));
+      this.orderedBurgers.push(Object.assign({}, this.$store.state.orders));
       this.clear();
       this.$store.commit('toggleFinish');
     }
   },
   activated () {
     if (this.finish) {
-      this.OrderedBurgers.push(Object.assign({}, this.$store.state.orders));
+      this.orderedBurgers.push(Object.assign({}, this.$store.state.orders));
       this.clear();
       this.$store.commit('toggleFinish');
     }
@@ -129,20 +129,20 @@ export default {
       //location.reload()
     },
     RemoveDrinks: function(item) {
-      console.log(this.$store.state.drinks[this.$store.state.drinks.indexOf(item)].counter);
+      console.log(this.$store.state.orderedDrinks[this.$store.state.orderedDrinks.indexOf(item)].counter);
       // this.$store.state.drinks.splice(this.$store.state.drinks.indexOf(item), 1);
       // this.$store.state.drinks[this.$store.state.drinks.indexOf(item)].counter -=1;
-      this.$store.commit('decrementCounterDrinks', this.$store.state.drinks.indexOf(item))
-      console.log(this.$store.state.drinks)
+      this.$store.commit('decrementCounterDrinks', this.$store.state.orderedDrinks.indexOf(item))
+      console.log(this.$store.state.orederedDrinks)
       // console.log(this.$store.state.drinks[this.$store.state.drinks.indexOf(item)].counter)
       // need to reset counter of item
     },
     RemoveSides: function(item) {
-      this.$store.state.sides.splice(this.$store.state.sides.indexOf(item), 1)
+      this.$store.state.orderedSides.splice(this.$store.state.orderedSides.indexOf(item), 1)
     },
     Cancel: function(){
-      this.$store.state.drinks.splice(0, this.$store.state.drinks.length);
-      this.$store.state.sides.splice(0, this.$store.state.sides.length);
+      this.$store.state.orderedDrinks.splice(0, this.$store.state.orderedDrinks.length);
+      this.$store.state.orderedSides.splice(0, this.$store.state.orderedSides.length);
     },
     placeOrder: function () {
       var i,

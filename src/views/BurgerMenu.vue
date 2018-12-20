@@ -88,6 +88,9 @@ export default {
   },
   activated () {
     this.$store.commit('changeCurrentTab', 'Buns');
+    this.$store.state.selectedBurger.vegetables.splice(0, this.$store.state.selectedBurger.vegetables.length);
+    this.$store.state.selectedBurger.sauces.splice(0, this.$store.state.selectedBurger.sauces.length);
+    this.$store.state.selectedBurger.extras.splice(0, this.$store.state.selectedBurger.extras.length);
   },
   computed: {
     currentTab: function () {

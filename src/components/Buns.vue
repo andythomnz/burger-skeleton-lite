@@ -102,10 +102,11 @@ export default {
       this.chosenIngredients.push(item);
       this.price += +item.selling_price;
       this.currentKey = item.ingredient_id;
-      this.$store.commit('changeOrders', {
-        type: 'buns',
-        value: Object(item)
-      })
+      this.$store.state.selectedBurger.bun=item;
+      // this.$store.commit('changeOrders', {
+      //   type: 'buns',
+      //   value: Object(item)
+      // })
     },
     resetToOrder: function () {
       this.chosenIngredients = [];
