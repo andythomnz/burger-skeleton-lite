@@ -43,12 +43,15 @@
       <h2>{{ uiLabels.drinks }}</h2>
       <p>
       <ul>
-        <li v-for="item in OrderedDrinks" :key="item.ingredient_id">{{ item["ingredient_"+lang] }} <button v-on:click='RemoveDrinks(item)'>X</button></li>
+        <li v-for="item in OrderedDrinks" :key="item.ingredient_id">{{ item["ingredient_"+lang] }} <button v-on:click='RemoveDrinks(item)'>X</button>
+        <span class="price">{{ item.selling_price }} kr</span></li>
       </ul></p>
       <h2>{{ uiLabels.sides }}</h2>
       <p><ul>
-        <li v-for="item in OrderedSides" :key="item.ingredient_id">{{ item["ingredient_"+lang] }} <button v-on:click='RemoveSides(item)'>X</button></li>
+        <li v-for="item in OrderedSides" :key="item.ingredient_id">{{ item["ingredient_"+lang] }} <button v-on:click='RemoveSides(item)'>X</button>
+        <span class="price">{{ item.selling_price }} kr</span></li>
       </ul></p>
+      <p>{{ uiLabels.sum }}: {{ this.price }}</p>
       <button id='btn' v-on:click="Cancel()">{{ uiLabels.cancelOrder }}</button>
       <button id='btn' v-on:click="placeOrder()">{{ uiLabels.placeOrder }}</button>
 
@@ -71,8 +74,12 @@ export default {
     return {
       OrderedDrinks: this.$store.state.drinks,
       OrderedSides: this.$store.state.sides,
+      price: Number,
 
     };
+  },
+  created: function(){
+    this.calculatePrice();
   },
   computed: {
     OrderedBurger () {
@@ -89,13 +96,15 @@ export default {
       console.log(this.$store.state.drinks[this.$store.state.drinks.indexOf(item)].counter);
       // this.$store.state.drinks.splice(this.$store.state.drinks.indexOf(item), 1);
       // this.$store.state.drinks[this.$store.state.drinks.indexOf(item)].counter -=1;
-      this.$store.commit('decrementCounterDrinks', this.$store.state.drinks.indexOf(item))
-      console.log(this.$store.state.drinks)
+      this.$store.commit('decrementCounterDrinks', this.$store.state.drinks.indexOf(item));
+      console.log(this.$store.state.drinks);
+      this.calculatePrice();
       // console.log(this.$store.state.drinks[this.$store.state.drinks.indexOf(item)].counter)
       // need to reset counter of item
     },
     RemoveSides: function(item) {
-      this.$store.state.sides.splice(this.$store.state.sides.indexOf(item), 1)
+      this.$store.state.sides.splice(this.$store.state.sides.indexOf(item), 1);
+      this.calculatePrice();
     },
     Cancel: function(){
       this.$store.state.drinks.splice(0, this.$store.state.drinks.length);
@@ -117,6 +126,14 @@ export default {
       this.price = 0;
       this.chosenIngredients = [];
       this.$router.push({ name: "payment" });
+    },
+    calculatePrice: function() {
+      for (var i = 0; i < this.OrderedDrinks.length; i++) {
+        this.price += +this.OrderedDrinks[i].selling_price;
+      }
+      for (var j = 0; j < this.OrderedSides.length; j++) {
+        this.price += +this.OrderedSides[i].selling_price;
+      }
     }
 
   }
@@ -135,5 +152,10 @@ text-align: center}
 
 .order{
   margin-left: 2%
+}
+
+.price {
+  position:absolute;
+  right: 60em;
 }
 </style>
