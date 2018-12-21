@@ -51,7 +51,7 @@
         <li v-for="item in OrderedSides" :key="item.ingredient_id">{{ item["ingredient_"+lang] }} <button v-on:click='RemoveSides(item)'>X</button>
         <span class="price">{{ item.selling_price }} kr</span></li>
       </ul></p>
-      <p>{{ uiLabels.sum }}: {{ this.price }}</p>
+      <p style="font-weight:bold" class="price">{{ uiLabels.sum }}: {{ this.price }} kr</p>
       <button id='btn' v-on:click="Cancel()">{{ uiLabels.cancelOrder }}</button>
       <button id='btn' v-on:click="placeOrder()">{{ uiLabels.placeOrder }}</button>
 
@@ -74,12 +74,12 @@ export default {
     return {
       OrderedDrinks: this.$store.state.drinks,
       OrderedSides: this.$store.state.sides,
-      price: Number,
+      price: 0,
 
     };
   },
-  created: function(){
-    this.calculatePrice().bind.this();
+  activated (){
+    return this.calculatePrice();
   },
   computed: {
     OrderedBurger () {
@@ -98,12 +98,14 @@ export default {
       // this.$store.state.drinks[this.$store.state.drinks.indexOf(item)].counter -=1;
       this.$store.commit('decrementCounterDrinks', this.$store.state.drinks.indexOf(item));
       console.log(this.$store.state.drinks);
+      this.price=0;
       this.calculatePrice();
       // console.log(this.$store.state.drinks[this.$store.state.drinks.indexOf(item)].counter)
       // need to reset counter of item
     },
     RemoveSides: function(item) {
       this.$store.state.sides.splice(this.$store.state.sides.indexOf(item), 1);
+      this.price=0;
       this.calculatePrice();
     },
     Cancel: function(){
@@ -132,7 +134,7 @@ export default {
         this.price += this.OrderedDrinks[i].selling_price;
       }
       for (var j = 0; j < this.OrderedSides.length; j++) {
-        this.price += this.OrderedSides[i].selling_price;
+        this.price += this.OrderedSides[j].selling_price;
       }
     }
 
