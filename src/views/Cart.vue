@@ -75,6 +75,7 @@ export default {
       OrderedDrinks: this.$store.state.drinks,
       OrderedSides: this.$store.state.sides,
       price: 0,
+      orderNumber: "",
 
     };
   },
@@ -86,6 +87,11 @@ export default {
       return this.$store.state.orders;
     }
   },
+  created: function () {
+    this.$store.state.socket.on('orderNumber', function (data) {
+      this.orderNumber = data;
+    }.bind(this));
+  },
   methods: {
     NextPage: function() {
 
@@ -93,11 +99,9 @@ export default {
       //location.reload()
     },
     RemoveDrinks: function(item) {
-      console.log(this.$store.state.drinks[this.$store.state.drinks.indexOf(item)].counter);
-      // this.$store.state.drinks.splice(this.$store.state.drinks.indexOf(item), 1);
+      // console.log(this.$store.state.drinks[this.$store.state.drinks.indexOf(item)].counter);
+      this.$store.state.drinks.splice(this.$store.state.drinks.indexOf(item), 1);
       // this.$store.state.drinks[this.$store.state.drinks.indexOf(item)].counter -=1;
-      this.$store.commit('decrementCounterDrinks', this.$store.state.drinks.indexOf(item));
-      console.log(this.$store.state.drinks);
       this.price=0;
       this.calculatePrice();
       // console.log(this.$store.state.drinks[this.$store.state.drinks.indexOf(item)].counter)
@@ -111,22 +115,27 @@ export default {
     Cancel: function(){
       this.$store.state.drinks.splice(0, this.$store.state.drinks.length);
       this.$store.state.sides.splice(0, this.$store.state.sides.length);
+      this.price=0;
     },
     placeOrder: function () {
-      var i,
-        //Wrap the order in an object
-        order = {
-          ingredients: this.chosenIngredients,
-          price: this.price
-        };
+      //Wrap the order in an object
+      let chosenIngredients=[];
+      // chosenIngredients.push(this.OrderedBurger);
+      for (var i = 0; i < this.OrderedDrinks.length; i++) {
+        chosenIngredients.push(this.OrderedDrinks[i]);
+      }
+      for (var j = 0; j < this.OrderedSides.length; j++) {
+        chosenIngredients.push(this.OrderedSides[j]);
+      }
+      let order = {
+        ingredients: chosenIngredients,
+        price: this.price
+      };
       // make use of socket.io's magic to send the stuff to the kitchen via the server (app.js)
       this.$store.state.socket.emit("order", { order: order });
       //set all counters to 0. Notice the use of $refs
-      for (i = 0; i < this.$refs.ingredient.length; i += 1) {
-        this.$refs.ingredient[i].resetCounter();
-      }
+      this.Cancel()
       this.price = 0;
-      this.chosenIngredients = [];
       this.$router.push({ name: "payment" });
     },
     calculatePrice: function() {
