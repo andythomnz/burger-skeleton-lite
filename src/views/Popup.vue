@@ -168,27 +168,48 @@ export default {
     },
     confirm: function(route) {
       if (this.itemCategory=='CustomBurger') {
+        for (var j = 0; j < this.counter; j++) {
         this.$store.commit('changeOrders', {
           type: 'buns',
           value: Object(this.bun)
         });
         this.$store.commit('changeOrders', {
           type: 'protein',
-          value: this.protein
+          value: Object(this.protein)
         });
+        let orderedVeggies= [];
+        for (var i = 0; i < this.vegetables.length; i++) {
+          orderedVeggies.push(this.vegetables[i]);
+        }
         this.$store.commit('changeOrders', {
           type: 'vegetables',
-          value: this.vegetables
+          value: orderedVeggies
         });
+        let orderedSauces= [];
+        for (var i = 0; i < this.sauces.length; i++) {
+          orderedSauces.push(this.sauces[i]);
+        }
         this.$store.commit('changeOrders', {
           type: 'sauces',
           value: this.sauces
         });
+        let orderedExtras= [];
+        for (var i = 0; i < this.extras.length; i++) {
+          orderedExtras.push(this.extras[i]);
+        }
         this.$store.commit('changeOrders', {
           type: 'extras',
           value: this.extras
         });
-        console.log('save');
+        // this.$store.commit('toggleFinish');
+        // this.$store.commit('toggleClose');
+        // this.$store.commit('toggleFinish');
+        console.log('save');}
+        this.$store.state.selectedBurger.vegetables.splice(0, this.$store.state.selectedBurger.vegetables.length);
+        this.$store.state.selectedBurger.sauces.splice(0, this.$store.state.selectedBurger.sauces.length);
+        this.$store.state.selectedBurger.extras.splice(0, this.$store.state.selectedBurger.extras.length);
+        // this.$store.commit('toggleClose');
+        // this.$store.commit('toggleFinish');
       }
       else if (this.menuItem.category === 5) {
         let i=0;
