@@ -79,7 +79,7 @@ export default {
     };
   },
   created: function(){
-    this.calculatePrice();
+    this.calculatePrice().bind.this();
   },
   computed: {
     OrderedBurger () {
@@ -129,10 +129,10 @@ export default {
     },
     calculatePrice: function() {
       for (var i = 0; i < this.OrderedDrinks.length; i++) {
-        this.price += +this.OrderedDrinks[i].selling_price;
+        this.price += this.OrderedDrinks[i].selling_price;
       }
       for (var j = 0; j < this.OrderedSides.length; j++) {
-        this.price += +this.OrderedSides[i].selling_price;
+        this.price += this.OrderedSides[i].selling_price;
       }
     }
 
