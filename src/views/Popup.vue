@@ -37,15 +37,15 @@
               <span v-if="protein.addi_cost>0"> (+ {{ protein.addi_cost }} kr)</span></p>
             <p>{{ uiLabels.vegetables }}:
               <ul v-for="item in vegetables" :key="item.ingredient_id">
-                <li>{{ item['ingredient_'+lang] }} <span v-if="item.addi_cost>0"> (+ {{ item.addi_cost }} kr)</span></li>
+                <li>{{ item['ingredient_'+lang] }} <span v-if="item.addi_cost>0"> (+ {{ item.addi_cost }} kr)</span><span v-if="vegetables.length>0"> <button v-on:click="removeIngredient('vegetables', item)"> x </button></span></li>
               </ul></p>
             <p>{{ uiLabels.sauces }}:
               <ul v-for="item in sauces" :key="item.ingredient_id">
-                <li>{{ item['ingredient_'+lang] }} <span v-if="item.addi_cost>0"> (+ {{ item.addi_cost }} kr)</span></li>
+                <li>{{ item['ingredient_'+lang] }} <span v-if="item.addi_cost>0"> (+ {{ item.addi_cost }} kr)</span><span v-if="sauces.length>0"> <button v-on:click="removeIngredient('sauces', item)"> x </button></span></li>
               </ul></p>
             <p>{{ uiLabels.extras }}:
               <ul v-for="item in extras" :key="item.ingredient_id">
-                <li>{{ item['ingredient_'+lang] }} <span v-if="item.addi_cost>0"> (+ {{ item.addi_cost }} kr)</span></li>
+                <li>{{ item['ingredient_'+lang] }} <span v-if="item.addi_cost>0"> (+ {{ item.addi_cost }} kr)</span><span v-if="extras.length>0"> <button v-on:click="removeIngredient('extras', item)"> x </button></span></li>
               </ul></p></div>
           </div>
           <div class="price">
@@ -109,16 +109,7 @@ export default {
         this.vegetables=this.$store.state.selectedBurger.vegetables;
         this.sauces=this.$store.state.selectedBurger.sauces;
         this.extras=this.$store.state.selectedBurger.extras;
-        this.price=this.$store.state.selectedBurger.bun.selling_price + this.$store.state.selectedBurger.protein.selling_price;
-        for (var i = 0; i < this.$store.state.selectedBurger.vegetables.length; i++) {
-          this.price += this.$store.state.selectedBurger.vegetables[i].selling_price;
-        }
-        for (var i = 0; i < this.$store.state.selectedBurger.sauces.length; i++) {
-          this.price += this.$store.state.selectedBurger.sauces[i].selling_price;
-        }
-        for (var i = 0; i < this.$store.state.selectedBurger.extras.length; i++) {
-          this.price += this.$store.state.selectedBurger.extras[i].selling_price;
-        }
+        this.calculatePrice();
         // this.ingredients= {bun: this.$store.state.selectedBurger.buns, protein: this.$store.state.selectedBurger.protein, vegetables: this.$store.state.selectedBurger.vegetables, sauces: this.$store.state.selectedBurger.sauces, extras: this.$store.state.selectedBurger.extras};
       }
       else if (data.data=='Drinks') {
@@ -138,10 +129,17 @@ export default {
 
   },
   methods: {
-    NextPage: function() {
-
-      this.$router.push({ name: "MainMenu" });
-      //location.reload()
+    calculatePrice: function() {
+      this.price=this.$store.state.selectedBurger.bun.selling_price + this.$store.state.selectedBurger.protein.selling_price;
+      for (var i = 0; i < this.$store.state.selectedBurger.vegetables.length; i++) {
+        this.price += this.$store.state.selectedBurger.vegetables[i].selling_price;
+      }
+      for (var i = 0; i < this.$store.state.selectedBurger.sauces.length; i++) {
+        this.price += this.$store.state.selectedBurger.sauces[i].selling_price;
+      }
+      for (var i = 0; i < this.$store.state.selectedBurger.extras.length; i++) {
+        this.price += this.$store.state.selectedBurger.extras[i].selling_price;
+      }
     },
 
     cancelItem: function(){
@@ -191,7 +189,7 @@ export default {
         }
         this.$store.commit('changeOrders', {
           type: 'sauces',
-          value: this.sauces
+          value: orderedSauces
         });
         let orderedExtras= [];
         for (var i = 0; i < this.extras.length; i++) {
@@ -199,7 +197,7 @@ export default {
         }
         this.$store.commit('changeOrders', {
           type: 'extras',
-          value: this.extras
+          value: orderedExtras
         });
         // this.$store.commit('toggleFinish');
         // this.$store.commit('toggleClose');
@@ -237,6 +235,39 @@ export default {
       else
         if(this.showVegan==false) {this.showVegan=true}
         else this.showVegan=false
+    },
+    removeIngredient: function(type, ingredient) {
+      if (type=='vegetables') {
+        var v=0;
+        while (v < this.vegetables.length) {
+          if (this.vegetables[v].ingredient_id == ingredient.ingredient_id) {
+            break
+          };
+          v += 1;
+        }
+        this.vegetables.splice(v, 1);
+      }
+      else if (type=='sauces') {
+        var s=0;
+        while (s < this.sauces.length) {
+          if (this.sauces[s].ingredient_id == ingredient.ingredient_id) {
+            break
+          };
+          s += 1;
+        }
+        this.sauces.splice(s, 1);
+      }
+      else if (type=='extras') {
+        var e=0;
+        while (e < this.extras.length) {
+          if (this.extras[e].ingredient_id == ingredient.ingredient_id) {
+            break
+          };
+          e+= 1;
+        }
+        this.extras.splice(e, 1);
+      }
+      this.calculatePrice();
     }
   }
 }
