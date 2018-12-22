@@ -49,12 +49,15 @@
       <h2>{{ uiLabels.drinks }}</h2>
       <p>
       <ul>
-        <li v-for="item in OrderedDrinks" :key="item.ingredient_id">{{ item["ingredient_"+lang] }} <button v-on:click='RemoveDrinks(item)'>X</button></li>
+        <li v-for="item in OrderedDrinks" :key="item.ingredient_id">{{ item["ingredient_"+lang] }} <button v-on:click='RemoveDrinks(item)'>X</button>
+        <span class="price">{{ item.selling_price }} kr</span></li>
       </ul></p>
       <h2>{{ uiLabels.sides }}</h2>
       <p><ul>
-        <li v-for="item in OrderedSides" :key="item.ingredient_id">{{ item["ingredient_"+lang] }} <button v-on:click='RemoveSides(item)'>X</button></li>
+        <li v-for="item in OrderedSides" :key="item.ingredient_id">{{ item["ingredient_"+lang] }} <button v-on:click='RemoveSides(item)'>X</button>
+        <span class="price">{{ item.selling_price }} kr</span></li>
       </ul></p>
+      <p style="font-weight:bold" class="price">{{ uiLabels.sum }}: {{ this.price }} kr</p>
       <button id='btn' v-on:click="Cancel()">{{ uiLabels.cancelOrder }}</button>
       <button id='btn' v-on:click="placeOrder()">{{ uiLabels.placeOrder }}</button>
 
@@ -78,8 +81,13 @@ export default {
       orderedBurgers: [],
       OrderedDrinks: this.$store.state.orderedDrinks,
       OrderedSides: this.$store.state.orderedSides,
+      price: 0,
+      orderNumber: "",
 
     };
+  },
+  activated (){
+    return this.calculatePrice();
   },
   computed: {
     finish () {
@@ -99,6 +107,11 @@ export default {
       this.clear();
       this.$store.commit('toggleFinish');
     }
+  },
+  created: function () {
+    this.$store.state.socket.on('orderNumber', function (data) {
+      this.orderNumber = data;
+    }.bind(this));
   },
   methods: {
     clear () {
@@ -129,37 +142,52 @@ export default {
       //location.reload()
     },
     RemoveDrinks: function(item) {
-      console.log(this.$store.state.orderedDrinks[this.$store.state.orderedDrinks.indexOf(item)].counter);
-      // this.$store.state.drinks.splice(this.$store.state.drinks.indexOf(item), 1);
+      // console.log(this.$store.state.drinks[this.$store.state.drinks.indexOf(item)].counter);
+      this.$store.state.drinks.splice(this.$store.state.drinks.indexOf(item), 1);
       // this.$store.state.drinks[this.$store.state.drinks.indexOf(item)].counter -=1;
-      this.$store.commit('decrementCounterDrinks', this.$store.state.orderedDrinks.indexOf(item))
-      console.log(this.$store.state.orederedDrinks)
+      this.price=0;
+      this.calculatePrice();
       // console.log(this.$store.state.drinks[this.$store.state.drinks.indexOf(item)].counter)
       // need to reset counter of item
     },
     RemoveSides: function(item) {
-      this.$store.state.orderedSides.splice(this.$store.state.orderedSides.indexOf(item), 1)
+      this.$store.state.sides.splice(this.$store.state.sides.indexOf(item), 1);
+      this.price=0;
+      this.calculatePrice();
     },
     Cancel: function(){
-      this.$store.state.orderedDrinks.splice(0, this.$store.state.orderedDrinks.length);
-      this.$store.state.orderedSides.splice(0, this.$store.state.orderedSides.length);
+      this.$store.state.drinks.splice(0, this.$store.state.drinks.length);
+      this.$store.state.sides.splice(0, this.$store.state.sides.length);
+      this.price=0;
     },
     placeOrder: function () {
-      var i,
-        //Wrap the order in an object
-        order = {
-          ingredients: this.chosenIngredients,
-          price: this.price
-        };
+      //Wrap the order in an object
+      let chosenIngredients=[];
+      // chosenIngredients.push(this.OrderedBurger);
+      for (var i = 0; i < this.OrderedDrinks.length; i++) {
+        chosenIngredients.push(this.OrderedDrinks[i]);
+      }
+      for (var j = 0; j < this.OrderedSides.length; j++) {
+        chosenIngredients.push(this.OrderedSides[j]);
+      }
+      let order = {
+        ingredients: chosenIngredients,
+        price: this.price
+      };
       // make use of socket.io's magic to send the stuff to the kitchen via the server (app.js)
       this.$store.state.socket.emit("order", { order: order });
       //set all counters to 0. Notice the use of $refs
-      for (i = 0; i < this.$refs.ingredient.length; i += 1) {
-        this.$refs.ingredient[i].resetCounter();
-      }
+      this.Cancel()
       this.price = 0;
-      this.chosenIngredients = [];
       this.$router.push({ name: "payment" });
+    },
+    calculatePrice: function() {
+      for (var i = 0; i < this.OrderedDrinks.length; i++) {
+        this.price += this.OrderedDrinks[i].selling_price;
+      }
+      for (var j = 0; j < this.OrderedSides.length; j++) {
+        this.price += this.OrderedSides[j].selling_price;
+      }
     }
 
   }
@@ -178,5 +206,10 @@ text-align: center}
 
 .order{
   margin-left: 2%
+}
+
+.price {
+  position:absolute;
+  right: 60em;
 }
 </style>
