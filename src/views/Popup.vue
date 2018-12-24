@@ -125,20 +125,17 @@ export default {
       this.counter = data.counter;
     }.bind(this));
   },
-  computed: {
-
-  },
   methods: {
     calculatePrice: function() {
       this.price=this.$store.state.selectedBurger.bun.selling_price + this.$store.state.selectedBurger.protein.selling_price;
       for (var i = 0; i < this.$store.state.selectedBurger.vegetables.length; i++) {
         this.price += this.$store.state.selectedBurger.vegetables[i].selling_price;
       }
-      for (var i = 0; i < this.$store.state.selectedBurger.sauces.length; i++) {
-        this.price += this.$store.state.selectedBurger.sauces[i].selling_price;
+      for (var j = 0; j < this.$store.state.selectedBurger.sauces.length; j++) {
+        this.price += this.$store.state.selectedBurger.sauces[j].selling_price;
       }
-      for (var i = 0; i < this.$store.state.selectedBurger.extras.length; i++) {
-        this.price += this.$store.state.selectedBurger.extras[i].selling_price;
+      for (var k = 0; k < this.$store.state.selectedBurger.extras.length; k++) {
+        this.price += this.$store.state.selectedBurger.extras[k].selling_price;
       }
     },
 
