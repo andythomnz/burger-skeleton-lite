@@ -157,12 +157,18 @@ export default {
     },
     increment: function(item) {
       this.counter +=1;
-      this.$store.state.socket.emit('incrementCounter', {data: item})
+      if (this.itemCategory=='Drinks')
+      {this.$store.state.socket.emit('incrementCounterDrinks', {data: item})}
+      else if (this.itemCategory=='Sides')
+      {this.$store.state.socket.emit('incrementCounterSides', {data: item})}
     },
     decrement: function(item) {
       if (this.counter==0) {return}
       else this.counter -=1;
-      this.$store.state.socket.emit('decrementCounter', {data: item})
+      if (this.itemCategory=='Drinks')
+      {this.$store.state.socket.emit('decrementCounterDrinks', {data: item})}
+      else if (this.itemCategory=='Sides')
+      {this.$store.state.socket.emit('decrementCounterSides', {data: item})}
     },
     confirm: function(route) {
       if (this.itemCategory=='CustomBurger') {
