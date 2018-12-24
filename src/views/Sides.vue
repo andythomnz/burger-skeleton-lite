@@ -22,7 +22,7 @@
       ></Ingredient>
     </div>
 
-    <h1>{{ uiLabels.order }}</h1>
+    <!-- <h1>{{ uiLabels.order }}</h1>
     {{ chosenIngredients.map(item => item["ingredient_"+lang]).join(', ') }},
     {{ price }} kr
     <button
@@ -39,7 +39,7 @@
         :lang="lang"
         :key="key"
       ></OrderItem>
-    </div>
+    </div> -->
   </div>
 </template>
 <script>
@@ -75,11 +75,27 @@ export default {
       orderNumber: ""
     };
   },
-  created: function() {
+  // created: function() {
+  //   this.$store.state.socket.on(
+  //     "orderNumber",
+  //     function(data) {
+  //       this.orderNumber = data;
+  //     }.bind(this)
+  //   );
+  // },
+  mounted: function() {
     this.$store.state.socket.on(
-      "orderNumber",
-      function(data) {
-        this.orderNumber = data;
+      "incrementCounterSides", function(data) {
+        console.log('increment');
+        this.id=data.data.ingredient_id;
+        this.$refs.ingredient[this.id -54].incrementCounter();
+      }.bind(this)
+    );
+    this.$store.state.socket.on(
+      "decrementCounterSides", function(data) {
+        console.log('decrement');
+        this.id=data.data.ingredient_id;
+        this.$refs.ingredient[this.id -54].decrementCounter();
       }.bind(this)
     );
   },
@@ -87,25 +103,27 @@ export default {
     addToOrder: function(item) {
       this.chosenIngredients.push(item);
       this.price += +item.selling_price;
-      this.$store.state.sides.push(item);
+      this.$store.state.sides=item;
+      this.$store.state.socket.emit('popup', {data: item, counter:this.$refs.ingredient[item.ingredient_id -54].counter});
+      this.$router.push({ name: "Popup" })
     },
-    placeOrder: function() {
-      var i,
-        //Wrap the order in an object
-        order = {
-          ingredients: this.$store.state.sides,
-          price: this.price
-        };
-      // make use of socket.io's magic to send the stuff to the kitchen via the server (app.js)
-      this.$store.state.socket.emit("order", { order: order });
-      //set all counters to 0. Notice the use of $refs
-      for (i = 0; i < this.$refs.ingredient.length; i += 1) {
-        this.$refs.ingredient[i].resetCounter();
-      }
-      this.price = 0;
-      this.chosenIngredients = [];
-      this.$router.push({ name: "payment" });
-    }
+    // placeOrder: function() {
+    //   var i,
+    //     //Wrap the order in an object
+    //     order = {
+    //       ingredients: this.$store.state.sides,
+    //       price: this.price
+    //     };
+    //   // make use of socket.io's magic to send the stuff to the kitchen via the server (app.js)
+    //   this.$store.state.socket.emit("order", { order: order });
+    //   //set all counters to 0. Notice the use of $refs
+    //   for (i = 0; i < this.$refs.ingredient.length; i += 1) {
+    //     this.$refs.ingredient[i].resetCounter();
+    //   }
+    //   this.price = 0;
+    //   this.chosenIngredients = [];
+    //   this.$router.push({ name: "payment" });
+    // }
   }
 };
 </script>

@@ -36,19 +36,18 @@
       </button>
     </label>
 
-    <!-- TODO Change the text in the basicButton to be language sensitive 
+    <!-- TODO Change the text in the basicButton to be language sensitive
 =======
   <div class="ingredient" >
     <label>
       <button v-on:click="incrementCounter">{{ counter }}</button>
       <ul>
         <img v-bind:src="item.image" width="20%">
-        
+
         <li>{{item["ingredient_"+ lang]}}</li>
         <li>{{item.selling_price}}:-</li><li>{{item.stock}} pcs</li>-->
 
     <!--  Change the text in the basicButton to be language sensitive
->>>>>>> b10b3fb3f81ee9f1618b4b0bf8710f9cef9166b2
     {{item["ingredient_"+ lang]}}
 
     also do something with the stock and price {{item.selling_price}}:-, {{item.stock}} pcs
@@ -96,31 +95,46 @@ export default {
     //make the buttons highlihgt for the veggies and extras. with stylings and v-if
 
     incrementCounter: function () {
-      if (this.counter === 1) {
-        this.currentClass = '';
-        this.counter = 0;
-        this.$emit("reset");
-        return;
+      if (this.item.category === 5 || this.item.category === 6 )
+        { this.counter += 1;
+          this.currentClass = 'yellow-bg';
+          this.$emit("increment") }
+      else {
+        if (this.counter === 1) {
+          this.currentClass = '';
+          this.counter = 0;
+          this.$emit("reset");
+          return;
+        }
+        if (+this.saucesCount >= 2) {
+          return;
+        }
+        if (+this.proteinCount >= 1) {
+          return;
+        }
+        this.counter = 1;
+        this.currentClass = 'yellow-bg';
+        // sending 'increment' message to parent component or view so that it
+        // can catch it with v-on:increment in the component declaration
+        this.$emit("increment");
+        if (this.currentTab === 'Buns') {
+          this.$store.commit('changeCurrentTab', 'Protein');
+        } else if (this.currentTab === 'Protein') {
+          this.$store.commit('changeCurrentTab', 'Vegetables');
+        }
       }
-      if (+this.saucesCount >= 2) {
-        return;
-      }
-      if (+this.proteinCount >= 1) {
-        return;
-      }
-      this.counter = 1;
-      this.currentClass = 'yellow-bg';
-      // sending 'increment' message to parent component or view so that it
-      // can catch it with v-on:increment in the component declaration
-      this.$emit("increment");
-      if (this.currentTab === 'Buns') {
-        this.$store.commit('changeCurrentTab', 'Protein');
-      } else if (this.currentTab === 'Protein') {
-        this.$store.commit('changeCurrentTab', 'Vegetables');
-      }
+    },
+    decrementCounter: function () {
+        this.counter -= 1;
+        if (this.counter==0) {this.currentClass=''}
+        // sending 'increment' message to parent component or view so that it
+        // can catch it with v-on:increment in the component declaration
+
+
     },
     resetCounter: function () {
       this.counter = 0;
+      this.currentClass = ''
     }
   }
 };
@@ -164,4 +178,6 @@ button {
   display: block;
   width: 100%;
 }
+
+
 </style>

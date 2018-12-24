@@ -9,10 +9,17 @@ export default new Vuex.Store({
     socket: io(),
     uiLabels: {},
     lang: 'en',
-    drinks: [],
-    sides: [],
+    drinks: {},
+    sides: {},
     cartCount: 0,
     close: false,
+    selectedBurger:{
+      bun: {},
+      protein: {},
+      vegetables:[],
+      sauces: [],
+      extras:[]
+    },
     orders: {
       buns: {},
       protein: {},
@@ -20,6 +27,8 @@ export default new Vuex.Store({
       sauces: [],
       extras: []
     },
+    orderedDrinks: [],
+    orderedSides: [],
     finish: false,
     currentTab: 'Buns'
   },

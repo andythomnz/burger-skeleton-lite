@@ -17,7 +17,21 @@
   "ready" : "Done",
   "order" : "My burger",
   "language" : "Svenska",
-  "patty" : "Patties",
+  "protein" : "Protein",
+  "bun" : "Bun",
+  "sauces" : "Sauces",
+  "vegetables" : "Vegetables",
+  "extras" : "Extras",
   "back" : "Back",
-  "cart" : "Cart"
+  "cart" : "Cart",
+  "burgers" : "Burgers",
+  "drinks" : "Drinks",
+  "sides" : "Sides",
+  "myob" : "Make Your Own Burger",
+  "premade_burgers" : "Pre-Made Burgers",
+  "cancel" : "Cancel Item",
+  "confirm" : "Confirm Item",
+  "finish" : "Finish",
+  "price": "Price",
+  "customBurger" : "Customized Burger"
 }

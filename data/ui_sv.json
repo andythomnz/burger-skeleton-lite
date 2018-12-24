@@ -17,7 +17,21 @@
   "ready" : "Klart",
   "order" : "Min burgare",
   "language" : "English",
-  "patty" : "Färsbiff",
+  "protein" : "Protein",
+  "bun" : "Bröd",
+  "sauces" : "Såser",
+  "vegetables" : "Grönsaker",
+  "extras" : "Extra Tillbehör",
   "back" : "Tillbaka",
-  "cart" : "Varukorgen"
+  "cart" : "Varukorgen",
+  "burgers" : "Burgare",
+  "drinks" : "Dryck",
+  "sides" : "Tillbehör",
+  "myob" : "Gör Din Egen Burgare",
+  "premade_burgers" : "Pre-Made Burgare",
+  "cancel" : "Annulera Artikel",
+  "confirm" : "Konfirmera Artikel",
+  "finish" : "Slutföra",
+  "price" : "Pris",
+  "customBurger" : "Skräddarsydd Burgare"
 }
