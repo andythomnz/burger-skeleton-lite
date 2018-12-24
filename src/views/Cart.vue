@@ -49,12 +49,12 @@
       <h2>{{ uiLabels.drinks }}</h2>
       <p>
       <ul>
-        <li v-for="item in OrderedDrinks" :key="item.ingredient_id">{{ item["ingredient_"+lang] }} <button v-on:click='RemoveDrinks(item)'>X</button>
+        <li v-for="(item, index) in OrderedDrinks" :key="item.ingredient_id + index">{{ item["ingredient_"+lang] }} <button v-on:click='RemoveDrinks(item, index)'>X</button>
         <span class="price">{{ item.selling_price }} kr</span></li>
       </ul></p>
       <h2>{{ uiLabels.sides }}</h2>
       <p><ul>
-        <li v-for="item in OrderedSides" :key="item.ingredient_id">{{ item["ingredient_"+lang] }} <button v-on:click='RemoveSides(item)'>X</button>
+        <li v-for="(item, index) in OrderedSides" :key="item.ingredient_id +index">{{ item["ingredient_"+lang] }} <button v-on:click='RemoveSides(item, index)'>X</button>
         <span class="price">{{ item.selling_price }} kr</span></li>
       </ul></p>
       <p style="font-weight:bold" class="price">{{ uiLabels.sum }}: {{ this.price }} kr</p>
@@ -141,33 +141,26 @@ export default {
       this.$router.push({ name: "MainMenu" });
       //location.reload()
     },
-    increment: function(item) {
-      this.counter +=1;
-      this.$store.state.socket.emit('incrementCounter', {data: item})
-    },
-    decrement: function(item) {
-      if (this.counter==0) {return}
-      else this.counter -=1;
-      this.$store.state.socket.emit('decrementCounter', {data: item})
-    },
-    RemoveDrinks: function(item) {
+    RemoveDrinks: function(item, index) {
       // console.log(this.$store.state.drinks[this.$store.state.drinks.indexOf(item)].counter);
-      this.$store.state.drinks.splice(this.$store.state.drinks.indexOf(item), 1);
-      
+      this.$store.state.socket.emit('decrementCounter', {data: item});
+      this.$store.state.orderedDrinks.splice(index, 1);
+
       // this.$store.state.drinks[this.$store.state.drinks.indexOf(item)].counter -=1;
       this.price=0;
       this.calculatePrice();
       // console.log(this.$store.state.drinks[this.$store.state.drinks.indexOf(item)].counter)
       // need to reset counter of item
     },
-    RemoveSides: function(item) {
-      this.$store.state.sides.splice(this.$store.state.sides.indexOf(item), 1);
+    RemoveSides: function(item, index) {
+      this.$store.state.socket.emit('decrementCounter', {data: item});
+      this.$store.state.orderedSides.splice(index, 1);
       this.price=0;
       this.calculatePrice();
     },
     Cancel: function(){
-      this.$store.state.drinks.splice(0, this.$store.state.drinks.length);
-      this.$store.state.sides.splice(0, this.$store.state.sides.length);
+      this.$store.state.orderedDrinks.splice(0, this.$store.state.orderedDrinks.length);
+      this.$store.state.orderedSides.splice(0, this.$store.state.orderedSides.length);
       this.price=0;
     },
     placeOrder: function () {
