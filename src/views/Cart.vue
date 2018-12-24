@@ -141,9 +141,19 @@ export default {
       this.$router.push({ name: "MainMenu" });
       //location.reload()
     },
+    increment: function(item) {
+      this.counter +=1;
+      this.$store.state.socket.emit('incrementCounter', {data: item})
+    },
+    decrement: function(item) {
+      if (this.counter==0) {return}
+      else this.counter -=1;
+      this.$store.state.socket.emit('decrementCounter', {data: item})
+    },
     RemoveDrinks: function(item) {
       // console.log(this.$store.state.drinks[this.$store.state.drinks.indexOf(item)].counter);
       this.$store.state.drinks.splice(this.$store.state.drinks.indexOf(item), 1);
+      
       // this.$store.state.drinks[this.$store.state.drinks.indexOf(item)].counter -=1;
       this.price=0;
       this.calculatePrice();
