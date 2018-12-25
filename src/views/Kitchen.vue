@@ -1,16 +1,17 @@
 <template>
 <div id="orders">
   <h1>{{ uiLabels.ordersInQueue }}</h1>
+  <button v-on:click="switchLang()">{{ uiLabels.language }}</button>
   <table id="completeTable" class="orderQueue">
     <thead>
       <tr>
-        <th colspan="2" class="tableName" v-on:click="changeTable('completeTable')">Complete</th>
-        <th colspan="2" v-on:click="changeTable('MainTable')">Main course</th>
-        <th colspan="2" v-on:click="changeTable('sideTable')">Side</th>
-        <th colspan="2" v-on:click="changeTable('sauceTable')">Sauce</th>
-        <th colspan="2" v-on:click="changeTable('breadTable')">Bread</th>
-        <th colspan="1" v-on:click="changeTable('snackTable')">Snack</th>
-        <th colspan="1" v-on:click="changeTable('drinkTable')">Drink</th>
+        <th colspan="2" class="tableName" v-on:click="changeTable('completeTable')">{{ uiLabels.complete }}</th>
+        <th colspan="2" v-on:click="changeTable('MainTable')">{{ uiLabels.mainCourse }}</th>
+        <th colspan="2" v-on:click="changeTable('sideTable')">{{ uiLabels.sideorders }}</th>
+        <th colspan="2" v-on:click="changeTable('sauceTable')">{{ uiLabels.sauce }}</th>
+        <th colspan="2" v-on:click="changeTable('breadTable')">{{ uiLabels.bread }}</th>
+        <th colspan="1" v-on:click="changeTable('snackTable')">{{ uiLabels.snack }}</th>
+        <th colspan="1" v-on:click="changeTable('drinkTable')">{{ uiLabels.drink }}</th>
       </tr>
     </thead>
   <tbody>
@@ -29,13 +30,13 @@
   <table id="MainTable" class="orderQueue">
     <thead>
       <tr>
-        <th colspan="2" v-on:click="changeTable('completeTable')">Complete</th>
-        <th colspan="2" class="tableName" v-on:click="changeTable('MainTable')">Main course</th>
-        <th colspan="2" v-on:click="changeTable('sideTable')">Side</th>
-        <th colspan="2" v-on:click="changeTable('sauceTable')">Sauce</th>
-        <th colspan="2" v-on:click="changeTable('breadTable')">Bread</th>
-        <th colspan="1" v-on:click="changeTable('snackTable')">Snack</th>
-        <th colspan="1" v-on:click="changeTable('drinkTable')">Drink</th>
+        <th colspan="2" v-on:click="changeTable('completeTable')">{{ uiLabels.complete }}</th>
+        <th colspan="2" class="tableName" v-on:click="changeTable('MainTable')">{{ uiLabels.mainCourse }}</th>
+        <th colspan="2" v-on:click="changeTable('sideTable')">{{ uiLabels.sideorders }}</th>
+        <th colspan="2" v-on:click="changeTable('sauceTable')">{{ uiLabels.sauce }}</th>
+        <th colspan="2" v-on:click="changeTable('breadTable')">{{ uiLabels.bread }}</th>
+        <th colspan="1" v-on:click="changeTable('snackTable')">{{ uiLabels.snack }}</th>
+        <th colspan="1" v-on:click="changeTable('drinkTable')">{{ uiLabels.drink }}</th>
       </tr>
     </thead>
     <tbody>
@@ -55,13 +56,13 @@
   <table id="sideTable" class="orderQueue">
     <thead>
       <tr>
-        <th colspan="2" v-on:click="changeTable('completeTable')">Complete</th>
-        <th colspan="2" v-on:click="changeTable('MainTable')">Main course</th>
-        <th colspan="2" class="tableName" v-on:click="changeTable('sideTable')">Side</th>
-        <th colspan="2" v-on:click="changeTable('sauceTable')">Sauce</th>
-        <th colspan="2" v-on:click="changeTable('breadTable')">Bread</th>
-        <th colspan="1" v-on:click="changeTable('snackTable')">Snack</th>
-        <th colspan="1" v-on:click="changeTable('drinkTable')">Drink</th>
+        <th colspan="2" v-on:click="changeTable('completeTable')">{{ uiLabels.complete }}</th>
+        <th colspan="2" v-on:click="changeTable('MainTable')">{{ uiLabels.mainCourse }}</th>
+        <th colspan="2" class="tableName" v-on:click="changeTable('sideTable')">{{ uiLabels.sideorders }}</th>
+        <th colspan="2" v-on:click="changeTable('sauceTable')">{{ uiLabels.sauce }}</th>
+        <th colspan="2" v-on:click="changeTable('breadTable')">{{ uiLabels.bread }}</th>
+        <th colspan="1" v-on:click="changeTable('snackTable')">{{ uiLabels.snack }}</th>
+        <th colspan="1" v-on:click="changeTable('drinkTable')">{{ uiLabels.drink }}</th>
       </tr>
     </thead>
     <tbody>
@@ -81,13 +82,13 @@
   <table id="sauceTable" class="orderQueue">
     <thead>
       <tr>
-        <th colspan="2" v-on:click="changeTable('completeTable')">Complete</th>
-        <th colspan="2" v-on:click="changeTable('MainTable')">Main course</th>
-        <th colspan="2" v-on:click="changeTable('sideTable')">Side</th>
-        <th colspan="2" class="tableName" v-on:click="changeTable('sauceTable')">Sauce</th>
-        <th colspan="2" v-on:click="changeTable('breadTable')">Bread</th>
-        <th colspan="1" v-on:click="changeTable('snackTable')">Snack</th>
-        <th colspan="1" v-on:click="changeTable('drinkTable')">Drink</th>
+        <th colspan="2" v-on:click="changeTable('completeTable')">{{ uiLabels.complete }}</th>
+        <th colspan="2" v-on:click="changeTable('MainTable')">{{ uiLabels.mainCourse }}</th>
+        <th colspan="2" v-on:click="changeTable('sideTable')">{{ uiLabels.sideorders }}</th>
+        <th colspan="2" class="tableName" v-on:click="changeTable('sauceTable')">{{ uiLabels.sauce }}</th>
+        <th colspan="2" v-on:click="changeTable('breadTable')">{{ uiLabels.bread }}</th>
+        <th colspan="1" v-on:click="changeTable('snackTable')">{{ uiLabels.snack }}</th>
+        <th colspan="1" v-on:click="changeTable('drinkTable')">{{ uiLabels.drink }}</th>
       </tr>
     </thead>
     <tbody>
@@ -107,13 +108,13 @@
   <table id="breadTable" class="orderQueue">
     <thead>
       <tr>
-        <th colspan="2" v-on:click="changeTable('completeTable')">Complete</th>
-        <th colspan="2" v-on:click="changeTable('MainTable')">Main course</th>
-        <th colspan="2" v-on:click="changeTable('sideTable')">Side</th>
-        <th colspan="2" v-on:click="changeTable('sauceTable')">Sauce</th>
-        <th colspan="2" class="tableName" v-on:click="changeTable('breadTable')">Bread</th>
-        <th colspan="1" v-on:click="changeTable('snackTable')">Snack</th>
-        <th colspan="1" v-on:click="changeTable('drinkTable')">Drink</th>
+        <th colspan="2" v-on:click="changeTable('completeTable')">{{ uiLabels.complete }}</th>
+        <th colspan="2" v-on:click="changeTable('MainTable')">{{ uiLabels.mainCourse }}</th>
+        <th colspan="2" v-on:click="changeTable('sideTable')">{{ uiLabels.sideorders }}</th>
+        <th colspan="2" v-on:click="changeTable('sauceTable')">{{ uiLabels.sauce }}</th>
+        <th colspan="2" class="tableName" v-on:click="changeTable('breadTable')">{{ uiLabels.bread }}</th>
+        <th colspan="1" v-on:click="changeTable('snackTable')">{{ uiLabels.snack }}</th>
+        <th colspan="1" v-on:click="changeTable('drinkTable')">{{ uiLabels.drink }}</th>
       </tr>
     </thead>
     <tbody>
@@ -133,13 +134,13 @@
   <table id="snackTable" class="orderQueue">
     <thead>
       <tr>
-        <th colspan="2" v-on:click="changeTable('completeTable')">Complete</th>
-        <th colspan="2" v-on:click="changeTable('MainTable')">Main course</th>
-        <th colspan="2" v-on:click="changeTable('sideTable')">Side</th>
-        <th colspan="2" v-on:click="changeTable('sauceTable')">Sauce</th>
-        <th colspan="2" v-on:click="changeTable('breadTable')">Bread</th>
-        <th colspan="1" class="tableName" v-on:click="changeTable('snackTable')">Snack</th>
-        <th colspan="1" v-on:click="changeTable('drinkTable')">Drink</th>
+        <th colspan="2" v-on:click="changeTable('completeTable')">{{ uiLabels.complete }}</th>
+        <th colspan="2" v-on:click="changeTable('MainTable')">{{ uiLabels.mainCourse }}</th>
+        <th colspan="2" v-on:click="changeTable('sideTable')">{{ uiLabels.sideorders }}</th>
+        <th colspan="2" v-on:click="changeTable('sauceTable')">{{ uiLabels.sauce }}</th>
+        <th colspan="2" v-on:click="changeTable('breadTable')">{{ uiLabels.bread }}</th>
+        <th colspan="1" class="tableName" v-on:click="changeTable('snackTable')">{{ uiLabels.snack }}</th>
+        <th colspan="1" v-on:click="changeTable('drinkTable')">{{ uiLabels.drink }}</th>
       </tr>
     </thead>
     <tbody>
@@ -159,13 +160,13 @@
   <table id="drinkTable" class="orderQueue">
     <thead>
       <tr>
-        <th colspan="2" v-on:click="changeTable('completeTable')">Complete</th>
-        <th colspan="2" v-on:click="changeTable('MainTable')">Main course</th>
-        <th colspan="2" v-on:click="changeTable('sideTable')">Side</th>
-        <th colspan="2" v-on:click="changeTable('sauceTable')">Sauce</th>
-    <th colspan="2" v-on:click="changeTable('breadTable')">Bread</th>
-    <th colspan="1" v-on:click="changeTable('snackTable')">Snack</th>
-    <th colspan="1" class="tableName" v-on:click="changeTable('drinkTable')">Drink</th>
+        <th colspan="2" v-on:click="changeTable('completeTable')">{{ uiLabels.complete }}</th>
+        <th colspan="2" v-on:click="changeTable('MainTable')">{{ uiLabels.mainCourse }}</th>
+        <th colspan="2" v-on:click="changeTable('sideTable')">{{ uiLabels.sideorders }}</th>
+        <th colspan="2" v-on:click="changeTable('sauceTable')">{{ uiLabels.sauce }}</th>
+    <th colspan="2" v-on:click="changeTable('breadTable')">{{ uiLabels.bread }}</th>
+    <th colspan="1" v-on:click="changeTable('snackTable')">{{ uiLabels.snack }}</th>
+    <th colspan="1" class="tableName" v-on:click="changeTable('drinkTable')">{{ uiLabels.drink }}</th>
       </tr>
     </thead>
     <tbody>

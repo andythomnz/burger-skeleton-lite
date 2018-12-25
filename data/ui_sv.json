@@ -20,5 +20,10 @@
   "patty" : "Färsbiff",
   "complete" : "Komplett",
   "hotKitchen" : "Varmt kök",
-  "coldKitchen" : "Kallt kök"  
+  "coldKitchen" : "Kallt kök",
+  "mainCourse" : "Huvudrätt",
+  "sauce" : "Sås",
+  "bread" : "Bröd",
+  "snack" : "Mellanmål",
+  "drink" : "Dryck"
 }
