@@ -108,7 +108,6 @@ export default {
       this.clear();
       this.$store.commit('toggleFinish');
     }
-    console.log(this.$store.state.orders.buns.length);
     this.calculatePrice();
   },
   created: function () {
@@ -162,9 +161,20 @@ export default {
       }
     },
     Cancel: function(){
-      this.$store.state.orderedDrinks.splice(0, this.$store.state.orderedDrinks.length);
-      this.$store.state.orderedSides.splice(0, this.$store.state.orderedSides.length);
-      this.price=0;
+      let i=0;
+      while (i < this.OrderedDrinks.length) {
+        this.RemoveItem(this.OrderedDrinks[i],i);
+      }
+      let j=0;
+      while (j < this.OrderedSides.length) {
+        this.RemoveItem(this.OrderedSides[j],j);
+      }
+      for (var k = 0; k < this.orderedBurgers.length; k++) {
+        this.RemoveItem(this.orderedBurgers[k],k);
+        // this.orderedBurgers.splice(k, 1);
+      }
+      this.price=0
+
     },
     placeOrder: function () {
       //Wrap the order in an object
@@ -231,7 +241,7 @@ text-align: center}
 }
 
 .price {
-  position:absolute;
-  right: 60em;
+  position: absolute;
+  right: 60%;
 }
 </style>
