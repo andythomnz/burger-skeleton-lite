@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <template>
 
   <div
@@ -37,18 +38,7 @@
     </label>
 
     <!-- TODO Change the text in the basicButton to be language sensitive 
-=======
-  <div class="ingredient" >
-    <label>
-      <button v-on:click="incrementCounter">{{ counter }}</button>
-      <ul>
-        <img v-bind:src="item.image" width="20%">
-        
-        <li>{{item["ingredient_"+ lang]}}</li>
-        <li>{{item.selling_price}}:-</li><li>{{item.stock}} pcs</li>-->
 
-    <!--  Change the text in the basicButton to be language sensitive
->>>>>>> b10b3fb3f81ee9f1618b4b0bf8710f9cef9166b2
     {{item["ingredient_"+ lang]}}
 
     also do something with the stock and price {{item.selling_price}}:-, {{item.stock}} pcs

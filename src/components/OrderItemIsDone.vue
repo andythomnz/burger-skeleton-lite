@@ -3,12 +3,12 @@
   <tr>
     <OrderItem
       v-for="n in 3"
-      v-if="notDone[orderId+n-1] !== undefined"
+      v-if="isDone[orderId+n-1] !== undefined"
       :ui-labels="uiLabels"
       :lang="lang"
-      :order-id="notDone[orderId+n-1]"
-      :order="orders[notDone[orderId+n-1]]"
-      :needDoneButton="orders[notDone[orderId+n-1]].status == 'started'">
+      :order-id="isDone[orderId+n-1]"
+      :order="orders[isDone[orderId+n-1]]"
+      :needDoneButton="false">
     </OrderItem>
   </tr>
 </template>
@@ -16,20 +16,17 @@
 import OrderItem from '@/components/OrderItem.vue'
 
 export default {
-  name: 'OrderItemToPrepare',
+  name: 'OrderItemIsDone',
   components: { OrderItem },
   props: {
     uiLabels: Object,
     orderId: Number,
     lang: String,
-	notDone: Array,
-	orders: Object
+    isDone: Array,
+    orders: Object
   },
   methods: {
 
-    cancelOrder: function () {
-      // not implemented
-    }
   }
 }
 </script>

@@ -19,5 +19,13 @@
   "language" : "English",
   "patty" : "Färsbiff",
   "back" : "Tillbaka",
-  "cart" : "Varukorgen"
+  "cart" : "Varukorgen",
+  "complete" : "Komplett",
+  "hotKitchen" : "Varmt kök",
+  "coldKitchen" : "Kallt kök",
+  "mainCourse" : "Huvudrätt",
+  "sauce" : "Sås",
+  "bread" : "Bröd",
+  "snack" : "Mellanmål",
+  "drink" : "Dryck"  
 }

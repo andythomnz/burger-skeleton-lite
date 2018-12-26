@@ -1,29 +1,30 @@
 <template>
   <!-- Note in this component that it is using another component -->
   <tr>
-    <OrderItem
-      v-for="n in 3"
+    <DetailItem
+      v-for="n in 4"
       v-if="notDone[orderId+n-1] !== undefined"
       :ui-labels="uiLabels"
       :lang="lang"
       :order-id="notDone[orderId+n-1]"
       :order="orders[notDone[orderId+n-1]]"
-      :needDoneButton="orders[notDone[orderId+n-1]].status == 'started'">
-    </OrderItem>
+      :category="category">
+    </DetailItem>
   </tr>
 </template>
 <script>
-import OrderItem from '@/components/OrderItem.vue'
+import DetailItem from '@/components/DetailItem.vue'
 
 export default {
-  name: 'OrderItemToPrepare',
-  components: { OrderItem },
+  name: 'DetailItemToPrepare',
+  components: { DetailItem },
   props: {
     uiLabels: Object,
     orderId: Number,
     lang: String,
 	notDone: Array,
-	orders: Object
+	orders: Object,
+	category: Number
   },
   methods: {
 

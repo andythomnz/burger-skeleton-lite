@@ -19,5 +19,13 @@
   "language" : "Svenska",
   "patty" : "Patties",
   "back" : "Back",
-  "cart" : "Cart"
+  "cart" : "Cart",
+  "complete" : "Complete",
+  "hotKitchen" : "Hot kitchen",
+  "coldKitchen" : "Cold kitchen",
+  "mainCourse" : "Main course",
+  "sauce" : "Sauce orders",
+  "bread" : "Bread orders",
+  "snack" : "Snack orders",
+  "drink" : "Drink orders"  
 }
