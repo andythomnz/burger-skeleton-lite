@@ -158,7 +158,7 @@ export default {
     increment: function(item) {
       this.counter +=1;
       if (this.itemCategory=='Drinks')
-      {this.$store.state.socket.emit('incrementCounterDrinks', {data: item})}
+      {this.$store.state.socket.emit("incrementCounterDrinks", {data: item})}
       else if (this.itemCategory=='Sides')
       {this.$store.state.socket.emit('incrementCounterSides', {data: item})}
     },
@@ -190,20 +190,24 @@ export default {
           value: orderedVeggies
         });
         let orderedSauces= [];
-        for (var i = 0; i < this.sauces.length; i++) {
-          orderedSauces.push(this.sauces[i]);
+        for (var l = 0; l < this.sauces.length; l++) {
+          orderedSauces.push(this.sauces[l]);
         }
         this.$store.commit('changeOrders', {
           type: 'sauces',
           value: orderedSauces
         });
         let orderedExtras= [];
-        for (var i = 0; i < this.extras.length; i++) {
-          orderedExtras.push(this.extras[i]);
+        for (var k = 0; k < this.extras.length; k++) {
+          orderedExtras.push(this.extras[k]);
         }
         this.$store.commit('changeOrders', {
           type: 'extras',
           value: orderedExtras
+        });
+        this.$store.commit('changeOrders', {
+          type: 'price',
+          value: this.price
         });
         // this.$store.commit('toggleFinish');
         // this.$store.commit('toggleClose');
@@ -248,7 +252,7 @@ export default {
         while (v < this.vegetables.length) {
           if (this.vegetables[v].ingredient_id == ingredient.ingredient_id) {
             break
-          };
+          }
           v += 1;
         }
         this.vegetables.splice(v, 1);
@@ -258,7 +262,7 @@ export default {
         while (s < this.sauces.length) {
           if (this.sauces[s].ingredient_id == ingredient.ingredient_id) {
             break
-          };
+          }
           s += 1;
         }
         this.sauces.splice(s, 1);
@@ -268,7 +272,7 @@ export default {
         while (e < this.extras.length) {
           if (this.extras[e].ingredient_id == ingredient.ingredient_id) {
             break
-          };
+          }
           e+= 1;
         }
         this.extras.splice(e, 1);

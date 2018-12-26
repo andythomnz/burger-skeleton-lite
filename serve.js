@@ -89,12 +89,20 @@ io.on('connection', function (socket) {
     io.emit('openPopup', {data: data.data, counter: data.counter})
   });
 
-  socket.on('incrementCounter', function (data) {
-    io.emit('incrementCounter', {data: data.data})
+  socket.on('incrementCounterDrinks', function (data) {
+    io.emit('incrementCounterDrinks', {data: data.data})
   });
 
-  socket.on('decrementCounter', function (data) {
-    io.emit('decrementCounter', {data: data.data})
+  socket.on('incrementCounterSides', function (data) {
+    io.emit('incrementCounterSides', {data: data.data})
+  });
+
+  socket.on('decrementCounterDrinks', function (data) {
+    io.emit('decrementCounterDrinks', {data: data.data})
+  });
+
+  socket.on('decrementCounterSides', function (data) {
+    io.emit('decrementCounterSides', {data: data.data})
   });
 
 });
