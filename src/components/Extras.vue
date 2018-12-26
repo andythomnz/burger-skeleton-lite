@@ -97,12 +97,13 @@ export default {
     addToOrder: function (item) {
       this.chosenIngredients.push(item);
       this.price += +item.selling_price;
-      let store = this.$store.state.orders.extras;
-      store.push(item);
-      this.$store.commit('changeOrders', {
-        type: 'extras',
-        value: store
-      })
+      // let store = this.$store.state.orders.extras;
+      // store.push(item);
+      this.$store.state.selectedBurger.extras.push(item);
+      // this.$store.commit('changeOrders', {
+      //   type: 'extras',
+      //   value: store
+      // })
     },
     resetToOrder (item) {
       let store = this.$store.state.orders.extras;

@@ -20,12 +20,12 @@
     <div>
       <basicButton
         v-if="nextButton"
-        text="Next"
+        :text="uiLabels.next"
         v-on:buttonclick="NextPage(currentTab)"
       ></basicButton>
       <basicButton
         v-else-if="finishButton"
-        text="Finish"
+        :text="uiLabels.finish"
         v-on:buttonclick="FinishPage(currentTab)"
       ></basicButton>
     </div>
@@ -99,7 +99,8 @@ export default {
     FinishPage (route) {
       this.$store.commit('toggleClose');
       this.$store.commit('toggleFinish');
-      this.$router.push({ name: 'Cart' });
+      this.$store.state.socket.emit('popup', {data: 'CustomBurger', counter: 1});
+      this.$router.push({ name: 'Popup' });
     },
     CartPage (route) {
       this.$router.push({ name: route });

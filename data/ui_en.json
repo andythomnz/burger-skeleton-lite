@@ -27,5 +27,22 @@
   "sauce" : "Sauce orders",
   "bread" : "Bread orders",
   "snack" : "Snack orders",
-  "drink" : "Drink orders"  
+  "drink" : "Drink orders",
+  "protein" : "Protein",
+  "bun" : "Bun",
+  "sauces" : "Sauces",
+  "vegetables" : "Vegetables",
+  "extras" : "Extras",
+  "back" : "Back",
+  "cart" : "Cart",
+  "burgers" : "Burgers",
+  "drinks" : "Drinks",
+  "sides" : "Sides",
+  "myob" : "Make Your Own Burger",
+  "premade_burgers" : "Pre-Made Burgers",
+  "cancel" : "Cancel Item",
+  "confirm" : "Confirm Item",
+  "finish" : "Finish",
+  "price": "Price",
+  "customBurger" : "Customized Burger"
 }

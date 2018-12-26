@@ -97,6 +97,14 @@ let router = new Router({
       },
       name: 'Cart',
       component: () => import(/* webpackChunkName: "read" */ './views/Cart.vue')
+    },
+    {
+      path: '/Popup',
+      meta: {
+        title: 'Popup',
+      },
+      name: 'Popup',
+      component: () => import(/* webpackChunkName: "read" */ './views/Popup.vue')
     }
   ]
 })

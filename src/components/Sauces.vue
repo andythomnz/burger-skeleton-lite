@@ -102,12 +102,13 @@ export default {
       if (this.allCount >= 2) {
         return;
       }
-      let store = this.$store.state.orders.sauces;
-      store.push(item);
-      this.$store.commit('changeOrders', {
-        type: 'sauces',
-        value: store
-      })
+      // let store = this.$store.state.orders.sauces;
+      // store.push(item);
+      this.$store.state.selectedBurger.sauces.push(item);
+      // this.$store.commit('changeOrders', {
+      //   type: 'sauces',
+      //   value: store
+      // })
       this.chosenIngredients.push(item);
       this.price += +item.selling_price;
       this.allCount = this.allCount + 1;

@@ -110,10 +110,11 @@ export default {
       this.chosenIngredients.push(item);
       this.price += +item.selling_price;
       this.currentKey = item.ingredient_id;
-      this.$store.commit('changeOrders', {
-        type: 'protein',
-        value: item
-      });
+      this.$store.state.selectedBurger.protein=item;
+      // this.$store.commit('changeOrders', {
+      //   type: 'protein',
+      //   value: item
+      // });
       this.allCount++;
     },
     resetToOrder: function (item) {

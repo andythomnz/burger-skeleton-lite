@@ -4,6 +4,27 @@
 	grid-template-columns: repeat(auto-fit, calc(12em + 10px));;
 }
 
+#btn {
+	background: none;
+	transition: background 250ms ease-in-out,
+              transform 150ms ease;
+
+}
+
+#btn:hover {
+	background: lightyellow; cursor: pointer;
+}
+
+#btn:focus {
+    outline: 1px solid #fff;
+    outline-offset: -4px;
+}
+
+#btn:active {
+    transform: scale(0.99);
+    outline:yellow auto 5
+}
+
 .icon{
   width:2em;
 }
