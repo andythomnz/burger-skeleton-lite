@@ -7,15 +7,14 @@ var sharedVueStuff = {
       orders: {},
       uiLabels: {},
       ingredients: {},
-      lang: "en",
       notDone: [],
       isDone: []
     }
   },
   computed: {
-    uiLabels: function () {
-      return this.$store.state.uiLabels;
-    },
+    // uiLabels: function () {
+    //   return this.$store.state.uiLabels;
+    // },
     lang: { get: function () {
       return this.$store.state.lang;
      },

@@ -27,7 +27,7 @@
       <OrderItem
         v-for="(order, key) in orders"
         v-if="order.status !== 'done'"
-        :order-id="key"
+        :order-id="Number(key)"
         :order="order"
         :ui-labels="uiLabels"
         :lang="lang"
