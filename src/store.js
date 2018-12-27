@@ -25,7 +25,8 @@ export default new Vuex.Store({
       protein: {},
       vegetables: [],
       sauces: [],
-      extras: []
+      extras: [],
+      price:0
     },
     orderedDrinks: [],
     orderedSides: [],

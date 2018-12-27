@@ -10,7 +10,11 @@
       <h1>{{ uiLabels.yourOrder}}</h1>
       <h2>{{ uiLabels.burgers }}</h2>
       <div style="width: 100%;height: auto;">
-        <ul
+        <ul v-for="(orderedBurger, index) in orderedBurgers" :key="orderedBurger.buns['ingredient_id'] + index">
+          <li>Customized burger {{index+1}} <button v-on:click="RemoveItem(orderedBurger, index)"> X </button><button v-on:click="NextPage()">EDIT</button>
+          <span class="price">{{ orderedBurger.price }} kr</span></li>
+        </ul>
+        <!-- <ul
           v-for="(orderedBurger, index) in orderedBurgers"
           :key="orderedBurger.buns['ingredient_'+lang] + index"
           style="display: inline-block; width: 300px;vertical-align: top;"
@@ -44,17 +48,17 @@
               >{{item['ingredient_'+lang]}} <button>X</button></li>
             </ul>
           </li>
-        </ul>
+        </ul> -->
       </div>
       <h2>{{ uiLabels.drinks }}</h2>
       <p>
       <ul>
-        <li v-for="(item, index) in OrderedDrinks" :key="item.ingredient_id + index">{{ item["ingredient_"+lang] }} <button v-on:click='RemoveDrinks(item, index)'>X</button>
+        <li v-for="(item, index) in OrderedDrinks" :key="item.ingredient_id + index">{{ item["ingredient_"+lang] }} <button v-on:click='RemoveItem(item, index)'>X</button>
         <span class="price">{{ item.selling_price }} kr</span></li>
       </ul></p>
       <h2>{{ uiLabels.sides }}</h2>
       <p><ul>
-        <li v-for="(item, index) in OrderedSides" :key="item.ingredient_id +index">{{ item["ingredient_"+lang] }} <button v-on:click='RemoveSides(item, index)'>X</button>
+        <li v-for="(item, index) in OrderedSides" :key="item.ingredient_id +index">{{ item["ingredient_"+lang] }} <button v-on:click='RemoveItem(item, index)'>X</button>
         <span class="price">{{ item.selling_price }} kr</span></li>
       </ul></p>
       <p style="font-weight:bold" class="price">{{ uiLabels.sum }}: {{ this.price }} kr</p>
@@ -86,9 +90,6 @@ export default {
 
     };
   },
-  activated (){
-    return this.calculatePrice();
-  },
   computed: {
     finish () {
       return this.$store.state.finish
@@ -107,6 +108,7 @@ export default {
       this.clear();
       this.$store.commit('toggleFinish');
     }
+    this.calculatePrice();
   },
   created: function () {
     this.$store.state.socket.on('orderNumber', function (data) {
@@ -138,30 +140,41 @@ export default {
     },
     NextPage: function() {
 
-      this.$router.push({ name: "MainMenu" });
+      this.$router.push({ name: "Popup" });
       //location.reload()
     },
-    RemoveDrinks: function(item, index) {
-      // console.log(this.$store.state.drinks[this.$store.state.drinks.indexOf(item)].counter);
-      this.$store.state.socket.emit('decrementCounter', {data: item});
-      this.$store.state.orderedDrinks.splice(index, 1);
-
-      // this.$store.state.drinks[this.$store.state.drinks.indexOf(item)].counter -=1;
-      this.price=0;
-      this.calculatePrice();
-      // console.log(this.$store.state.drinks[this.$store.state.drinks.indexOf(item)].counter)
-      // need to reset counter of item
-    },
-    RemoveSides: function(item, index) {
-      this.$store.state.socket.emit('decrementCounter', {data: item});
-      this.$store.state.orderedSides.splice(index, 1);
-      this.price=0;
-      this.calculatePrice();
+    RemoveItem: function(item, index) {
+      if (item.category===6) {
+        this.$store.state.socket.emit('decrementCounterDrinks', {data: item});
+        this.$store.state.orderedDrinks.splice(index, 1);
+        this.price=0;
+        this.calculatePrice();
+      }
+      else if (item.category===5) {
+        this.$store.state.socket.emit('decrementCounterSides', {data: item});
+        this.$store.state.orderedSides.splice(index, 1);
+        this.price=0;
+        this.calculatePrice();
+      }
+      else {
+        this.orderedBurgers.splice(index, 1)
+      }
     },
     Cancel: function(){
-      this.$store.state.orderedDrinks.splice(0, this.$store.state.orderedDrinks.length);
-      this.$store.state.orderedSides.splice(0, this.$store.state.orderedSides.length);
-      this.price=0;
+      let i=0;
+      while (i < this.OrderedDrinks.length) {
+        this.RemoveItem(this.OrderedDrinks[i],i);
+      }
+      let j=0;
+      while (j < this.OrderedSides.length) {
+        this.RemoveItem(this.OrderedSides[j],j);
+      }
+      for (var k = 0; k < this.orderedBurgers.length; k++) {
+        this.RemoveItem(this.orderedBurgers[k],k);
+        // this.orderedBurgers.splice(k, 1);
+      }
+      this.price=0
+
     },
     placeOrder: function () {
       //Wrap the order in an object
@@ -172,6 +185,19 @@ export default {
       }
       for (var j = 0; j < this.OrderedSides.length; j++) {
         chosenIngredients.push(this.OrderedSides[j]);
+      }
+      for (var b = 0; b < this.orderedBurgers.length; b++) {
+        chosenIngredients.push(this.orderedBurgers[b].buns);
+        chosenIngredients.push(this.orderedBurgers[b].protein);
+        for (var v = 0; v < this.orderedBurgers[b].vegetables.length; v++) {
+          chosenIngredients.push(this.orderedBurgers[b].vegetables[v])
+        }
+        for (var s = 0; s < this.orderedBurgers[b].sauces.length; s++) {
+          chosenIngredients.push(this.orderedBurgers[b].sauces[s])
+        }
+        for (var e = 0; e < this.orderedBurgers[b].extras.length; e++) {
+          chosenIngredients.push(this.orderedBurgers[b].extras[e])
+        }
       }
       let order = {
         ingredients: chosenIngredients,
@@ -190,6 +216,9 @@ export default {
       }
       for (var j = 0; j < this.OrderedSides.length; j++) {
         this.price += this.OrderedSides[j].selling_price;
+      }
+      for (var k = 0; k < this.orderedBurgers.length; k++) {
+        this.price += this.orderedBurgers[k].price
       }
     }
 
@@ -212,7 +241,7 @@ text-align: center}
 }
 
 .price {
-  position:absolute;
-  right: 60em;
+  position: absolute;
+  right: 60%;
 }
 </style>

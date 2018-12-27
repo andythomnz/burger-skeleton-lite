@@ -94,7 +94,8 @@ export default {
       protein:Object,
       vegetables: Array,
       sauces: Array,
-      extras: Array
+      extras: Array,
+      orderedBurgers: [],
     };
   },
   created: function() {
@@ -102,7 +103,8 @@ export default {
       if (data.data=='CustomBurger') {
         this.menuItem=this.$store.state.selectedBurger.bun;
         this.itemCategory='CustomBurger';
-        this.title=this.uiLabels.customBurger;
+        this.orderedBurgers.push(Object.assign({}, this.$store.state.orders));
+        this.title=this.uiLabels.customBurger +' '+ this.orderedBurgers.length;
         this.ingredients=this.$store.state.orders;
         this.bun=this.$store.state.selectedBurger.bun;
         this.protein=this.$store.state.selectedBurger.protein;
@@ -115,18 +117,19 @@ export default {
       else if (data.data=='Drinks') {
         this.menuItem=this.$store.state.drinks;
         this.itemCategory='Drinks';
-        this.title=this.uiLabels.drinks;
+        this.title=this.uiLabels.drink +' '+(this.$store.state.orderedDrinks.length+1);
       }
       else {
         this.menuItem=this.$store.state.sides;
         this.itemCategory='Sides';
-        this.title=this.uiLabels.sides;
+        this.title=this.uiLabels.side +' '+(this.$store.state.orderedSides.length+1);
       }
       this.counter = data.counter;
     }.bind(this));
   },
   methods: {
     calculatePrice: function() {
+      this.price=0;
       this.price=this.$store.state.selectedBurger.bun.selling_price + this.$store.state.selectedBurger.protein.selling_price;
       for (var i = 0; i < this.$store.state.selectedBurger.vegetables.length; i++) {
         this.price += this.$store.state.selectedBurger.vegetables[i].selling_price;
@@ -155,7 +158,7 @@ export default {
     increment: function(item) {
       this.counter +=1;
       if (this.itemCategory=='Drinks')
-      {this.$store.state.socket.emit('incrementCounterDrinks', {data: item})}
+      {this.$store.state.socket.emit("incrementCounterDrinks", {data: item})}
       else if (this.itemCategory=='Sides')
       {this.$store.state.socket.emit('incrementCounterSides', {data: item})}
     },
@@ -187,20 +190,24 @@ export default {
           value: orderedVeggies
         });
         let orderedSauces= [];
-        for (var i = 0; i < this.sauces.length; i++) {
-          orderedSauces.push(this.sauces[i]);
+        for (var l = 0; l < this.sauces.length; l++) {
+          orderedSauces.push(this.sauces[l]);
         }
         this.$store.commit('changeOrders', {
           type: 'sauces',
           value: orderedSauces
         });
         let orderedExtras= [];
-        for (var i = 0; i < this.extras.length; i++) {
-          orderedExtras.push(this.extras[i]);
+        for (var k = 0; k < this.extras.length; k++) {
+          orderedExtras.push(this.extras[k]);
         }
         this.$store.commit('changeOrders', {
           type: 'extras',
           value: orderedExtras
+        });
+        this.$store.commit('changeOrders', {
+          type: 'price',
+          value: this.price
         });
         // this.$store.commit('toggleFinish');
         // this.$store.commit('toggleClose');
@@ -245,7 +252,7 @@ export default {
         while (v < this.vegetables.length) {
           if (this.vegetables[v].ingredient_id == ingredient.ingredient_id) {
             break
-          };
+          }
           v += 1;
         }
         this.vegetables.splice(v, 1);
@@ -255,7 +262,7 @@ export default {
         while (s < this.sauces.length) {
           if (this.sauces[s].ingredient_id == ingredient.ingredient_id) {
             break
-          };
+          }
           s += 1;
         }
         this.sauces.splice(s, 1);
@@ -265,7 +272,7 @@ export default {
         while (e < this.extras.length) {
           if (this.extras[e].ingredient_id == ingredient.ingredient_id) {
             break
-          };
+          }
           e+= 1;
         }
         this.extras.splice(e, 1);
