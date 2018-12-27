@@ -5,16 +5,15 @@ var sharedVueStuff = {
   data: function () {
     return {
       orders: {},
-      uiLabels: {},
       ingredients: {},
       notDone: [],
       isDone: []
     }
   },
   computed: {
-    // uiLabels: function () {
-    //   return this.$store.state.uiLabels;
-    // },
+    uiLabels: function () {
+      return this.$store.state.uiLabels;
+    },
     lang: { get: function () {
       return this.$store.state.lang;
      },
@@ -31,7 +30,6 @@ var sharedVueStuff = {
       this.$store.commit('setUiLabels', data.uiLabels);
       this.notDone = data.notDone;
       this.isDone = data.isDone;
-      this.uiLabels = data.uiLabels;      
       this.ingredients = data.ingredients;
     }.bind(this));
 
@@ -42,7 +40,7 @@ var sharedVueStuff = {
     this.$store.state.socket.on('currentQueue', function (data) {
       this.orders = data.orders;
       this.notDone = data.notDone;
-      this.isDone = data.isDone;      
+      this.isDone = data.isDone;
       if (typeof data.ingredients !== 'undefined') {
         this.ingredients = data.ingredients;
       }
