@@ -108,6 +108,7 @@ export default {
       this.clear();
       this.$store.commit('toggleFinish');
     }
+    this.price=0;
     this.calculatePrice();
   },
   created: function () {
