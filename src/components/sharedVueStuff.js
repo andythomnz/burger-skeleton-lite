@@ -5,7 +5,11 @@ var sharedVueStuff = {
   data: function () {
     return {
       orders: {},
+      uiLabels: {},
       ingredients: {},
+      lang: "en",
+      notDone: [],
+      isDone: []
     }
   },
   computed: {
