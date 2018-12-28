@@ -57,6 +57,12 @@
         <li v-for="(item, index) in OrderedSides" :key="item.ingredient_id +index">{{ item["ingredient_"+lang] }} <button v-on:click='RemoveSides(item, index)'>X</button>
         <span class="price">{{ item.selling_price }} kr</span></li>
       </ul></p>
+      <h2>{{ uiLabels.premade_burgers }}</h2>
+      <p><ul>
+        <li v-for="(item, index) in OrderedPremadeBurgers" :key="item.ingredient_id +index">{{ item["ingredient_"+lang] }} <button v-on:click='RemovePremadeBurgers(item, index)'>X</button>
+        <span class="price">{{ item.selling_price }} kr</span></li>
+        </ul></p>
+
       <p style="font-weight:bold" class="price">{{ uiLabels.sum }}: {{ this.price }} kr</p>
       <button id='btn' v-on:click="Cancel()">{{ uiLabels.cancelOrder }}</button>
       <button id='btn' v-on:click="placeOrder()">{{ uiLabels.placeOrder }}</button>
@@ -81,6 +87,7 @@ export default {
       orderedBurgers: [],
       OrderedDrinks: this.$store.state.orderedDrinks,
       OrderedSides: this.$store.state.orderedSides,
+      OrderedPremadeBurgers: this.$store.state.OrderedPremadeBurgers,
       price: 0,
       orderNumber: "",
 
@@ -153,6 +160,12 @@ export default {
       // need to reset counter of item
     },
     RemoveSides: function(item, index) {
+      this.$store.state.socket.emit('decrementCounter', {data: item});
+      this.$store.state.orderedSides.splice(index, 1);
+      this.price=0;
+      this.calculatePrice();
+    },
+    RemovePremadeBurgers: function(item, index) {
       this.$store.state.socket.emit('decrementCounter', {data: item});
       this.$store.state.orderedSides.splice(index, 1);
       this.price=0;

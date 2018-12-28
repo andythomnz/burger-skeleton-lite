@@ -18,7 +18,7 @@
           <div class="side-grid">
           <basicButton
             :text="uiLabels.premade_burgers"
-            v-on:buttonclick="NextPage('Drinks')"
+            v-on:buttonclick="NextPage('PremadeBurgers')"
           ></basicButton>
           <basicButton
             :text="uiLabels.drinks"

@@ -1,9 +1,9 @@
 <template>
   <div v-on:popup='set(data,title)'>
     <NavBar
-    nextRoute=""
-    backRoute="MainMenu"
-    :showCart="Boolean.false">
+      nextRoute=""
+      backRoute="MainMenu"
+      :showCart="Boolean.false">
       <h1 slot="center-component">  {{ this.title }}</h1>
     </NavBar>
     <div class='OrderItem'>
@@ -31,23 +31,35 @@
           </span></div>
           <div v-if="itemCategory === 'CustomBurger'" class='ingredients'>
             <div style="padding-left: 5px; padding-right: 5px">
-            <p style="font-weight: bold; font-size: 16pt">{{ uiLabels.ingredients }}: </p>
-            <p>{{ uiLabels.bun }}: {{ bun["ingredient_"+lang] }}</p>
-            <p>{{ uiLabels.protein }}: {{ protein['ingredient_'+lang]}}
-              <span v-if="protein.addi_cost>0"> (+ {{ protein.addi_cost }} kr)</span></p>
-            <p>{{ uiLabels.vegetables }}:
-              <ul v-for="item in vegetables" :key="item.ingredient_id">
-                <li>{{ item['ingredient_'+lang] }} <span v-if="item.addi_cost>0"> (+ {{ item.addi_cost }} kr)</span><span v-if="vegetables.length>0"> <button v-on:click="removeIngredient('vegetables', item)"> x </button></span></li>
-              </ul></p>
-            <p>{{ uiLabels.sauces }}:
-              <ul v-for="item in sauces" :key="item.ingredient_id">
-                <li>{{ item['ingredient_'+lang] }} <span v-if="item.addi_cost>0"> (+ {{ item.addi_cost }} kr)</span><span v-if="sauces.length>0"> <button v-on:click="removeIngredient('sauces', item)"> x </button></span></li>
-              </ul></p>
-            <p>{{ uiLabels.extras }}:
-              <ul v-for="item in extras" :key="item.ingredient_id">
-                <li>{{ item['ingredient_'+lang] }} <span v-if="item.addi_cost>0"> (+ {{ item.addi_cost }} kr)</span><span v-if="extras.length>0"> <button v-on:click="removeIngredient('extras', item)"> x </button></span></li>
-              </ul></p></div>
+              <p style="font-weight: bold; font-size: 16pt">{{ uiLabels.ingredients }}: </p>
+              <p>{{ uiLabels.bun }}: {{ bun["ingredient_"+lang] }}</p>
+              <p>{{ uiLabels.protein }}: {{ protein['ingredient_'+lang]}}
+                <span v-if="protein.addi_cost>0"> (+ {{ protein.addi_cost }} kr)</span></p>
+              <p>{{ uiLabels.vegetables }}:
+                <ul v-for="item in vegetables" :key="item.ingredient_id">
+                  <li>{{ item['ingredient_'+lang] }} <span v-if="item.addi_cost>0"> (+ {{ item.addi_cost }} kr)</span><span v-if="vegetables.length>0"> <button v-on:click="removeIngredient('vegetables', item)"> x </button></span></li>
+                </ul></p>
+              <p>{{ uiLabels.sauces }}:
+                <ul v-for="item in sauces" :key="item.ingredient_id">
+                  <li>{{ item['ingredient_'+lang] }} <span v-if="item.addi_cost>0"> (+ {{ item.addi_cost }} kr)</span><span v-if="sauces.length>0"> <button v-on:click="removeIngredient('sauces', item)"> x </button></span></li>
+                </ul></p>
+              <p>{{ uiLabels.extras }}:
+                <ul v-for="item in extras" :key="item.ingredient_id">
+                  <li>{{ item['ingredient_'+lang] }} <span v-if="item.addi_cost>0"> (+ {{ item.addi_cost }} kr)</span><span v-if="extras.length>0"> <button v-on:click="removeIngredient('extras', item)"> x </button></span></li>
+                </ul></p>
+            </div>
           </div>
+
+          <div v-if="itemCategory === 'PremadeBurger'" class='ingredients'>
+            <div style="padding-left: 5px; padding-right: 5px">
+              <p style="font-weight: bold; font-size: 16pt">{{ uiLabels.PremadeBurgerIngredients }}: </p>
+              <p>{{ uiLabels.bun }}: {{ bun }}</p>
+              <p>{{ uiLabels.protein }}: {{ protein }}</p>
+              <p>{{ uiLabels.vegetables }}: {{ vegetables }}</p>
+              <p>{{ uiLabels.sauces }}: {{ sauces }}</p>
+            </div>
+          </div>
+
           <div class="price">
             <p>{{ uiLabels.price }}:
               <span v-if="itemCategory === 'CustomBurger'">{{ price }} kr</span>
@@ -104,23 +116,34 @@ export default {
         this.itemCategory='CustomBurger';
         this.title=this.uiLabels.customBurger;
         this.ingredients=this.$store.state.orders;
+
         this.bun=this.$store.state.selectedBurger.bun;
         this.protein=this.$store.state.selectedBurger.protein;
         this.vegetables=this.$store.state.selectedBurger.vegetables;
         this.sauces=this.$store.state.selectedBurger.sauces;
         this.extras=this.$store.state.selectedBurger.extras;
         this.calculatePrice();
-        // this.ingredients= {bun: this.$store.state.selectedBurger.buns, protein: this.$store.state.selectedBurger.protein, vegetables: this.$store.state.selectedBurger.vegetables, sauces: this.$store.state.selectedBurger.sauces, extras: this.$store.state.selectedBurger.extras};
+        // this.ingredients= {bun: this.$s tore.state.selectedBurger.buns, protein: this.$store.state.selectedBurger.protein, vegetables: this.$store.state.selectedBurger.vegetables, sauces: this.$store.state.selectedBurger.sauces, extras: this.$store.state.selectedBurger.extras};
       }
       else if (data.data=='Drinks') {
         this.menuItem=this.$store.state.drinks;
         this.itemCategory='Drinks';
         this.title=this.uiLabels.drinks;
       }
-      else {
+      else if (data.data=='Sides'){
         this.menuItem=this.$store.state.sides;
         this.itemCategory='Sides';
         this.title=this.uiLabels.sides;
+      }
+      else if (data.data=='PremadeBurger') {
+        this.menuItem=this.$store.state.premadeBurgerName;
+        this.itemCategory='PremadeBurger';
+        this.title=this.uiLabels.premade_burgers;
+        //this.ingredients=this.$store.state.premadeBurgerIngredients;
+        this.bun=this.$store.state.premadeBurgerIngredients.bun;
+        this.protein=this.$store.state.premadeBurgerIngredients.protein;
+        this.vegetables=this.$store.state.premadeBurgerIngredients.vegetables;
+        this.sauces=this.$store.state.premadeBurgerIngredients.sauces;
       }
       this.counter = data.counter;
     }.bind(this));
@@ -156,8 +179,10 @@ export default {
       this.counter +=1;
       if (this.itemCategory=='Drinks')
       {this.$store.state.socket.emit('incrementCounterDrinks', {data: item})}
-      else if (this.itemCategory=='Sides')
+      if (this.itemCategory=='Sides')
       {this.$store.state.socket.emit('incrementCounterSides', {data: item})}
+      else if (this.itemCategory=='PremadeBurgers')
+      {this.$store.state.socket.emit('incrementCounterPremadeBurgers', {data: item})}
     },
     decrement: function(item) {
       if (this.counter==0) {return}
@@ -166,6 +191,8 @@ export default {
       {this.$store.state.socket.emit('decrementCounterDrinks', {data: item})}
       else if (this.itemCategory=='Sides')
       {this.$store.state.socket.emit('decrementCounterSides', {data: item})}
+      else if (this.itemCategory=='PremadeBurgers')
+      {this.$store.state.socket.emit('decrementCounterPremadeBurgers', {data: item})}
     },
     confirm: function(route) {
       if (this.itemCategory=='CustomBurger') {
@@ -223,6 +250,13 @@ export default {
         let i=0;
         while (i < this.counter) {
           this.$store.state.orderedDrinks.push(this.menuItem);
+          i += 1
+        }
+      }
+      else if (this.menuItem.category === 7) {
+        let i=0;
+        while (i < this.counter) {
+          this.$store.state.orderedPremadeBurgers.push(this.menuItem);
           i += 1
         }
       }
