@@ -29,7 +29,7 @@
             <img src="../assets/vegan.png" class="icon">
             <p v-if='showVegan'><span class="popuptext" id="myInfo">This item is vegan</span></p>
           </span></div>
-          <div v-if="itemCategory === 'CustomBurger'" class='ingredients'>
+          <div v-if="itemCategory === 'CustomBurger' || 'PremadeBurger'" class='ingredients'>
             <div style="padding-left: 5px; padding-right: 5px">
               <p style="font-weight: bold; font-size: 16pt">{{ uiLabels.ingredients }}: </p>
               <p>{{ uiLabels.bun }}: {{ bun["ingredient_"+lang] }}</p>
@@ -50,7 +50,7 @@
             </div>
           </div>
 
-          <div v-if="itemCategory === 'PremadeBurger'" class='ingredients'>
+          <!-- <div v-if="itemCategory === 'PremadeBurger'" class='ingredients'>
             <div style="padding-left: 5px; padding-right: 5px">
               <p style="font-weight: bold; font-size: 16pt">{{ uiLabels.PremadeBurgerIngredients }}: </p>
               <p>{{ uiLabels.bun }}: {{ bun }}</p>
@@ -58,7 +58,7 @@
               <p>{{ uiLabels.vegetables }}: {{ vegetables }}</p>
               <p>{{ uiLabels.sauces }}: {{ sauces }}</p>
             </div>
-          </div>
+          </div> -->
 
           <div class="price">
             <p>{{ uiLabels.price }}:
