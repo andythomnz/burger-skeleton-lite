@@ -29,7 +29,7 @@
             <img src="../assets/vegan.png" class="icon">
             <p v-if='showVegan'><span class="popuptext" id="myInfo">This item is vegan</span></p>
           </span></div>
-          <div v-if="itemCategory === 'CustomBurger' || 'PremadeBurger'" class='ingredients'>
+          <div v-if="itemCategory === 'CustomBurger' || itemCategory==='PremadeBurger'" class='ingredients'>
             <div style="padding-left: 5px; padding-right: 5px">
               <p style="font-weight: bold; font-size: 16pt">{{ uiLabels.ingredients }}: </p>
               <p>{{ uiLabels.bun }}: {{ bun["ingredient_"+lang] }}</p>
@@ -110,6 +110,7 @@ export default {
     };
   },
   created: function() {
+    this.clear();
     this.$store.state.socket.on('openPopup', function (data) {
       if (data.data=='CustomBurger') {
         this.menuItem=this.$store.state.selectedBurger.bun;
@@ -137,6 +138,7 @@ export default {
       }
       else if (data.data=='PremadeBurger') {
         this.menuItem=this.$store.state.premadeBurgerName;
+        console.log(this.menuItem.ingredient_en);
         this.itemCategory='PremadeBurger';
         this.title=this.uiLabels.premade_burgers;
         //this.ingredients=this.$store.state.premadeBurgerIngredients;
@@ -149,6 +151,22 @@ export default {
     }.bind(this));
   },
   methods: {
+    clear: function() {
+      this.price= 0;
+      this.counter=0;
+      this.menuItem= {};
+      this.showVegan= false;
+      this.showGluten= false;
+      this.showLactose= false;
+      this.itemCategory= "";
+      this.title= "";
+      this.ingredients= {};
+      this.bun= {};
+      this.protein={};
+      this.vegetables= [];
+      this.sauces= [];
+      this.extras= []
+    },
     calculatePrice: function() {
       this.price=this.$store.state.selectedBurger.bun.selling_price + this.$store.state.selectedBurger.protein.selling_price;
       for (var i = 0; i < this.$store.state.selectedBurger.vegetables.length; i++) {
@@ -256,6 +274,7 @@ export default {
       else if (this.menuItem.category === 7) {
         let i=0;
         while (i < this.counter) {
+          console.log(this.menuItem.ingredient_en);
           this.$store.state.orderedPremadeBurgers.push(this.menuItem);
           i += 1
         }

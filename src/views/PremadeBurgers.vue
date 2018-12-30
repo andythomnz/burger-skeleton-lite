@@ -54,7 +54,11 @@ export default {
     return {
       chosenBurger: [],
       price: 0,
-      orderNumber: ""
+      orderNumber: "",
+      bun: Object,
+      protein: Object,
+      vegetables: [],
+      sauces: []
     };
   },
   /*created: function() {
@@ -92,13 +96,39 @@ export default {
       this.$store.state.premadeBurgerIngredients.protein = item.burger_protein;
       this.$store.state.premadeBurgerIngredients.vegetable = item.burger_vegetable;
       this.$store.state.premadeBurgerIngredients.sauces = item.burger_sauces;*/
-      this.$store.commit('changeBurgerBun', item.burger_bun);
-      this.$store.commit('changeBurgerProtein', item.burger_protein);
-      this.$store.commit('changeBurgerVegetables', item.burger_vegetables);
-      this.$store.commit('changeBurgerSauces', item.burger_sauces);
+      this.bun= {};
+      this.protein= {};
+      this.vegetables=[];
+      this.sauces=[];
+      item.burger_vegetables=item.burger_vegetables.split(',');
+      item.burger_sauces=item.burger_sauces.split(',');
+      for (var i = 0; i < this.ingredients.length; i++) {
+        if (this.ingredients[i].ingredient_id===item.burger_bun)
+        {this.bun=this.ingredients[i]}
+        else if (this.ingredients[i].ingredient_id===item.burger_protein) {
+          this.protein=this.ingredients[i]}
+        else if (this.ingredients[i].category==2)
+        {
+        // item.burger_vegetables=item.burger_vegetables.split(',');
+        for (var v = 0; v < item.burger_vegetables.length; v++) {
+          if (this.ingredients[i].ingredient_id==parseInt(item.burger_vegetables[v])) {
+            this.vegetables.push(this.ingredients[i]);
+        }}}
+        else if (this.ingredients[i].category==3){
+        // item.burger_sauces=item.burger_sauces.split(',');
+        for (var s = 0; s < item.burger_sauces.length; s++) {
+        if (this.ingredients[i].ingredient_id==parseInt(item.burger_sauces[s])) {
+          this.sauces.push(this.ingredients[i])}
+        }
+      }
+      }
+      this.$store.commit('changeBurgerBun', this.bun);
+      this.$store.commit('changeBurgerProtein', this.protein);
+      this.$store.commit('changeBurgerVegetables', this.vegetables);
+      this.$store.commit('changeBurgerSauces', this.sauces);
       this.$store.state.socket.emit('popup', {data: 'PremadeBurger', counter:this.$refs.ingredient[item.ingredient_id -62].counter});
       this.$router.push({ name: "Popup" });
-    },
+    }
     /*placeOrder: function() {
       var i,
         //Wrap the order in an object
