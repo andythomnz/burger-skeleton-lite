@@ -15,8 +15,8 @@
           <span class="price">{{ orderedBurger.price }} kr</span></li>
         </ul>
         <ul>
-          <li v-for="(item, index) in OrderedPremadeBurgers" :key="item.ingredient_id +index">{{ item["ingredient_"+lang] }} <button v-on:click='RemovePremadeBurgers(item, index)'>X</button>
-          <span class="price">{{ item.selling_price }} kr</span></li>
+          <li v-for="(item, index) in OrderedPremadeBurgers" :key="item.ingredient_id +index">{{ item["ingredient_"+lang] }} <button v-on:click='RemoveItem(item, index)'>X</button>
+          <span class="price">{{ item.price }} kr</span></li>
           </ul>
         <!-- <ul
           v-for="(orderedBurger, index) in orderedBurgers"
@@ -163,15 +163,15 @@ export default {
         this.price=0;
         this.calculatePrice();
       }
+      else if (item.category===7) {
+        this.$store.state.socket.emit('decrementCounterPremadeBurgers', {data: item});
+        this.$store.state.orderedPremadeBurgers.splice(index, 1);
+        this.price=0;
+        this.calculatePrice();
+      }
       else {
         this.orderedBurgers.splice(index, 1)
       }
-    },
-    RemovePremadeBurgers: function(item, index) {
-      this.$store.state.socket.emit('decrementCounter', {data: item});
-      this.$store.state.orderedSides.splice(index, 1);
-      this.price=0;
-      this.calculatePrice();
     },
     Cancel: function(){
       let i=0;
@@ -185,6 +185,10 @@ export default {
       for (var k = 0; k < this.orderedBurgers.length; k++) {
         this.RemoveItem(this.orderedBurgers[k],k);
         // this.orderedBurgers.splice(k, 1);
+      }
+      let l=0;
+      while (l < this.OrderedPremadeBurgers.length) {
+        this.RemoveItem(this.OrderedPremadeBurgers[l],l);
       }
       this.price=0
 
@@ -232,6 +236,9 @@ export default {
       }
       for (var k = 0; k < this.orderedBurgers.length; k++) {
         this.price += this.orderedBurgers[k].price
+      }
+      for (var k = 0; k < this.OrderedPremadeBurgers.length; k++) {
+        this.price += this.OrderedPremadeBurgers[k].price
       }
     }
 

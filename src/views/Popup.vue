@@ -62,10 +62,10 @@
 
           <div class="price">
             <p>{{ uiLabels.price }}:
-              <span v-if="itemCategory === 'CustomBurger'">{{ price }} kr</span>
+              <span v-if="itemCategory === 'CustomBurger' || itemCategory==='PremadeBurger'">{{ price }} kr</span>
               <span v-else >{{ menuItem.selling_price }} kr</span></p>
             <p>{{ uiLabels.sum }}:
-              <span v-if="itemCategory === 'CustomBurger'">{{ price*counter }} kr</span>
+              <span v-if="itemCategory === 'CustomBurger' || itemCategory==='PremadeBurger'">{{ price*counter }} kr</span>
               <span v-else >{{ menuItem.selling_price*this.counter }} kr</span></p>
           </div>
         </div>
@@ -144,10 +144,11 @@ export default {
         this.itemCategory='PremadeBurger';
         this.title=this.uiLabels.premade_burgers;
         //this.ingredients=this.$store.state.premadeBurgerIngredients;
-        this.bun=this.$store.state.premadeBurgerIngredients.bun;
-        this.protein=this.$store.state.premadeBurgerIngredients.protein;
-        this.vegetables=this.$store.state.premadeBurgerIngredients.vegetables;
-        this.sauces=this.$store.state.premadeBurgerIngredients.sauces;
+        this.bun=this.$store.state.selectedBurger.bun;
+        this.protein=this.$store.state.selectedBurger.protein;
+        this.vegetables=this.$store.state.selectedBurger.vegetables;
+        this.sauces=this.$store.state.selectedBurger.sauces;
+        this.calculatePrice()
       }
       this.counter = data.counter;
     }.bind(this));
@@ -171,15 +172,15 @@ export default {
     },
     calculatePrice: function() {
       this.price=0;
-      this.price=this.$store.state.selectedBurger.bun.selling_price + this.$store.state.selectedBurger.protein.selling_price;
-      for (var i = 0; i < this.$store.state.selectedBurger.vegetables.length; i++) {
-        this.price += this.$store.state.selectedBurger.vegetables[i].selling_price;
+      this.price=this.bun.selling_price + this.protein.selling_price;
+      for (var i = 0; i < this.vegetables.length; i++) {
+        this.price += this.vegetables[i].selling_price;
       }
-      for (var j = 0; j < this.$store.state.selectedBurger.sauces.length; j++) {
-        this.price += this.$store.state.selectedBurger.sauces[j].selling_price;
+      for (var j = 0; j < this.sauces.length; j++) {
+        this.price += this.sauces[j].selling_price;
       }
-      for (var k = 0; k < this.$store.state.selectedBurger.extras.length; k++) {
-        this.price += this.$store.state.selectedBurger.extras[k].selling_price;
+      for (var k = 0; k < this.extras.length; k++) {
+        this.price += this.extras[k].selling_price;
       }
     },
 
@@ -188,14 +189,10 @@ export default {
       while (i < this.counter) {
         this.decrement(this.menuItem);
       }
-      if (this.itemCategory=='CustomBurger') {
+      if (this.itemCategory=='CustomBurger' || this.itemCategory==='PremadeBurger') {
         this.$store.state.selectedBurger.vegetables.splice(0, this.$store.state.selectedBurger.vegetables.length);
         this.$store.state.selectedBurger.sauces.splice(0, this.$store.state.selectedBurger.sauces.length);
         this.$store.state.selectedBurger.extras.splice(0, this.$store.state.selectedBurger.extras.length);}
-      else if (this.itemCategory=='PremadeBurger') {
-        this.$store.state.premadeBurgerIngredients.vegetables.splice(0, this.$store.state.premadeBurgerIngredients.vegetables.length);
-        this.$store.state.premadeBurgerIngredients.sauces.splice(0, this.$store.state.premadeBurgerIngredients.sauces.length);
-      }
       this.$router.push({ name: "MainMenu" });
     },
     increment: function(item) {
@@ -283,10 +280,12 @@ export default {
       else if (this.menuItem.category === 7) {
         let i=0;
         while (i < this.counter) {
-          console.log(this.menuItem.ingredient_en);
-          this.$store.state.orderedPremadeBurgers.push(this.menuItem);
+          this.$store.state.orderedPremadeBurgers.push(Object.assign(this.menuItem, {price: this.price}));
           i += 1
         }
+        this.$store.state.selectedBurger.vegetables.splice(0, this.$store.state.selectedBurger.vegetables.length);
+        this.$store.state.selectedBurger.sauces.splice(0, this.$store.state.selectedBurger.sauces.length);
+        this.$store.state.selectedBurger.extras.splice(0, this.$store.state.selectedBurger.extras.length);
       }
       this.$router.push({ name: route });
     },
