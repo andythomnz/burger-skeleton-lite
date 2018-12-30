@@ -105,6 +105,14 @@ let router = new Router({
       },
       name: 'Popup',
       component: () => import(/* webpackChunkName: "read" */ './views/Popup.vue')
+    },
+    {
+      path: '/PremadeBurgers',
+      meta: {
+        title: 'PremadeBurgers',
+      },
+      name: 'PremadeBurgers',
+      component: () => import(/* webpackChunkName: "read" */ './views/PremadeBurgers.vue')
     }
   ]
 })

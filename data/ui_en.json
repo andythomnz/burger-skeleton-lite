@@ -46,5 +46,6 @@
   "confirm" : "Confirm Item",
   "finish" : "Finish",
   "price": "Price",
-  "customBurger" : "Customized Burger"
+  "customBurger" : "Customized Burger",
+  "PremadeBurgerIngredients" : "Ingredients"
 }
