@@ -96,7 +96,7 @@ export default {
     //make the buttons highlihgt for the veggies and extras. with stylings and v-if
 
     incrementCounter: function () {
-      if (this.item.category === 5 || this.item.category === 6 )
+      if (this.item.category === 5 || this.item.category === 6 || this.item.category === 7 )
         { this.counter += 1;
           this.currentClass = 'yellow-bg';
           this.$emit("increment") }

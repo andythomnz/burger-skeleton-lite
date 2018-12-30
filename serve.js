@@ -97,12 +97,20 @@ io.on('connection', function (socket) {
     io.emit('incrementCounterSides', {data: data.data})
   });
 
+  socket.on('incrementCounterPremadeBurgers', function (data) {
+    io.emit('incrementCounterPremadeBurgers', {data: data.data})
+  });
+
   socket.on('decrementCounterDrinks', function (data) {
     io.emit('decrementCounterDrinks', {data: data.data})
   });
 
   socket.on('decrementCounterSides', function (data) {
     io.emit('decrementCounterSides', {data: data.data})
+  });
+
+  socket.on('decrementCounterPremadeBurgers', function (data) {
+    io.emit('decrementCounterPremadeBurgers', {data: data.data})
   });
 
 });

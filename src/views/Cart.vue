@@ -14,6 +14,10 @@
           <li>Customized burger {{index+1}} <button v-on:click="RemoveItem(orderedBurger, index)"> X </button><button v-on:click="NextPage()">EDIT</button>
           <span class="price">{{ orderedBurger.price }} kr</span></li>
         </ul>
+        <ul>
+          <li v-for="(item, index) in OrderedPremadeBurgers" :key="item.ingredient_id +index">{{ item["ingredient_"+lang] }} <button v-on:click='RemovePremadeBurgers(item, index)'>X</button>
+          <span class="price">{{ item.selling_price }} kr</span></li>
+          </ul>
         <!-- <ul
           v-for="(orderedBurger, index) in orderedBurgers"
           :key="orderedBurger.buns['ingredient_'+lang] + index"
@@ -61,11 +65,6 @@
         <li v-for="(item, index) in OrderedSides" :key="item.ingredient_id +index">{{ item["ingredient_"+lang] }} <button v-on:click='RemoveItem(item, index)'>X</button>
         <span class="price">{{ item.selling_price }} kr</span></li>
       </ul></p>
-      <h2>{{ uiLabels.premade_burgers }}</h2>
-      <p><ul>
-        <li v-for="(item, index) in OrderedPremadeBurgers" :key="item.ingredient_id +index">{{ item["ingredient_"+lang] }} <button v-on:click='RemovePremadeBurgers(item, index)'>X</button>
-        <span class="price">{{ item.selling_price }} kr</span></li>
-        </ul></p>
 
       <p style="font-weight:bold" class="price">{{ uiLabels.sum }}: {{ this.price }} kr</p>
       <button id='btn' v-on:click="Cancel()">{{ uiLabels.cancelOrder }}</button>
@@ -91,7 +90,7 @@ export default {
       orderedBurgers: [],
       OrderedDrinks: this.$store.state.orderedDrinks,
       OrderedSides: this.$store.state.orderedSides,
-      OrderedPremadeBurgers: this.$store.state.OrderedPremadeBurgers,
+      OrderedPremadeBurgers: this.$store.state.orderedPremadeBurgers,
       price: 0,
       orderNumber: "",
 

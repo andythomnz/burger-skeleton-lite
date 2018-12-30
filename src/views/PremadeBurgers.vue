@@ -11,7 +11,7 @@
     <h1>{{ uiLabels.burgers }}</h1> <!-- matching text in ui_en and ui_sv -->
 
     <div class="wrapper">
-      <Burger
+      <Ingredient
         ref="ingredient"
         v-for="item in ingredients"
         v-on:increment="addToOrder(item)"
@@ -19,7 +19,7 @@
         v-if="item.category == 7"
         :lang="lang"
         :key="item.ingredient_id"
-      ></Burger>
+      ></Ingredient>
     </div>
   </div>
 </template>
@@ -28,7 +28,7 @@
 //use for importing will be used in the template above and also below in
 //components
 
-import Burger from "@/components/Burger.vue";
+import Ingredient from "@/components/Ingredient.vue";
 import OrderItem from "@/components/OrderItem.vue";
 import NavBar from "@/components/NavBar.vue";
 
@@ -43,7 +43,7 @@ necessary Vue instance (found in main.js) to import your data and methods */
 export default {
   name: "Ordering",
   components: {
-    Burger,
+    Ingredient,
     OrderItem,
     NavBar
   },

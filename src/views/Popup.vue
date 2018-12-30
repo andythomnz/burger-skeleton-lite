@@ -191,8 +191,10 @@ export default {
       if (this.itemCategory=='CustomBurger') {
         this.$store.state.selectedBurger.vegetables.splice(0, this.$store.state.selectedBurger.vegetables.length);
         this.$store.state.selectedBurger.sauces.splice(0, this.$store.state.selectedBurger.sauces.length);
-        this.$store.state.selectedBurger.extras.splice(0, this.$store.state.selectedBurger.extras.length);
-
+        this.$store.state.selectedBurger.extras.splice(0, this.$store.state.selectedBurger.extras.length);}
+      else if (this.itemCategory=='PremadeBurger') {
+        this.$store.state.premadeBurgerIngredients.vegetables.splice(0, this.$store.state.premadeBurgerIngredients.vegetables.length);
+        this.$store.state.premadeBurgerIngredients.sauces.splice(0, this.$store.state.premadeBurgerIngredients.sauces.length);
       }
       this.$router.push({ name: "MainMenu" });
     },
@@ -202,7 +204,7 @@ export default {
       {this.$store.state.socket.emit("incrementCounterDrinks", {data: item})}
       else if (this.itemCategory=='Sides')
       {this.$store.state.socket.emit('incrementCounterSides', {data: item})}
-      else if (this.itemCategory=='PremadeBurgers')
+      else if (this.itemCategory=='PremadeBurger')
       {this.$store.state.socket.emit('incrementCounterPremadeBurgers', {data: item})}
     },
     decrement: function(item) {
@@ -212,7 +214,7 @@ export default {
       {this.$store.state.socket.emit('decrementCounterDrinks', {data: item})}
       else if (this.itemCategory=='Sides')
       {this.$store.state.socket.emit('decrementCounterSides', {data: item})}
-      else if (this.itemCategory=='PremadeBurgers')
+      else if (this.itemCategory=='PremadeBurger')
       {this.$store.state.socket.emit('decrementCounterPremadeBurgers', {data: item})}
     },
     confirm: function(route) {
