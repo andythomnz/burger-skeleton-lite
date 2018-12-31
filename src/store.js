@@ -37,7 +37,15 @@ export default new Vuex.Store({
     },
     orderedDrinks: [],
     orderedSides: [],
-    orderedPremadeBurgers: [],
+    orderedPremadeBurgers: {
+      item: {},
+      buns: {},
+      protein: {},
+      vegetables: [],
+      sauces: [],
+      extras: [],
+      price:0
+    },
     finish: false,
     currentTab: 'Buns'
   },

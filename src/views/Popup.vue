@@ -280,7 +280,14 @@ export default {
       else if (this.menuItem.category === 7) {
         let i=0;
         while (i < this.counter) {
-          this.$store.state.orderedPremadeBurgers.push(Object.assign(this.menuItem, {price: this.price}));
+          console.log('save');
+          this.$store.state.orderedPremadeBurgers.price= this.price;
+          let burger=this.menuItem
+          this.$store.state.orderedPremadeBurgers.item= burger;
+          this.$store.state.orderedPremadeBurgers.bun= this.bun;
+          this.$store.state.orderedPremadeBurgers.protein= this.protein;
+          this.$store.state.orderedPremadeBurgers.vegetables= this.vegetables;
+          this.$store.state.orderedPremadeBurgers.sauces= this.sauces;
           i += 1
         }
         this.$store.state.selectedBurger.vegetables.splice(0, this.$store.state.selectedBurger.vegetables.length);

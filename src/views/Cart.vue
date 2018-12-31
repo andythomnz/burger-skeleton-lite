@@ -15,8 +15,8 @@
           <span class="price">{{ orderedBurger.price }} kr</span></li>
         </ul>
         <ul>
-          <li v-for="(item, index) in OrderedPremadeBurgers" :key="item.ingredient_id +index">{{ item["ingredient_"+lang] }} <button v-on:click='RemoveItem(item, index)'>X</button>
-          <span class="price">{{ item.price }} kr</span></li>
+          <li v-for="(burger, index) in OrderedPremadeBurgers" :key="burger.item['ingredient_id'] +index">{{ burger.item["ingredient_"+lang] }} <button v-on:click='RemoveItem(burger, index)'>X</button>
+          <span class="price">{{ burger.price }} kr</span></li>
           </ul>
         <!-- <ul
           v-for="(orderedBurger, index) in orderedBurgers"
@@ -90,7 +90,7 @@ export default {
       orderedBurgers: [],
       OrderedDrinks: this.$store.state.orderedDrinks,
       OrderedSides: this.$store.state.orderedSides,
-      OrderedPremadeBurgers: this.$store.state.orderedPremadeBurgers,
+      OrderedPremadeBurgers: [],
       price: 0,
       orderNumber: "",
 
@@ -104,6 +104,7 @@ export default {
   mounted () {
     if (this.finish) {
       this.orderedBurgers.push(Object.assign({}, this.$store.state.orders));
+      this.OrderedPremadeBurgers.push(Object.assign({}, this.$store.state.orderedPremadeBurgers));
       this.clear();
       this.$store.commit('toggleFinish');
     }
@@ -111,6 +112,7 @@ export default {
   activated () {
     if (this.finish) {
       this.orderedBurgers.push(Object.assign({}, this.$store.state.orders));
+      this.OrderedPremadeBurgers.push(Object.assign({}, this.$store.state.orderedPremadeBurgers));
       this.clear();
       this.$store.commit('toggleFinish');
     }
@@ -144,6 +146,12 @@ export default {
         type: 'extras',
         value: []
       })
+      this.$store.orderedPremadeBurgers.item={};
+      this.$store.orderedPremadeBurgers.buns={};
+      this.$store.orderedPremadeBurgers.protein={};
+      this.$store.orderedPremadeBurgers.vegetables=[];
+      this.$store.orderedPremadeBurgers.sauces=[];
+      this.$store.orderedPremadeBurgers.price=0;
     },
     NextPage: function() {
 
@@ -237,8 +245,8 @@ export default {
       for (var k = 0; k < this.orderedBurgers.length; k++) {
         this.price += this.orderedBurgers[k].price
       }
-      for (var k = 0; k < this.OrderedPremadeBurgers.length; k++) {
-        this.price += this.OrderedPremadeBurgers[k].price
+      for (var l = 0; l < this.OrderedPremadeBurgers.length; l++) {
+        this.price += this.OrderedPremadeBurgers[l].price
       }
     }
 
