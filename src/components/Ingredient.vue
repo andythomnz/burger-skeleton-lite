@@ -12,7 +12,7 @@
 
         <img
           v-bind:src="item.image"
-          width="50%"
+          width="50%" 
         >
         <p>{{item["ingredient_"+ lang]}}</p>
         <!--p>{{uiLabels.price}}: {{item.selling_price}}</p>
