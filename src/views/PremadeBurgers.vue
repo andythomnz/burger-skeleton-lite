@@ -61,14 +61,6 @@ export default {
       sauces: []
     };
   },
-  /*created: function() {
-    this.$store.state.socket.on(
-      "orderNumber",
-      function(data) {
-        this.orderNumber = data;
-      }.bind(this)
-    );
-  },*/
   mounted: function() {
     this.$store.state.socket.on(
       "incrementCounterPremadeBurgers", function(data) {
@@ -92,10 +84,6 @@ export default {
       this.chosenBurger.push(item);
       this.price += +item.selling_price;
       this.$store.state.premadeBurgerName=item;
-      /*this.$store.state.premadeBurgerIngredients.bun = item.burger_bun;
-      this.$store.state.premadeBurgerIngredients.protein = item.burger_protein;
-      this.$store.state.premadeBurgerIngredients.vegetable = item.burger_vegetable;
-      this.$store.state.premadeBurgerIngredients.sauces = item.burger_sauces;*/
       this.bun= {};
       this.protein= {};
       this.vegetables=[];

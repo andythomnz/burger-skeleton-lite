@@ -71,8 +71,8 @@ export default new Vuex.Store({
     toggleFinish: function (store) {
       store.finish = !store.finish;
     },
-    changeBurgerBun:function(store, array){
-      store.premadeBurgerIngredients.bun = array;
+    changePremadeBurger:function(store, value){
+      store.orderedPremadeBurgers[value.type] = value.value;
     },
     changeBurgerProtein:function(store, array){
       store.premadeBurgerIngredients.protein = array;

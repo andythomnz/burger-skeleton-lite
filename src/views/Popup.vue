@@ -281,13 +281,18 @@ export default {
         let i=0;
         while (i < this.counter) {
           console.log('save');
+          this.$store.commit('changePremadeBurger', {
+            type: 'item',
+            value: Object(this.menuItem)
+          });
+          console.log(this.$store.state.orderedPremadeBurgers.item.ingredient_en);
           this.$store.state.orderedPremadeBurgers.price= this.price;
-          let burger=this.menuItem
-          this.$store.state.orderedPremadeBurgers.item= burger;
-          this.$store.state.orderedPremadeBurgers.bun= this.bun;
+          // this.$store.state.orderedPremadeBurgers.item= this.menuItem;
+          this.$store.state.orderedPremadeBurgers.buns= this.bun;
           this.$store.state.orderedPremadeBurgers.protein= this.protein;
           this.$store.state.orderedPremadeBurgers.vegetables= this.vegetables;
           this.$store.state.orderedPremadeBurgers.sauces= this.sauces;
+          console.log(this.$store.state.orderedPremadeBurgers.protein.ingredient_en);
           i += 1
         }
         this.$store.state.selectedBurger.vegetables.splice(0, this.$store.state.selectedBurger.vegetables.length);
