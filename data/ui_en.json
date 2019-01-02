@@ -47,5 +47,8 @@
   "finish" : "Finish",
   "price": "Price",
   "customBurger" : "Customized Burger",
-  "PremadeBurgerIngredients" : "Ingredients"
+  "PremadeBurgerIngredients" : "Ingredients",
+  "welcome" : "Welcome to Crafty Burgers",
+  "eatin" : "Eat in",
+  "takeaway" : "Take Away"
 }
