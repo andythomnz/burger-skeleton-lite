@@ -4,7 +4,7 @@
     nextRoute=""
     backRoute="MainMenu"
     :showCart="Boolean.false">
-      <h1 slot="center-component"><img src=@/assets/cart.png height=40px>  {{ uiLabels.cart }}</h1>
+      <h1 slot="center-component"><img src=@/assets/cart.png width=10%>  {{ uiLabels.cart }}</h1>
     </NavBar>
     <div class='order'>
       <h1>{{ uiLabels.yourOrder}}</h1>
@@ -258,18 +258,26 @@ h1 {
 text-align: center}
 
 #btn {
-  font-size: 18pt;
+  font-size: 1.5vw;
   float: right;
   margin-right: 5%;
   font-weight: bold
 }
 
 .order{
-  margin-left: 2%
+  margin-left: 2%;
+  font-size: 1.2vw
+}
+
+.order li button {
+  font-size: 0.7vw;
+  width: 3%;
+  text-align: center;
 }
 
 .price {
   position: absolute;
   right: 60%;
+  font-size: 1.2vw
 }
 </style>

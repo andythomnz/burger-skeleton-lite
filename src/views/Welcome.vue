@@ -68,11 +68,6 @@ export default {
 };
 </script>
 <style scoped>
-h1 {
-  text-transform: uppercase;
-  font-size: 2vw;
-  text-align: center;
-}
 
 .close {
   color: #aaaaaa;

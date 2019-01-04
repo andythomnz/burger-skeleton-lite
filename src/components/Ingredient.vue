@@ -9,6 +9,7 @@
         :ref="'itemButton'+item.ingredient_id"
         :class="currentClass"
         v-on:click="incrementCounter"
+        id="btn"
       >
 
         <img
@@ -19,8 +20,8 @@
         <!--p>{{uiLabels.price}}: {{item.selling_price}}</p>
         <p>{{uiLabels.stock}}: {{item.stock}}</p-->
         <p v-if="item.addi_cost>0">+ {{item.addi_cost}}kr</p>
-        <p>Stock: {{item.stock}}</p>
-        Number: {{ counter }}
+        <!-- <p>Stock: {{item.stock}}</p> -->
+        <p>Number: {{ counter }}</p>
       </button>
     </label>
       <div class='icons'>
@@ -227,6 +228,7 @@ button {
   transition: background 250ms ease-in-out, transform 150ms ease;
   display: block;
   width: 100%;
+  font-size: 2vw;
 }
 
 .icon{

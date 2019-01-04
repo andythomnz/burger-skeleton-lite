@@ -9,11 +9,11 @@
     <div class='OrderItem'>
       <div class='wrapper'>
         <div id='half1'>
-          <div v-if="itemCategory!= 'CustomBurger'" style="font-weight:bold; font-size:18pt; margin-bottom:10px"> {{ menuItem["ingredient_" +lang] }} </div>
+          <div v-if="itemCategory!= 'CustomBurger'" style="font-weight:bold; font-size:2vw; margin-bottom:10px"> {{ menuItem["ingredient_" +lang] }} </div>
           <div><img v-bind:src="menuItem.image" width="50%"></div>
-          <div><span><button v-on:click='decrement(menuItem)'>-</button>
-            <span id='counter'>{{this.counter}}</span>
-            <button v-on:click='increment(menuItem)'>+</button></span></div>
+          <div><span><button v-on:click='decrement(menuItem)' style="font-size:1vw">-</button>
+            <span id='counter' style="font-size:1.5vw">{{this.counter}}</span>
+            <button v-on:click='increment(menuItem)' style="font-size:1vw">+</button></span></div>
         </div>
         <div id='half2'>
           <div class='icons'>
@@ -31,7 +31,7 @@
           </span></div>
           <div v-if="itemCategory === 'CustomBurger' || itemCategory==='PremadeBurger'" class='ingredients'>
             <div style="padding-left: 5px; padding-right: 5px">
-              <p style="font-weight: bold; font-size: 16pt">{{ uiLabels.ingredients }}: </p>
+              <p style="font-weight: bold; font-size: 1.6vw">{{ uiLabels.ingredients }}: </p>
               <p>{{ uiLabels.bun }}: {{ bun["ingredient_"+lang] }}</p>
               <p>{{ uiLabels.protein }}: {{ protein['ingredient_'+lang]}}
                 <span v-if="protein.addi_cost>0"> (+ {{ protein.addi_cost }} kr)</span></p>
@@ -375,22 +375,37 @@ h1 {
 text-align: center}
 
 #btn {
-  font-size: 18pt;
+  font-size: 1.5vw;
   float: right;
   margin-right: 5%;
   font-weight: bold;
 }
 
 .icon{
-  width: 3em;
-  margin-right: 5%
+  width: 40%;
+  float:left
 }
 
 .icons {
+  display:grid;
+  grid-template-columns: 33% 33% 33%;
   margin-left: 10%;
+  margin-right: 10%;
   position: absolute;
-  top: 120px;
+  top: 15%;
 }
+
+@media screen and (max-width: 1100px) {
+  .icons{
+    top:10%
+  }
+}
+
+/*@media (max-width: 600px) {
+  .icons{
+    top:15%
+  }
+} */
 
 .wrapper {
   grid-template-columns: 50% 50%
@@ -407,9 +422,9 @@ text-align: center}
 }
 
 .price {
-  font-size: 16pt;
+  font-size: 1.5vw;
   font-weight: bold;
-  padding-top: 50px;
+  padding-top: 70px;
 }
 
 #counter {
@@ -421,7 +436,14 @@ text-align: center}
 .ingredients {
   border-style:dashed;
   width: 70%;
-  margin-top: 70px
+  margin-top: 70px;
+  font-size: 1.2vw
+}
+
+.ingredients button {
+  font-size: 1vw;
+  text-align: center;
+  width: 8%
 }
 
 </style>

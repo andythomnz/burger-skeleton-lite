@@ -4,7 +4,6 @@
     class="container"
   >
     <NavBar
-      text="Welcome to Kraft Burgers"
       nextRoute=""
       backRoute="MainMenu"
       showCart='true'

@@ -4,11 +4,11 @@
       nextRoute=""
       backRoute="MainMenu"
       showCart='true'>
-      <h1 slot="center-component">Drinks</h1>
+      <h1 slot="center-component">{{uiLabels.drinks}}</h1>
     </NavBar>
     <!-- <button v-on:click="switchLang()">{{ uiLabels.language }}</button> -->
 
-    <h1>{{ uiLabels.ingredients }}</h1>
+    <h2>{{ uiLabels.ingredients }}</h2>
 
     <div class="wrapper">
       <Ingredient

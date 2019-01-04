@@ -66,11 +66,6 @@ export default {
 };
 </script>
 <style scoped>
-h1 {
-  text-transform: uppercase;
-  font-size: 1.4em;
-  text-align: center;
-}
 
 .side-grid {
   text-align: center;

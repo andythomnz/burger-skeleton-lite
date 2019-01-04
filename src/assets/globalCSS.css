@@ -1,7 +1,16 @@
 .wrapper {
 	display: grid;
-	grid-gap: 5em;
+	grid-gap: 2em;
 	grid-template-columns: repeat(auto-fit, calc(12em + 10px));;
+}
+
+h1 {
+  text-transform: uppercase;
+  font-size: 2.5vw;
+}
+
+h2 {
+  font-size: 2.5vw;
 }
 
 #btn {
