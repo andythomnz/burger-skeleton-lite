@@ -29,7 +29,6 @@ export default {
 <style scoped>
 .splitpage{
   display: grid;
-  grid-gap: 10px;
   grid-template-columns: 50% 50%;
 
 }

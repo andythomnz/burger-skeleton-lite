@@ -7,6 +7,9 @@
       <h1 slot="center-component">{{ uiLabels.welcome }}</h1>
     </NavBar>
     <div id="body">
+      <div :class="currentClass"><div id='message'><span class="close" v-on:click='closeModal()'>&times;</span>
+    <p style="padding-left: 10%">Tilt screen</p>
+      </div></div>
       <SplitPage>
         <template slot="left">
           <basicButton
@@ -43,8 +46,12 @@ export default {
   mixins: [sharedVueStuff],
   data: function() {
     return {
-      diningOption: ""
+      diningOption: "",
+      currentClass:""
     };
+  },
+  created: function() {
+    this.currentClass="modal"
   },
   methods: {
     NextPage: function(dO) {
@@ -54,16 +61,64 @@ export default {
       this.$router.push({ name: "MainMenu" });
       //location.reload()
     },
+    closeModal: function() {
+      this.currentClass="closeModal"
+    }
   }
 };
 </script>
 <style scoped>
 h1 {
   text-transform: uppercase;
-  font-size: 150%;
+  font-size: 2vw;
   text-align: center;
 }
 
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+#message {
+  background-color: lightgrey;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+.modal {
+  display: block; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.closeModal {
+  display: none;
+}
+
+@media (min-width: 600px) {
+  .modal {
+    display: none;
+  }
+}
 
 
 </style>

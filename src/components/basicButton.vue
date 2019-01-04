@@ -1,6 +1,6 @@
 <template>
     <button v-on:click="ButtonClick()">
-      <img :src="icon" width=40%>
+      <img :src="icon" width=28%>
       <br>
       <p class="buttonText" id="text">{{text}}</p>
       <p>{{secondaryText}}</p>
@@ -39,7 +39,7 @@ img {
 .buttonText {
     margin-block-start: 0em;
     margin-block-end: 0em;
-    font-size: 90%
+    font-size: 2vw
 }
 
 button:hover{

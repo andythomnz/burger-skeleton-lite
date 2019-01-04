@@ -5,7 +5,7 @@
         and the parent component should pass a function
     or URL to the page for the funtion-->
     <div>
-      <button v-on:click="switchLang()">{{ uiLabels.language }}</button>
+      <button class='lang' v-on:click="switchLang()">{{ uiLabels.language }}</button>
     </div>
     <div>
       <basicButton
@@ -124,6 +124,10 @@ export default {
 
 #text {
   font-weight: bold;
+}
+
+.lang {
+  font-size: 0.8vw;
 }
 
 .center {
