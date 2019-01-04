@@ -1,6 +1,6 @@
 <template>
   <div>
-    <NavBar text="Welcome to Kraft Burgers"
+    <NavBar
       nextRoute=""
       backRoute=""
       :showCart="Boolean.false">
@@ -60,22 +60,10 @@ export default {
 <style scoped>
 h1 {
   text-transform: uppercase;
-  font-size: 1.4em;
+  font-size: 150%;
   text-align: center;
 }
 
-#buttons {
-  width:50%;
-}
 
-#backbutton {
-  width:auto;
-  font-size: 16pt;
-  padding-bottom: 0;
-}
 
-#nextbutton {
-  font-size: 16pt;
-  float:right
-}
 </style>
