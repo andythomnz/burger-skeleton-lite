@@ -7,7 +7,7 @@
       <h1 slot="center-component">{{ uiLabels.welcome }}</h1>
     </NavBar>
     <div id="body">
-      <div :class="currentClass"><div id='message'><span class="close" v-on:click='closeModal()'>&times;</span>
+      <div :class="Class"><div id='message'><span class="close" v-on:click='closeModal()'>&times;</span>
     <p style="padding-left: 10%">Tilt screen</p>
       </div></div>
       <SplitPage>
@@ -47,11 +47,11 @@ export default {
   data: function() {
     return {
       diningOption: "",
-      currentClass:""
+      Class:""
     };
   },
   created: function() {
-    this.currentClass="modal"
+    this.Class="modal"
   },
   methods: {
     NextPage: function(dO) {
@@ -62,7 +62,7 @@ export default {
       //location.reload()
     },
     closeModal: function() {
-      this.currentClass="closeModal"
+      this.Class="closeModal"
     }
   }
 };
