@@ -2,7 +2,7 @@
   <div v-on:popup='set(data,title)'>
     <NavBar
       nextRoute=""
-      backRoute="MainMenu"
+      backRoute=""
       :showCart="Boolean.false">
       <h1 slot="center-component">  {{ this.title }}</h1>
     </NavBar>
@@ -70,7 +70,7 @@
           </div>
         </div>
       </div>
-      <button id='btn' v-on:click="confirm('Cart')">{{ uiLabels.finish }}</button>
+      <button id='btn' v-on:click="confirm('Cart')">{{ uiLabels.finish_order }}</button>
       <button id='btn' v-on:click="cancelItem()">{{ uiLabels.cancel }}</button>
       <button id='btn' v-on:click="confirm('MainMenu')">{{ uiLabels.confirm }}</button>
 
