@@ -9,7 +9,6 @@
         :ref="'itemButton'+item.ingredient_id"
         :class="currentClass"
         v-on:click="incrementCounter"
-        id="btn"
       >
 
         <img
