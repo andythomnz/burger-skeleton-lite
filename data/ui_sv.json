@@ -45,7 +45,11 @@
   "cancel" : "Annulera Artikel",
   "confirm" : "Konfirmera Artikel",
   "finish" : "Slutföra",
+  "finish_order" : "Slutföra Beställning",
   "price" : "Pris",
   "customBurger" : "Skräddarsydd Burgare",
-  "PremadeBurgerIngredients" : "Ingredienser"
+  "PremadeBurgerIngredients" : "Ingredienser",
+  "welcome" : "Välkommen till Crafty Burgers",
+  "eatin" : "Äta Här",
+  "takeaway" : "Ta Med"
 }
