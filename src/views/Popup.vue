@@ -81,13 +81,11 @@
 <script>
 import NavBar from "@/components/NavBar.vue";
 import sharedVueStuff from "@/components/sharedVueStuff.js";
-import SplitPage from "@/components/SplitPage.vue";
 require('@/assets/globalCSS.css')
 export default {
   name: "Popup",
   components: {
     NavBar,
-    SplitPage
 
   },
   mixins: [sharedVueStuff],
@@ -303,13 +301,37 @@ export default {
     },
     clickInfo: function(category) {
       if (category=='lactose'){
-        if(this.showLactose==false) {this.showLactose=true}
+        if(this.showLactose==false) {
+          if (this.showGluten==true) {
+            this.showGluten=false
+          }
+          if (this.showVegan==true) {
+            this.showVegan=false
+          }
+          this.showLactose=true
+        }
         else this.showLactose=false }
       else if (category=='gluten') {
-        if(this.showGluten==false) {this.showGluten=true}
+        if(this.showGluten==false) {
+          if (this.showLactose==true) {
+            this.showLactose=false
+          }
+          if (this.showVegan==true) {
+            this.showVegan=false
+          }
+          this.showGluten=true
+        }
         else this.showGluten=false }
       else
-        if(this.showVegan==false) {this.showVegan=true}
+        if(this.showVegan==false) {
+          if (this.showGluten==true) {
+            this.showGluten=false
+          }
+          if (this.showLactose==true) {
+              this.showLactose=false
+          }
+          this.showVegan=true
+        }
         else this.showVegan=false
     },
     removeIngredient: function(type, ingredient) {
@@ -382,57 +404,6 @@ text-align: center}
 #half1 button {
   margin-top: 5%;
   margin-left: 8%
-}
-
-#info {
-  position: relative;
-  display: inline-block;
-  cursor: pointer;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
-#myInfo {
-  visibility: visible;
-  -webkit-animation: fadeIn 1s;
-  animation: fadeIn 1s;
-}
-
-.popuptext {
-  visibility: hidden;
-  width: 160px;
-  background-color: #555;
-  color: #fff;
-  text-align: center;
-  border-radius: 6px;
-  padding: 8px 0;
-  position: absolute;
-  z-index: 1;
-  bottom: 125%;
-  left: 50%;
-  margin-left: -80px;
-}
-
-#info .popuptext::after {
-  content: "";
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  margin-left: -5px;
-  border-width: 5px;
-  border-style: solid;
-  border-color: #555 transparent transparent transparent;
-}
-@-webkit-keyframes fadeIn {
-  from {opacity: 0;}
-  to {opacity: 1;}
-}
-
-@keyframes fadeIn {
-  from {opacity: 0;}
-  to {opacity:1 ;}
 }
 
 .price {
