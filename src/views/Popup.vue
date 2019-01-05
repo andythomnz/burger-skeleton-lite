@@ -43,7 +43,7 @@
                 <ul v-for="item in sauces" :key="item.ingredient_id">
                   <li>{{ item['ingredient_'+lang] }} <span v-if="item.addi_cost>0"> (+ {{ item.addi_cost }} kr)</span><span v-if="sauces.length>0"> <button v-on:click="removeIngredient('sauces', item)"> x </button></span></li>
                 </ul></p>
-              <p>{{ uiLabels.extras }}:
+              <p v-if="extras.length>0">{{ uiLabels.extras }}:
                 <ul v-for="item in extras" :key="item.ingredient_id">
                   <li>{{ item['ingredient_'+lang] }} <span v-if="item.addi_cost>0"> (+ {{ item.addi_cost }} kr)</span><span v-if="extras.length>0"> <button v-on:click="removeIngredient('extras', item)"> x </button></span></li>
                 </ul></p>
@@ -137,19 +137,20 @@ export default {
         this.title=this.uiLabels.side +' '+(this.$store.state.orderedSides.length+1);
       }
       else if (data.data=='PremadeBurger') {
-        this.menuItem=this.$store.state.premadeBurgerName;
+        this.menuItem=this.$store.state.selectedPremadeBurger.item;
         console.log(this.menuItem.category);
         this.itemCategory='PremadeBurger';
         this.title=this.uiLabels.premade_burgers;
         //this.ingredients=this.$store.state.premadeBurgerIngredients;
-        this.bun=this.$store.state.selectedBurger.bun;
-        this.protein=this.$store.state.selectedBurger.protein;
-        this.vegetables=this.$store.state.selectedBurger.vegetables;
-        this.sauces=this.$store.state.selectedBurger.sauces;
+        this.bun=this.$store.state.selectedPremadeBurger.bun;
+        this.protein=this.$store.state.selectedPremadeBurger.protein;
+        this.vegetables=this.$store.state.selectedPremadeBurger.vegetables;
+        this.sauces=this.$store.state.selectedPremadeBurger.sauces;
         this.calculatePrice()
       }
       this.counter = data.counter;
-      console.log(this.itemCategory)
+      console.log(this.itemCategory);
+      console.log(this.orderedBurgers.length)
     }.bind(this));
   },
   methods: {
@@ -291,12 +292,10 @@ export default {
           this.$store.state.orderedPremadeBurgers.protein= this.protein;
           this.$store.state.orderedPremadeBurgers.vegetables= this.vegetables;
           this.$store.state.orderedPremadeBurgers.sauces= this.sauces;
-          console.log(this.$store.state.orderedPremadeBurgers.protein.ingredient_en);
           i += 1
         }
-        this.$store.state.selectedBurger.vegetables.splice(0, this.$store.state.selectedBurger.vegetables.length);
-        this.$store.state.selectedBurger.sauces.splice(0, this.$store.state.selectedBurger.sauces.length);
-        this.$store.state.selectedBurger.extras.splice(0, this.$store.state.selectedBurger.extras.length);
+        this.$store.state.selectedPremadeBurger.vegetables.splice(0, this.$store.state.selectedPremadeBurger.vegetables.length);
+        this.$store.state.selectedPremadeBurger.sauces.splice(0, this.$store.state.selectedPremadeBurger.sauces.length);
       }
       this.$router.push({ name: route });
     },

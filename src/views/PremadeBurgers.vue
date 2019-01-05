@@ -83,7 +83,7 @@ export default {
       this.price = 0;
       this.chosenBurger.push(item);
       this.price += +item.selling_price;
-      this.$store.state.premadeBurgerName=item;
+      this.$store.state.selectedPremadeBurger.item=item;
       this.bun= {};
       this.protein= {};
       this.vegetables=[];
@@ -92,21 +92,21 @@ export default {
       item.burger_sauces=item.burger_sauces.split(',');
       for (var i = 0; i < this.ingredients.length; i++) {
         if (this.ingredients[i].ingredient_id===item.burger_bun)
-        {this.$store.state.selectedBurger.bun=this.ingredients[i]}
+        {this.$store.state.selectedPremadeBurger.bun=this.ingredients[i]}
         else if (this.ingredients[i].ingredient_id===item.burger_protein) {
-          this.$store.state.selectedBurger.protein=this.ingredients[i]}
+          this.$store.state.selectedPremadeBurger.protein=this.ingredients[i]}
         else if (this.ingredients[i].category==2)
         {
         // item.burger_vegetables=item.burger_vegetables.split(',');
         for (var v = 0; v < item.burger_vegetables.length; v++) {
           if (this.ingredients[i].ingredient_id==parseInt(item.burger_vegetables[v])) {
-            this.$store.state.selectedBurger.vegetables.push(this.ingredients[i]);
+            this.$store.state.selectedPremadeBurger.vegetables.push(this.ingredients[i]);
         }}}
         else if (this.ingredients[i].category==3){
         // item.burger_sauces=item.burger_sauces.split(',');
         for (var s = 0; s < item.burger_sauces.length; s++) {
         if (this.ingredients[i].ingredient_id==parseInt(item.burger_sauces[s])) {
-          this.$store.state.selectedBurger.sauces.push(this.ingredients[i])}
+          this.$store.state.selectedPremadeBurger.sauces.push(this.ingredients[i])}
         }
       }
       }

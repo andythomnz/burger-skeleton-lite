@@ -14,7 +14,7 @@
           <li>Customized burger {{index+1}} <button v-on:click="RemoveItem(orderedBurger, index)"> X </button>
           <span class="price">{{ orderedBurger.price }} kr</span></li>
         </ul>
-        <ul v-if="Object.keys(OrderedPremadeBurgers).length>1" v-for="(burger, index) in OrderedPremadeBurgers" :key="burger.item['ingredient_id'] +index">
+        <ul v-for="(burger, index) in OrderedPremadeBurgers" :key="burger.item['ingredient_id'] +index">
           <li >{{ burger.item["ingredient_"+lang] }} <button v-on:click='RemoveItem(burger, index)'>X</button>
           <span class="price">{{ burger.price }} kr</span></li>
           </ul>
@@ -103,16 +103,16 @@ export default {
   },
   mounted () {
     if (this.finish) {
-      this.orderedBurgers.push(Object.assign({}, this.$store.state.orders));
       this.OrderedPremadeBurgers.push(Object.assign({}, this.$store.state.orderedPremadeBurgers));
+      this.orderedBurgers.push(Object.assign({}, this.$store.state.orders));
       this.clear();
       this.$store.commit('toggleFinish');
     }
   },
   activated () {
     if (this.finish) {
-      this.orderedBurgers.push(Object.assign({}, this.$store.state.orders));
       this.OrderedPremadeBurgers.push(Object.assign({}, this.$store.state.orderedPremadeBurgers));
+      this.orderedBurgers.push(Object.assign({}, this.$store.state.orders));
       this.clear();
       this.$store.commit('toggleFinish');
     }
