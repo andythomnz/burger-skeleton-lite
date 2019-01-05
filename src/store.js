@@ -13,7 +13,8 @@ export default new Vuex.Store({
     sides: {},
     cartCount: 0,
     close: false,
-    selectedPremadeBurger: {
+    selectedPremadeBurger:[],
+    selectedPremadeBurger1: {
       item: {},
       bun: {},
       protein: {},
@@ -37,7 +38,9 @@ export default new Vuex.Store({
     },
     orderedDrinks: [],
     orderedSides: [],
-    orderedPremadeBurgers: {
+    orderedPremadeBurgers: [],
+    burgerPrices: [],
+    orderedPremadeBurgers1: {
       item: {},
       buns: {},
       protein: {},

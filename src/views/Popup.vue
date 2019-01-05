@@ -137,15 +137,27 @@ export default {
         this.title=this.uiLabels.side +' '+(this.$store.state.orderedSides.length+1);
       }
       else if (data.data=='PremadeBurger') {
-        this.menuItem=this.$store.state.selectedPremadeBurger.item;
-        console.log(this.menuItem.category);
+        this.clear();
         this.itemCategory='PremadeBurger';
         this.title=this.uiLabels.premade_burgers;
-        //this.ingredients=this.$store.state.premadeBurgerIngredients;
-        this.bun=this.$store.state.selectedPremadeBurger.bun;
-        this.protein=this.$store.state.selectedPremadeBurger.protein;
-        this.vegetables=this.$store.state.selectedPremadeBurger.vegetables;
-        this.sauces=this.$store.state.selectedPremadeBurger.sauces;
+        for (var i = 0; i < this.$store.state.selectedPremadeBurger.length; i++) {
+          if (this.$store.state.selectedPremadeBurger[i].category===7) {
+            this.menuItem=this.$store.state.selectedPremadeBurger[i];
+            console.log(this.menuItem.category);
+          }
+          else if (this.$store.state.selectedPremadeBurger[i].category===4) {
+            this.bun=this.$store.state.selectedPremadeBurger[i]
+          }
+          else if (this.$store.state.selectedPremadeBurger[i].category===1) {
+            this.protein=this.$store.state.selectedPremadeBurger[i]
+          }
+          else if (this.$store.state.selectedPremadeBurger[i].category===2) {
+            this.vegetables.push(this.$store.state.selectedPremadeBurger[i])
+          }
+          else if (this.$store.state.selectedPremadeBurger[i].category===3) {
+            this.sauces.push(this.$store.state.selectedPremadeBurger[i])
+          }
+        }
         this.calculatePrice()
       }
       this.counter = data.counter;
@@ -189,10 +201,13 @@ export default {
       while (i < this.counter) {
         this.decrement(this.menuItem);
       }
-      if (this.itemCategory=='CustomBurger' || this.itemCategory==='PremadeBurger') {
+      if (this.itemCategory=='CustomBurger') {
         this.$store.state.selectedBurger.vegetables.splice(0, this.$store.state.selectedBurger.vegetables.length);
         this.$store.state.selectedBurger.sauces.splice(0, this.$store.state.selectedBurger.sauces.length);
         this.$store.state.selectedBurger.extras.splice(0, this.$store.state.selectedBurger.extras.length);}
+      else if (this.itemCategory=='PremadeBurger') {
+        this.$store.state.selectedPremadeBurger.splice(0, this.$store.state.selectedPremadeBurger.length)
+      }
       this.$router.push({ name: "MainMenu" });
     },
     increment: function(item) {
@@ -281,21 +296,15 @@ export default {
         let i=0;
         while (i < this.counter) {
           console.log('save PremadeBurger');
-          this.$store.commit('changePremadeBurger', {
-            type: 'item',
-            value: Object(this.menuItem)
-          });
-          console.log(this.$store.state.orderedPremadeBurgers.item.ingredient_en);
-          this.$store.state.orderedPremadeBurgers.price= this.price;
-          // this.$store.state.orderedPremadeBurgers.item= this.menuItem;
-          this.$store.state.orderedPremadeBurgers.buns= this.bun;
-          this.$store.state.orderedPremadeBurgers.protein= this.protein;
-          this.$store.state.orderedPremadeBurgers.vegetables= this.vegetables;
-          this.$store.state.orderedPremadeBurgers.sauces= this.sauces;
+          this.$store.state.burgerPrices.push(this.price);
+          this.$store.state.orderedPremadeBurgers.push(this.menuItem);
+          this.$store.state.orderedPremadeBurgers.push(this.bun);
+          this.$store.state.orderedPremadeBurgers.push(this.protein);
+          this.$store.state.orderedPremadeBurgers.push(this.vegetables);
+          this.$store.state.orderedPremadeBurgers.push(this.sauces);
           i += 1
         }
-        this.$store.state.selectedPremadeBurger.vegetables.splice(0, this.$store.state.selectedPremadeBurger.vegetables.length);
-        this.$store.state.selectedPremadeBurger.sauces.splice(0, this.$store.state.selectedPremadeBurger.sauces.length);
+        this.$store.state.selectedPremadeBurger.splice(0, this.$store.state.selectedPremadeBurger.length);
       }
       this.$router.push({ name: route });
     },
