@@ -138,7 +138,7 @@ export default {
       }
       else if (data.data=='PremadeBurger') {
         this.menuItem=this.$store.state.premadeBurgerName;
-        console.log(this.menuItem.ingredient_en);
+        console.log(this.menuItem.category);
         this.itemCategory='PremadeBurger';
         this.title=this.uiLabels.premade_burgers;
         //this.ingredients=this.$store.state.premadeBurgerIngredients;
@@ -149,6 +149,7 @@ export default {
         this.calculatePrice()
       }
       this.counter = data.counter;
+      console.log(this.itemCategory)
     }.bind(this));
   },
   methods: {
@@ -275,10 +276,10 @@ export default {
           i += 1
         }
       }
-      else if (this.menuItem.category === 7) {
+      else if (this.itemCategory =='PremadeBurger') {
         let i=0;
         while (i < this.counter) {
-          console.log('save');
+          console.log('save PremadeBurger');
           this.$store.commit('changePremadeBurger', {
             type: 'item',
             value: Object(this.menuItem)

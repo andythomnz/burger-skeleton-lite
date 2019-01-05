@@ -114,6 +114,8 @@ export default {
       // this.$store.commit('changeBurgerProtein', this.protein);
       // this.$store.commit('changeBurgerVegetables', this.vegetables);
       // this.$store.commit('changeBurgerSauces', this.sauces);
+      this.$store.commit('toggleClose');
+      this.$store.commit('toggleFinish');
       this.$store.state.socket.emit('popup', {data: 'PremadeBurger', counter:this.$refs.ingredient[item.ingredient_id -62].counter});
       this.$router.push({ name: "Popup" });
     }
