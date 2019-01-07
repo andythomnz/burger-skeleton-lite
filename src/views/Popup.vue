@@ -99,7 +99,7 @@ export default {
       showLactose: false,
       itemCategory: String,
       title: String,
-      ingredients: Object,
+      ingredients: [],
       bun: Object,
       protein:Object,
       vegetables: Array,
@@ -112,17 +112,38 @@ export default {
     this.clear();
     this.$store.state.socket.on('openPopup', function (data) {
       if (data.data=='CustomBurger') {
-        this.menuItem=this.$store.state.selectedBurger.bun;
+        this.clear();
         this.itemCategory='CustomBurger';
-        this.orderedBurgers.push(Object.assign({}, this.$store.state.orders));
-        this.title=this.uiLabels.customBurger +' '+ this.orderedBurgers.length;
-        this.ingredients=this.$store.state.orders;
-
-        this.bun=this.$store.state.selectedBurger.bun;
-        this.protein=this.$store.state.selectedBurger.protein;
-        this.vegetables=this.$store.state.selectedBurger.vegetables;
-        this.sauces=this.$store.state.selectedBurger.sauces;
-        this.extras=this.$store.state.selectedBurger.extras;
+        this.orderedBurgers=this.$store.state.orderedBurgers;
+        let number=0
+        number= this.orderedBurgers.length+1
+        // this.orderedBurgers.push(Object.assign({}, this.$store.state.orders));
+        this.title=this.uiLabels.customBurger +' '+ number;
+        this.ingredients=this.$store.state.selectedBurger;
+        for (var j = 0; j < this.ingredients.length; j++) {
+          if (this.ingredients[j].category===4) {
+            this.bun=this.ingredients[j];
+            this.menuItem=this.bun
+          }
+          else if (this.ingredients[j].category===1) {
+            this.protein=this.ingredients[j]
+          }
+          else if (this.ingredients[j].category===2) {
+            let vegetable=true
+            for (var k = 0; k < this.vegetables.length; k++) {
+              vegetable=true
+              if (this.ingredients[j].ingredient_id === this.vegetables[k].ingredient_id) {
+                this.extras.push(this.ingredients[j]);
+                vegetable=false;
+                break
+              }
+            }
+            if (vegetable===true){this.vegetables.push(this.ingredients[j])}
+          }
+          else if (this.ingredients[j].category===3) {
+            this.sauces.push(this.ingredients[j])
+          }
+        }
         this.calculatePrice();
         // this.ingredients= {bun: this.$s tore.state.selectedBurger.buns, protein: this.$store.state.selectedBurger.protein, vegetables: this.$store.state.selectedBurger.vegetables, sauces: this.$store.state.selectedBurger.sauces, extras: this.$store.state.selectedBurger.extras};
       }
@@ -202,9 +223,8 @@ export default {
         this.decrement(this.menuItem);
       }
       if (this.itemCategory=='CustomBurger') {
-        this.$store.state.selectedBurger.vegetables.splice(0, this.$store.state.selectedBurger.vegetables.length);
-        this.$store.state.selectedBurger.sauces.splice(0, this.$store.state.selectedBurger.sauces.length);
-        this.$store.state.selectedBurger.extras.splice(0, this.$store.state.selectedBurger.extras.length);}
+        this.$store.state.selectedBurger.splice(0, this.$store.state.selectedBurger.length);
+        console.log(this.$store.state.selectedBurger.length)}
       else if (this.itemCategory=='PremadeBurger') {
         this.$store.state.selectedPremadeBurger.splice(0, this.$store.state.selectedPremadeBurger.length)
       }
@@ -231,52 +251,54 @@ export default {
     },
     confirm: function(route) {
       if (this.itemCategory=='CustomBurger') {
-        for (var j = 0; j < this.counter; j++) {
-        this.$store.commit('changeOrders', {
-          type: 'buns',
-          value: Object(this.bun)
-        });
-        this.$store.commit('changeOrders', {
-          type: 'protein',
-          value: Object(this.protein)
-        });
-        let orderedVeggies= [];
-        for (var i = 0; i < this.vegetables.length; i++) {
-          orderedVeggies.push(this.vegetables[i]);
-        }
-        this.$store.commit('changeOrders', {
-          type: 'vegetables',
-          value: orderedVeggies
-        });
-        let orderedSauces= [];
-        for (var l = 0; l < this.sauces.length; l++) {
-          orderedSauces.push(this.sauces[l]);
-        }
-        this.$store.commit('changeOrders', {
-          type: 'sauces',
-          value: orderedSauces
-        });
-        let orderedExtras= [];
-        for (var k = 0; k < this.extras.length; k++) {
-          orderedExtras.push(this.extras[k]);
-        }
-        this.$store.commit('changeOrders', {
-          type: 'extras',
-          value: orderedExtras
-        });
-        this.$store.commit('changeOrders', {
-          type: 'price',
-          value: this.price
-        });
+        let j=0
+        while (j < this.counter) {
+          let burger={};
+          burger={bun: this.bun, protein: this.protein, vegetables: this.vegetables, sauces: this.sauces, extras: this.extras, price: this.price};
+          this.$store.state.orderedBurgers.push(burger);
+          j += 1
+        // this.$store.commit('changeOrders', {
+        //   type: 'buns',
+        //   value: Object(this.bun)
+        // });
+        // this.$store.commit('changeOrders', {
+        //   type: 'protein',
+        //   value: Object(this.protein)
+        // });
+        // let orderedVeggies= [];
+        // for (var i = 0; i < this.vegetables.length; i++) {
+        //   orderedVeggies.push(this.vegetables[i]);
+        // }
+        // this.$store.commit('changeOrders', {
+        //   type: 'vegetables',
+        //   value: orderedVeggies
+        // });
+        // let orderedSauces= [];
+        // for (var l = 0; l < this.sauces.length; l++) {
+        //   orderedSauces.push(this.sauces[l]);
+        // }
+        // this.$store.commit('changeOrders', {
+        //   type: 'sauces',
+        //   value: orderedSauces
+        // });
+        // let orderedExtras= [];
+        // for (var k = 0; k < this.extras.length; k++) {
+        //   orderedExtras.push(this.extras[k]);
+        // }
+        // this.$store.commit('changeOrders', {
+        //   type: 'extras',
+        //   value: orderedExtras
+        // });
+        // this.$store.commit('changeOrders', {
+        //   type: 'price',
+        //   value: this.price
+        // });
         // this.$store.commit('toggleFinish');
         // this.$store.commit('toggleClose');
         // this.$store.commit('toggleFinish');
         console.log('save');}
-        this.$store.state.selectedBurger.vegetables.splice(0, this.$store.state.selectedBurger.vegetables.length);
-        this.$store.state.selectedBurger.sauces.splice(0, this.$store.state.selectedBurger.sauces.length);
-        this.$store.state.selectedBurger.extras.splice(0, this.$store.state.selectedBurger.extras.length);
-        // this.$store.commit('toggleClose');
-        // this.$store.commit('toggleFinish');
+        this.$store.state.selectedBurger.splice(0, this.$store.state.selectedBurger.length);
+        console.log('length orderedBurgers '+this.$store.state.orderedBurgers.length)
       }
       else if (this.menuItem.category === 5) {
         let i=0;
@@ -299,12 +321,6 @@ export default {
           let burger= {};
           burger={item: this.menuItem, bun: this.bun, protein: this.protein, vegetables: this.vegetables, sauces: this.sauces, price: this.price};
           this.$store.state.orderedPremadeBurgers.push(burger);
-          // this.$store.state.burgerPrices.push(this.price);
-          // this.$store.state.orderedPremadeBurgers.push(this.menuItem);
-          // this.$store.state.orderedPremadeBurgers.push(this.bun);
-          // this.$store.state.orderedPremadeBurgers.push(this.protein);
-          // this.$store.state.orderedPremadeBurgers.push(this.vegetables);
-          // this.$store.state.orderedPremadeBurgers.push(this.sauces);
           i += 1
         }
         this.$store.state.selectedPremadeBurger.splice(0, this.$store.state.selectedPremadeBurger.length);

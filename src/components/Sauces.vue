@@ -101,7 +101,7 @@ export default {
       }
       // let store = this.$store.state.orders.sauces;
       // store.push(item);
-      this.$store.state.selectedBurger.sauces.push(item);
+      this.$store.state.selectedBurger.push(item);
       // this.$store.commit('changeOrders', {
       //   type: 'sauces',
       //   value: store

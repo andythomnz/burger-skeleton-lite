@@ -14,25 +14,11 @@ export default new Vuex.Store({
     cartCount: 0,
     close: false,
     selectedPremadeBurger:[],
-    selectedBurger:{
-      bun: {},
-      protein: {},
-      vegetables:[],
-      sauces: [],
-      extras:[]
-    },
-    orders: {
-      buns: {},
-      protein: {},
-      vegetables: [],
-      sauces: [],
-      extras: [],
-      price:0
-    },
+    selectedBurger:[],
+    orderedBurgers: [],
     orderedDrinks: [],
     orderedSides: [],
     orderedPremadeBurgers: [],
-    burgerPrices: [],
     finish: false,
     currentTab: 'Buns'
   },
@@ -57,18 +43,6 @@ export default new Vuex.Store({
     },
     toggleFinish: function (store) {
       store.finish = !store.finish;
-    },
-    changePremadeBurger:function(store, value){
-      store.orderedPremadeBurgers[value.type] = value.value;
-    },
-    changeBurgerProtein:function(store, array){
-      store.premadeBurgerIngredients.protein = array;
-    },
-    changeBurgerVegetables:function(store, array){
-      store.premadeBurgerIngredients.vegetables = array;
-    },
-    changeBurgerSauces:function(store, array){
-      store.premadeBurgerIngredients.sauces = array;
     },
   },
   actions: {

@@ -96,7 +96,7 @@ export default {
       this.price += +item.selling_price;
       // let store = this.$store.state.orders.vegetables;
       // store.push(item);
-      this.$store.state.selectedBurger.vegetables.push(item);
+      this.$store.state.selectedBurger.push(item);
       // this.$store.commit('changeOrders', {
       //   type: 'vegetables',
       //   value: store

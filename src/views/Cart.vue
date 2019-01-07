@@ -10,7 +10,7 @@
       <h1>{{ uiLabels.yourOrder}}</h1>
       <h2>{{ uiLabels.burgers }}</h2>
       <div style="width: 100%;height: auto;">
-        <ul v-for="(orderedBurger, index) in orderedBurgers" :key="orderedBurger.buns['ingredient_id'] + index">
+        <ul v-for="(orderedBurger, index) in orderedBurgers" :key="orderedBurger.bun['ingredient_id'] + index">
           <li>Customized burger {{index+1}} <button v-on:click="RemoveItem(orderedBurger, index)"> X </button>
           <span class="price">{{ orderedBurger.price }} kr</span></li>
         </ul>
@@ -89,7 +89,7 @@ export default {
   mixins: [sharedVueStuff],
   data: function() {
     return {
-      orderedBurgers: [],
+      orderedBurgers: this.$store.state.orderedBurgers,
       OrderedDrinks: this.$store.state.orderedDrinks,
       OrderedSides: this.$store.state.orderedSides,
       OrderedPremadeBurgers: this.$store.state.orderedPremadeBurgers,
@@ -98,25 +98,18 @@ export default {
 
     };
   },
-  computed: {
-    finish () {
-      return this.$store.state.finish
-    }
-  },
-  mounted () {
-    if (this.finish) {
-      this.orderedBurgers.push(Object.assign({}, this.$store.state.orders));
-      this.clear();
-      this.$store.commit('toggleFinish');
-    }
+  // computed: {
+  //   finish () {
+  //     return this.$store.state.finish
+  //   }
+  // },
 
-  },
   activated () {
-    if (this.finish) {
-      this.orderedBurgers.push(Object.assign({}, this.$store.state.orders));
-      this.clear();
-      this.$store.commit('toggleFinish');
-    }
+    // if (this.finish) {
+    //   // this.orderedBurgers.push(Object.assign({}, this.$store.state.orders));
+    //   this.clear();
+    //   // this.$store.commit('toggleFinish');
+    // }
     this.price=0;
     this.calculatePrice();
   },
@@ -127,26 +120,27 @@ export default {
   },
   methods: {
     clear () {
-      this.$store.commit('changeOrders', {
-        type: 'buns',
-        value: {}
-      })
-      this.$store.commit('changeOrders', {
-        type: 'protein',
-        value: {}
-      })
-      this.$store.commit('changeOrders', {
-        type: 'vegetables',
-        value: []
-      })
-      this.$store.commit('changeOrders', {
-        type: 'sauces',
-        value: []
-      })
-      this.$store.commit('changeOrders', {
-        type: 'extras',
-        value: []
-      })
+      // this.$store.commit('changeOrders', {
+      //   type: 'buns',
+      //   value: {}
+      // })
+      // this.$store.commit('changeOrders', {
+      //   type: 'protein',
+      //   value: {}
+      // })
+      // this.$store.commit('changeOrders', {
+      //   type: 'vegetables',
+      //   value: []
+      // })
+      // this.$store.commit('changeOrders', {
+      //   type: 'sauces',
+      //   value: []
+      // })
+      // this.$store.commit('changeOrders', {
+      //   type: 'extras',
+      //   value: []
+      // })
+      this.$store.state.orderedBurgers.splice(0, this.$store.state.orderedBurgers.length);
       this.$store.state.orderedPremadeBurgers.splice(0,this.$store.state.orderedPremadeBurgers.length)
     },
     NextPage: function() {
@@ -175,6 +169,7 @@ export default {
       }
       else {
         this.orderedBurgers.splice(index, 1);
+        this.$store.state.orderedBurgers.splice(index, 1);
         this.price=0;
         this.calculatePrice()
       }
@@ -188,10 +183,9 @@ export default {
       while (j < this.OrderedSides.length) {
         this.RemoveItem(this.OrderedSides[j],j);
       }
-      // let k=0
-      // while ( k < this.orderedBurgers.length) {
-      //   this.RemoveItem(this.orderedBurgers[k],k);}
-      this.orderedBurgers=[];
+      let k=0
+      while ( k < this.orderedBurgers.length) {
+        this.RemoveItem(this.orderedBurgers[k],k);}
       let l=0;
       while (l < this.OrderedPremadeBurgers.length) {
         this.RemoveItem(this.OrderedPremadeBurgers[l].item,l);
