@@ -14,9 +14,11 @@
           <li>Customized burger {{index+1}} <button v-on:click="RemoveItem(orderedBurger, index)"> X </button>
           <span class="price">{{ orderedBurger.price }} kr</span></li>
         </ul>
-        <ul v-for="(burger, index1) in OrderedPremadeBurgers" :key="burger['ingredient_id'] +index1">
-          <li >{{ burger["ingredient_"+lang] }} <button v-on:click='RemoveItem(burger, index1)'>X</button>
-          <span v-for="(Bprice, index2) in BurgersPrices" :key="index2" v-if="index1==index2"class="price">{{ Bprice }} kr</span></li>
+        <ul v-for="(burger, index1) in OrderedPremadeBurgers" :key="burger.item['ingredient_id'] +index1">
+          <li >{{ burger.item["ingredient_"+lang] }} <button v-on:click='RemoveItem(burger.item, index1)'>X</button>
+            <span class="price">{{ burger.price }} kr</span>
+          <!-- <span v-for="(Bprice, index2) in BurgersPrices" :key="index2" v-if="index1==index2"class="price">{{ Bprice }} kr</span> -->
+        </li>
           </ul>
         <!-- <ul
           v-for="(orderedBurger, index) in orderedBurgers"
@@ -90,10 +92,8 @@ export default {
       orderedBurgers: [],
       OrderedDrinks: this.$store.state.orderedDrinks,
       OrderedSides: this.$store.state.orderedSides,
-      OrderedPremadeBurgersIng: this.$store.state.orderedPremadeBurgers,
-      OrderedPremadeBurgers: [],
+      OrderedPremadeBurgers: this.$store.state.orderedPremadeBurgers,
       price: 0,
-      BurgersPrices: this.$store.state.burgerPrices,
       orderNumber: "",
 
     };
@@ -116,17 +116,6 @@ export default {
       this.orderedBurgers.push(Object.assign({}, this.$store.state.orders));
       this.clear();
       this.$store.commit('toggleFinish');
-    }
-    else {
-    this.OrderedPremadeBurgers=[];
-    for (var i = 0; i < this.OrderedPremadeBurgersIng.length; i++) {
-      if (this.OrderedPremadeBurgersIng[i].category===7) {
-        this.OrderedPremadeBurgers.push(this.OrderedPremadeBurgersIng[i])
-      }
-      // else if (typeof(this.OrderedPremadeBurgersIng[i])=='number') {
-      //   this.BurgersPrices.push(this.OrderedPremadeBurgersIng[i]);
-      // }
-    }
     }
     this.price=0;
     this.calculatePrice();
@@ -203,13 +192,10 @@ export default {
       // while ( k < this.orderedBurgers.length) {
       //   this.RemoveItem(this.orderedBurgers[k],k);}
       this.orderedBurgers=[];
-      this.OrderedPremadeBurgers=[];
-      this.OrderedPremadeBurgersIng=[];
-      this.BurgersPrices=[];
-      // let l=0;
-      // while (l < this.OrderedPremadeBurgers.length) {
-      //   this.RemoveItem(this.OrderedPremadeBurgers[l],l);
-      // }
+      let l=0;
+      while (l < this.OrderedPremadeBurgers.length) {
+        this.RemoveItem(this.OrderedPremadeBurgers[l].item,l);
+      }
       this.price=0
 
     },
@@ -236,6 +222,16 @@ export default {
           chosenIngredients.push(this.orderedBurgers[b].extras[e])
         }
       }
+      for (var p = 0; p < this.OrderedPremadeBurgers.length; p++) {
+        chosenIngredients.push(this.OrderedPremadeBurgers[p].bun);
+        chosenIngredients.push(this.OrderedPremadeBurgers[p].protein);
+        for (var v = 0; v < this.OrderedPremadeBurgers[b].vegetables.length; v++) {
+          chosenIngredients.push(this.OrderedPremadeBurgers[b].vegetables[v])
+        }
+        for (var s = 0; s < this.OrderedPremadeBurgers[b].sauces.length; s++) {
+          chosenIngredients.push(this.OrderedPremadeBurgers[b].sauces[s])
+        }
+      }
       let order = {
         ingredients: chosenIngredients,
         price: this.price
@@ -257,8 +253,9 @@ export default {
       for (var k = 0; k < this.orderedBurgers.length; k++) {
         this.price += this.orderedBurgers[k].price
       }
-      for (var l = 0; l < this.BurgersPrices.length; l++) {
-        this.price += this.BurgersPrices[l]
+      for (var l = 0; l < this.OrderedPremadeBurgers.length; l++) {
+        this.price += this.OrderedPremadeBurgers[l].price;
+        console.log(this.OrderedPremadeBurgers[l].price)
       }
     }
 

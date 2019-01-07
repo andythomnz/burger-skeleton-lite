@@ -56,7 +56,8 @@ h2 {
 
 .popuptext {
   visibility: hidden;
-  width: 160px;
+	font-size: 1.2vw;
+  width: 600%;
   background-color: #555;
   color: #fff;
   text-align: center;
@@ -65,8 +66,16 @@ h2 {
   position: absolute;
   z-index: 1;
   bottom: 125%;
-  left: 50%;
+  left: 10%;
   margin-left: -80px;
+}
+
+@media (max-width: 600px) {
+	.popuptext {
+		width: 300%;
+		left: 150%;
+		font-size: 1.5vw
+	}
 }
 
 #info .popuptext::after {

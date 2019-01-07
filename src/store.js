@@ -14,13 +14,6 @@ export default new Vuex.Store({
     cartCount: 0,
     close: false,
     selectedPremadeBurger:[],
-    selectedPremadeBurger1: {
-      item: {},
-      bun: {},
-      protein: {},
-      vegetables: [],
-      sauces: []
-    },
     selectedBurger:{
       bun: {},
       protein: {},
@@ -40,15 +33,6 @@ export default new Vuex.Store({
     orderedSides: [],
     orderedPremadeBurgers: [],
     burgerPrices: [],
-    orderedPremadeBurgers1: {
-      item: {},
-      buns: {},
-      protein: {},
-      vegetables: [],
-      sauces: [],
-      extras: [],
-      price:0
-    },
     finish: false,
     currentTab: 'Buns'
   },

@@ -9,8 +9,8 @@
     <div class='OrderItem'>
       <div class='wrapper'>
         <div id='half1'>
-          <div v-if="itemCategory!= 'CustomBurger'" style="font-weight:bold; font-size:2vw; margin-bottom:10px"> {{ menuItem["ingredient_" +lang] }} </div>
-          <div><img v-bind:src="menuItem.image" width="50%"></div>
+          <div id="item_name" v-if="itemCategory!= 'CustomBurger'" style="font-weight:bold; font-size:2vw; margin-bottom:10px"> {{ menuItem["ingredient_" +lang] }} </div>
+          <div><img id="image" v-bind:src="menuItem.image" width="50%"></div>
           <div><span><button v-on:click='decrement(menuItem)' style="font-size:1vw">-</button>
             <span id='counter' style="font-size:1.5vw">{{this.counter}}</span>
             <button v-on:click='increment(menuItem)' style="font-size:1vw">+</button></span></div>
@@ -296,12 +296,15 @@ export default {
         let i=0;
         while (i < this.counter) {
           console.log('save PremadeBurger');
-          this.$store.state.burgerPrices.push(this.price);
-          this.$store.state.orderedPremadeBurgers.push(this.menuItem);
-          this.$store.state.orderedPremadeBurgers.push(this.bun);
-          this.$store.state.orderedPremadeBurgers.push(this.protein);
-          this.$store.state.orderedPremadeBurgers.push(this.vegetables);
-          this.$store.state.orderedPremadeBurgers.push(this.sauces);
+          let burger= {};
+          burger={item: this.menuItem, bun: this.bun, protein: this.protein, vegetables: this.vegetables, sauces: this.sauces, price: this.price};
+          this.$store.state.orderedPremadeBurgers.push(burger);
+          // this.$store.state.burgerPrices.push(this.price);
+          // this.$store.state.orderedPremadeBurgers.push(this.menuItem);
+          // this.$store.state.orderedPremadeBurgers.push(this.bun);
+          // this.$store.state.orderedPremadeBurgers.push(this.protein);
+          // this.$store.state.orderedPremadeBurgers.push(this.vegetables);
+          // this.$store.state.orderedPremadeBurgers.push(this.sauces);
           i += 1
         }
         this.$store.state.selectedPremadeBurger.splice(0, this.$store.state.selectedPremadeBurger.length);
@@ -398,39 +401,14 @@ text-align: center}
 .icons {
   margin-top: 5%;
   display:grid;
-  grid-template-columns: auto auto auto;
+  grid-template-columns: 33% 33% 33%;
   margin-left: 10%;
   margin-right: 10%;
-  /* position: absolute;
-  top: 15%; */
   width: 30%
 }
 
-#info .popuptext::after {
-  content: "";
-  position: absolute;
-  top: 100%;
-  left: 45%;
-  margin-left: -5px;
-  border-width: 5px;
-  border-style: solid;
-  border-color: #555 transparent transparent transparent;
-}
-
-#info {
-
-}
-
-@media (max-width: 1100px) {
-  .icons{
-    top:10%
-  }
-}
-
-/*@media (max-width: 600px) {
-  .icons{
-    top:15%
-  }
+/* #info .popuptext::after {
+  left: 45%
 } */
 
 .wrapper {
@@ -470,6 +448,21 @@ text-align: center}
   font-size: 1vw;
   text-align: center;
   width: 8%
+}
+
+@media (max-width: 600px) {
+  #image {
+    padding-left: 5%
+  }
+  #item_name {
+    padding-left: 5%
+  }
+  .ingredients {
+    margin-top: 5%
+  }
+  .price {
+    padding-top: 5%
+  }
 }
 
 </style>
