@@ -17,18 +17,18 @@
         </div>
         <div id='half2'>
           <div class='icons'>
-          <span v-if="menuItem.milk_free" v-on:click="clickInfo('lactose')" id='info'>
+          <div v-if="menuItem.milk_free" v-on:click="clickInfo('lactose')" id='info'>
             <img src="../assets/milkfree.png" class="icon">
             <p v-if='showLactose'><span class="popuptext" id="myInfo">This item is lactose-free</span></p>
-          </span>
-          <span v-if="menuItem.gluten_free" v-on:click="clickInfo('gluten')" id='info'>
+          </div>
+          <div v-if="menuItem.gluten_free" v-on:click="clickInfo('gluten')" id='info'>
             <img src="../assets/glutenfree.png" class="icon">
             <p v-if='showGluten'><span class="popuptext" id="myInfo">This item is gluten-free</span></p>
-          </span>
-          <span v-if="menuItem.vegan" v-on:click="clickInfo('vegan')" id='info'>
+          </div>
+          <div v-if="menuItem.vegan" v-on:click="clickInfo('vegan')" id='info'>
             <img src="../assets/vegan.png" class="icon">
             <p v-if='showVegan'><span class="popuptext" id="myInfo">This item is vegan</span></p>
-          </span></div>
+          </div></div>
           <div v-if="itemCategory === 'CustomBurger' || itemCategory==='PremadeBurger'" class='ingredients'>
             <div style="padding-left: 5px; padding-right: 5px">
               <p style="font-weight: bold; font-size: 1.6vw">{{ uiLabels.ingredients }}: </p>
@@ -391,20 +391,37 @@ text-align: center}
 }
 
 .icon{
-  width: 40%;
+  width: 70%;
   float:left
 }
 
 .icons {
+  margin-top: 5%;
   display:grid;
-  grid-template-columns: 33% 33% 33%;
+  grid-template-columns: auto auto auto;
   margin-left: 10%;
   margin-right: 10%;
-  position: absolute;
-  top: 15%;
+  /* position: absolute;
+  top: 15%; */
+  width: 30%
 }
 
-@media screen and (max-width: 1100px) {
+#info .popuptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 45%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+#info {
+
+}
+
+@media (max-width: 1100px) {
   .icons{
     top:10%
   }
