@@ -6,9 +6,6 @@
       showCart='true'>
       <h1 slot="center-component">{{uiLabels.drinks}}</h1>
     </NavBar>
-    <!-- <button v-on:click="switchLang()">{{ uiLabels.language }}</button> -->
-
-    <h2>{{ uiLabels.ingredients }}</h2>
 
     <div class="wrapper">
       <Ingredient

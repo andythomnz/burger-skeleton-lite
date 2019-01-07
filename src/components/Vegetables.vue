@@ -1,10 +1,7 @@
 <template>
   <div
     id="ordering"
-    v-if="vegetables"
-  >
-
-    <h1>{{ uiLabels.ingredients }}</h1>
+    v-if="vegetables">
 
     <div class="wrapper">
       <Ingredient

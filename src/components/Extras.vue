@@ -4,7 +4,6 @@
     v-if="extras"
   >
 
-    <h1>{{ uiLabels.ingredients }}</h1>
 
     <div class="wrapper">
       <Ingredient

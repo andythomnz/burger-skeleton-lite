@@ -2,25 +2,25 @@
 
   <div
     class="ingredient"
-
+    :id="currentID"
   >
     <label>
       <button
         :ref="'itemButton'+item.ingredient_id"
-        :class="currentClass"
         v-on:click="incrementCounter"
       >
-
+        <p style='margin-top: 5%'>{{item["ingredient_"+ lang]}}</p>
         <img
           v-bind:src="item.image"
           width="50%"
+          style="padding-top: 5%; padding-bottom: 6%"
         >
-        <p>{{item["ingredient_"+ lang]}}</p>
-        <!--p>{{uiLabels.price}}: {{item.selling_price}}</p>
-        <p>{{uiLabels.stock}}: {{item.stock}}</p-->
+        <div class="price_number">
+        <p v-if="item.category === 5 || item.category === 6 || item.category === 7">{{uiLabels.price}}: {{item.selling_price}} kr</p>
+        <!--p>{{uiLabels.stock}}: {{item.stock}}</p-->
         <p v-if="item.addi_cost>0">+ {{item.addi_cost}}kr</p>
         <!-- <p>Stock: {{item.stock}}</p> -->
-        <p>Number: {{ counter }}</p>
+        <p id="counter" v-if="this.counter>0">{{ counter }}</p></div>
       </button>
     </label>
       <div class='icons'>
@@ -65,11 +65,12 @@ require('@/assets/globalCSS.css')
 export default {
   name: "Ingredient",
   components: {
-    sharedVueStuff,
+
   },
+  mixins: [sharedVueStuff],
   props: {
     item: Object,
-    lang: String,
+    // lang: String,
     currentKey: [String, Number],
     saucesCount: [String, Number],
     proteinCount: [String, Number]
@@ -77,7 +78,7 @@ export default {
   data: function () {
     return {
       counter: 0,
-      currentClass: '',
+      currentID: '',
       showVegan: false,
       showGluten: false,
       showLactose: false,
@@ -93,7 +94,7 @@ export default {
       if (this.currentTab === 'Buns' || this.currentTab === 'Protein') {
         if (this.currentKey !== this.item.ingredient_id) {
           this.counter = 0;
-          this.currentClass = '';
+          this.currentID = '';
         }
       }
     }
@@ -105,18 +106,18 @@ export default {
     incrementCounter: function () {
       if (this.item.category === 5 || this.item.category === 6)
         { this.counter += 1;
-          this.currentClass = 'yellow-bg';
+          this.currentID = 'yellow-bg';
           this.$emit("increment") }
       else if (this.item.category === 7) {
         this.counter += 1;
-        this.currentClass = 'yellow-bg';
+        this.currentID = 'yellow-bg';
         if (this.counter == 1) {
           this.$emit("increment")
         }
       }
       else {
         if (this.counter === 1) {
-          this.currentClass = '';
+          this.currentID = '';
           this.counter = 0;
           this.$emit("reset");
           return;
@@ -128,7 +129,7 @@ export default {
           return;
         }
         this.counter = 1;
-        this.currentClass = 'yellow-bg';
+        this.currentID = 'yellow-bg';
         // sending 'increment' message to parent component or view so that it
         // can catch it with v-on:increment in the component declaration
         this.$emit("increment");
@@ -176,15 +177,11 @@ export default {
     },
     decrementCounter: function () {
         this.counter -= 1;
-        if (this.counter==0) {this.currentClass=''}
-        // sending 'increment' message to parent component or view so that it
-        // can catch it with v-on:increment in the component declaration
-
-
+        if (this.counter==0) {this.currentID=''}
     },
     resetCounter: function () {
       this.counter = 0;
-      this.currentClass = ''
+      this.currentID = ''
     }
   }
 };
@@ -199,32 +196,35 @@ img {
   padding-top: 0em;
 }
 
-.yellow-bg {
+#yellow-bg {
   background: lightyellow;
 }
 
-button:hover {
+.ingredient:hover {
   background: lightyellow;
-  cursor: pointer;
+  /* cursor: pointer; */
 }
 
-button:focus {
+.ingredient:focus {
   outline: 1px solid #fff;
   outline-offset: -4px;
 }
 
-button:active {
+.ingredient:active {
   transform: scale(0.99);
   outline: yellow auto 5;
+}
+
+button:hover {
+  cursor: pointer;
 }
 
 button {
   border: none;
   background: none;
   text-align: center;
-  font-size: 20pt;
   font-weight: bold;
-  transition: background 250ms ease-in-out, transform 150ms ease;
+  /* transition: background 250ms ease-in-out, transform 150ms ease; */
   display: block;
   width: 100%;
   font-size: 2vw;
@@ -236,10 +236,47 @@ button {
 }
 
 .icons {
-  padding-left: 25%
+  padding-left: 25%;
+  margin-top: 5%;
+  /* position: absolute;
+  bottom: 5% */
 }
 
+.ingredient {
+  background-color: lightblue;
+  border-style: inset;
+  border-color: lightblue;
+  transition: background 250ms ease-in-out, transform 150ms ease;
+  position: relative
 
+}
 
+.price_number {
+  font-size: 1.2vw;
+  text-align: left;
+  margin-left: 20%
+}
+
+@media (max-width: 600px) {
+  .price_number {
+    margin-left: 25%
+  }
+  #counter {
+    bottom: 100%
+  }
+}
+
+#counter {
+  position: absolute;
+  left: 95%;
+  bottom: 95%;
+  background-color: red;
+  border-radius: 50%;
+  width: 11%;
+  text-align: center;
+  color: white;
+  /* font-size: 1vw; */
+  font-weight: bold;
+}
 
 </style>

@@ -21,7 +21,7 @@
       </div>
     </NavBar>
 
-    <h1> tab: {{currentTab}}</h1>
+    <h2> tab: {{currentTab}}</h2>
     <div class="page">
       <keep-alive>
         <component
@@ -79,7 +79,7 @@ export default {
   data: function () {        //Not that data is a function!
     return {
       // currentTab: 'Buns',
-      tabs: ['Buns', 'Protein', 'Vegetables', 'Sauces', 'Extras', 'MYOB'],
+      tabs: ['Buns', 'Protein', 'Vegetables', 'Sauces', 'Extras'],
       chosenIngredients: [],
       price: 0,
       orderNumber: "",

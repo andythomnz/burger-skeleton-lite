@@ -52,14 +52,14 @@ ingredient_id,ingredient_sv,ingredient_en,category,milk_free,gluten_free,vegan,s
 51,glutenfritt bröd,gluten free bread,4,1,1,1,10,0,,,,,,http://www.greektownpita.ca/wp-content/uploads/2015/04/Nutrition-un-hamburger-maison-equilibre.jpg
 52,veganskt bröd,vegan bun,4,0,0,1,10,0,,,,,,https://images.pexels.com/photos/35195/burger-cheese-food-hamburger.jpg?auto=compress&cs=tinysrgb&h=750&w=1260
 53,fullkornsbrioche,whole wheat brioche,4,0,0,0,10,0,,,,,,https://www.maxpixel.net/static/photo/1x/Whole-Wheat-Hamburger-Food-Fast-Food-Home-1715388.jpg
-54,nachochips,nachos,5,1,0,1,20,20,,,,,,https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Nachos-cheese.jpg/398px-Nachos-cheese.jpg
-55,potatisstrips,potato fries,5,1,1,1,20,20,,,,,,https://c1.staticflickr.com/4/3525/3862654181_cf4040e9d2_b.jpg
-56,sötpotatisstrips,sweet potato fries,5,1,1,1,30,30,,,,,,https://c1.staticflickr.com/6/5029/5594197886_094cfd0837_b.jpg
-57,chokladmilkshake,chocolate milk shake,6,0,1,0,40,40,,,,,,https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Chocolate_Malt_with_Sprinkles.jpg/400px-Chocolate_Malt_with_Sprinkles.jpg
-58,pucko,pucko,6,0,1,0,25,25,,,,,,https://www.onfos.de/media/catalog/product/cache/2/image/394x394/9df78eab33525d08d6e5fb8d27136e95/5/7/5711953024399.jpg
-59,läsk,soda,6,1,1,1,20,20,,,,,,https://www.goodfreephotos.com/albums/vector-images/soda-with-central-straw.png
-60,jordgubbsmilkshake,strawberry milk shake,6,0,1,0,40,40,,,,,,https://c1.staticflickr.com/7/6055/5910973811_669bddc6e2_b.jpg
-61,vegansk mango lassi,vegan mango lassi,6,1,1,1,40,40,,,,,,https://c1.staticflickr.com/3/2752/4142353694_e5697e154a_b.jpg
+54,nachochips,nachos,5,1,0,1,20,0,,,,,,https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Nachos-cheese.jpg/398px-Nachos-cheese.jpg
+55,potatisstrips,potato fries,5,1,1,1,20,0,,,,,,https://c1.staticflickr.com/4/3525/3862654181_cf4040e9d2_b.jpg
+56,sötpotatisstrips,sweet potato fries,5,1,1,1,30,0,,,,,,https://c1.staticflickr.com/6/5029/5594197886_094cfd0837_b.jpg
+57,chokladmilkshake,chocolate milk shake,6,0,1,0,40,0,,,,,,https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Chocolate_Malt_with_Sprinkles.jpg/400px-Chocolate_Malt_with_Sprinkles.jpg
+58,pucko,pucko,6,0,1,0,25,0,,,,,,https://www.onfos.de/media/catalog/product/cache/2/image/394x394/9df78eab33525d08d6e5fb8d27136e95/5/7/5711953024399.jpg
+59,läsk,soda,6,1,1,1,20,0,,,,,,https://www.goodfreephotos.com/albums/vector-images/soda-with-central-straw.png
+60,jordgubbsmilkshake,strawberry milk shake,6,0,1,0,40,0,,,,,,https://c1.staticflickr.com/7/6055/5910973811_669bddc6e2_b.jpg
+61,vegansk mango lassi,vegan mango lassi,6,1,1,1,40,0,,,,,,https://c1.staticflickr.com/3/2752/4142353694_e5697e154a_b.jpg
 62,ham burgare,ham burger,7,0,1,0,70,0,"""2, 29, 24, 33, 27, 37, 45, 50""",50,2,"24,27,29,33","37, 45",http://www.greektownpita.ca/wp-content/uploads/2015/04/Nutrition-un-hamburger-maison-equilibre.jpg
 63,ost burgare,cheese burger,7,0,1,0,80,0,"""2, 29, 24, 33, 27, 37, 16, 45, 50""",50,2,"16, 24, 27, 29, 33","37, 45",https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Cheeseburger.jpg/800px-Cheeseburger.jpg
 64,fisk burgare,fish burger,7,0,1,0,75,0,"""6, 29, 24, 33, 27, 37, 44, 50""",50,6,"24, 27, 29, 33","37, 44",https://s3.eu-central-1.amazonaws.com/quickbelux/media/images/hot_fish_vfcUap.max-380x600.background-ffffff.format-jpeg.jpegquality-75.jpg

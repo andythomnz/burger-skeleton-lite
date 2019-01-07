@@ -4,11 +4,8 @@
       nextRoute=""
       backRoute="MainMenu"
       showCart='true'>
-      <h1 slot="center-component">Pre-Made Burgers</h1>
+      <h1 slot="center-component">{{uiLabels.premade_burgers}}</h1>
     </NavBar>
-    <!-- <button v-on:click="switchLang()">{{ uiLabels.language }}</button> -->
-
-    <h1>{{ uiLabels.burgers }}</h1> <!-- matching text in ui_en and ui_sv -->
 
     <div class="wrapper">
       <Ingredient

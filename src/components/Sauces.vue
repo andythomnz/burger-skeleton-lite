@@ -4,8 +4,6 @@
     v-if="sauces"
   >
 
-    <h1>{{ uiLabels.ingredients }}</h1>
-
     <div class="wrapper">
       <Ingredient
         ref="ingredient"
