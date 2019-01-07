@@ -11,13 +11,12 @@
       <h2>{{ uiLabels.burgers }}</h2>
       <div style="width: 100%;height: auto;">
         <ul v-for="(orderedBurger, index) in orderedBurgers" :key="orderedBurger.bun['ingredient_id'] + index">
-          <li>Customized burger {{index+1}} <button v-on:click="RemoveItem(orderedBurger, index)"> X </button>
+          <li>Customized burger {{index+1}} <button v-on:click="RemoveItem(orderedBurger, index)"> X </button><button v-on:click="editBurger(orderedBurger, index)">EDIT </button>
           <span class="price">{{ orderedBurger.price }} kr</span></li>
         </ul>
-        <ul v-for="(burger, index1) in OrderedPremadeBurgers" :key="burger.item['ingredient_id'] +index1">
-          <li >{{ burger.item["ingredient_"+lang] }} <button v-on:click='RemoveItem(burger.item, index1)'>X</button>
+        <ul v-for="(burger, index) in OrderedPremadeBurgers" :key="burger.item['ingredient_id'] +index">
+          <li >{{ burger.item["ingredient_"+lang] }} <button v-on:click='RemoveItem(burger.item, index)'>X</button><button v-on:click="editBurger(burger, index)">EDIT </button>
             <span class="price">{{ burger.price }} kr</span>
-          <!-- <span v-for="(Bprice, index2) in BurgersPrices" :key="index2" v-if="index1==index2"class="price">{{ Bprice }} kr</span> -->
         </li>
           </ul>
         <!-- <ul
@@ -251,6 +250,39 @@ export default {
         this.price += this.OrderedPremadeBurgers[l].price;
         console.log(this.OrderedPremadeBurgers[l].price)
       }
+    },
+    editBurger: function(item, index) {
+      if (item.item.category === 7) {
+        this.$store.state.selectedPremadeBurger.push(item.item);
+        this.$store.state.selectedPremadeBurger.push(item.bun);
+        this.$store.state.selectedPremadeBurger.push(item.protein);
+        for (var i = 0; i < item.vegetables.length; i++) {
+          this.$store.state.selectedPremadeBurger.push(item.vegetables[i])
+        }
+        for (var j = 0; j < item.sauces.length; j++) {
+          this.$store.state.selectedPremadeBurger.push(item.sauces[j])
+        }
+        this.$store.state.selectedPremadeBurger.push(item.price);
+        this.RemoveItem(item.item, index);
+        this.$store.state.socket.emit('popup', {data: 'PremadeBurger', previous_route: 'cart',counter: 1});
+      }
+      else {
+        this.$store.state.selectedBurger.push(item.bun);
+        this.$store.state.selectedBurger.push(item.protein);
+        for (var i = 0; i < item.vegetables.length; i++) {
+          this.$store.state.selectedBurger.push(item.vegetables[i])
+        }
+        for (var j = 0; j < item.sauces.length; j++) {
+          this.$store.state.selectedBurger.push(item.sauces[j])
+        }
+        for (var j = 0; j < item.extras.length; j++) {
+          this.$store.state.selectedBurger.push(item.extras[j])
+        }
+        this.$store.state.selectedBurger.push(item.price);
+        this.RemoveItem(item, index);
+        this.$store.state.socket.emit('popup', {data: 'CustomBurger', counter: 1});
+      }
+      this.$router.push({ name: 'Popup' });
     }
 
   }

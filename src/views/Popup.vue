@@ -106,11 +106,13 @@ export default {
       sauces: Array,
       extras: Array,
       orderedBurgers: [],
+      previous_route: ""
     };
   },
   created: function() {
     this.clear();
     this.$store.state.socket.on('openPopup', function (data) {
+      this.previous_route=data.previous_route;
       if (data.data=='CustomBurger') {
         this.clear();
         this.itemCategory='CustomBurger';
@@ -298,7 +300,6 @@ export default {
         // this.$store.commit('toggleFinish');
         console.log('save');}
         this.$store.state.selectedBurger.splice(0, this.$store.state.selectedBurger.length);
-        console.log('length orderedBurgers '+this.$store.state.orderedBurgers.length)
       }
       else if (this.menuItem.category === 5) {
         let i=0;
@@ -321,6 +322,11 @@ export default {
           let burger= {};
           burger={item: this.menuItem, bun: this.bun, protein: this.protein, vegetables: this.vegetables, sauces: this.sauces, price: this.price};
           this.$store.state.orderedPremadeBurgers.push(burger);
+          console.log(this.previous_route);
+          if (this.previous_route=='cart') {
+            this.$store.state.socket.emit('decrementCounterPremadeBurgers', {data: this.menuItem});
+            this.$store.state.socket.emit('incrementCounterPremadeBurgers', {data: this.menuItem})
+          }
           i += 1
         }
         this.$store.state.selectedPremadeBurger.splice(0, this.$store.state.selectedPremadeBurger.length);

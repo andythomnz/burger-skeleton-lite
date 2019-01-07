@@ -114,6 +114,13 @@ export default {
         if (this.counter == 1) {
           this.$emit("increment")
         }
+        // to edit a premade burger, the burger will be removed and added again if clicked on confirm or finish in popup,
+        // which makes the counter be 1 again, but then it will emit increment and open the popup again (see if above)
+        // to prevent this, the counter will be decremented twice and incremented once which makes the final count be 0
+        // but we want it to be 1 again
+        else if (this.counter==0) {
+          this.counter += 1
+        }
       }
       else {
         if (this.counter === 1) {
