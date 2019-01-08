@@ -58,13 +58,19 @@
       <h2>{{ uiLabels.drinks }}</h2>
       <p>
       <ul>
-        <li v-for="(item, index) in OrderedDrinks" :key="item.ingredient_id + index">{{ item["ingredient_"+lang] }} <button v-on:click='RemoveItem(item, index)'>X</button>
-        <span class="price">{{ item.selling_price }} kr</span></li>
+        <li v-for="(item, index) in OrderedDrinks" :key="item.item.ingredient_id + index">{{ item.item["ingredient_"+lang] }}
+          <span v-if="item.counter>1"> {{ item.counter }} </span>
+          <button v-on:click='RemoveItem(item, index)'>X</button>
+          <button v-on:click='EditItem(item, index)'> Edit </button>
+        <span class="price">{{ item.item.selling_price }} kr</span></li>
       </ul></p>
       <h2>{{ uiLabels.sides }}</h2>
       <p><ul>
-        <li v-for="(item, index) in OrderedSides" :key="item.ingredient_id +index">{{ item["ingredient_"+lang] }} <button v-on:click='RemoveItem(item, index)'>X</button>
-        <span class="price">{{ item.selling_price }} kr</span></li>
+        <li v-for="(item, index) in OrderedSides" :key="item.item.ingredient_id +index">{{ item.item["ingredient_"+lang] }}
+          <span v-if="item.counter>1"> {{ item.counter }} </span>
+          <button v-on:click='RemoveItem(item, index)'>X</button>
+          <button v-on:click='EditItem(item, index)'> Edit </button>
+        <span class="price">{{ item.item.selling_price }} kr</span></li>
       </ul></p>
 
       <p style="font-weight:bold" class="price">{{ uiLabels.sum }}: {{ this.price }} kr</p>
@@ -119,26 +125,6 @@ export default {
   },
   methods: {
     clear () {
-      // this.$store.commit('changeOrders', {
-      //   type: 'buns',
-      //   value: {}
-      // })
-      // this.$store.commit('changeOrders', {
-      //   type: 'protein',
-      //   value: {}
-      // })
-      // this.$store.commit('changeOrders', {
-      //   type: 'vegetables',
-      //   value: []
-      // })
-      // this.$store.commit('changeOrders', {
-      //   type: 'sauces',
-      //   value: []
-      // })
-      // this.$store.commit('changeOrders', {
-      //   type: 'extras',
-      //   value: []
-      // })
       this.$store.state.orderedBurgers.splice(0, this.$store.state.orderedBurgers.length);
       this.$store.state.orderedPremadeBurgers.splice(0,this.$store.state.orderedPremadeBurgers.length)
     },
@@ -148,21 +134,29 @@ export default {
       //location.reload()
     },
     RemoveItem: function(item, index) {
-      if (item.category===6) {
-        this.$store.state.socket.emit('decrementCounterDrinks', {data: item});
+      if (item.category==7) {
+        this.$store.state.socket.emit('decrementCounterPremadeBurgers', {data: item});
+        this.OrderedPremadeBurgers.splice(index, 1);
+        this.price=0;
+        this.calculatePrice();
+      }
+      else if (item.item.category==6) {
+        let d=0;
+        while (d<item.counter) {
+          this.$store.state.socket.emit('decrementCounterDrinks', {data: item.item});
+          d += 1
+        }
         this.$store.state.orderedDrinks.splice(index, 1);
         this.price=0;
         this.calculatePrice();
       }
-      else if (item.category===5) {
-        this.$store.state.socket.emit('decrementCounterSides', {data: item});
+      else if (item.item.category==5) {
+        let s=0;
+        while (s<item.counter) {
+          this.$store.state.socket.emit('decrementCounterSides', {data: item.item});
+          s +=1
+        }
         this.$store.state.orderedSides.splice(index, 1);
-        this.price=0;
-        this.calculatePrice();
-      }
-      else if (item.category===7) {
-        this.$store.state.socket.emit('decrementCounterPremadeBurgers', {data: item});
-        this.OrderedPremadeBurgers.splice(index, 1);
         this.price=0;
         this.calculatePrice();
       }
@@ -172,6 +166,24 @@ export default {
         this.price=0;
         this.calculatePrice()
       }
+    },
+    EditItem: function (item, index) {
+      if (item.item.category===6) {
+        this.$store.state.drinks=item.item;
+        this.$store.state.socket.emit('popup', {data: 'Drinks', counter:item.counter});
+        this.$store.state.orderedDrinks.splice(index, 1);
+        this.price=0;
+        this.calculatePrice();
+      }
+      else if (item.item.category===5) {
+        this.$store.state.sides=item.item;
+        this.$store.state.socket.emit('popup', {data: 'Sides', counter:item.counter});
+        this.$store.state.orderedSides.splice(index, 1);
+        console.log(this.$store.state.orderedSides.length);
+        this.price=0;
+        this.calculatePrice();
+      }
+      this.$router.push({ name: "Popup" })
     },
     Cancel: function(){
       let i=0;
@@ -197,10 +209,18 @@ export default {
       let chosenIngredients=[];
       // chosenIngredients.push(this.OrderedBurger);
       for (var i = 0; i < this.OrderedDrinks.length; i++) {
-        chosenIngredients.push(this.OrderedDrinks[i]);
+        let countD=0;
+        while (countD<this.OrderedDrinks[i].counter) {
+          chosenIngredients.push(this.OrderedDrinks[i].item);
+          countD += 1
+        }
       }
       for (var j = 0; j < this.OrderedSides.length; j++) {
-        chosenIngredients.push(this.OrderedSides[j]);
+        let countS=0;
+        while (countS<this.OrderedSides[j].counter) {
+          chosenIngredients.push(this.OrderedSides[j].item);
+          countS += 1
+        }
       }
       for (var b = 0; b < this.orderedBurgers.length; b++) {
         chosenIngredients.push(this.orderedBurgers[b].buns);
@@ -238,10 +258,18 @@ export default {
     },
     calculatePrice: function() {
       for (var i = 0; i < this.OrderedDrinks.length; i++) {
-        this.price += this.OrderedDrinks[i].selling_price;
+        let countD=0;
+        while (countD<this.OrderedDrinks[i].counter) {
+          this.price += this.OrderedDrinks[i].item.selling_price;
+          countD += 1
+        }
       }
       for (var j = 0; j < this.OrderedSides.length; j++) {
-        this.price += this.OrderedSides[j].selling_price;
+        let countS=0;
+        while (countS<this.OrderedSides[j].counter) {
+          this.price += this.OrderedSides[j].item.selling_price;
+          countS += 1
+        }
       }
       for (var k = 0; k < this.orderedBurgers.length; k++) {
         this.price += this.orderedBurgers[k].price
@@ -264,7 +292,7 @@ export default {
         }
         this.$store.state.selectedPremadeBurger.push(item.price);
         this.RemoveItem(item.item, index);
-        this.$store.state.socket.emit('popup', {data: 'PremadeBurger', previous_route: 'cart',counter: 1});
+        this.$store.state.socket.emit('popup', {data: 'PremadeBurger', counter: 1});
       }
       else {
         this.$store.state.selectedBurger.push(item.bun);

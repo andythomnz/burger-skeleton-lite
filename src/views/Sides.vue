@@ -18,7 +18,6 @@
         :key="item.ingredient_id"
       ></Ingredient>
     </div>
-
     <!-- <h1>{{ uiLabels.order }}</h1>
     {{ chosenIngredients.map(item => item["ingredient_"+lang]).join(', ') }},
     {{ price }} kr

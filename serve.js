@@ -86,7 +86,7 @@ io.on('connection', function (socket) {
   socket.on('popup', function (data) {
     console.log(data.data);
     console.log(data.counter);
-    io.emit('openPopup', {data: data.data, previous_route: data.previous_route, counter: data.counter})
+    io.emit('openPopup', {data: data.data, counter: data.counter})
   });
 
   socket.on('incrementCounterDrinks', function (data) {

@@ -106,7 +106,7 @@ export default {
       sauces: Array,
       extras: Array,
       orderedBurgers: [],
-      previous_route: ""
+      previous_route: "",
     };
   },
   created: function() {
@@ -239,7 +239,8 @@ export default {
       else if (this.itemCategory=='Sides')
       {this.$store.state.socket.emit('incrementCounterSides', {data: item})}
       else if (this.itemCategory=='PremadeBurger')
-      {this.$store.state.socket.emit('incrementCounterPremadeBurgers', {data: item})}
+      {
+        this.$store.state.socket.emit('incrementCounterPremadeBurgers', {data: item})}
     },
     decrement: function(item) {
       if (this.counter==0) {return}
@@ -256,64 +257,25 @@ export default {
         let j=0
         while (j < this.counter) {
           let burger={};
-          burger={bun: this.bun, protein: this.protein, vegetables: this.vegetables, sauces: this.sauces, extras: this.extras, price: this.price};
+          burger={item: '', bun: this.bun, protein: this.protein, vegetables: this.vegetables, sauces: this.sauces, extras: this.extras, price: this.price};
           this.$store.state.orderedBurgers.push(burger);
           j += 1
-        // this.$store.commit('changeOrders', {
-        //   type: 'buns',
-        //   value: Object(this.bun)
-        // });
-        // this.$store.commit('changeOrders', {
-        //   type: 'protein',
-        //   value: Object(this.protein)
-        // });
-        // let orderedVeggies= [];
-        // for (var i = 0; i < this.vegetables.length; i++) {
-        //   orderedVeggies.push(this.vegetables[i]);
-        // }
-        // this.$store.commit('changeOrders', {
-        //   type: 'vegetables',
-        //   value: orderedVeggies
-        // });
-        // let orderedSauces= [];
-        // for (var l = 0; l < this.sauces.length; l++) {
-        //   orderedSauces.push(this.sauces[l]);
-        // }
-        // this.$store.commit('changeOrders', {
-        //   type: 'sauces',
-        //   value: orderedSauces
-        // });
-        // let orderedExtras= [];
-        // for (var k = 0; k < this.extras.length; k++) {
-        //   orderedExtras.push(this.extras[k]);
-        // }
-        // this.$store.commit('changeOrders', {
-        //   type: 'extras',
-        //   value: orderedExtras
-        // });
-        // this.$store.commit('changeOrders', {
-        //   type: 'price',
-        //   value: this.price
-        // });
-        // this.$store.commit('toggleFinish');
-        // this.$store.commit('toggleClose');
-        // this.$store.commit('toggleFinish');
         console.log('save');}
         this.$store.state.selectedBurger.splice(0, this.$store.state.selectedBurger.length);
       }
       else if (this.menuItem.category === 5) {
-        let i=0;
-        while (i < this.counter) {
-          this.$store.state.orderedSides.push(this.menuItem);
-          i += 1
-        }
+        // let i=0;
+        // while (i < this.counter) {
+          this.$store.state.orderedSides.push({item: this.menuItem, counter: this.counter});
+        //   i += 1
+        // }
       }
       else if (this.menuItem.category === 6) {
-        let i=0;
-        while (i < this.counter) {
-          this.$store.state.orderedDrinks.push(this.menuItem);
-          i += 1
-        }
+        // let i=0;
+        // while (i < this.counter) {
+          this.$store.state.orderedDrinks.push({item: this.menuItem, counter: this.counter});
+        //   i += 1
+        // }
       }
       else if (this.itemCategory =='PremadeBurger') {
         let i=0;
@@ -324,7 +286,6 @@ export default {
           this.$store.state.orderedPremadeBurgers.push(burger);
           console.log(this.previous_route);
           if (this.previous_route=='cart') {
-            this.$store.state.socket.emit('decrementCounterPremadeBurgers', {data: this.menuItem});
             this.$store.state.socket.emit('incrementCounterPremadeBurgers', {data: this.menuItem})
           }
           i += 1
