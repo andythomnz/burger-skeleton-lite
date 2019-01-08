@@ -106,13 +106,13 @@ export default {
       sauces: Array,
       extras: Array,
       orderedBurgers: [],
-      previous_route: "",
+      // previous_route: "",
     };
   },
   created: function() {
     this.clear();
     this.$store.state.socket.on('openPopup', function (data) {
-      this.previous_route=data.previous_route;
+      // this.previous_route=data.previous_route;
       if (data.data=='CustomBurger') {
         this.clear();
         this.itemCategory='CustomBurger';
@@ -259,23 +259,27 @@ export default {
           let burger={};
           burger={item: '', bun: this.bun, protein: this.protein, vegetables: this.vegetables, sauces: this.sauces, extras: this.extras, price: this.price};
           this.$store.state.orderedBurgers.push(burger);
+          this.$store.state.cartCount += 1;
           j += 1
         console.log('save');}
         this.$store.state.selectedBurger.splice(0, this.$store.state.selectedBurger.length);
       }
       else if (this.menuItem.category === 5) {
-        // let i=0;
-        // while (i < this.counter) {
+
           this.$store.state.orderedSides.push({item: this.menuItem, counter: this.counter});
-        //   i += 1
-        // }
+        let i=0;
+        while (i < this.counter) {
+          this.$store.state.cartCount += 1;
+          i += 1
+        }
       }
       else if (this.menuItem.category === 6) {
-        // let i=0;
-        // while (i < this.counter) {
           this.$store.state.orderedDrinks.push({item: this.menuItem, counter: this.counter});
-        //   i += 1
-        // }
+          let i=0;
+          while (i < this.counter) {
+            this.$store.state.cartCount += 1;
+            i += 1
+          }
       }
       else if (this.itemCategory =='PremadeBurger') {
         let i=0;
@@ -284,10 +288,13 @@ export default {
           let burger= {};
           burger={item: this.menuItem, bun: this.bun, protein: this.protein, vegetables: this.vegetables, sauces: this.sauces, price: this.price};
           this.$store.state.orderedPremadeBurgers.push(burger);
-          console.log(this.previous_route);
-          if (this.previous_route=='cart') {
+          // console.log(this.previous_route);
+          // if (this.previous_route=='cart') {
             this.$store.state.socket.emit('incrementCounterPremadeBurgers', {data: this.menuItem})
-          }
+          // }
+
+          this.$store.state.cartCount += 1;
+
           i += 1
         }
         this.$store.state.selectedPremadeBurger.splice(0, this.$store.state.selectedPremadeBurger.length);
@@ -390,9 +397,10 @@ text-align: center}
   width: 30%
 }
 
-/* #info .popuptext::after {
-  left: 45%
-} */
+.popuptext {
+  width: 250%;
+  left: 25%
+}
 
 .wrapper {
   grid-template-columns: 50% 50%
@@ -411,7 +419,7 @@ text-align: center}
 .price {
   font-size: 1.5vw;
   font-weight: bold;
-  padding-top: 70px;
+  padding-top: 5%;
 }
 
 #counter {
@@ -423,7 +431,7 @@ text-align: center}
 .ingredients {
   border-style:dashed;
   width: 70%;
-  margin-top: 70px;
+  margin-top: 5%;
   font-size: 1.2vw
 }
 
@@ -446,6 +454,10 @@ text-align: center}
   .price {
     padding-top: 5%
   }
+}
+
+.wrapper {
+  padding-top:0
 }
 
 </style>

@@ -3,7 +3,7 @@
       <img :src="icon" width=28%>
       <br>
       <p class="buttonText" id="text">{{text}}</p>
-      <p>{{secondaryText}}</p>
+      <slot name='cart'></slot>
     </button>
 </template>
 <script>
@@ -39,7 +39,8 @@ img {
 .buttonText {
     margin-block-start: 0em;
     margin-block-end: 0em;
-    font-size: 2vw
+    font-size: 2vw;
+    padding-bottom: 5%
 }
 
 button:hover{
@@ -60,7 +61,7 @@ button{
   border:none;
   background: none;
   text-align: center;
-  font-size: 20pt;
+  /* font-size: 20pt; */
   font-weight: bold;
   transition: background 250ms ease-in-out,
                 transform 150ms ease;

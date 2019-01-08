@@ -19,41 +19,6 @@
             <span class="price">{{ burger.price }} kr</span>
         </li>
           </ul>
-        <!-- <ul
-          v-for="(orderedBurger, index) in orderedBurgers"
-          :key="orderedBurger.buns['ingredient_'+lang] + index"
-          style="display: inline-block; width: 300px;vertical-align: top;"
-        >
-          <li>Buns: {{orderedBurger.buns['ingredient_'+lang]}} <button v-on:click='' v-if='Object.keys(orderedBurger.buns).length>0'>X</button></li>
-          <li>Protein: {{orderedBurger.protein['ingredient_'+lang]}} <button v-if='Object.keys(orderedBurger.protein).length>0'>X</button></li>
-          <li>
-            Vegetables:
-            <ul>
-              <li
-                v-for="item in orderedBurger.vegetables"
-                :key="item['ingredient_'+lang]"
-              >{{item['ingredient_'+lang]}} <button>X</button></li>
-            </ul>
-          </li>
-          <li>
-            Sauces:
-            <ul>
-              <li
-                v-for="item in orderedBurger.sauces"
-                :key="item['ingredient_'+lang]"
-              >{{item['ingredient_'+lang]}} <button>X</button></li>
-            </ul>
-          </li>
-          <li>
-            Extras:
-            <ul>
-              <li
-                v-for="item in orderedBurger.extras"
-                :key="item['ingredient_'+lang]"
-              >{{item['ingredient_'+lang]}} <button>X</button></li>
-            </ul>
-          </li>
-        </ul> -->
       </div>
       <h2>{{ uiLabels.drinks }}</h2>
       <p>
@@ -137,6 +102,7 @@ export default {
       if (item.category==7) {
         this.$store.state.socket.emit('decrementCounterPremadeBurgers', {data: item});
         this.OrderedPremadeBurgers.splice(index, 1);
+        this.$store.state.cartCount -= 1;
         this.price=0;
         this.calculatePrice();
       }
@@ -144,6 +110,7 @@ export default {
         let d=0;
         while (d<item.counter) {
           this.$store.state.socket.emit('decrementCounterDrinks', {data: item.item});
+          this.$store.state.cartCount -= 1;
           d += 1
         }
         this.$store.state.orderedDrinks.splice(index, 1);
@@ -154,6 +121,7 @@ export default {
         let s=0;
         while (s<item.counter) {
           this.$store.state.socket.emit('decrementCounterSides', {data: item.item});
+          this.$store.state.cartCount -= 1;
           s +=1
         }
         this.$store.state.orderedSides.splice(index, 1);
@@ -163,6 +131,7 @@ export default {
       else {
         this.orderedBurgers.splice(index, 1);
         this.$store.state.orderedBurgers.splice(index, 1);
+        this.$store.state.cartCount -= 1;
         this.price=0;
         this.calculatePrice()
       }
@@ -342,5 +311,10 @@ text-align: center}
   position: absolute;
   right: 60%;
   font-size: 1.2vw
+}
+
+.drink-wrapper {
+  display: grid;
+  grid-template-columns: 25% 25% 25% 25%
 }
 </style>

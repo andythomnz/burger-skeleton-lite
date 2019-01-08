@@ -9,6 +9,7 @@
     </div>
     <div>
       <basicButton
+        style="padding-bottom: 20%"
         :text="uiLabels.back"
         v-if="backRoute !== ''"
         v-on:buttonclick="BackPage(backRoute)"
@@ -19,11 +20,13 @@
     </div>
     <div>
       <basicButton
+        style="padding-bottom: 20%"
         v-if="nextButton"
         :text="uiLabels.next"
         v-on:buttonclick="NextPage(currentTab)"
       ></basicButton>
       <basicButton
+        style="padding-bottom: 20%"
         v-else-if="finishButton"
         :text="uiLabels.finish"
         v-on:buttonclick="FinishPage(currentTab)"
@@ -31,10 +34,11 @@
     </div>
     <div>
       <basicButton
+        id='cartButton'
         v-if="showCart"
         :text="uiLabels.cart"
         v-on:buttonclick="CartPage('Cart')"
-      ></basicButton>
+      ><p slot="cart" id="cartNumber" v-if="this.cartCount>0">{{cartCount}}</p></basicButton>
     </div>
   </div>
 </template>
@@ -55,10 +59,11 @@ export default {
     icon: String,
     nextRoute: "",
     backRoute: "",
-    showCart: Boolean.true,
+    showCart: Boolean.true
   },
   data: function () {
-    return {};
+    return {
+    };
   },
   activated () {
     // console.log(this.currentTab);
@@ -78,6 +83,9 @@ export default {
         return false;
       }
       return this.currentTab === 'Extras';
+    },
+    cartCount () {
+      return this.$store.state.cartCount
     }
   },
   methods: {
@@ -133,4 +141,21 @@ export default {
 .center {
   margin: auto auto;
 }
+
+#cartButton {
+  position: relative;
+  padding-bottom: 20%
+}
+
+#cartNumber {
+  position: absolute;
+  left: 75%;
+  bottom: 35%;
+  font-size: 1vw;
+  color: white;
+  background: red;
+  border-radius: 50%;
+  width: 30%
+}
+
 </style>
