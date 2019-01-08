@@ -43,9 +43,7 @@ io.on('connection', function (socket) {
     socket.emit('initialize', {
       orders: data.getAllOrders(),
       uiLabels: data.getUILabels(uiLang),
-      ingredients: data.getIngredients(),
-      notDone: data.getNotDone(),
-      isDone: data.getIsDone()
+      ingredients: data.getIngredients()
     });
   });
 
@@ -56,9 +54,7 @@ io.on('connection', function (socket) {
     socket.emit('orderNumber', orderIdAndName);
     io.emit('currentQueue', {
       orders: data.getAllOrders(),
-      ingredients: data.getIngredients(),
-      notDone: data.getNotDone(),
-      isDone: data.getIsDone() 
+      ingredients: data.getIngredients()
     });
   });
   // send UI labels in the chosen language
@@ -69,22 +65,17 @@ io.on('connection', function (socket) {
   // when order is marked as done, send updated queue to all connected clients
   socket.on('orderDone', function (orderId) {
     data.markOrderDone(orderId);
-    io.emit('currentQueue', { orders: data.getAllOrders(), notDone: data.getNotDone(), isDone: data.getIsDone() });
-  });
-
-  socket.on('itemDone', function (orderId, category) {
-    data.markItemDone(orderId, category);
-    io.emit('currentQueue', { orders: data.getAllOrders(), notDone: data.getNotDone(), isDone: data.getIsDone() });
+    io.emit('currentQueue', { orders: data.getAllOrders() });
   });
 
   socket.on('orderStarted', function (orderId) {
     data.markOrderStarted(orderId);
-    io.emit('currentQueue', { orders: data.getAllOrders(), notDone: data.getNotDone(), isDone: data.getIsDone() });
+    io.emit('currentQueue', { orders: data.getAllOrders() });
   });
 
   socket.on('orderNotStarted', function (orderId) {
     data.markOrderNotStarted(orderId);
-    io.emit('currentQueue', { orders: data.getAllOrders(), notDone: data.getNotDone(), isDone: data.getIsDone() });
+    io.emit('currentQueue', { orders: data.getAllOrders() });
   });
 
   socket.on('updateStock', function (item, saldo) {
