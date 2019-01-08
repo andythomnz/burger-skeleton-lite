@@ -63,7 +63,11 @@ export default {
       "incrementCounterPremadeBurgers", function(data) {
         console.log('increment');
         this.id=data.data.ingredient_id;
-        this.$refs.ingredient[this.id -62].counter += 1
+        this.previous_route=data.previous_route;
+        if (this.previous_route=='cart') {
+          this.$refs.ingredient[this.id -62].incrementCounter();
+        }
+        else { this.$refs.ingredient[this.id -62].counter += 1 }
       }.bind(this)
     );
     this.$store.state.socket.on(

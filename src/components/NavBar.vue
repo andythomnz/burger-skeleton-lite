@@ -150,7 +150,7 @@ export default {
 #cartNumber {
   position: absolute;
   left: 75%;
-  bottom: 35%;
+  bottom: 60%;
   font-size: 1vw;
   color: white;
   background: red;

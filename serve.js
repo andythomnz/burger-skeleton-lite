@@ -98,7 +98,7 @@ io.on('connection', function (socket) {
   });
 
   socket.on('incrementCounterPremadeBurgers', function (data) {
-    io.emit('incrementCounterPremadeBurgers', {data: data.data})
+    io.emit('incrementCounterPremadeBurgers', {data: data.data, previous_route: data.previous_route})
   });
 
   socket.on('decrementCounterDrinks', function (data) {

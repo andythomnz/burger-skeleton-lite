@@ -15,7 +15,7 @@
           <span class="price">{{ orderedBurger.price }} kr</span></li>
         </ul>
         <ul v-for="(burger, index) in OrderedPremadeBurgers" :key="burger.item['ingredient_id'] +index">
-          <li >{{ burger.item["ingredient_"+lang] }} <button v-on:click='RemoveItem(burger.item, index)'>X</button><button v-on:click="editBurger(burger, index)">EDIT </button>
+          <li >{{ burger.item["ingredient_"+lang] }} {{burger.count}}<button v-on:click='RemoveItem(burger.item, index)'>X</button><button v-on:click="editBurger(burger, index)">EDIT </button>
             <span class="price">{{ burger.price }} kr</span>
         </li>
           </ul>
@@ -141,6 +141,11 @@ export default {
         this.$store.state.drinks=item.item;
         this.$store.state.socket.emit('popup', {data: 'Drinks', counter:item.counter});
         this.$store.state.orderedDrinks.splice(index, 1);
+        let countD=0;
+        while (countD<item.counter) {
+          this.$store.state.cartCount -= 1;
+          countD += 1
+        }
         this.price=0;
         this.calculatePrice();
       }
@@ -148,6 +153,11 @@ export default {
         this.$store.state.sides=item.item;
         this.$store.state.socket.emit('popup', {data: 'Sides', counter:item.counter});
         this.$store.state.orderedSides.splice(index, 1);
+        let countS=0;
+        while (countS<item.counter) {
+          this.$store.state.cartCount -= 1;
+          countS += 1
+        }
         console.log(this.$store.state.orderedSides.length);
         this.price=0;
         this.calculatePrice();

@@ -106,13 +106,13 @@ export default {
       sauces: Array,
       extras: Array,
       orderedBurgers: [],
-      // previous_route: "",
+      previous_route: "",
     };
   },
   created: function() {
     this.clear();
     this.$store.state.socket.on('openPopup', function (data) {
-      // this.previous_route=data.previous_route;
+      this.previous_route=data.previous_route;
       if (data.data=='CustomBurger') {
         this.clear();
         this.itemCategory='CustomBurger';
@@ -162,7 +162,7 @@ export default {
       else if (data.data=='PremadeBurger') {
         this.clear();
         this.itemCategory='PremadeBurger';
-        this.title=this.uiLabels.premade_burgers;
+        this.title=this.uiLabels.premade_burger+' '+(this.$store.state.orderedPremadeBurgers.length+1);
         for (var i = 0; i < this.$store.state.selectedPremadeBurger.length; i++) {
           if (this.$store.state.selectedPremadeBurger[i].category===7) {
             this.menuItem=this.$store.state.selectedPremadeBurger[i];
@@ -239,8 +239,7 @@ export default {
       else if (this.itemCategory=='Sides')
       {this.$store.state.socket.emit('incrementCounterSides', {data: item})}
       else if (this.itemCategory=='PremadeBurger')
-      {
-        this.$store.state.socket.emit('incrementCounterPremadeBurgers', {data: item})}
+      {this.$store.state.socket.emit('incrementCounterPremadeBurgers', {data: item})}
     },
     decrement: function(item) {
       if (this.counter==0) {return}
@@ -286,13 +285,12 @@ export default {
         while (i < this.counter) {
           console.log('save PremadeBurger');
           let burger= {};
-          burger={item: this.menuItem, bun: this.bun, protein: this.protein, vegetables: this.vegetables, sauces: this.sauces, price: this.price};
+          burger={item: this.menuItem, bun: this.bun, protein: this.protein, vegetables: this.vegetables, sauces: this.sauces, price: this.price, count: i+1};
           this.$store.state.orderedPremadeBurgers.push(burger);
-          // console.log(this.previous_route);
-          // if (this.previous_route=='cart') {
-            this.$store.state.socket.emit('incrementCounterPremadeBurgers', {data: this.menuItem})
-          // }
-
+          console.log(this.previous_route);
+          if (this.previous_route=='cart') {
+            this.$store.state.socket.emit('incrementCounterPremadeBurgers', {data: this.menuItem, previous_route: 'cart'})
+          }
           this.$store.state.cartCount += 1;
 
           i += 1
