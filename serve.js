@@ -96,7 +96,7 @@ io.on('connection', function (socket) {
   socket.on('popup', function (data) {
     console.log(data.data);
     console.log(data.counter);
-    io.emit('openPopup', {data: data.data, counter: data.counter})
+    io.emit('openPopup', {data: data.data, counter: data.counter, cart: data.cart})
   });
 
   socket.on('incrementCounterDrinks', function (data) {
@@ -108,7 +108,7 @@ io.on('connection', function (socket) {
   });
 
   socket.on('incrementCounterPremadeBurgers', function (data) {
-    io.emit('incrementCounterPremadeBurgers', {data: data.data, previous_route: data.previous_route})
+    io.emit('incrementCounterPremadeBurgers', {data: data.data})
   });
 
   socket.on('decrementCounterDrinks', function (data) {

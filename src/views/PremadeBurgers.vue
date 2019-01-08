@@ -55,7 +55,7 @@ export default {
       bun: Object,
       protein: Object,
       vegetables: [],
-      sauces: []
+      sauces: [],
     };
   },
   mounted: function() {
@@ -63,11 +63,7 @@ export default {
       "incrementCounterPremadeBurgers", function(data) {
         console.log('increment');
         this.id=data.data.ingredient_id;
-        this.previous_route=data.previous_route;
-        if (this.previous_route=='cart') {
-          this.$refs.ingredient[this.id -62].incrementCounter();
-        }
-        else { this.$refs.ingredient[this.id -62].counter += 1 }
+        this.$refs.ingredient[this.id -62].incrementCounter();
       }.bind(this)
     );
     this.$store.state.socket.on(
@@ -80,15 +76,12 @@ export default {
   },
   methods: {
     addToOrder: function(item) {
-      this.chosenBurger = [];
-      this.price = 0;
-      this.chosenBurger.push(item);
-      this.price += +item.selling_price;
+      this.$store.state.selectedPremadeBurger.splice(0, this.$store.state.selectedPremadeBurger.length);
       this.$store.state.selectedPremadeBurger.push(item);
       this.bun= {};
       this.protein= {};
-      this.vegetables=[];
-      this.sauces=[];
+      this.vegetables.splice(0, this.vegetables.length);
+      this.sauces.splice(0, this.sauces.length);
       item.burger_vegetables=item.burger_vegetables.split(',');
       item.burger_sauces=item.burger_sauces.split(',');
       for (var i = 0; i < this.ingredients.length; i++) {
@@ -98,26 +91,18 @@ export default {
           this.$store.state.selectedPremadeBurger.push(this.ingredients[i])}
         else if (this.ingredients[i].category==2)
         {
-        // item.burger_vegetables=item.burger_vegetables.split(',');
         for (var v = 0; v < item.burger_vegetables.length; v++) {
           if (this.ingredients[i].ingredient_id==parseInt(item.burger_vegetables[v])) {
             this.$store.state.selectedPremadeBurger.push(this.ingredients[i]);
         }}}
         else if (this.ingredients[i].category==3){
-        // item.burger_sauces=item.burger_sauces.split(',');
         for (var s = 0; s < item.burger_sauces.length; s++) {
         if (this.ingredients[i].ingredient_id==parseInt(item.burger_sauces[s])) {
           this.$store.state.selectedPremadeBurger.push(this.ingredients[i])}
         }
       }
       }
-      // this.$store.commit('changeBurgerBun', this.bun);
-      // this.$store.commit('changeBurgerProtein', this.protein);
-      // this.$store.commit('changeBurgerVegetables', this.vegetables);
-      // this.$store.commit('changeBurgerSauces', this.sauces);
-      // this.$store.commit('toggleClose');
-      // this.$store.commit('toggleFinish');
-      this.$store.state.socket.emit('popup', {data: 'PremadeBurger', counter:this.$refs.ingredient[item.ingredient_id -62].counter});
+      this.$store.state.socket.emit('popup', {data: 'PremadeBurger', counter:this.$refs.ingredient[item.ingredient_id -62].counter, cart:false});
       this.$router.push({ name: "Popup" });
     }
     /*placeOrder: function() {

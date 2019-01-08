@@ -10,19 +10,28 @@
       <h1>{{ uiLabels.yourOrder}}</h1>
       <h2>{{ uiLabels.burgers }}</h2>
       <div style="width: 100%;height: auto;">
-        <ul v-for="(orderedBurger, index) in orderedBurgers" :key="orderedBurger.bun['ingredient_id'] + index">
-          <li>Customized burger {{index+1}} <button v-on:click="RemoveItem(orderedBurger, index)"> X </button><button v-on:click="editBurger(orderedBurger, index)">EDIT </button>
-          <span class="price">{{ orderedBurger.price }} kr</span></li>
-        </ul>
-        <ul v-for="(burger, index) in OrderedPremadeBurgers" :key="burger.item['ingredient_id'] +index">
-          <li >{{ burger.item["ingredient_"+lang] }} {{burger.count}}<button v-on:click='RemoveItem(burger.item, index)'>X</button><button v-on:click="editBurger(burger, index)">EDIT </button>
-            <span class="price">{{ burger.price }} kr</span>
-        </li>
-          </ul>
+        <div class='item-wrapper' v-for="(orderedBurger, index) in orderedBurgers" :key="orderedBurger.bun['ingredient_id'] + index">
+          <div>
+            <img v-bind:src="orderedBurger.bun.image" width="5%" style="padding-right:3%">
+            <span id='item_name'>Customized burger {{index+1}}</span>
+            <button id='removeButton' v-on:click="RemoveItem(orderedBurger, index)"> X </button>
+            <button id='editButton' v-on:click="editBurger(orderedBurger, index)">Edit</button>
+            <span class="item-price">{{ orderedBurger.price }} kr</span>
+          </div>
+        </div>
+        <div class='item-wrapper' v-for="(burger, index) in OrderedPremadeBurgers" :key="burger.item['ingredient_id'] +index">
+          <div>
+            <img v-bind:src="burger.item.image" width="5%" style="padding-right:3%">
+            <span id="item_name">{{ burger.item["ingredient_"+lang] }} {{burger.count}}</span>
+            <button id='removeButton' v-on:click='RemoveItem(burger.item, index)'>X</button>
+            <button id='editButton' v-on:click="editBurger(burger, index)">Edit</button>
+            <span class="item-price">{{ burger.price }} kr</span>
+        </div>
+      </div>
       </div>
       <h2>{{ uiLabels.drinks }}</h2>
       <p>
-      <div class="drink-wrapper">
+      <div class="item-wrapper">
         <div v-for="(item, index) in OrderedDrinks" :key="item.item.ingredient_id + index">
           <img
             v-bind:src="item.item.image"
@@ -35,7 +44,7 @@
         <span class="drink-price">{{ item.item.selling_price }} kr</span></div>
       </div></p>
       <h2>{{ uiLabels.sides }}</h2>
-      <p><div class="drink-wrapper" style="padding-bottom=3%">
+      <p><div class="item-wrapper" style="padding-bottom=3%">
         <div v-for="(item, index) in OrderedSides" :key="item.item.ingredient_id +index">
           <img
             v-bind:src="item.item.image"
@@ -280,8 +289,11 @@ export default {
           this.$store.state.selectedPremadeBurger.push(item.sauces[j])
         }
         this.$store.state.selectedPremadeBurger.push(item.price);
-        this.RemoveItem(item.item, index);
-        this.$store.state.socket.emit('popup', {data: 'PremadeBurger', counter: 1});
+        this.OrderedPremadeBurgers.splice(index, 1);
+        this.$store.state.cartCount -= 1;
+        this.price=0;
+        this.calculatePrice();
+        this.$store.state.socket.emit('popup', {data: 'PremadeBurger', counter: 1, cart: true});
       }
       else {
         this.$store.state.selectedBurger.push(item.bun);
@@ -337,19 +349,19 @@ text-align: center}
   font-size: 1.2vw
 }
 
-.drink-price {
+.item-price {
   position: absolute;
   right: 52%;
   bottom: 30%
 }
 
-.drink-wrapper {
+.item-wrapper {
   display: grid;
   grid-template-rows: auto;
   grid-gap: 8%
 }
 
-.drink-wrapper div{
+.item-wrapper div{
   position: relative;
   border-bottom-width:  5%;
   border-bottom-color: lightblue;

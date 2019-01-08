@@ -103,7 +103,7 @@ export default {
     //make a function that switches to another tab for the bread and burgers pages.
     //make the buttons highlihgt for the veggies and extras. with stylings and v-if
 
-    incrementCounter: function () {
+    incrementCounter: function (increment) {
       if (this.item.category === 5 || this.item.category === 6)
         { this.counter += 1;
           this.currentID = 'yellow-bg';
@@ -112,6 +112,7 @@ export default {
         this.counter += 1;
         this.currentID = 'yellow-bg';
         this.$emit("increment")
+
       }
       else {
         if (this.counter === 1) {

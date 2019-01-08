@@ -11,9 +11,9 @@
         <div id='half1'>
           <div id="item_name" v-if="itemCategory!= 'CustomBurger'" style="font-weight:bold; font-size:2vw; margin-bottom:10px"> {{ menuItem["ingredient_" +lang] }} </div>
           <div><img id="image" v-bind:src="menuItem.image" width="50%"></div>
-          <div><span><button v-on:click='decrement(menuItem)' style="font-size:1vw">-</button>
-            <span id='counter' style="font-size:1.5vw">{{this.counter}}</span>
-            <button v-on:click='increment(menuItem)' style="font-size:1vw">+</button></span></div>
+          <div style="padding-top:2%"><span><button v-if="this.cart==false" v-on:click='decrement(menuItem)' style="font-size:1vw">-</button>
+            <span :id="counterID" style="font-size:1.5vw">{{this.counter}}</span>
+            <button v-if="this.cart==false" v-on:click='increment(menuItem)' style="font-size:1vw">+</button></span></div>
         </div>
         <div id='half2'>
           <div class='icons'>
@@ -106,20 +106,19 @@ export default {
       sauces: Array,
       extras: Array,
       orderedBurgers: [],
-      previous_route: "",
+      cart: false,
+      counterID: "counter"
     };
   },
   created: function() {
     this.clear();
     this.$store.state.socket.on('openPopup', function (data) {
-      this.previous_route=data.previous_route;
       if (data.data=='CustomBurger') {
         this.clear();
         this.itemCategory='CustomBurger';
         this.orderedBurgers=this.$store.state.orderedBurgers;
         let number=0
         number= this.orderedBurgers.length+1
-        // this.orderedBurgers.push(Object.assign({}, this.$store.state.orders));
         this.title=this.uiLabels.customBurger +' '+ number;
         this.ingredients=this.$store.state.selectedBurger;
         for (var j = 0; j < this.ingredients.length; j++) {
@@ -161,6 +160,13 @@ export default {
       }
       else if (data.data=='PremadeBurger') {
         this.clear();
+        this.cart=data.cart;
+        if (this.cart==true) {
+          this.counterID="counterCart"
+        }
+        else {
+          this.counterID="counter"
+        }
         this.itemCategory='PremadeBurger';
         this.title=this.uiLabels.premade_burger+' '+(this.$store.state.orderedPremadeBurgers.length+1);
         for (var i = 0; i < this.$store.state.selectedPremadeBurger.length; i++) {
@@ -185,7 +191,6 @@ export default {
       }
       this.counter = data.counter;
       console.log(this.itemCategory);
-      console.log(this.orderedBurgers.length)
     }.bind(this));
   },
   methods: {
@@ -287,10 +292,6 @@ export default {
           let burger= {};
           burger={item: this.menuItem, bun: this.bun, protein: this.protein, vegetables: this.vegetables, sauces: this.sauces, price: this.price, count: i+1};
           this.$store.state.orderedPremadeBurgers.push(burger);
-          console.log(this.previous_route);
-          if (this.previous_route=='cart') {
-            this.$store.state.socket.emit('incrementCounterPremadeBurgers', {data: this.menuItem, previous_route: 'cart'})
-          }
           this.$store.state.cartCount += 1;
 
           i += 1
@@ -424,6 +425,10 @@ text-align: center}
   margin-left: 8%;
   border-color: grey;
   border-width: medium;
+}
+
+#counterCart {
+  margin-left: 23%
 }
 
 .ingredients {
