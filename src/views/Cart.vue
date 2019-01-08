@@ -41,7 +41,7 @@
           <span id='count' v-if="item.counter>1"> {{ item.counter }} </span>
           <button v-on:click='RemoveItem(item, index)' id='removeButton'>X</button>
           <button v-on:click='EditItem(item, index)' id='editButton'> Edit </button>
-        <span class="drink-price">{{ item.item.selling_price }} kr</span></div>
+        <span class="item-price">{{ item.item.selling_price }} kr</span></div>
       </div></p>
       <h2>{{ uiLabels.sides }}</h2>
       <p><div class="item-wrapper" style="padding-bottom=3%">
@@ -54,7 +54,7 @@
           <span id='count' v-if="item.counter>1"> {{ item.counter }} </span>
           <button id='removeButton' v-on:click='RemoveItem(item, index)'>X</button>
           <button id='editButton' v-on:click='EditItem(item, index)'> Edit </button>
-        <span class="drink-price">{{ item.item.selling_price }} kr</span></div>
+        <span class="item-price">{{ item.item.selling_price }} kr</span></div>
       </div></p>
       </div>
       <p style="font-weight:bold" class="price">{{ uiLabels.sum }}: {{ this.price }} kr</p>
@@ -221,7 +221,7 @@ export default {
         }
       }
       for (var b = 0; b < this.orderedBurgers.length; b++) {
-        chosenIngredients.push(this.orderedBurgers[b].buns);
+        chosenIngredients.push(this.orderedBurgers[b].bun);
         chosenIngredients.push(this.orderedBurgers[b].protein);
         for (var v = 0; v < this.orderedBurgers[b].vegetables.length; v++) {
           chosenIngredients.push(this.orderedBurgers[b].vegetables[v])
@@ -236,11 +236,11 @@ export default {
       for (var p = 0; p < this.OrderedPremadeBurgers.length; p++) {
         chosenIngredients.push(this.OrderedPremadeBurgers[p].bun);
         chosenIngredients.push(this.OrderedPremadeBurgers[p].protein);
-        for (var v = 0; v < this.OrderedPremadeBurgers[b].vegetables.length; v++) {
-          chosenIngredients.push(this.OrderedPremadeBurgers[b].vegetables[v])
+        for (var v = 0; v < this.OrderedPremadeBurgers[p].vegetables.length; v++) {
+          chosenIngredients.push(this.OrderedPremadeBurgers[p].vegetables[v])
         }
-        for (var s = 0; s < this.OrderedPremadeBurgers[b].sauces.length; s++) {
-          chosenIngredients.push(this.OrderedPremadeBurgers[b].sauces[s])
+        for (var s = 0; s < this.OrderedPremadeBurgers[p].sauces.length; s++) {
+          chosenIngredients.push(this.OrderedPremadeBurgers[p].sauces[s])
         }
       }
       let order = {
