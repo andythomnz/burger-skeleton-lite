@@ -80,8 +80,9 @@ Data.prototype.addOrder = function (order) {
   this.orders[orderId] = order.order;
   this.orders[orderId].orderId = orderId;
   this.orders[orderId].status = "not-started";
-  this.orders[orderId].prepare = new Array(7).fill(0);
-  for(var i=1;i<7;i++){
+  var categoryNum = 20; // the number 20 is to reserve scalable space
+  this.orders[orderId].prepare = new Array(categoryNum).fill(0); 
+  for(var i=1;i<categoryNum;i++){
     var categoryList = order.order.ingredients.map(item=>item["category"]);
     if(categoryList.indexOf(i)==-1){
       this.orders[orderId].prepare[i]=1;

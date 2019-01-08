@@ -9,9 +9,10 @@
         <th colspan="2" v-on:click="changeTable('MainTable')">{{ uiLabels.mainCourse }}</th>
         <th colspan="2" v-on:click="changeTable('sideTable')">{{ uiLabels.sideorders }}</th>
         <th colspan="2" v-on:click="changeTable('sauceTable')">{{ uiLabels.sauce }}</th>
-        <th colspan="2" v-on:click="changeTable('breadTable')">{{ uiLabels.bread }}</th>
+        <th colspan="1" v-on:click="changeTable('breadTable')">{{ uiLabels.bread }}</th>
         <th colspan="1" v-on:click="changeTable('snackTable')">{{ uiLabels.snack }}</th>
         <th colspan="1" v-on:click="changeTable('drinkTable')">{{ uiLabels.drink }}</th>
+        <th colspan="1" v-on:click="changeTable('burgerTable')">{{ uiLabels.premade_burgers }}</th>
       </tr>
     </thead>
   <tbody>
@@ -34,9 +35,10 @@
         <th colspan="2" class="tableName" v-on:click="changeTable('MainTable')">{{ uiLabels.mainCourse }}</th>
         <th colspan="2" v-on:click="changeTable('sideTable')">{{ uiLabels.sideorders }}</th>
         <th colspan="2" v-on:click="changeTable('sauceTable')">{{ uiLabels.sauce }}</th>
-        <th colspan="2" v-on:click="changeTable('breadTable')">{{ uiLabels.bread }}</th>
+        <th colspan="1" v-on:click="changeTable('breadTable')">{{ uiLabels.bread }}</th>
         <th colspan="1" v-on:click="changeTable('snackTable')">{{ uiLabels.snack }}</th>
         <th colspan="1" v-on:click="changeTable('drinkTable')">{{ uiLabels.drink }}</th>
+        <th colspan="1" v-on:click="changeTable('burgerTable')">{{ uiLabels.premade_burgers }}</th>
       </tr>
     </thead>
     <tbody>
@@ -60,9 +62,10 @@
         <th colspan="2" v-on:click="changeTable('MainTable')">{{ uiLabels.mainCourse }}</th>
         <th colspan="2" class="tableName" v-on:click="changeTable('sideTable')">{{ uiLabels.sideorders }}</th>
         <th colspan="2" v-on:click="changeTable('sauceTable')">{{ uiLabels.sauce }}</th>
-        <th colspan="2" v-on:click="changeTable('breadTable')">{{ uiLabels.bread }}</th>
+        <th colspan="1" v-on:click="changeTable('breadTable')">{{ uiLabels.bread }}</th>
         <th colspan="1" v-on:click="changeTable('snackTable')">{{ uiLabels.snack }}</th>
         <th colspan="1" v-on:click="changeTable('drinkTable')">{{ uiLabels.drink }}</th>
+        <th colspan="1" v-on:click="changeTable('burgerTable')">{{ uiLabels.premade_burgers }}</th>
       </tr>
     </thead>
     <tbody>
@@ -86,9 +89,10 @@
         <th colspan="2" v-on:click="changeTable('MainTable')">{{ uiLabels.mainCourse }}</th>
         <th colspan="2" v-on:click="changeTable('sideTable')">{{ uiLabels.sideorders }}</th>
         <th colspan="2" class="tableName" v-on:click="changeTable('sauceTable')">{{ uiLabels.sauce }}</th>
-        <th colspan="2" v-on:click="changeTable('breadTable')">{{ uiLabels.bread }}</th>
+        <th colspan="1" v-on:click="changeTable('breadTable')">{{ uiLabels.bread }}</th>
         <th colspan="1" v-on:click="changeTable('snackTable')">{{ uiLabels.snack }}</th>
         <th colspan="1" v-on:click="changeTable('drinkTable')">{{ uiLabels.drink }}</th>
+        <th colspan="1" v-on:click="changeTable('burgerTable')">{{ uiLabels.premade_burgers }}</th>
       </tr>
     </thead>
     <tbody>
@@ -112,9 +116,10 @@
         <th colspan="2" v-on:click="changeTable('MainTable')">{{ uiLabels.mainCourse }}</th>
         <th colspan="2" v-on:click="changeTable('sideTable')">{{ uiLabels.sideorders }}</th>
         <th colspan="2" v-on:click="changeTable('sauceTable')">{{ uiLabels.sauce }}</th>
-        <th colspan="2" class="tableName" v-on:click="changeTable('breadTable')">{{ uiLabels.bread }}</th>
+        <th colspan="1" class="tableName" v-on:click="changeTable('breadTable')">{{ uiLabels.bread }}</th>
         <th colspan="1" v-on:click="changeTable('snackTable')">{{ uiLabels.snack }}</th>
         <th colspan="1" v-on:click="changeTable('drinkTable')">{{ uiLabels.drink }}</th>
+        <th colspan="1" v-on:click="changeTable('burgerTable')">{{ uiLabels.premade_burgers }}</th>
       </tr>
     </thead>
     <tbody>
@@ -124,9 +129,9 @@
         :order-id="key"
         :ui-labels="uiLabels"
         :lang="lang"
-    :not-done="notDone"
-    :orders="orders"
-    :category="4"
+        :not-done="notDone"
+        :orders="orders"
+        :category="4"
         :key="key">
       </DetailItemToPrepare>
     </tbody>
@@ -138,9 +143,10 @@
         <th colspan="2" v-on:click="changeTable('MainTable')">{{ uiLabels.mainCourse }}</th>
         <th colspan="2" v-on:click="changeTable('sideTable')">{{ uiLabels.sideorders }}</th>
         <th colspan="2" v-on:click="changeTable('sauceTable')">{{ uiLabels.sauce }}</th>
-        <th colspan="2" v-on:click="changeTable('breadTable')">{{ uiLabels.bread }}</th>
+        <th colspan="1" v-on:click="changeTable('breadTable')">{{ uiLabels.bread }}</th>
         <th colspan="1" class="tableName" v-on:click="changeTable('snackTable')">{{ uiLabels.snack }}</th>
         <th colspan="1" v-on:click="changeTable('drinkTable')">{{ uiLabels.drink }}</th>
+        <th colspan="1" v-on:click="changeTable('burgerTable')">{{ uiLabels.premade_burgers }}</th>
       </tr>
     </thead>
     <tbody>
@@ -150,9 +156,9 @@
         :order-id="key"
         :ui-labels="uiLabels"
         :lang="lang"
-    :not-done="notDone"
-    :orders="orders"
-    :category="5"
+        :not-done="notDone"
+        :orders="orders"
+        :category="5"
         :key="key">
       </DetailItemToPrepare>
     </tbody>
@@ -164,9 +170,10 @@
         <th colspan="2" v-on:click="changeTable('MainTable')">{{ uiLabels.mainCourse }}</th>
         <th colspan="2" v-on:click="changeTable('sideTable')">{{ uiLabels.sideorders }}</th>
         <th colspan="2" v-on:click="changeTable('sauceTable')">{{ uiLabels.sauce }}</th>
-    <th colspan="2" v-on:click="changeTable('breadTable')">{{ uiLabels.bread }}</th>
-    <th colspan="1" v-on:click="changeTable('snackTable')">{{ uiLabels.snack }}</th>
-    <th colspan="1" class="tableName" v-on:click="changeTable('drinkTable')">{{ uiLabels.drink }}</th>
+        <th colspan="1" v-on:click="changeTable('breadTable')">{{ uiLabels.bread }}</th>
+        <th colspan="1" v-on:click="changeTable('snackTable')">{{ uiLabels.snack }}</th>
+        <th colspan="1" class="tableName" v-on:click="changeTable('drinkTable')">{{ uiLabels.drink }}</th>
+        <th colspan="1" v-on:click="changeTable('burgerTable')">{{ uiLabels.premade_burgers }}</th>
       </tr>
     </thead>
     <tbody>
@@ -176,13 +183,40 @@
         :order-id="key"
         :ui-labels="uiLabels"
         :lang="lang"
-    :not-done="notDone"
-    :orders="orders"
-    :category="6"
+        :not-done="notDone"
+        :orders="orders"
+        :category="6"
         :key="key">
       </DetailItemToPrepare>
     </tbody>
-  </table>   
+  </table>
+  <table id="burgerTable" class="orderQueue">
+    <thead>
+      <tr>
+        <th colspan="2" v-on:click="changeTable('completeTable')">{{ uiLabels.complete }}</th>
+        <th colspan="2" v-on:click="changeTable('MainTable')">{{ uiLabels.mainCourse }}</th>
+        <th colspan="2" v-on:click="changeTable('sideTable')">{{ uiLabels.sideorders }}</th>
+        <th colspan="2" v-on:click="changeTable('sauceTable')">{{ uiLabels.sauce }}</th>
+        <th colspan="1" v-on:click="changeTable('breadTable')">{{ uiLabels.bread }}</th>
+        <th colspan="1" v-on:click="changeTable('snackTable')">{{ uiLabels.snack }}</th>
+        <th colspan="1" v-on:click="changeTable('drinkTable')">{{ uiLabels.drink }}</th>
+        <th colspan="1" class="tableName" v-on:click="changeTable('burgerTable')">{{ uiLabels.premade_burgers }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <DetailItemToPrepare
+        v-for="(val, key) in notDone"
+        v-if="key%4 == 0"
+        :order-id="key"
+        :ui-labels="uiLabels"
+        :lang="lang"
+        :not-done="notDone"
+        :orders="orders"
+        :category="7"
+        :key="key">
+      </DetailItemToPrepare>
+    </tbody>
+  </table>    
   <h1>{{ uiLabels.ordersFinished }}</h1>
   <table id="finishTable" >  
   <tbody>
@@ -192,8 +226,8 @@
         :order-id="key"
         :ui-labels="uiLabels"
         :lang="lang"
-    :is-done="isDone"
-    :orders="orders"
+        :is-done="isDone"
+        :orders="orders"
         :key="key">
       </OrderItemIsDone>
   </tbody>
