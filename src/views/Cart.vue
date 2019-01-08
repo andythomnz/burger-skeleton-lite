@@ -22,27 +22,37 @@
       </div>
       <h2>{{ uiLabels.drinks }}</h2>
       <p>
-      <ul>
-        <li v-for="(item, index) in OrderedDrinks" :key="item.item.ingredient_id + index">{{ item.item["ingredient_"+lang] }}
-          <span v-if="item.counter>1"> {{ item.counter }} </span>
-          <button v-on:click='RemoveItem(item, index)'>X</button>
-          <button v-on:click='EditItem(item, index)'> Edit </button>
-        <span class="price">{{ item.item.selling_price }} kr</span></li>
-      </ul></p>
+      <div class="drink-wrapper">
+        <div v-for="(item, index) in OrderedDrinks" :key="item.item.ingredient_id + index">
+          <img
+            v-bind:src="item.item.image"
+            width="3%"
+            style="padding-right:3%">
+          <span id='item_name'>{{ item.item["ingredient_"+lang] }}</span>
+          <span id='count' v-if="item.counter>1"> {{ item.counter }} </span>
+          <button v-on:click='RemoveItem(item, index)' id='removeButton'>X</button>
+          <button v-on:click='EditItem(item, index)' id='editButton'> Edit </button>
+        <span class="drink-price">{{ item.item.selling_price }} kr</span></div>
+      </div></p>
       <h2>{{ uiLabels.sides }}</h2>
-      <p><ul>
-        <li v-for="(item, index) in OrderedSides" :key="item.item.ingredient_id +index">{{ item.item["ingredient_"+lang] }}
-          <span v-if="item.counter>1"> {{ item.counter }} </span>
-          <button v-on:click='RemoveItem(item, index)'>X</button>
-          <button v-on:click='EditItem(item, index)'> Edit </button>
-        <span class="price">{{ item.item.selling_price }} kr</span></li>
-      </ul></p>
-
+      <p><div class="drink-wrapper" style="padding-bottom=3%">
+        <div v-for="(item, index) in OrderedSides" :key="item.item.ingredient_id +index">
+          <img
+            v-bind:src="item.item.image"
+            width="5%"
+            style="padding-right:3%">
+          <span id='item_name'>{{ item.item["ingredient_"+lang] }}</span>
+          <span id='count' v-if="item.counter>1"> {{ item.counter }} </span>
+          <button id='removeButton' v-on:click='RemoveItem(item, index)'>X</button>
+          <button id='editButton' v-on:click='EditItem(item, index)'> Edit </button>
+        <span class="drink-price">{{ item.item.selling_price }} kr</span></div>
+      </div></p>
+      </div>
       <p style="font-weight:bold" class="price">{{ uiLabels.sum }}: {{ this.price }} kr</p>
       <button id='btn' v-on:click="Cancel()">{{ uiLabels.cancelOrder }}</button>
       <button id='btn' v-on:click="placeOrder()">{{ uiLabels.placeOrder }}</button>
 
-    </div>
+
   </div>
 </template>
 <script>
@@ -308,7 +318,11 @@ text-align: center}
 
 .order{
   margin-left: 2%;
-  font-size: 1.2vw
+  font-size: 1.2vw;
+  border-bottom-width:  5%;
+  border-bottom-color: lightblue;
+  border-bottom-style: outset;
+  margin-bottom: 2%
 }
 
 .order li button {
@@ -319,12 +333,58 @@ text-align: center}
 
 .price {
   position: absolute;
-  right: 60%;
+  right: 50%;
   font-size: 1.2vw
+}
+
+.drink-price {
+  position: absolute;
+  right: 52%;
+  bottom: 30%
 }
 
 .drink-wrapper {
   display: grid;
-  grid-template-columns: 25% 25% 25% 25%
+  grid-template-rows: auto;
+  grid-gap: 8%
 }
+
+.drink-wrapper div{
+  position: relative;
+  border-bottom-width:  5%;
+  border-bottom-color: lightblue;
+  border-bottom-style: groove;
+
+}
+
+#editButton {
+  position: absolute;
+  right: 35%;
+  bottom: 30%
+}
+
+#removeButton {
+  position: absolute;
+  right: 30%;
+  bottom: 30%;
+  border-radius: 50%;
+  border-style: solid;
+  height: 40%;
+  color: white;
+  background: radial-gradient(grey, lightgrey);
+  font-weight: bold;
+}
+
+#count {
+  position: absolute;
+  right: 75%;
+  bottom: 30%
+}
+
+#item_name {
+  padding-right:2%;
+  position: absolute;
+  bottom: 30%
+}
+
 </style>
