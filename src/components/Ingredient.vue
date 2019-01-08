@@ -4,6 +4,19 @@
     class="ingredient"
     :id="currentID"
   >
+    <div class='icons'>
+    <span v-if="item.milk_free" v-on:click="clickInfo('lactose')" id='info'>
+      <img src="../assets/milkfree.png" class="icon">
+      <p v-if='showLactose'><span class="popuptext" id="myInfo">This item is lactose-free</span></p>
+    </span>
+    <span v-if="item.gluten_free" v-on:click="clickInfo('gluten')" id='info'>
+      <img src="../assets/glutenfree.png" class="icon">
+      <p v-if='showGluten'><span class="popuptext" id="myInfo">This item is gluten-free</span></p>
+    </span>
+    <span v-if="item.vegan" v-on:click="clickInfo('vegan')" id='info'>
+      <img src="../assets/vegan.png" class="icon">
+      <p v-if='showVegan'><span class="popuptext" id="myInfo">This item is vegan</span></p>
+    </span></div>
     <label>
       <button
         :ref="'itemButton'+item.ingredient_id"
@@ -23,19 +36,6 @@
         <p id="counter" v-if="this.counter>0">{{ counter }}</p></div>
       </button>
     </label>
-      <div class='icons'>
-      <span v-if="item.milk_free" v-on:click="clickInfo('lactose')" id='info'>
-        <img src="../assets/milkfree.png" class="icon">
-        <p v-if='showLactose'><span class="popuptext" id="myInfo">This item is lactose-free</span></p>
-      </span>
-      <span v-if="item.gluten_free" v-on:click="clickInfo('gluten')" id='info'>
-        <img src="../assets/glutenfree.png" class="icon">
-        <p v-if='showGluten'><span class="popuptext" id="myInfo">This item is gluten-free</span></p>
-      </span>
-      <span v-if="item.vegan" v-on:click="clickInfo('vegan')" id='info'>
-        <img src="../assets/vegan.png" class="icon">
-        <p v-if='showVegan'><span class="popuptext" id="myInfo">This item is vegan</span></p>
-      </span></div>
 
 
 
@@ -234,10 +234,10 @@ button {
 }
 
 .icons {
-  padding-left: 25%;
+  padding-left: 15%;
   margin-top: 5%;
-  /* position: absolute;
-  bottom: 5% */
+  position: absolute;
+  top: 93%
 }
 
 .ingredient {
@@ -252,7 +252,8 @@ button {
 .price_number {
   font-size: 1.2vw;
   text-align: left;
-  margin-left: 20%
+  margin-left: 20%;
+  padding-bottom: 8%
 }
 
 @media (max-width: 600px) {
