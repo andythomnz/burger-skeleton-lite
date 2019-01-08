@@ -36,7 +36,7 @@
       <basicButton
         id='cartButton'
         v-if="showCart"
-        :text="uiLabels.cart"
+        :icon="require('@/assets/cart.png')"
         v-on:buttonclick="CartPage('Cart')"
       ><p slot="cart" id="cartNumber" v-if="this.cartCount>0">{{cartCount}}</p></basicButton>
     </div>
@@ -149,13 +149,14 @@ export default {
 
 #cartNumber {
   position: absolute;
-  left: 75%;
+  left: 45%;
   bottom: 60%;
   font-size: 1vw;
   color: white;
   background: red;
   border-radius: 50%;
-  width: 30%
+  width: 15%
 }
+
 
 </style>
