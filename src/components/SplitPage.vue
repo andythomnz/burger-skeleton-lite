@@ -39,7 +39,8 @@ export default {
 
 .splitpage button:hover,
 .splitpage button:focus{
-  background: lightyellow; cursor: pointer;
+  /*background: lightyellow; cursor: pointer;*/
+  background: rgb(253, 221, 170); cursor: pointer;
 }
 
 

@@ -240,19 +240,25 @@ export default {
 }
 </script>
 <style scoped>
+  body{
+    background: #FAFAFA;
+  }
+
   #orders {
     font-size:24pt;
   }
 
   h1 {
     text-transform: uppercase;
-    font-size: 1.4em;
+    font-size: 1.2em;
+
   }
   table {
     margin-left:auto; 
     margin-right:auto;
     display:none;
   }
+
   #completeTable {
     display:table;
   }

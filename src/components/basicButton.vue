@@ -44,7 +44,8 @@ img {
 }
 
 button:hover{
-  background: lightyellow; cursor: pointer;
+  /*background: lightyellow; cursor: pointer;*/
+  background: rgb(255, 214, 149); cursor: pointer;
 }
 
 button:focus {

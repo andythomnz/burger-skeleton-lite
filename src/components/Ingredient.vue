@@ -200,8 +200,10 @@ img {
 }
 
 .ingredient:hover {
-  background: lightyellow;
+  /*background: lightyellow;*/
   /* cursor: pointer; */
+  background: rgb(253, 202, 124); 
+  transform: scale(1.02);
 }
 
 .ingredient:focus {
@@ -211,7 +213,7 @@ img {
 
 .ingredient:active {
   transform: scale(0.99);
-  outline: yellow auto 5;
+  /*outline: yellow auto 5;*/
 }
 
 button:hover {
@@ -226,7 +228,7 @@ button {
   /* transition: background 250ms ease-in-out, transform 150ms ease; */
   display: block;
   width: 100%;
-  font-size: 2vw;
+  font-size: 1.5vw;
 }
 
 .icon{
@@ -242,9 +244,11 @@ button {
 }
 
 .ingredient {
-  background-color: lightblue;
-  border-style: inset;
-  border-color: lightblue;
+  /*background-color: lightblue;*/
+  background-color:rgb(255, 225, 185);
+  border-style: none;
+  border-radius: 1.3vw;
+  /*border-color: rgb(255, 173, 66);*/
   transition: background 250ms ease-in-out, transform 150ms ease;
   position: relative
 

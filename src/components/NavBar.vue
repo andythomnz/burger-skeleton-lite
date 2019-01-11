@@ -144,7 +144,7 @@ export default {
 
 #cartButton {
   position: relative;
-  padding-bottom: 20%
+  padding-bottom: 20%;
 }
 
 #cartNumber {

@@ -19,11 +19,12 @@ h2 {
 	background: none;
 	transition: background 250ms ease-in-out,
               transform 150ms ease;
-
+  border-radius: 0.8vw;
 }
 
 #btn:hover {
-	background: lightyellow; cursor: pointer;
+  /*background: lightyellow; cursor: pointer;*/
+  background: rgb(253, 221, 170); cursor: pointer;
 }
 
 #btn:focus {
