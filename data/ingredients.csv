@@ -1,0 +1,67 @@
+ingredient_id,ingredient_sv,ingredient_en,category,milk_free,gluten_free,vegan,selling_price,addi_cost,burger_ingredients_id,burger_bun,burger_protein,burger_vegetables,burger_sauces,image
+1,bönburgare,bean patty,1,1,1,1,40,0,,,,,,https://c1.staticflickr.com/5/4001/4683162341_7cf17f4451_b.jpg
+2,nötfärsburgare 100g,beef patty 100g,1,1,1,0,40,0,,,,,,https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfy98ABjDt2GRH9p1I-2tVq-knGqDazZW11ywNdqTi3BLHOYulUg
+3,nötfärsburgare 200g,beef patty 200g,1,1,1,0,60,20,,,,,,https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTgVYAH8p1WKPAcDPWMyW0uWgQ1CoDPWQ1RuUndnxcqLcg4-pbsg
+4,kycklingburgare,chicken patty,1,1,0,0,40,0,,,,,,https://upload.wikimedia.org/wikipedia/commons/c/c1/McD-McChicken_%28infobox%29.png
+5,friterad halloumi,deep-fried halloumi,1,0,0,0,40,0,,,,,,https://c1.staticflickr.com/1/598/31810780653_800d137ec5_b.jpg
+6,fiskfilé,fish filet,1,1,0,0,40,0,,,,,,https://c1.staticflickr.com/3/2730/4479377283_908249136d_b.jpg
+7,grillad aubergine,grilled eggplant,1,1,1,1,30,0,,,,,,https://c1.staticflickr.com/4/3258/2880725239_b4d88e5077_b.jpg
+8,hummer,lobster,1,1,1,0,80,40,,,,,,https://c1.staticflickr.com/6/5045/5283946994_83be57df6c_b.jpg
+9,pulled jackfruit,pulled jackfruit,1,1,1,1,40,0,,,,,,https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqJQkVyYHXwmHwCHSpCUqvVGEfvLFFv99GedKPFgoKJl1YZWfq
+10,pulled pork,pulled pork,1,1,1,0,40,0,,,,,,https://c1.staticflickr.com/3/2718/4217205733_55fcc042db_b.jpg
+11,avocado,avocado,2,1,1,1,5,5,,,,,,https://www.amando.it/imagesdyn/gallery_plus/orig_660/12/77/avocado-half-stack_127755.jpg
+12,bacon,bacon,2,1,1,0,5,5,,,,,,https://upload.wikimedia.org/wikipedia/commons/2/2e/500gfpx-Bacon.png
+13,banan,banana,2,1,1,1,5,0,,,,,,https://www.publicdomainpictures.net/pictures/160000/nahled/bananas-isolated-on-white.jpg
+14,löjrom,bleak caviar,2,1,1,0,50,45,,,,,,https://statics.lecourrierderussie.com/wp-content/uploads/2013/07/caviar.jpg
+15,karamelliserad lök,candied onions,2,1,1,1,5,0,,,,,,https://upload.wikimedia.org/wikipedia/commons/2/2d/Cooked_onions_in_frying_pan.JPG
+16,cheddar,cheddar cheese,2,0,1,0,10,5,,,,,,https://c1.staticflickr.com/5/4247/34870777711_8f74b5e297_b.jpg
+17,koriander,cilantro,2,1,1,1,5,0,,,,,,https://c1.staticflickr.com/4/3143/2648343226_58f61f7ed3_b.jpg
+18,coleslaw,coleslaw,2,1,1,0,5,0,,,,,,https://foedus.ru/wp-content/uploads/2017/10/90562298686fed12124d590.jpg
+19,friterade lökringar,deep-fried onion rings,2,1,0,1,15,10,,,,,,https://c1.staticflickr.com/3/2446/4123964588_82b85dc679.jpg
+20,stekt ägg,fried egg,2,1,1,0,10,5,,,,,,https://banner2.kisspng.com/20180204/upe/kisspng-fried-egg-yolk-frying-fried-egg-5a77a6d2571cd2.2273041015177909303568.jpg
+21,chèvre,goat cheese,2,0,1,0,10,5,,,,,,https://c1.staticflickr.com/4/3023/2907545950_3cf5041379_b.jpg
+22,jalapeño,jalapeño,2,1,1,1,5,0,,,,,,https://upload.wikimedia.org/wikipedia/commons/0/0f/Jalapeño.png
+23,kimchi,kimchi,2,1,1,1,10,5,,,,,,https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Gat-gimchi.jpg/800px-Gat-gimchi.jpg
+24,krispsallad,lettuce,2,1,1,1,5,0,,,,,,https://media.healthday.com/Images/icimages/romaine423.jpg
+25,svampstuvning,mushroom stew,2,0,1,0,15,10,,,,,,https://www.bauch.de/wp-content/uploads/2013/03/Fotolia_36776498_XS-300x283.jpg
+26,pepper jack-ost,pepper jack cheese,2,0,1,0,10,5,,,,,,https://upload.wikimedia.org/wikipedia/commons/b/ba/Pepperjack_Cheese.jpg
+27,inlagd gurka,pickled cucumber,2,1,1,1,5,0,,,,,,https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Polish_style_pickled_cucumbers_IMGP0443.jpg/800px-Polish_style_pickled_cucumbers_IMGP0443.jpg
+28,inlagd rödlök,pickled red onion,2,1,1,1,5,0,,,,,,https://c1.staticflickr.com/3/2614/3745923149_546be47604_b.jpg
+29,rå rödlök,raw red onion,2,1,1,1,5,0,,,,,,https://www.maxpixel.net/static/photo/1x/Fruit-Vegetable-Red-Onion-Onion-899095.jpg
+30,rå gul lök,raw yellow onion,2,1,1,1,5,0,,,,,,https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/White_onion_cross_section.jpg/615px-White_onion_cross_section.jpg
+31,salami,salami,2,1,1,0,10,5,,,,,,https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Salami_aka.jpg/800px-Salami_aka.jpg
+32,surkål,sauerkraut,2,1,1,1,5,0,,,,,,https://c1.staticflickr.com/1/907/41644809751_3f9085d2cd_b.jpg
+33,tomat,tomato,2,1,1,1,5,0,,,,,,https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Tomato_je.jpg/721px-Tomato_je.jpg
+34,vegansk ost,vegan cheese,2,1,1,1,10,5,,,,,,https://c1.staticflickr.com/2/1242/1416003606_2832bb12f7_b.jpg
+35,aioli,aioli,3,1,1,0,5,5,,,,,,https://c1.staticflickr.com/2/1740/28745192038_e3b0d4a359_b.jpg
+36,ajvar,ajvar,3,1,1,1,5,5,,,,,,https://upload.wikimedia.org/wikipedia/commons/b/bc/Lutenica.jpg
+37,barbecuesås,barbecue sauce,3,1,1,1,0,0,,,,,,https://c1.staticflickr.com/6/5165/5217243686_cafc960380_b.jpg
+38,klassisk hamburgarsås,classic hamburger dressing,3,1,1,0,5,5,,,,,,https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Béarnaise_sauce_with_Tarragon_garnish.jpeg/800px-Béarnaise_sauce_with_Tarragon_garnish.jpeg
+39,dijonsås,dijon sauce,3,1,1,0,5,5,,,,,,https://upload.wikimedia.org/wikipedia/commons/3/3c/Dijon_mustard_on_a_spoon_-_20051218.jpg
+40,guacamole,guacamole,3,1,1,1,10,10,,,,,,https://upload.wikimedia.org/wikipedia/commons/f/f9/Guacamole_-_AC.jpg
+41,hot salsa,hot salsa,3,1,1,1,5,5,,,,,,https://upload.wikimedia.org/wikipedia/commons/7/7e/Salsa_roja.jpg
+42,hummus,hummus,3,1,1,1,10,10,,,,,,https://www.maxpixel.net/static/photo/1x/Paste-Meal-Grains-Seeds-Hummus-Chickpeas-1057998.jpg
+43,ketchup,ketchup,3,1,1,1,0,0,,,,,,https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Ketchup-01.jpg/501px-Ketchup-01.jpg
+44,majonnäs,mayonnaise,3,1,1,0,5,5,,,,,,http://patzonenl.synology.me/ervo/wp-content/uploads/2016/03/mayonaise.jpg
+45,senap,mustard,3,1,1,1,0,0,,,,,,https://www.publicdomainpictures.net/pictures/260000/nahled/mustard-bottle.jpg
+46,sriracha,sriracha,3,1,1,1,0,0,,,,,,https://c1.staticflickr.com/3/2918/14059710450_be061bf402_b.jpg
+47,teriyakisås,teriyaki sauce,3,1,1,1,5,5,,,,,,https://upload.wikimedia.org/wikipedia/commons/6/63/Soy_sauce_2.jpg
+48,tryffelmajonnäs,truffle mayonnaise,3,1,1,0,5,5,,,,,,https://c1.staticflickr.com/3/2937/33435515330_dddfef7e37_b.jpg
+49,tzatziki,tzatziki,3,0,1,0,5,5,,,,,,https://c1.staticflickr.com/8/7032/6818317217_376d3e6ab0_b.jpg
+50,brioche,brioche,4,0,0,0,10,0,,,,,,https://c1.staticflickr.com/9/8199/27801929654_bee500750e_b.jpg
+51,glutenfritt bröd,gluten free bread,4,1,1,1,10,0,,,,,,http://www.greektownpita.ca/wp-content/uploads/2015/04/Nutrition-un-hamburger-maison-equilibre.jpg
+52,veganskt bröd,vegan bun,4,0,0,1,10,0,,,,,,https://images.pexels.com/photos/35195/burger-cheese-food-hamburger.jpg?auto=compress&cs=tinysrgb&h=750&w=1260
+53,fullkornsbrioche,whole wheat brioche,4,0,0,0,10,0,,,,,,https://www.maxpixel.net/static/photo/1x/Whole-Wheat-Hamburger-Food-Fast-Food-Home-1715388.jpg
+54,nachochips,nachos,5,1,0,1,20,0,,,,,,https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Nachos-cheese.jpg/398px-Nachos-cheese.jpg
+55,potatisstrips,potato fries,5,1,1,1,20,0,,,,,,https://c1.staticflickr.com/4/3525/3862654181_cf4040e9d2_b.jpg
+56,sötpotatisstrips,sweet potato fries,5,1,1,1,30,0,,,,,,https://c1.staticflickr.com/6/5029/5594197886_094cfd0837_b.jpg
+57,chokladmilkshake,chocolate milk shake,6,0,1,0,40,0,,,,,,https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Chocolate_Malt_with_Sprinkles.jpg/400px-Chocolate_Malt_with_Sprinkles.jpg
+58,pucko,pucko,6,0,1,0,25,0,,,,,,https://www.onfos.de/media/catalog/product/cache/2/image/394x394/9df78eab33525d08d6e5fb8d27136e95/5/7/5711953024399.jpg
+59,läsk,soda,6,1,1,1,20,0,,,,,,https://www.goodfreephotos.com/albums/vector-images/soda-with-central-straw.png
+60,jordgubbsmilkshake,strawberry milk shake,6,0,1,0,40,0,,,,,,https://c1.staticflickr.com/7/6055/5910973811_669bddc6e2_b.jpg
+61,vegansk mango lassi,vegan mango lassi,6,1,1,1,40,0,,,,,,https://c1.staticflickr.com/3/2752/4142353694_e5697e154a_b.jpg
+62,ham burgare,ham burger,7,0,1,0,70,0,"""2, 29, 24, 33, 27, 37, 45, 50""",50,2,"24,27,29,33","37, 45",http://www.greektownpita.ca/wp-content/uploads/2015/04/Nutrition-un-hamburger-maison-equilibre.jpg
+63,ost burgare,cheese burger,7,0,1,0,80,0,"""2, 29, 24, 33, 27, 37, 16, 45, 50""",50,2,"16, 24, 27, 29, 33","37, 45",https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Cheeseburger.jpg/800px-Cheeseburger.jpg
+64,fisk burgare,fish burger,7,0,1,0,75,0,"""6, 29, 24, 33, 27, 37, 44, 50""",50,6,"24, 27, 29, 33","37, 44",https://s3.eu-central-1.amazonaws.com/quickbelux/media/images/hot_fish_vfcUap.max-380x600.background-ffffff.format-jpeg.jpegquality-75.jpg
+65,grönsaks burgare,veggie burger,7,0,1,1,70,0,"""1, 29, 24, 33, 27, 37, 45, 50""",50,1,"24, 27, 29, 33","37, 45",https://upload.wikimedia.org/wikipedia/commons/8/86/Veggie_burger_miikkahoo_flickr_creative_commons.jpg
+66,halloumi burgare,halloumi burger,7,0,1,0,70,0,"""5, 29, 24, 33, 27, 50""",50,5,"24, 27, 29, 33",,https://c1.staticflickr.com/1/598/31810780653_800d137ec5_b.jpg
