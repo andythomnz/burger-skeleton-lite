@@ -21,7 +21,7 @@
       </div>
     </NavBar>
 
-    <h2> tab: {{currentTab}}</h2>
+    <h2 style='padding-left: 5%'>{{currentTab}}</h2>
     <div class="page">
       <keep-alive>
         <component
@@ -130,4 +130,27 @@ export default {
 }
 </script>
 <style scoped>
+
+button:hover{
+  background: rgb(255, 214, 149); cursor: pointer;
+}
+
+button:active {
+    transform: scale(0.99);
+    outline:yellow auto 5
+}
+
+button{
+  border-color: rgb(255, 214, 149);
+  border-radius: 10%;
+  text-align: center;
+  font-size: 1.2vw;
+  font-weight: bold;
+  background-color:rgb(255, 225, 185);
+  transition: background 250ms ease-in-out,
+                transform 150ms ease;
+  margin-right: 1%;
+  margin-bottom: 1%
+}
+
 </style>

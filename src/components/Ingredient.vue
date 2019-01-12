@@ -22,7 +22,7 @@
         :ref="'itemButton'+item.ingredient_id"
         v-on:click="incrementCounter"
       >
-        <p style='margin-top: 5%'>{{item["ingredient_"+ lang]}}</p>
+        <p style='margin-top: 5%; text-transform: capitalize;word-wrap: break-word;'>{{item["ingredient_"+ lang]}}</p>
         <img
           v-bind:src="item.image"
           width="50%"
@@ -230,15 +230,16 @@ button {
   width: 100%;
   height: 100%;
   font-size: 1.5vw;
+  font-family: "Verdana"
 }
 
 .icon{
-  width: 100%
+  width: 100%;
 }
 
 .icons {
   position: absolute;
-  top: 93%;
+  top: 90%;
   width: 50%
 }
 
@@ -249,7 +250,8 @@ button {
 .ingredient {
   background-color:rgb(255, 225, 185);
   border-style: none;
-  border-radius: 1.3vw;
+  border-radius: 10%;
+  margin-bottom: 10%;
   transition: background 250ms ease-in-out, transform 150ms ease;
   position: relative
 }
@@ -261,7 +263,7 @@ button {
   padding-bottom: 8%
 }
 
-@media (max-width: 600px) {
+@media (max-width: 800px) {
   .price_number {
     margin-left: 25%
   }

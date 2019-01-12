@@ -40,7 +40,8 @@ img {
     margin-block-start: 0em;
     margin-block-end: 0em;
     font-size: 2vw;
-    padding-bottom: 5%
+    padding-bottom: 5%;
+    font-family: "Verdana"
 }
 
 button:hover{
