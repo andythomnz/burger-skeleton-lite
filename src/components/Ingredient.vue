@@ -247,11 +247,9 @@ button {
 }
 
 .ingredient {
-  /*background-color: lightblue;*/
   background-color:rgb(255, 225, 185);
   border-style: none;
   border-radius: 1.3vw;
-  /*border-color: rgb(255, 173, 66);*/
   transition: background 250ms ease-in-out, transform 150ms ease;
   position: relative
 }
@@ -268,11 +266,19 @@ button {
     margin-left: 25%
   }
   #counter {
-    bottom: 100%
+    bottom: 100%;
+    font-size: 2vw
   }
   .popuptext {
-    left: 160%;
-    width: 250%
+    left: 150%;
+    width: 300%;
+    font-size: 1.5vw
+  }
+  .price_number {
+    font-size: 1.5vw
+  }
+  button {
+    font-size: 2vw
   }
 }
 

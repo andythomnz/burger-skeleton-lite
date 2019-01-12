@@ -158,4 +158,10 @@ export default {
   width: 30%
 }
 
+@media (max-width: 600px) {
+  #cartNumber {
+    font-size: 1.5vw
+  }
+}
+
 </style>
