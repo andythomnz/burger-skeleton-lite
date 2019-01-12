@@ -3,25 +3,26 @@
     {{orderId}} : {{ order.ingredients.filter(function(item, index, array){return item.category === category;}).map(item=>item["ingredient_"+ lang]).join(", ") }}
     <button v-if="order.prepare[category]==0" v-on:click="itemDone(orderId, category)">
       {{uiLabels.ready}}
-    </button>		
+    </button>
   </td>
 </template>
 <script>
+import sharedVueStuff from "@/components/sharedVueStuff.js";
 export default {
   name: 'DetailItem',
   props: {
-    uiLabels: Object,
     order: Object,
     orderId: Number,
     lang: String,
     category: Number
   },
+  mixins: [sharedVueStuff],
   methods: {
     itemDone: function (id, item) {
       // sending 'done' message to parent component or view so that it
       // can catch it with v-on:done in the component declaration
       this.$store.state.socket.emit("itemDone", id, item);
-    }  
+    }
   }
 }
 </script>

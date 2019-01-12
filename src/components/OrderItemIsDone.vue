@@ -4,7 +4,6 @@
     <OrderItem
       v-for="n in 3"
       v-if="isDone[orderId+n-1] !== undefined"
-      :ui-labels="uiLabels"
       :lang="lang"
       :order-id="isDone[orderId+n-1]"
       :order="orders[isDone[orderId+n-1]]"
@@ -14,17 +13,17 @@
 </template>
 <script>
 import OrderItem from '@/components/OrderItem.vue'
-
+import sharedVueStuff from "@/components/sharedVueStuff.js";
 export default {
   name: 'OrderItemIsDone',
   components: { OrderItem },
   props: {
-    uiLabels: Object,
     orderId: Number,
     lang: String,
     isDone: Array,
     orders: Object
   },
+  mixins: [sharedVueStuff],
   methods: {
 
   }
@@ -32,7 +31,7 @@ export default {
 </script>
 <style scoped>
   table {
-    margin-left:auto; 
+    margin-left:auto;
     margin-right:auto;
     display:none;
   }
