@@ -29,7 +29,7 @@
         style="padding-bottom: 20%"
         v-else-if="finishButton"
         :text="uiLabels.finish"
-        v-on:buttonclick="FinishPage(currentTab)"
+        v-on:buttonclick="FinishPage()"
       ></basicButton>
     </div>
     <div>
@@ -37,7 +37,7 @@
         id='cartButton'
         v-if="showCart"
         :icon="require('@/assets/cart.png')"
-        v-on:buttonclick="CartPage('Cart')"
+        v-on:buttonclick="CartPage()"
       ><p slot="cart" id="cartNumber" v-if="this.cartCount>0">{{cartCount}}</p></basicButton>
     </div>
   </div>
@@ -89,29 +89,24 @@ export default {
     }
   },
   methods: {
-    NextPage: function (route, type) {
-      //console.log("Back route: " + this.backRoute);
+    NextPage: function (route) {
       if (this.currentTab === 'Vegetables') {
         this.$store.commit('changeCurrentTab', 'Sauces');
       } else if (this.currentTab === 'Sauces') {
         this.$store.commit('changeCurrentTab', 'Extras');
       }
-      // else if (this.currentTab === 'Extras' && type !== 'back') {
-      //   this.$store.commit('toggleClose');
-      //   this.$router.push({ name: 'Cart' });
-      // }
     },
     BackPage (route) {
       this.$router.push({ name: route });
     },
-    FinishPage (route) {
+    FinishPage () {
       this.$store.commit('toggleClose');
       this.$store.commit('toggleFinish');
       this.$store.state.socket.emit('popup', {data: 'CustomBurger', counter: 1});
       this.$router.push({ name: 'Popup' });
     },
-    CartPage (route) {
-      this.$router.push({ name: route });
+    CartPage () {
+      this.$router.push({ name: 'Cart' });
     }
   }
 };

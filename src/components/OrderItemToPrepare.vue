@@ -22,8 +22,8 @@ export default {
     uiLabels: Object,
     orderId: Number,
     lang: String,
-	notDone: Array,
-	orders: Object
+	  notDone: Array,
+	  orders: Object
   },
   methods: {
 
@@ -35,7 +35,7 @@ export default {
 </script>
 <style scoped>
   table {
-    margin-left:auto; 
+    margin-left:auto;
     margin-right:auto;
     display:none;
   }

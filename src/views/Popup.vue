@@ -16,7 +16,7 @@
             <button v-if="this.cart==false" v-on:click='increment(menuItem)' style="font-size:1vw">+</button></span></div>
         </div>
         <div id='half2'>
-          <div class='icons'>
+          <div class='icons' v-if="itemCategory!= 'CustomBurger'" >
           <div v-if="menuItem.milk_free" v-on:click="clickInfo('lactose')" id='info'>
             <img src="../assets/milkfree.png" class="icon">
             <p v-if='showLactose'><span class="popuptext" id="myInfo">This item is lactose-free</span></p>
@@ -357,7 +357,7 @@ export default {
               this.premadeBurgerNo=count+1
             }
             burger={item: this.menuItem, bun: this.bun, protein: this.protein, vegetables: this.vegetables, sauces: this.sauces, price: this.price, count: this.premadeBurgerNo}
-          };
+          }
           this.$store.state.orderedPremadeBurgers.push(burger);
           this.$store.state.cartCount += 1;
 

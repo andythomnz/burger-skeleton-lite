@@ -42,7 +42,8 @@
           <button v-on:click='RemoveItem(item, index)' id='removeButton'>X</button>
           <button v-on:click='EditItem(item, index)' id='editButton'> Edit </button>
         <span class="item-price">{{ item.item.selling_price }} kr</span></div>
-      </div></p>
+      </div>
+    </p>
       <h2>{{ uiLabels.sides }}</h2>
       <p><div class="item-wrapper" style="padding-bottom=3%">
         <div v-for="(item, index) in OrderedSides" :key="item.item.ingredient_id +index">
@@ -55,7 +56,8 @@
           <button id='removeButton' v-on:click='RemoveItem(item, index)'>X</button>
           <button id='editButton' v-on:click='EditItem(item, index)'> Edit </button>
         <span class="item-price">{{ item.item.selling_price }} kr</span></div>
-      </div></p>
+      </div>
+    </p>
       </div>
       <p style="font-weight:bold" class="price">{{ uiLabels.sum }}: {{ this.price }} kr</p>
       <button id='btn' v-on:click="Cancel()">{{ uiLabels.cancelOrder }}</button>

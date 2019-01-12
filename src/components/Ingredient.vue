@@ -30,32 +30,10 @@
         >
         <div class="price_number">
         <p v-if="item.category === 5 || item.category === 6 || item.category === 7">{{uiLabels.price}}: {{item.selling_price}} kr</p>
-        <!--p>{{uiLabels.stock}}: {{item.stock}}</p-->
         <p v-if="item.addi_cost>0">+ {{item.addi_cost}}kr</p>
-        <!-- <p>Stock: {{item.stock}}</p> -->
         <p id="counter" v-if="this.counter>0">{{ counter }}</p></div>
       </button>
     </label>
-
-
-
-    <!-- TODO Change the text in the basicButton to be language sensitive
-
-  <div class="ingredient" >
-    <label>
-      <button v-on:click="incrementCounter">{{ counter }}</button>
-      <ul>
-        <img v-bind:src="item.image" width="20%">
-
-        <li>{{item["ingredient_"+ lang]}}</li>
-        <li>{{item.selling_price}}:-</li><li>{{item.stock}} pcs</li>-->
-
-    <!--  Change the text in the basicButton to be language sensitive
-
-    {{item["ingredient_"+ lang]}}
-
-    also do something with the stock and price {{item.selling_price}}:-, {{item.stock}} pcs
-    -->
   </div>
 </template>
 
@@ -70,10 +48,8 @@ export default {
   mixins: [sharedVueStuff],
   props: {
     item: Object,
-    // lang: String,
     currentKey: [String, Number],
     saucesCount: [String, Number],
-    proteinCount: [String, Number]
   },
   data: function () {
     return {
@@ -91,7 +67,7 @@ export default {
   },
   watch: {
     currentKey () {
-      if (this.currentTab === 'Buns' || this.currentTab === 'Protein') {
+      if (this.currentTab === 'Vegetables' || this.currentTab === 'Protein') {
         if (this.currentKey !== this.item.ingredient_id) {
           this.counter = 0;
           this.currentID = '';
@@ -103,7 +79,7 @@ export default {
     //make a function that switches to another tab for the bread and burgers pages.
     //make the buttons highlihgt for the veggies and extras. with stylings and v-if
 
-    incrementCounter: function (increment) {
+    incrementCounter: function () {
       if (this.item.category === 5 || this.item.category === 6)
         { this.counter += 1;
           this.currentID = 'yellow-bg';
@@ -122,9 +98,6 @@ export default {
           return;
         }
         if (+this.saucesCount >= 2) {
-          return;
-        }
-        if (+this.proteinCount >= 1) {
           return;
         }
         this.counter = 1;
