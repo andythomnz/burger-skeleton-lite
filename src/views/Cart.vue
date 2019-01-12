@@ -288,7 +288,7 @@ export default {
         for (var j = 0; j < item.sauces.length; j++) {
           this.$store.state.selectedPremadeBurger.push(item.sauces[j])
         }
-        this.$store.state.selectedPremadeBurger.push(item.price);
+        this.$store.state.selectedPremadeBurger.push(item.count);
         this.OrderedPremadeBurgers.splice(index, 1);
         this.$store.state.cartCount -= 1;
         this.price=0;

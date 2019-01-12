@@ -107,7 +107,8 @@ export default {
       extras: Array,
       orderedBurgers: [],
       cart: false,
-      counterID: "counter"
+      counterID: "counter",
+      premadeBurgerNo: 0
     };
   },
   created: function() {
@@ -185,6 +186,12 @@ export default {
           }
           else if (this.$store.state.selectedPremadeBurger[i].category===3) {
             this.sauces.push(this.$store.state.selectedPremadeBurger[i])
+          }
+          else {
+            if (this.cart==true) {
+              this.premadeBurgerNo=this.$store.state.selectedPremadeBurger[i];
+              console.log(this.premadeBurgerNo)
+            }
           }
         }
         this.calculatePrice()
@@ -286,11 +293,34 @@ export default {
           }
       }
       else if (this.itemCategory =='PremadeBurger') {
+        let count=0;
+        for (var j = 0; j < this.$store.state.orderedPremadeBurgers.length; j++) {
+          if (this.$store.state.orderedPremadeBurgers[j].item.ingredient_id==this.menuItem.ingredient_id) {
+            count += 1
+          }
+        }
+        let number=0;
+        if (this.cart==true) {
+          number=this.counter
+        }
+        else {
+          number=this.counter-count
+        }
         let i=0;
-        while (i < this.counter) {
+        while (i < number) {
           console.log('save PremadeBurger');
           let burger= {};
-          burger={item: this.menuItem, bun: this.bun, protein: this.protein, vegetables: this.vegetables, sauces: this.sauces, price: this.price, count: i+1};
+          if (this.cart==true) {
+            burger={item: this.menuItem, bun: this.bun, protein: this.protein, vegetables: this.vegetables, sauces: this.sauces, price: this.price, count: this.premadeBurgerNo};
+          }
+          else {
+            if (count == 0 ) {
+              this.premadeBurgerNo=i+1}
+            else {
+              this.premadeBurgerNo=count+1
+            }
+            burger={item: this.menuItem, bun: this.bun, protein: this.protein, vegetables: this.vegetables, sauces: this.sauces, price: this.price, count: this.premadeBurgerNo}
+          };
           this.$store.state.orderedPremadeBurgers.push(burger);
           this.$store.state.cartCount += 1;
 
