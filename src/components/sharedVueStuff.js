@@ -31,6 +31,7 @@ var sharedVueStuff = {
       this.notDone = data.notDone;
       this.isDone = data.isDone;
       this.ingredients = data.ingredients;
+      this.$store.state.ingredients=this.ingredients;
     }.bind(this));
 
     this.$store.state.socket.on('switchLang', function (data) {
