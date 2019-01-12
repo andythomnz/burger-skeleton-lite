@@ -279,16 +279,7 @@ export default {
     },
     editBurger: function(item, index) {
       if (item.item.category === 7) {
-        this.$store.state.selectedPremadeBurger.push(item.item);
-        this.$store.state.selectedPremadeBurger.push(item.bun);
-        this.$store.state.selectedPremadeBurger.push(item.protein);
-        for (var i = 0; i < item.vegetables.length; i++) {
-          this.$store.state.selectedPremadeBurger.push(item.vegetables[i])
-        }
-        for (var j = 0; j < item.sauces.length; j++) {
-          this.$store.state.selectedPremadeBurger.push(item.sauces[j])
-        }
-        this.$store.state.selectedPremadeBurger.push(item.count);
+        this.$store.state.selectedPremadeBurger={item: item.item, count: item.count};
         this.OrderedPremadeBurgers.splice(index, 1);
         this.$store.state.cartCount -= 1;
         this.price=0;

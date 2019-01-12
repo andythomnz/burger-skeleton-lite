@@ -171,31 +171,65 @@ export default {
         }
         this.itemCategory='PremadeBurger';
         console.log(this.ingredients.length);
-        this.title=this.uiLabels.premade_burger+' '+(this.$store.state.orderedPremadeBurgers.length+1);
-        for (var i = 0; i < this.$store.state.selectedPremadeBurger.length; i++) {
-          if (this.$store.state.selectedPremadeBurger[i].category===7) {
-            this.menuItem=this.$store.state.selectedPremadeBurger[i];
-            console.log(this.menuItem.category);
+        this.menuItem=this.$store.state.selectedPremadeBurger.item;
+        let burger_vegetables= [];
+        burger_vegetables=this.menuItem.burger_vegetables.split(',');
+        let burger_sauces= [];
+        burger_sauces=this.menuItem.burger_sauces.split(',');
+        for (var i = 0; i < this.ingredients.length; i++) {
+          if (this.ingredients[i].ingredient_id===this.menuItem.burger_bun)
+          {this.bun=this.ingredients[i]}
+          else if (this.ingredients[i].ingredient_id===this.menuItem.burger_protein) {
+            this.protein=this.ingredients[i]}
+          else if (this.ingredients[i].category==2)
+          {
+          for (var v = 0; v < burger_vegetables.length; v++) {
+            if (this.ingredients[i].ingredient_id==parseInt(burger_vegetables[v])) {
+              this.vegetables.push(this.ingredients[i]);
+          }}}
+          else if (this.ingredients[i].category==3){
+          for (var s = 0; s < burger_sauces.length; s++) {
+          if (this.ingredients[i].ingredient_id==parseInt(burger_sauces[s])) {
+            this.sauces.push(this.ingredients[i])}
           }
-          else if (this.$store.state.selectedPremadeBurger[i].category===4) {
-            this.bun=this.$store.state.selectedPremadeBurger[i]
-          }
-          else if (this.$store.state.selectedPremadeBurger[i].category===1) {
-            this.protein=this.$store.state.selectedPremadeBurger[i]
-          }
-          else if (this.$store.state.selectedPremadeBurger[i].category===2) {
-            this.vegetables.push(this.$store.state.selectedPremadeBurger[i])
-          }
-          else if (this.$store.state.selectedPremadeBurger[i].category===3) {
-            this.sauces.push(this.$store.state.selectedPremadeBurger[i])
           }
           else {
-            if (this.cart==true) {
-              this.premadeBurgerNo=this.$store.state.selectedPremadeBurger[i];
-              console.log(this.premadeBurgerNo)
+              if (this.cart==true) {
+                this.premadeBurgerNo=this.$store.state.selectedPremadeBurger.count;
+                console.log(this.premadeBurgerNo)
+              }
             }
-          }
         }
+        if (this.cart==false) {
+          this.title=this.uiLabels.premade_burger+' '+(this.$store.state.orderedPremadeBurgers.length+1);
+        }
+        else {
+          this.title=this.uiLabels.premade_burger+' '+(this.premadeBurgerNo);
+        }
+        // for (var i = 0; i < this.$store.state.selectedPremadeBurger.length; i++) {
+        //   if (this.$store.state.selectedPremadeBurger[i].category===7) {
+        //     this.menuItem=this.$store.state.selectedPremadeBurger[i];
+        //     console.log(this.menuItem.category);
+        //   }
+        //   else if (this.$store.state.selectedPremadeBurger[i].category===4) {
+        //     this.bun=this.$store.state.selectedPremadeBurger[i]
+        //   }
+        //   else if (this.$store.state.selectedPremadeBurger[i].category===1) {
+        //     this.protein=this.$store.state.selectedPremadeBurger[i]
+        //   }
+        //   else if (this.$store.state.selectedPremadeBurger[i].category===2) {
+        //     this.vegetables.push(this.$store.state.selectedPremadeBurger[i])
+        //   }
+        //   else if (this.$store.state.selectedPremadeBurger[i].category===3) {
+        //     this.sauces.push(this.$store.state.selectedPremadeBurger[i])
+        //   }
+        //   else {
+        //     if (this.cart==true) {
+        //       this.premadeBurgerNo=this.$store.state.selectedPremadeBurger[i];
+        //       console.log(this.premadeBurgerNo)
+        //     }
+        //   }
+        // }
         this.calculatePrice()
       }
       this.counter = data.counter;
@@ -243,7 +277,7 @@ export default {
         this.$store.state.selectedBurger.splice(0, this.$store.state.selectedBurger.length);
         console.log(this.$store.state.selectedBurger.length)}
       else if (this.itemCategory=='PremadeBurger') {
-        this.$store.state.selectedPremadeBurger.splice(0, this.$store.state.selectedPremadeBurger.length)
+        this.$store.state.selectedPremadeBurger={}
       }
       this.$router.push({ name: "MainMenu" });
     },
@@ -329,7 +363,7 @@ export default {
 
           i += 1
         }
-        this.$store.state.selectedPremadeBurger.splice(0, this.$store.state.selectedPremadeBurger.length);
+        this.$store.state.selectedPremadeBurger={};
       }
       this.$router.push({ name: route });
     },
