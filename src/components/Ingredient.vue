@@ -196,13 +196,13 @@ img {
 }
 
 #yellow-bg {
-  background: lightyellow;
+  background: rgb(253, 202, 124);
 }
 
 .ingredient:hover {
   /*background: lightyellow;*/
   /* cursor: pointer; */
-  background: rgb(253, 202, 124); 
+  background: rgb(253, 202, 124);
   transform: scale(1.02);
 }
 
@@ -228,19 +228,22 @@ button {
   /* transition: background 250ms ease-in-out, transform 150ms ease; */
   display: block;
   width: 100%;
+  height: 100%;
   font-size: 1.5vw;
 }
 
 .icon{
-  width: 2em;
-  margin-right: 10%
+  width: 100%
 }
 
 .icons {
-  padding-left: 15%;
-  margin-top: 5%;
   position: absolute;
-  top: 93%
+  top: 93%;
+  width: 50%
+}
+
+.popuptext {
+  left: -8%;
 }
 
 .ingredient {
@@ -251,7 +254,6 @@ button {
   /*border-color: rgb(255, 173, 66);*/
   transition: background 250ms ease-in-out, transform 150ms ease;
   position: relative
-
 }
 
 .price_number {
@@ -267,6 +269,10 @@ button {
   }
   #counter {
     bottom: 100%
+  }
+  .popuptext {
+    left: 160%;
+    width: 250%
   }
 }
 

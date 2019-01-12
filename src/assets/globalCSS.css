@@ -1,9 +1,9 @@
 .wrapper {
 	display: grid;
-	grid-gap: 2em;
+	grid-gap: 10%;
 	grid-template-columns: repeat(auto-fit, calc(12em + 10px));;
 	padding-top: 5%;
-	padding-left: 2%
+	padding-left: 5%
 }
 
 h1 {
@@ -37,10 +37,6 @@ h2 {
     outline:yellow auto 5
 }
 
-.icon{
-  width:2em;
-}
-
 #info {
   position: relative;
   display: inline-block;
@@ -69,16 +65,7 @@ h2 {
   position: absolute;
   z-index: 1;
   bottom: 125%;
-  left: 10%;
   margin-left: -80px;
-}
-
-@media (max-width: 600px) {
-	.popuptext {
-		width: 300%;
-		left: 150%;
-		font-size: 1.5vw
-	}
 }
 
 #info .popuptext::after {
@@ -99,4 +86,18 @@ h2 {
 @keyframes fadeIn {
   from {opacity: 0;}
   to {opacity:1 ;}
+}
+
+.icon{
+  width: 70%;
+  float:left
+}
+
+.icons {
+  margin-top: 5%;
+  display:grid;
+  grid-template-columns: 33% 33% 33%;
+  margin-left: 10%;
+  margin-right: 10%;
+  width: 30%
 }

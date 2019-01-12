@@ -382,7 +382,7 @@ text-align: center}
   font-weight: bold;
 }
 
-.icon{
+/* .icon{
   width: 70%;
   float:left
 }
@@ -394,7 +394,7 @@ text-align: center}
   margin-left: 10%;
   margin-right: 10%;
   width: 30%
-}
+} */
 
 .popuptext {
   width: 250%;
@@ -456,6 +456,10 @@ text-align: center}
   }
   .price {
     padding-top: 5%
+  }
+  .popuptext {
+  	width: 300%;
+  	left: 170%;
   }
 }
 
