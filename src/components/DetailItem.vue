@@ -2,11 +2,11 @@
   <td colspan="3" height="100">
     {{uiLabels.order}} {{orderId}}:
     <ul>
-      <li v-for="(item, key) in order.ingredients.filter(function(item){return item.category === category;})" :key="index">
+      <li v-for="(item, key) in order.ingredients.filter(function(item){return item.category === category;})" :key="key">
         {{ item["ingredient_"+ lang]}}
       </li>
     </ul>
-    <button v-if="order.prepare[category]==0" v-on:click="itemDone(orderId, category)">
+    <button id='btn' v-if="order.prepare[category]==0" v-on:click="itemDone(orderId, category)">
       {{uiLabels.ready}}
     </button>
   </td>
@@ -34,6 +34,10 @@ export default {
 
 button {
   font-size: 1vw
+}
+
+li {
+  font-size: 1.2vw
 }
 
 </style>

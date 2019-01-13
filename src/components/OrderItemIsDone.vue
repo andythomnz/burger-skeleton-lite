@@ -33,18 +33,14 @@ export default {
 }
 </script>
 <style scoped>
-  table {
-    margin-left:auto;
-    margin-right:auto;
-    display:none;
-  }
-  #completeTable {
-    display:table;
-  }
+
   table, td, th{
-    border: 1px solid black;
+    border-style:inset;
+    border-radius: 8px;
+    border-color: rgb(253, 202, 124);
+    background-color:rgb(255, 225, 185);
   }
-  .tableName {
-    color : red;
-  }
+
+
+
 </style>

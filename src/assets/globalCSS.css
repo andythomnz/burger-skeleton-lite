@@ -35,7 +35,8 @@ h2 {
 
 #btn:hover {
   /*background: lightyellow; cursor: pointer;*/
-  background: rgb(253, 221, 170); cursor: pointer;
+  background: rgb(253, 202, 124);
+	cursor: pointer;
 }
 
 #btn:focus {
