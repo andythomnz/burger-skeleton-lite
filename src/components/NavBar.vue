@@ -6,7 +6,7 @@
     or URL to the page for the funtion-->
     <div>
       <button :class="[lang]" v-on:click="switchLang()"></button>
-      <button class='lang' v-on:click="switchLang()">{{ uiLabels.language }}</button>
+      <!--button class='lang' v-on:click="switchLang()">{{ uiLabels.language }}</button-->
     </div>
     <div>
       <basicButton
@@ -161,12 +161,17 @@ export default {
 }
 
 .sv {
-  background: #8b4513 url('~@/assets/SV-select.png') no-repeat right 50% top 50%;
-  background-size: 80%;
+  background: url('~@/assets/swedish-language-icon.png') no-repeat right 50% top 50%;
+  background-size: 50%;
+  width: 100%;
+  height: 100%;
 }
 .en {
-  background: #8b4513 url('~@/assets/ENG-select.png') no-repeat right 50% top 50%;
-  background-size: 80%;
+  background: url('~@/assets/english-language-icon.png') no-repeat right 50% top 50%;
+  background-size: 50%;
+  width: 100%;
+  height: 100%;
+  border-width: 0; 
 }
 
 
