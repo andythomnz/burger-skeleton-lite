@@ -1,6 +1,6 @@
 <template>
   <td colspan="4" height="100">
-    <div class='content'>{{uiLabels.order}} {{orderId}}{{order.type}}:
+    <div class='content'>{{uiLabels.order}} {{orderId}} {{order.type}}:
     <ul id="completeItems">
       <li v-for="(item, index) in order.ingredients.filter(function(item){return order.prepare[item.category] === 1;})" :key="index">
         {{ item["ingredient_" +lang] }}

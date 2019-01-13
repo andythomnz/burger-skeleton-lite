@@ -244,7 +244,8 @@ export default {
       }
       let order = {
         ingredients: chosenIngredients,
-        price: this.price
+        price: this.price,
+        type: this.$store.state.dO
       };
       // make use of socket.io's magic to send the stuff to the kitchen via the server (app.js)
       this.$store.state.socket.emit("order", { order: order });
