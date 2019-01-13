@@ -22,7 +22,7 @@
         :ref="'itemButton'+item.ingredient_id"
         v-on:click="incrementCounter"
       >
-        <p style='margin-top: 5%'>{{item["ingredient_"+ lang]}}</p>
+        <p style='margin-top: 5%; text-transform: capitalize;word-wrap: break-word;'>{{item["ingredient_"+ lang]}}</p>
         <img
           v-bind:src="item.image"
           width="50%"
@@ -169,12 +169,14 @@ img {
 }
 
 #yellow-bg {
-  background: lightyellow;
+  background: rgb(253, 202, 124);
 }
 
 .ingredient:hover {
-  background: lightyellow;
+  /*background: lightyellow;*/
   /* cursor: pointer; */
+  background: rgb(253, 202, 124);
+  transform: scale(1.02);
 }
 
 .ingredient:focus {
@@ -184,7 +186,7 @@ img {
 
 .ingredient:active {
   transform: scale(0.99);
-  outline: yellow auto 5;
+  /*outline: yellow auto 5;*/
 }
 
 button:hover {
@@ -199,28 +201,32 @@ button {
   /* transition: background 250ms ease-in-out, transform 150ms ease; */
   display: block;
   width: 100%;
-  font-size: 2vw;
+  height: 100%;
+  font-size: 1.5vw;
+  font-family: "Verdana"
 }
 
 .icon{
-  width: 2em;
-  margin-right: 10%
+  width: 100%;
 }
 
 .icons {
-  padding-left: 15%;
-  margin-top: 5%;
   position: absolute;
-  top: 93%
+  top: 90%;
+  width: 50%
+}
+
+.popuptext {
+  left: -8%;
 }
 
 .ingredient {
-  background-color: lightblue;
-  border-style: inset;
-  border-color: lightblue;
+  background-color:rgb(255, 225, 185);
+  border-style: none;
+  border-radius: 10%;
+  margin-bottom: 10%;
   transition: background 250ms ease-in-out, transform 150ms ease;
   position: relative
-
 }
 
 .price_number {
@@ -230,12 +236,24 @@ button {
   padding-bottom: 8%
 }
 
-@media (max-width: 600px) {
+@media (max-width: 800px) {
   .price_number {
     margin-left: 25%
   }
   #counter {
-    bottom: 100%
+    bottom: 100%;
+    font-size: 2vw
+  }
+  .popuptext {
+    left: 150%;
+    width: 300%;
+    font-size: 1.5vw
+  }
+  .price_number {
+    font-size: 1.5vw
+  }
+  button {
+    font-size: 2vw
   }
 }
 

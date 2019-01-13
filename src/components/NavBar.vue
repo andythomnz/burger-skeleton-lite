@@ -9,7 +9,7 @@
     </div>
     <div>
       <basicButton
-        style="padding-bottom: 20%"
+        id='buttons'
         :text="uiLabels.back"
         v-if="backRoute !== ''"
         v-on:buttonclick="BackPage(backRoute)"
@@ -20,13 +20,13 @@
     </div>
     <div>
       <basicButton
-        style="padding-bottom: 20%"
+        id='buttons'
         v-if="nextButton"
         :text="uiLabels.next"
         v-on:buttonclick="NextPage(currentTab)"
       ></basicButton>
       <basicButton
-        style="padding-bottom: 20%"
+        id='buttons'
         v-else-if="finishButton"
         :text="uiLabels.finish"
         v-on:buttonclick="FinishPage()"
@@ -113,13 +113,18 @@ export default {
 </script>
 
 <style scoped>
+#buttons {
+  padding-bottom: 15%;
+  border-radius: 10%
+}
+
 .bar-wrapper {
   text-align: center;
   width: 100%;
   padding-top: 0;
   border-bottom-color: grey;
   border-bottom-style: solid;
-  padding-bottom: 0.5%;
+  /* padding-bottom: 0.5%; */
   display: grid;
   grid-gap: 10px;
   grid-template-columns: 10% 10% auto 10% 10%;
@@ -139,7 +144,8 @@ export default {
 
 #cartButton {
   position: relative;
-  padding-bottom: 20%
+  padding-bottom: 15%;
+  border-radius: 10%
 }
 
 #cartNumber {

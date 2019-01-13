@@ -7,15 +7,15 @@
       <h1 slot="center-component"><img src=@/assets/cart.png width=10%>  {{ uiLabels.cart }}</h1>
     </NavBar>
     <div class='order'>
-      <h1>{{ uiLabels.yourOrder}}</h1>
-      <h2>{{ uiLabels.burgers }}</h2>
+      <h2 id="yourOrder">{{ uiLabels.yourOrder}}</h2>
+      <h2 style='margin-top: 0'>{{ uiLabels.burgers }}</h2>
       <div style="width: 100%;height: auto;">
         <div class='item-wrapper' v-for="(orderedBurger, index) in orderedBurgers" :key="orderedBurger.bun['ingredient_id'] + index">
           <div>
             <img v-bind:src="orderedBurger.bun.image" width="5%" style="padding-right:3%">
             <span id='item_name'>Customized burger {{index+1}}</span>
-            <button id='removeButton' v-on:click="RemoveItem(orderedBurger, index)"> X </button>
-            <button id='editButton' v-on:click="editBurger(orderedBurger, index)">Edit</button>
+            <button class='removeButton' id='btn' v-on:click="RemoveItem(orderedBurger, index)"> X </button>
+            <button class='editButton' id='btn' v-on:click="editBurger(orderedBurger, index)">Edit</button>
             <span class="item-price">{{ orderedBurger.price }} kr</span>
           </div>
         </div>
@@ -23,8 +23,8 @@
           <div>
             <img v-bind:src="burger.item.image" width="5%" style="padding-right:3%">
             <span id="item_name">{{ burger.item["ingredient_"+lang] }} {{burger.count}}</span>
-            <button id='removeButton' v-on:click='RemoveItem(burger.item, index)'>X</button>
-            <button id='editButton' v-on:click="editBurger(burger, index)">Edit</button>
+            <button class='removeButton' id='btn' v-on:click='RemoveItem(burger.item, index)'>X</button>
+            <button class='editButton' id='btn' v-on:click="editBurger(burger, index)">Edit</button>
             <span class="item-price">{{ burger.price }} kr</span>
         </div>
       </div>
@@ -39,11 +39,10 @@
             style="padding-right:3%">
           <span id='item_name'>{{ item.item["ingredient_"+lang] }}</span>
           <span id='count' v-if="item.counter>1"> {{ item.counter }} </span>
-          <button v-on:click='RemoveItem(item, index)' id='removeButton'>X</button>
-          <button v-on:click='EditItem(item, index)' id='editButton'> Edit </button>
+          <button v-on:click='RemoveItem(item, index)' class='removeButton' id='btn'>X</button>
+          <button v-on:click='EditItem(item, index)' class='editButton' id='btn'> Edit </button>
         <span class="item-price">{{ item.item.selling_price }} kr</span></div>
-      </div>
-    </p>
+      </div></p>
       <h2>{{ uiLabels.sides }}</h2>
       <p><div class="item-wrapper" style="padding-bottom=3%">
         <div v-for="(item, index) in OrderedSides" :key="item.item.ingredient_id +index">
@@ -53,18 +52,16 @@
             style="padding-right:3%">
           <span id='item_name'>{{ item.item["ingredient_"+lang] }}</span>
           <span id='count' v-if="item.counter>1"> {{ item.counter }} </span>
-          <button id='removeButton' v-on:click='RemoveItem(item, index)'>X</button>
-          <button id='editButton' v-on:click='EditItem(item, index)'> Edit </button>
+          <button class='removeButton' id='btn' v-on:click='RemoveItem(item, index)'>X</button>
+          <button class='editButton' id='btn' v-on:click='EditItem(item, index)'> Edit </button>
         <span class="item-price">{{ item.item.selling_price }} kr</span></div>
-      </div>
-    </p>
+      </div></p>
       </div>
       <p style="font-weight:bold" class="price">{{ uiLabels.sum }}: {{ this.price }} kr</p>
-      <button id='btn' v-on:click="Cancel()">{{ uiLabels.cancelOrder }}</button>
-      <button id='btn' v-on:click="placeOrder()">{{ uiLabels.placeOrder }}</button>
+      <button id='btn' class='btn' v-on:click="Cancel()">{{ uiLabels.cancelOrder }}</button>
+      <button id='btn' class='btn' v-on:click="placeOrder()">{{ uiLabels.placeOrder }}</button>
 
-
-  </div>
+</div>
 </template>
 <script>
 import NavBar from "@/components/NavBar.vue";
@@ -247,7 +244,8 @@ export default {
       }
       let order = {
         ingredients: chosenIngredients,
-        price: this.price
+        price: this.price,
+        type: this.$store.state.dO
       };
       // make use of socket.io's magic to send the stuff to the kitchen via the server (app.js)
       this.$store.state.socket.emit("order", { order: order });
@@ -311,14 +309,12 @@ export default {
 }
 </script>
 <style scoped>
-h1 {
-text-align: center}
+#yourOrder {
+  text-align: center;
+  margin-bottom: 1%}
 
-#btn {
-  font-size: 1.5vw;
-  float: right;
-  margin-right: 5%;
-  font-weight: bold
+h2 {
+  margin-bottom: 1%
 }
 
 .order{
@@ -330,7 +326,7 @@ text-align: center}
   margin-bottom: 2%
 }
 
-.order li button {
+.item-wrapper button {
   font-size: 0.7vw;
   width: 3%;
   text-align: center;
@@ -339,57 +335,63 @@ text-align: center}
 .price {
   position: absolute;
   right: 50%;
-  font-size: 1.2vw
+  font-size: 1.5vw;
+  font-family: "Verdana";
+  margin-top: -0.1%
 }
 
 .item-price {
   position: absolute;
   right: 52%;
-  bottom: 30%
+  bottom: 35%
 }
 
 .item-wrapper {
   display: grid;
   grid-template-rows: auto;
-  grid-gap: 8%
 }
 
 .item-wrapper div{
   position: relative;
-  border-bottom-width:  5%;
-  border-bottom-color: lightblue;
-  border-bottom-style: groove;
-
+  border-style:inset;
+  border-radius: 8px;
+  border-color: rgb(253, 202, 124);
+  background-color:rgb(255, 225, 185);
+  padding: 0.5% 0 0.5% 2%;
+  margin-bottom: 0.5%
 }
 
-#editButton {
+.editButton {
   position: absolute;
   right: 35%;
-  bottom: 30%
+  bottom: 35%;
 }
 
-#removeButton {
+.removeButton {
   position: absolute;
   right: 30%;
-  bottom: 30%;
-  border-radius: 50%;
-  border-style: solid;
-  height: 40%;
-  color: white;
-  background: radial-gradient(grey, lightgrey);
-  font-weight: bold;
+  bottom: 35%;
 }
 
 #count {
   position: absolute;
   right: 75%;
-  bottom: 30%
+  bottom: 35%;
 }
 
 #item_name {
   padding-right:2%;
   position: absolute;
-  bottom: 30%
+  bottom: 35%;
+  text-transform: capitalize;
 }
+
+@media (max-width: 800px) {
+  .item-wrapper button{
+    font-size: 0.8vw;
+    width: auto
+  }
+}
+
 
 </style>

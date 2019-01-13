@@ -9,6 +9,7 @@
 
     <div class="wrapper">
       <Ingredient
+        id='ingredient'
         ref="ingredient"
         v-for="item in ingredients"
         v-on:increment="addToOrder(item)"
@@ -126,4 +127,9 @@ export default {
 };
 </script>
 <style scoped>
+
+#ingredient {
+  padding-bottom: 2%;
+}
+
 </style>

@@ -1,19 +1,19 @@
 <template>
-  <div v-on:popup='set(data,title)'>
+  <div>
     <NavBar
       nextRoute=""
       backRoute=""
       :showCart="Boolean.false">
-      <h1 slot="center-component">  {{ this.title }}</h1>
+      <h2 slot="center-component">  {{ this.title }}</h2>
     </NavBar>
     <div class='OrderItem'>
       <div class='wrapper'>
         <div id='half1'>
           <div id="item_name" v-if="itemCategory!= 'CustomBurger'" style="font-weight:bold; font-size:2vw; margin-bottom:10px"> {{ menuItem["ingredient_" +lang] }} </div>
           <div><img id="image" v-bind:src="menuItem.image" width="50%"></div>
-          <div style="padding-top:2%"><span><button v-if="this.cart==false" v-on:click='decrement(menuItem)' style="font-size:1vw">-</button>
-            <span :id="counterID" style="font-size:1.5vw">{{this.counter}}</span>
-            <button v-if="this.cart==false" v-on:click='increment(menuItem)' style="font-size:1vw">+</button></span></div>
+          <div style="padding-top:2%"><span><button v-if="this.cart==false" id='btn' v-on:click='decrement(menuItem)' style="font-size:0.8vw">-</button>
+            <span :id="counterID">{{this.counter}}</span>
+            <button v-if="this.cart==false" v-on:click='increment(menuItem)' id='btn' style="font-size:0.8vw">+</button></span></div>
         </div>
         <div id='half2'>
           <div class='icons' v-if="itemCategory!= 'CustomBurger'" >
@@ -30,22 +30,22 @@
             <p v-if='showVegan'><span class="popuptext" id="myInfo">This item is vegan</span></p>
           </div></div>
           <div v-if="itemCategory === 'CustomBurger' || itemCategory==='PremadeBurger'" class='ingredients'>
-            <div style="padding-left: 5px; padding-right: 5px">
-              <p style="font-weight: bold; font-size: 1.6vw">{{ uiLabels.ingredients }}: </p>
+            <div style="padding-left: 5%">
+              <p style="font-weight: bold; font-size: 1.5vw">{{ uiLabels.ingredients }}: </p>
               <p>{{ uiLabels.bun }}: {{ bun["ingredient_"+lang] }}</p>
               <p>{{ uiLabels.protein }}: {{ protein['ingredient_'+lang]}}
                 <span v-if="protein.addi_cost>0"> (+ {{ protein.addi_cost }} kr)</span></p>
               <p>{{ uiLabels.vegetables }}:
                 <ul v-for="item in vegetables" :key="item.ingredient_id">
-                  <li>{{ item['ingredient_'+lang] }} <span v-if="item.addi_cost>0"> (+ {{ item.addi_cost }} kr)</span><span v-if="vegetables.length>0"> <button v-on:click="removeIngredient('vegetables', item)"> x </button></span></li>
+                  <li>{{ item['ingredient_'+lang] }} <span v-if="item.addi_cost>0"> (+ {{ item.addi_cost }} kr)</span><span v-if="vegetables.length>0"> <button id='btn' v-on:click="removeIngredient('vegetables', item)">x</button></span></li>
                 </ul></p>
               <p>{{ uiLabels.sauces }}:
                 <ul v-for="item in sauces" :key="item.ingredient_id">
-                  <li>{{ item['ingredient_'+lang] }} <span v-if="item.addi_cost>0"> (+ {{ item.addi_cost }} kr)</span><span v-if="sauces.length>0"> <button v-on:click="removeIngredient('sauces', item)"> x </button></span></li>
+                  <li>{{ item['ingredient_'+lang] }} <span v-if="item.addi_cost>0"> (+ {{ item.addi_cost }} kr)</span><span v-if="sauces.length>0"> <button id='btn' v-on:click="removeIngredient('sauces', item)">x</button></span></li>
                 </ul></p>
               <p v-if="extras.length>0">{{ uiLabels.extras }}:
                 <ul v-for="item in extras" :key="item.ingredient_id">
-                  <li>{{ item['ingredient_'+lang] }} <span v-if="item.addi_cost>0"> (+ {{ item.addi_cost }} kr)</span><span v-if="extras.length>0"> <button v-on:click="removeIngredient('extras', item)"> x </button></span></li>
+                  <li>{{ item['ingredient_'+lang] }} <span v-if="item.addi_cost>0"> (+ {{ item.addi_cost }} kr)</span><span v-if="extras.length>0"> <button id='btn' v-on:click="removeIngredient('extras', item)">x</button></span></li>
                 </ul></p>
             </div>
           </div>
@@ -70,9 +70,9 @@
           </div>
         </div>
       </div>
-      <button id='btn' v-on:click="confirm('Cart')">{{ uiLabels.finish_order }}</button>
-      <button id='btn' v-on:click="cancelItem()">{{ uiLabels.cancel }}</button>
-      <button id='btn' v-on:click="confirm('MainMenu')">{{ uiLabels.confirm }}</button>
+      <button id='btn' class='btn' v-on:click="confirm('Cart')">{{ uiLabels.finish_order }}</button>
+      <button id='btn' class='btn' v-on:click="cancelItem()">{{ uiLabels.cancel }}</button>
+      <button id='btn' class='btn' v-on:click="confirm('MainMenu')">{{ uiLabels.confirm }}</button>
 
 
     </div>
@@ -354,7 +354,11 @@ export default {
             if (count == 0 ) {
               this.premadeBurgerNo=i+1}
             else {
-              this.premadeBurgerNo=count+1
+              if (this.premadeBurgerNo==0) {
+                this.premadeBurgerNo=count+1
+              }
+              else {
+              this.premadeBurgerNo=this.premadeBurgerNo+count}
             }
             burger={item: this.menuItem, bun: this.bun, protein: this.protein, vegetables: this.vegetables, sauces: this.sauces, price: this.price, count: this.premadeBurgerNo}
           }
@@ -442,39 +446,28 @@ export default {
 h1 {
 text-align: center}
 
-#btn {
-  font-size: 1.5vw;
-  float: right;
-  margin-right: 5%;
-  font-weight: bold;
+#item_name{
+  text-transform: capitalize;
 }
 
-.icon{
-  width: 70%;
-  float:left
-}
-
-.icons {
-  margin-top: 5%;
-  display:grid;
-  grid-template-columns: 33% 33% 33%;
-  margin-left: 10%;
-  margin-right: 10%;
-  width: 30%
+.btn {
+  margin-bottom: 0
 }
 
 .popuptext {
-  width: 250%;
-  left: 25%
+  width: 300%;
+  left: 5%
 }
 
 .wrapper {
-  grid-template-columns: 50% 50%
+  grid-template-columns: 50% 50%;
+  grid-column-gap: 0;
+  padding-top: 0
 }
 
 #half1  {
-  margin-left: 20%;
-  margin-top: 5%
+  margin-left: 10%;
+  margin-top: 5%;
 }
 
 #half1 button {
@@ -483,35 +476,68 @@ text-align: center}
 }
 
 .price {
-  font-size: 1.5vw;
+  font-size: 1vw;
   font-weight: bold;
-  padding-top: 5%;
+  border-style:inset;
+  border-radius: 10%;
+  border-color: rgb(253, 202, 124);
+  background-color:rgb(255, 225, 185);
+  width: 20%;
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+
+.price p {
+  margin: 5% 5% 5% 15%;
 }
 
 #counter {
   margin-left: 8%;
-  border-color: grey;
-  border-width: medium;
+  padding-left: 2%;
+  padding-right: 2%;
+  border-style: inset;
+  border-radius: 5%;
+  border-color: rgb(253, 202, 124);
+  background-color: rgb(255, 225, 185);
+  border-width:medium;
+  font-size:1.2vw
 }
 
 #counterCart {
-  margin-left: 23%
+  margin-left: 23%;
+  padding-left: 2%;
+  padding-right: 2%;
+  border-style: inset;
+  border-radius: 5%;
+  border-color: rgb(253, 202, 124);
+  background-color: rgb(255, 225, 185);
+  border-width:medium;
+  font-size:1.2vw
 }
 
 .ingredients {
-  border-style:dashed;
+  border-style:inset;
+  border-radius: 10%;
+  border-color: rgb(253, 202, 124);
+  background-color:rgb(255, 225, 185);
   width: 70%;
-  margin-top: 5%;
-  font-size: 1.2vw
+  margin-top: 3%;
+  font-size: 1vw;
+  font-family: "Verdana"
 }
 
 .ingredients button {
-  font-size: 1vw;
+  font-size: 0.8vw;
   text-align: center;
-  width: 8%
+  /* width: 4%; */
+  font-family: "Verdana"
 }
 
-@media (max-width: 600px) {
+.ingredients li {
+  padding-top: -1%
+}
+
+@media (max-width: 800px) {
   #image {
     padding-left: 5%
   }
@@ -521,13 +547,12 @@ text-align: center}
   .ingredients {
     margin-top: 5%
   }
-  .price {
-    padding-top: 5%
+  .popuptext {
+  	width: 300%;
+  	left: 115%;
   }
 }
 
-.wrapper {
-  padding-top:0
-}
+
 
 </style>

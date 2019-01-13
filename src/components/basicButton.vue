@@ -40,11 +40,13 @@ img {
     margin-block-start: 0em;
     margin-block-end: 0em;
     font-size: 2vw;
-    padding-bottom: 5%
+    padding-bottom: 5%;
+    font-family: "Verdana"
 }
 
 button:hover{
-  background: lightyellow; cursor: pointer;
+  /*background: lightyellow; cursor: pointer;*/
+  background: rgb(255, 214, 149); cursor: pointer;
 }
 
 button:focus {

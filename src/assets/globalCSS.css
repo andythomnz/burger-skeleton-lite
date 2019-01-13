@@ -1,9 +1,9 @@
 .wrapper {
 	display: grid;
-	grid-gap: 2em;
+	grid-gap: 10%;
 	grid-template-columns: repeat(auto-fit, calc(12em + 10px));;
 	padding-top: 5%;
-	padding-left: 2%
+	padding-left: 5%
 }
 
 h1 {
@@ -15,15 +15,30 @@ h2 {
   font-size: 2.5vw;
 }
 
+.btn {
+  font-size: 1.5vw;
+  float: right;
+  margin-right: 5%;
+  font-weight: bold;
+  margin-bottom: 1%;
+  padding-left: 1%;
+  padding-right: 1%
+}
+
 #btn {
-	background: none;
+	background: rgb(255, 225, 185);
 	transition: background 250ms ease-in-out,
               transform 150ms ease;
-
+  border-radius: 0.8vw;
+	border-color: rgb(253, 202, 124) ;
+	border-style: outset;
+	font-family: "Verdana";
 }
 
 #btn:hover {
-	background: lightyellow; cursor: pointer;
+  /*background: lightyellow; cursor: pointer;*/
+  background: rgb(253, 202, 124);
+	cursor: pointer;
 }
 
 #btn:focus {
@@ -34,10 +49,6 @@ h2 {
 #btn:active {
     transform: scale(0.99);
     outline:yellow auto 5
-}
-
-.icon{
-  width:2em;
 }
 
 #info {
@@ -58,7 +69,7 @@ h2 {
 
 .popuptext {
   visibility: hidden;
-	font-size: 1.2vw;
+	font-size: 1vw;
   width: 600%;
   background-color: #555;
   color: #fff;
@@ -68,16 +79,7 @@ h2 {
   position: absolute;
   z-index: 1;
   bottom: 125%;
-  left: 10%;
   margin-left: -80px;
-}
-
-@media (max-width: 600px) {
-	.popuptext {
-		width: 300%;
-		left: 150%;
-		font-size: 1.5vw
-	}
 }
 
 #info .popuptext::after {
@@ -98,4 +100,18 @@ h2 {
 @keyframes fadeIn {
   from {opacity: 0;}
   to {opacity:1 ;}
+}
+
+.icon{
+  width: 70%;
+  float:left
+}
+
+.icons {
+  margin-top: 5%;
+  display:grid;
+  grid-template-columns: 33% 33% 33%;
+  margin-left: 10%;
+  margin-right: 10%;
+  width: 30%
 }

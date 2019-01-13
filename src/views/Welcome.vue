@@ -57,6 +57,7 @@ export default {
     NextPage: function(dO) {
       this.diningOption = dO;
       console.log("DO: " + dO);
+      this.$store.state.dO=dO;
       //console.log("Dining Option: " + diningOption); <-- Issue with defining diningOption
       this.$router.push({ name: "MainMenu" });
       //location.reload()

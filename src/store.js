@@ -21,7 +21,8 @@ export default new Vuex.Store({
     orderedPremadeBurgers: [],
     finish: false,
     currentTab: 'Buns',
-    ingredients: []
+    ingredients: [],
+    dO: ''
   },
   getters: {
     getSocket: state => state.socket

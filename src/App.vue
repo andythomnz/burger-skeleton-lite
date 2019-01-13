@@ -19,10 +19,10 @@ export default {
 
 <style>
 body {
-  height: 100vh;
-  background: radial-gradient(white, lightblue);
+  height: 100%;
+  background: #FAFAFA;
   background-size: 200% 200%;
-  /* animation: Gradient 20s linear infinite; */
+  font-family: "Verdana"
 }
 
 @keyframes Gradient {
