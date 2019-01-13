@@ -1,7 +1,16 @@
 <template>
   <td colspan="4" height="100">
-    Order {{orderId}} {{order.type}} {{uiLabels.ingredients}}: <div id="comleteItems">{{ order.ingredients.filter(function(item, index, array){return order.prepare[item.category] === 1;}).map(item=>item["ingredient_"+ lang]).join(", ") }}</div>
-    <div id="uncomleteItems">{{ order.ingredients.filter(function(item, index, array){return order.prepare[item.category] === 0;}).map(item=>item["ingredient_"+ lang]).join(", ") }}</div>
+    {{uiLabels.order}} {{orderId}}{{order.type}}:
+    <ul id="completeItems">
+      <li v-for="(item, index) in order.ingredients.filter(function(item){return order.prepare[item.category] === 1;})" :key="index">
+        {{ item["ingredient_" +lang] }}
+      </li>
+    </ul>
+    <ul id="uncompleteItems">
+      <li v-for="(item, index) in order.ingredients.filter(function(item){return order.prepare[item.category] === 0;})" :key="index">
+        {{ item["ingredient_" +lang] }}
+      </li>
+    </ul>
     <button v-if="needDoneButton==true" v-on:click="orderDone(orderId)">
       {{uiLabels.ready}}
     </button>
@@ -14,10 +23,14 @@ export default {
   props: {
     order: Object,
     orderId: Number,
-    lang: String,
     needDoneButton: Boolean
   },
   mixins: [sharedVueStuff],
+  data: function () {
+    return {
+
+    }
+  },
   methods: {
     orderDone: function (id) {
       // sending 'done' message to parent component or view so that it
@@ -28,10 +41,13 @@ export default {
 }
 </script>
 <style scoped>
-  #comleteItems {
+  #completeItems {
     color: green;
   }
-  #uncomleteItems {
+  #uncompleteItems {
     color: gray;
+  }
+  button {
+    font-size: 1vw
   }
 </style>

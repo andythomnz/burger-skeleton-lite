@@ -19,7 +19,6 @@
       v-for="(val, key) in notDone"
       v-if="key%3 == 0"
       :order-id="key"
-      :lang="lang"
       :not-done="notDone"
       :orders="orders"
       :key="key">
@@ -43,7 +42,6 @@
         v-for="(val, key) in notDone"
         v-if="key%4 == 0"
         :order-id="key"
-        :lang="lang"
         :not-done="notDone"
         :orders="orders"
         :category="1"
@@ -68,7 +66,6 @@
         v-for="(val, key) in notDone"
         v-if="key%4 == 0"
         :order-id="key"
-        :lang="lang"
         :not-done="notDone"
         :orders="orders"
         :category="2"
@@ -93,7 +90,6 @@
         v-for="(val, key) in notDone"
         v-if="key%4 == 0"
         :order-id="key"
-        :lang="lang"
         :not-done="notDone"
         :orders="orders"
         :category="3"
@@ -118,7 +114,6 @@
         v-for="(val, key) in notDone"
         v-if="key%4 == 0"
         :order-id="key"
-        :lang="lang"
         :not-done="notDone"
         :orders="orders"
         :category="4"
@@ -143,7 +138,6 @@
         v-for="(val, key) in notDone"
         v-if="key%4 == 0"
         :order-id="key"
-        :lang="lang"
         :not-done="notDone"
         :orders="orders"
         :category="5"
@@ -168,7 +162,6 @@
         v-for="(val, key) in notDone"
         v-if="key%4 == 0"
         :order-id="key"
-        :lang="lang"
         :not-done="notDone"
         :orders="orders"
         :category="6"
@@ -183,7 +176,6 @@
         v-for="(val, key) in isDone"
         v-if="key%3 == 0"
         :order-id="key"
-        :lang="lang"
         :is-done="isDone"
         :orders="orders"
         :key="key">
@@ -237,12 +229,11 @@ export default {
   }
 
   #orders {
-    font-size:24pt;
+    font-size:1.5vw;
   }
 
   h1 {
     text-transform: uppercase;
-    font-size: 1.2em;
 
   }
   table {

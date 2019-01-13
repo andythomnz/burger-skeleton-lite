@@ -4,7 +4,7 @@
     <OrderItem
       v-for="n in 3"
       v-if="notDone[orderId+n-1] !== undefined"
-      :lang="lang"
+      :key="n"
       :order-id="notDone[orderId+n-1]"
       :order="orders[notDone[orderId+n-1]]"
       :needDoneButton="orders[notDone[orderId+n-1]].status == 'started'">
@@ -19,11 +19,14 @@ export default {
   components: { OrderItem },
   props: {
     orderId: Number,
-    lang: String,
-	  notDone: Array,
-	  orders: Object
   },
   mixins: [sharedVueStuff],
+  data: function () {
+    return {
+      notDone: Array,
+  	  orders: Object,
+    };
+  },
   methods: {
 
     cancelOrder: function () {

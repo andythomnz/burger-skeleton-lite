@@ -4,7 +4,7 @@
     <OrderItem
       v-for="n in 3"
       v-if="isDone[orderId+n-1] !== undefined"
-      :lang="lang"
+      :key="n"
       :order-id="isDone[orderId+n-1]"
       :order="orders[isDone[orderId+n-1]]"
       :needDoneButton="false">
@@ -19,11 +19,14 @@ export default {
   components: { OrderItem },
   props: {
     orderId: Number,
-    lang: String,
-    isDone: Array,
-    orders: Object
   },
   mixins: [sharedVueStuff],
+  data: function () {
+    return {
+      isDone: Array,
+  	  orders: Object,
+    };
+  },
   methods: {
 
   }
