@@ -10,18 +10,23 @@
     >
       <!--button slot="center-component" v-on:click="switchLang()">{{ uiLabels.language }}</button-->
       <div slot="center-component">
-        <button
+        <!-- <button
           v-for="tab in tabs"
           v-bind:key="tab"
-          v-bind:class="['tab-button', { active: currentTab === tab }]"
+          v-bind:class="['navbutton', { active: currentTab === tab }]"
           v-on:click="changeTab(tab)"
-        >
+        > -->
+        <button
+         v-for="(tab,index) in tabs"
+         v-bind:key="tab"
+         :class="[ 'navbutton', tab == currentTab ? 'actives': '' ]"
+         @click="changeTab(tab); changeSingClass(index);">
           {{ tab }}
         </button>
       </div>
     </NavBar>
 
-    <h2 style='padding-left: 5%'>{{currentTab}}</h2>
+    <!-- <h2 style='padding-left: 5%'>{{currentTab}}</h2> -->
     <div class="page">
       <keep-alive>
         <component
@@ -80,9 +85,10 @@ export default {
     return {
       // currentTab: 'Buns',
       tabs: ['Buns', 'Protein', 'Vegetables', 'Sauces', 'Extras'],
-      chosenIngredients: [],
-      price: 0,
-      orderNumber: "",
+      // chosenIngredients: [],
+      // price: 0,
+      // orderNumber: "",
+      currentId:-1,
     }
   },
   activated () {
@@ -105,6 +111,9 @@ export default {
     changeTab (tab) {
       this.$store.commit('changeCurrentTab', tab);
       // this.currentTab = tab
+    },
+    changeSingClass(index) {
+      this.currentId = index;
     },
     // addToOrder: function (item) {
     //   this.chosenIngredients.push(item);
@@ -131,7 +140,38 @@ export default {
 </script>
 <style scoped>
 
-button:hover{
+.navbutton {
+  margin: auto auto;
+  background:#fee0bb;
+  text-indent:0;
+  border:0;
+  display:inline-block;
+  font-size:1.2vw;
+  font-weight:bold;
+  font-style:normal;
+  height:40px;
+  line-height:40px;
+  width:auto;
+  text-decoration:none;
+  text-align:center;
+}
+.navbutton:hover {
+  background:#fcc982;
+  box-shadow: inset 0 -0.1em #000;
+  cursor: pointer
+}
+
+.navbutton:active {
+  background:#fcc982;
+  box-shadow: inset 0 -0.1em #000;
+}
+
+.actives {
+  background:#fcc982;
+  box-shadow: inset 0 -0.1em #000;
+}
+
+/* button:hover{
   background: rgb(255, 214, 149); cursor: pointer;
 }
 
@@ -151,6 +191,6 @@ button{
                 transform 150ms ease;
   margin-right: 1%;
   margin-bottom: 1%
-}
+} */
 
 </style>

@@ -122,9 +122,8 @@ export default {
   text-align: center;
   width: 100%;
   padding-top: 0;
-  border-bottom-color: grey;
-  border-bottom-style: solid;
-  /* padding-bottom: 0.5%; */
+  background: #f2f2f2;
+  /*padding-bottom: 0.5%;*/
   display: grid;
   grid-gap: 10px;
   grid-template-columns: 10% 10% auto 10% 10%;

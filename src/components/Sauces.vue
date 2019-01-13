@@ -3,7 +3,7 @@
     id="ordering"
     v-if="sauces"
   >
-<div style="margin-left: 5%">{{uiLabels.chooseSauces}}</div>
+<div style="margin-left: 5%; margin-top: 1%">{{uiLabels.chooseSauces}}</div>
     <div class="wrapper" style="padding-top: 2%">
       <Ingredient
         ref="ingredient"

@@ -1,6 +1,6 @@
 .wrapper {
 	display: grid;
-	grid-gap: 10%;
+	grid-gap: 5%;
 	grid-template-columns: repeat(auto-fit, calc(12em + 10px));;
 	padding-top: 5%;
 	padding-left: 5%
