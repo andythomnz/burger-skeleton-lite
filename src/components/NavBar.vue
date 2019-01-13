@@ -164,13 +164,14 @@ export default {
   background-size: 50%;
   width: 100%;
   height: 100%;
+  border-width: 0; 
 }
 .en {
   background: url('~@/assets/english-language-icon.png') no-repeat right 50% top 50%;
   background-size: 50%;
   width: 100%;
   height: 100%;
-  border-width: 0; 
+  border-width: 0;
 }
 
 
