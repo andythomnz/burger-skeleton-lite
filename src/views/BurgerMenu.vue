@@ -9,13 +9,16 @@
       showCart='true'
     >
       <!--button slot="center-component" v-on:click="switchLang()">{{ uiLabels.language }}</button-->
-       <!--v-bind:class="['tab-button', { active: currentTab === tab }]"-->
+       <!--v-bind:class="['tab-button', { active: currentTab === tab }]"
+      v-bind:class="['navbutton', { active: currentTab === tab }]"
+      @click="changeTab(tab)"
+   -->
       <div slot="center-component">
         <button
-          v-for="tab in tabs"
+          v-for="(tab,index) in tabs"
           v-bind:key="tab"
-          v-bind:class="['navbutton', { active: currentTab === tab }]"
-          v-on:click="changeTab(tab)"
+          :class="[ 'navbutton', tab == currentTab ? 'actives': '' ]"
+          @click="changeTab(tab); changeSingClass(index);"
         >
           {{ tab }}
         </button>
@@ -84,6 +87,9 @@ export default {
       chosenIngredients: [],
       price: 0,
       orderNumber: "",
+      ////////
+      currentId:-1,
+      ////////
     }
   },
   activated () {
@@ -107,6 +113,11 @@ export default {
       this.$store.commit('changeCurrentTab', tab);
       // this.currentTab = tab
     },
+        //////
+    changeSingClass(index) {
+      this.currentId = index;  
+    },
+    ///////
     // addToOrder: function (item) {
     //   this.chosenIngredients.push(item);
     //   this.price += +item.selling_price;
@@ -139,7 +150,7 @@ export default {
   border:0;
   display:inline-block;
   font-family:Arial;
-  font-size:18px;
+  font-size:1em;
   font-weight:bold;
   font-style:normal;
   height:40px;
@@ -152,6 +163,14 @@ export default {
   background:#fcc982;
   box-shadow: inset 0 -0.1em #000;
 }
+.navbutton:active {
+  background:#fcc982;
+  box-shadow: inset 0 -0.1em #000;
+}
 
+.actives {
+  background:lightyellow;
+  box-shadow: inset 0 -0.1em #000;
+}
 
 </style>
