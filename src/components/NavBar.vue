@@ -102,7 +102,7 @@ export default {
     FinishPage () {
       this.$store.commit('toggleClose');
       this.$store.commit('toggleFinish');
-      this.$store.state.socket.emit('popup', {data: 'CustomBurger', counter: 1});
+      this.$store.state.socket.emit('popup', {data: 'CustomBurger', counter: 1, cart:false});
       this.$router.push({ name: 'Popup' });
     },
     CartPage () {

@@ -10,7 +10,7 @@
       <h2 id="yourOrder">{{ uiLabels.yourOrder}}</h2>
       <h2 style='margin-top: 0'>{{ uiLabels.burgers }}</h2>
       <div style="width: 100%;height: auto;">
-        <div class='item-wrapper' v-for="(orderedBurger, index) in orderedBurgers" :key="orderedBurger.bun['ingredient_id'] + index">
+        <div class='item-wrapper' v-for="(orderedBurger, index) in orderedBurgers" :key="index">
           <div>
             <img v-bind:src="orderedBurger.bun.image" width="5%" style="padding-right:3%">
             <span id='item_name'>Customized burger {{index+1}}</span>
@@ -287,9 +287,12 @@ export default {
         for (var j = 0; j < item.extras.length; j++) {
           this.$store.state.selectedBurger.push(item.extras[j])
         }
-        this.$store.state.selectedBurger.push(item.price);
-        this.RemoveItem(item, index);
-        this.$store.state.socket.emit('popup', {data: 'CustomBurger', counter: 1});
+        this.$store.state.selectedBurger.push(index+1);
+        this.orderedBurgers.splice(index, 1);
+        this.$store.state.cartCount -= 1;
+        this.price=0;
+        this.calculatePrice();
+        this.$store.state.socket.emit('popup', {data: 'CustomBurger', counter: 1, cart:true});
       }
       this.$router.push({ name: 'Popup' });
     }

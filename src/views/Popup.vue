@@ -109,7 +109,8 @@ export default {
       cart: false,
       counterID: "counter",
       premadeBurgerNo: 0,
-      ingredients: this.$store.state.ingredients
+      ingredients: this.$store.state.ingredients,
+      burgerNo: 0
     };
   },
   created: function() {
@@ -119,9 +120,6 @@ export default {
         this.clear();
         this.itemCategory='CustomBurger';
         this.orderedBurgers=this.$store.state.orderedBurgers;
-        let number=0
-        number= this.orderedBurgers.length+1
-        this.title=this.uiLabels.customBurger +' '+ number;
         this.burgerIngredients=this.$store.state.selectedBurger;
         for (var j = 0; j < this.burgerIngredients.length; j++) {
           if (this.burgerIngredients[j].category===4) {
@@ -146,9 +144,21 @@ export default {
           else if (this.burgerIngredients[j].category===3) {
             this.sauces.push(this.burgerIngredients[j])
           }
+          else {
+            let number=0
+            if (data.cart==true) {
+            this.burgerNo=this.burgerIngredients[j];
+            console.log(this.burgerNo);
+            number=this.burgerNo
+          }
+          else {
+            number= this.orderedBurgers.length+1
+          }
+          this.title=this.uiLabels.customBurger +' '+ number;
+          }
         }
+
         this.calculatePrice();
-        // this.ingredients= {bun: this.$s tore.state.selectedBurger.buns, protein: this.$store.state.selectedBurger.protein, vegetables: this.$store.state.selectedBurger.vegetables, sauces: this.$store.state.selectedBurger.sauces, extras: this.$store.state.selectedBurger.extras};
       }
       else if (data.data=='Drinks') {
         this.menuItem=this.$store.state.drinks;
@@ -206,30 +216,6 @@ export default {
         else {
           this.title=this.uiLabels.premade_burger+' '+(this.premadeBurgerNo);
         }
-        // for (var i = 0; i < this.$store.state.selectedPremadeBurger.length; i++) {
-        //   if (this.$store.state.selectedPremadeBurger[i].category===7) {
-        //     this.menuItem=this.$store.state.selectedPremadeBurger[i];
-        //     console.log(this.menuItem.category);
-        //   }
-        //   else if (this.$store.state.selectedPremadeBurger[i].category===4) {
-        //     this.bun=this.$store.state.selectedPremadeBurger[i]
-        //   }
-        //   else if (this.$store.state.selectedPremadeBurger[i].category===1) {
-        //     this.protein=this.$store.state.selectedPremadeBurger[i]
-        //   }
-        //   else if (this.$store.state.selectedPremadeBurger[i].category===2) {
-        //     this.vegetables.push(this.$store.state.selectedPremadeBurger[i])
-        //   }
-        //   else if (this.$store.state.selectedPremadeBurger[i].category===3) {
-        //     this.sauces.push(this.$store.state.selectedPremadeBurger[i])
-        //   }
-        //   else {
-        //     if (this.cart==true) {
-        //       this.premadeBurgerNo=this.$store.state.selectedPremadeBurger[i];
-        //       console.log(this.premadeBurgerNo)
-        //     }
-        //   }
-        // }
         this.calculatePrice()
       }
       this.counter = data.counter;
@@ -252,7 +238,8 @@ export default {
       this.vegetables= [];
       this.sauces= [];
       this.extras= [];
-      this.premadeBurgerNo= 0
+      this.premadeBurgerNo= 0;
+      this.burgerNo=0
     },
     calculatePrice: function() {
       this.price=0;
@@ -548,8 +535,8 @@ text-align: center}
     margin-top: 5%
   }
   .popuptext {
-  	width: 300%;
-  	left: 115%;
+    width: 300%;
+    left: 115%
   }
 }
 
