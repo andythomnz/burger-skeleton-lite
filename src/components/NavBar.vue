@@ -5,7 +5,8 @@
         and the parent component should pass a function
     or URL to the page for the funtion-->
     <div>
-      <button class='lang' v-on:click="switchLang()">{{ uiLabels.language }}</button>
+      <button :class="[lang]" v-on:click="switchLang()"></button>
+      <!--button class='lang' v-on:click="switchLang()">{{ uiLabels.language }}</button-->
     </div>
     <div>
       <basicButton
@@ -156,6 +157,20 @@ export default {
   background: red;
   border-radius: 50%;
   width: 15%
+}
+
+.sv {
+  background: url('~@/assets/swedish-language-icon.png') no-repeat right 50% top 50%;
+  background-size: 50%;
+  width: 100%;
+  height: 100%;
+}
+.en {
+  background: url('~@/assets/english-language-icon.png') no-repeat right 50% top 50%;
+  background-size: 50%;
+  width: 100%;
+  height: 100%;
+  border-width: 0; 
 }
 
 
