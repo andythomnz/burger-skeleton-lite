@@ -275,7 +275,7 @@ export default {
       }
       if (this.itemCategory=='CustomBurger') {
         this.$store.state.selectedBurger.splice(0, this.$store.state.selectedBurger.length);
-        console.log(this.$store.state.selectedBurger.length)}
+        console.log(this.$store.state.selectedBurger.length);}
       else if (this.itemCategory=='PremadeBurger') {
         this.$store.state.selectedPremadeBurger={}
       }

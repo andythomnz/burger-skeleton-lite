@@ -37,9 +37,6 @@ export default new Vuex.Store({
     changeCurrentTab: function (store, tab) {
       store.currentTab = tab;
     },
-    changeOrders: function (store, value) {
-      store.orders[value.type] = value.value;
-    },
     toggleClose: function (store) {
       store.close = !store.close;
     },

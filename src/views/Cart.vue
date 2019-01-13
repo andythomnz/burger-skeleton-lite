@@ -86,18 +86,7 @@ export default {
 
     };
   },
-  // computed: {
-  //   finish () {
-  //     return this.$store.state.finish
-  //   }
-  // },
-
   activated () {
-    // if (this.finish) {
-    //   // this.orderedBurgers.push(Object.assign({}, this.$store.state.orders));
-    //   this.clear();
-    //   // this.$store.commit('toggleFinish');
-    // }
     this.price=0;
     this.calculatePrice();
   },
