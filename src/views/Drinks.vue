@@ -102,7 +102,7 @@ export default {
       this.chosenIngredients.push(item);
       this.price += +item.selling_price;
       this.$store.state.drinks=item;
-      this.$store.state.socket.emit('popup', {data: 'Drinks', counter:this.$refs.ingredient[item.ingredient_id -57].counter});
+      this.$store.state.socket.emit('popup', {data: 'Drinks', counter:this.$refs.ingredient[item.ingredient_id -57].counter, cart: false});
       this.$router.push({ name: "Popup" })
 
     },

@@ -13,7 +13,7 @@
         <div class='item-wrapper' v-for="(orderedBurger, index) in orderedBurgers" :key="index">
           <div>
             <img v-bind:src="orderedBurger.bun.image" width="5%" style="padding-right:3%">
-            <span id='item_name'>Customized burger {{index+1}}</span>
+            <span id='item_name'>Customized burger {{ orderedBurger.count }}</span>
             <button class='removeButton' id='btn' v-on:click="RemoveItem(orderedBurger, index)"> X </button>
             <button class='editButton' id='btn' v-on:click="editBurger(orderedBurger, index)">Edit</button>
             <span class="item-price">{{ orderedBurger.price }} kr</span>
@@ -268,7 +268,16 @@ export default {
     },
     editBurger: function(item, index) {
       if (item.item.category === 7) {
-        this.$store.state.selectedPremadeBurger={item: item.item, count: item.count};
+        this.$store.state.selectedPremadeBurger.push(item.item);
+        this.$store.state.selectedPremadeBurger.push(item.bun);
+        this.$store.state.selectedPremadeBurger.push(item.protein);
+        for (var i = 0; i < item.vegetables.length; i++) {
+          this.$store.state.selectedPremadeBurger.push(item.vegetables[i])
+        }
+        for (var j = 0; j < item.sauces.length; j++) {
+          this.$store.state.selectedPremadeBurger.push(item.sauces[j])
+        }
+        this.$store.state.selectedPremadeBurger.push(item.count);
         this.OrderedPremadeBurgers.splice(index, 1);
         this.$store.state.cartCount -= 1;
         this.price=0;
@@ -287,7 +296,7 @@ export default {
         for (var j = 0; j < item.extras.length; j++) {
           this.$store.state.selectedBurger.push(item.extras[j])
         }
-        this.$store.state.selectedBurger.push(index+1);
+        this.$store.state.selectedBurger.push(item.count);
         this.orderedBurgers.splice(index, 1);
         this.$store.state.cartCount -= 1;
         this.price=0;
