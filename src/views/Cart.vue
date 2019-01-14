@@ -13,7 +13,7 @@
         <div class='item-wrapper' v-for="(orderedBurger, index) in orderedBurgers" :key="index">
           <div>
             <img v-bind:src="orderedBurger.bun.image" width="5%" style="padding-right:3%">
-            <span id='item_name'>Customized burger {{ orderedBurger.count }}</span>
+            <span id='item_name'>{{ uiLabels.customBurger }} {{ orderedBurger.count }}</span>
             <button class='removeButton' id='btn' v-on:click="RemoveItem(orderedBurger, index)"> X </button>
             <button class='editButton' id='btn' v-on:click="editBurger(orderedBurger, index)">Edit</button>
             <span class="item-price">{{ orderedBurger.price }} kr</span>
@@ -187,13 +187,13 @@ export default {
       while (l < this.OrderedPremadeBurgers.length) {
         this.RemoveItem(this.OrderedPremadeBurgers[l].item,l);
       }
-      this.price=0
+      this.price=0;
+      this.$store.state.cartCount=0
 
     },
     placeOrder: function () {
       //Wrap the order in an object
       let chosenIngredients=[];
-      // chosenIngredients.push(this.OrderedBurger);
       for (var i = 0; i < this.OrderedDrinks.length; i++) {
         let countD=0;
         while (countD<this.OrderedDrinks[i].counter) {
@@ -238,7 +238,6 @@ export default {
       };
       // make use of socket.io's magic to send the stuff to the kitchen via the server (app.js)
       this.$store.state.socket.emit("order", { order: order });
-      //set all counters to 0. Notice the use of $refs
       this.Cancel()
       this.price = 0;
       this.$router.push({ name: "payment" });

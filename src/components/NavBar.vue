@@ -1,12 +1,7 @@
 <template>
   <div class="bar-wrapper">
-    <!-- needs boolean for show,
-         an icon
-        and the parent component should pass a function
-    or URL to the page for the funtion-->
     <div>
       <button :class="[lang]" v-on:click="switchLang()"></button>
-      <!--button class='lang' v-on:click="switchLang()">{{ uiLabels.language }}</button-->
     </div>
     <div>
       <basicButton
@@ -116,6 +111,7 @@ export default {
 <style scoped>
 #buttons {
   padding-bottom: 15%;
+  height:100%;
   border-radius: 10%
 }
 
@@ -124,7 +120,6 @@ export default {
   width: 100%;
   padding-top: 0;
   background: #f2f2f2;
-  /*padding-bottom: 0.5%;*/
   display: grid;
   grid-gap: 10px;
   grid-template-columns: 10% 10% auto 10% 10%;
@@ -144,14 +139,14 @@ export default {
 
 #cartButton {
   position: relative;
-  padding-bottom: 15%;
+  height: 100%;
   border-radius: 10%
 }
 
 #cartNumber {
   position: absolute;
   left: 45%;
-  bottom: 60%;
+  bottom: 48%;
   font-size: 1vw;
   color: white;
   background: red;
@@ -164,13 +159,14 @@ export default {
   background-size: 50%;
   width: 100%;
   height: 100%;
+  border-width: 0;
 }
 .en {
   background: url('~@/assets/english-language-icon.png') no-repeat right 50% top 50%;
   background-size: 50%;
   width: 100%;
   height: 100%;
-  border-width: 0; 
+  border-width: 0;
 }
 
 

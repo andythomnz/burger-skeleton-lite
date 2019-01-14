@@ -19,15 +19,15 @@
           <div class='icons' v-if="itemCategory!= 'CustomBurger'" >
           <div v-if="menuItem.milk_free" v-on:click="clickInfo('lactose')" id='info'>
             <img src="../assets/milkfree.png" class="icon">
-            <p v-if='showLactose'><span class="popuptext" id="myInfo">This item is lactose-free</span></p>
+            <p v-if='showLactose'><span class="popuptext" id="myInfo">{{ uiLabels.lactose }}</span></p>
           </div>
           <div v-if="menuItem.gluten_free" v-on:click="clickInfo('gluten')" id='info'>
             <img src="../assets/glutenfree.png" class="icon">
-            <p v-if='showGluten'><span class="popuptext" id="myInfo">This item is gluten-free</span></p>
+            <p v-if='showGluten'><span class="popuptext" id="myInfo">{{ uiLabels.gluten }}</span></p>
           </div>
           <div v-if="menuItem.vegan" v-on:click="clickInfo('vegan')" id='info'>
             <img src="../assets/vegan.png" class="icon">
-            <p v-if='showVegan'><span class="popuptext" id="myInfo">This item is vegan</span></p>
+            <p v-if='showVegan'><span class="popuptext" id="myInfo">{{ uiLabels.vegan }}</span></p>
           </div></div>
           <div v-if="itemCategory === 'CustomBurger' || itemCategory==='PremadeBurger'" class='ingredients'>
             <div style="padding-left: 5%">
@@ -49,17 +49,6 @@
                 </ul></p>
             </div>
           </div>
-
-          <!-- <div v-if="itemCategory === 'PremadeBurger'" class='ingredients'>
-            <div style="padding-left: 5px; padding-right: 5px">
-              <p style="font-weight: bold; font-size: 16pt">{{ uiLabels.PremadeBurgerIngredients }}: </p>
-              <p>{{ uiLabels.bun }}: {{ bun }}</p>
-              <p>{{ uiLabels.protein }}: {{ protein }}</p>
-              <p>{{ uiLabels.vegetables }}: {{ vegetables }}</p>
-              <p>{{ uiLabels.sauces }}: {{ sauces }}</p>
-            </div>
-          </div> -->
-
           <div class="price">
             <p>{{ uiLabels.price }}:
               <span v-if="itemCategory === 'CustomBurger' || itemCategory==='PremadeBurger'">{{ price }} kr</span>
@@ -487,7 +476,7 @@ text-align: center}
   border-radius: 10%;
   border-color: rgb(253, 202, 124);
   background-color:rgb(255, 225, 185);
-  width: 20%;
+  width: 25%;
   margin-top: 5%;
   margin-bottom: 5%;
 }

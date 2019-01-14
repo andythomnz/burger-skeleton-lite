@@ -1,6 +1,11 @@
 <template>
 <div id="orders">
-  <button v-on:click="switchLang()">{{ uiLabels.language }}</button>
+  <NavBar
+    style="height:10vh"
+    nextRoute=""
+    backRoute=""
+    showCart=''>
+  </NavBar>
   <h1>{{ uiLabels.ordersInQueue }}</h1>
   <div class='kitchen'>
     <span :class='kitchenAll' v-on:click="changeKitchen('AllKitchen')">{{ uiLabels.all }}</span>
@@ -42,7 +47,7 @@
   </tbody>
   </table>
   <h1>{{ uiLabels.ordersFinished }}</h1>
-  <table id="finishTable" >
+  <table id="finishTable" v-if="isDone.length>0">
   <tbody>
       <OrderItemIsDone
         v-for="(val, key) in isDone"
@@ -61,6 +66,7 @@ import OrderItem from '@/components/OrderItem.vue'
 import OrderItemToPrepare from '@/components/OrderItemToPrepare.vue'
 import OrderItemIsDone from '@/components/OrderItemIsDone.vue'
 import DetailItemToPrepare from '@/components/DetailItemToPrepare.vue'
+import NavBar from "@/components/NavBar.vue";
 
 //import methods and data that are shared between ordering and kitchen views
 import sharedVueStuff from '@/components/sharedVueStuff.js'
@@ -71,14 +77,13 @@ export default {
     OrderItem,
     OrderItemToPrepare,
     OrderItemIsDone,
-    DetailItemToPrepare
+    DetailItemToPrepare,
+    NavBar
   },
   mixins: [sharedVueStuff], // include stuff that is used in both
                             //the ordering system and the kitchen
   data: function(){
     return {
-      chosenIngredients: [],
-      price: 0,
       tableComplete: 'tableName',
       tableProtein: '',
       tableBuns: '',
@@ -89,7 +94,7 @@ export default {
       cat: 0,
       kitchenHot: '',
       kitchenCold: '',
-      kitchenAll: '',
+      kitchenAll: 'tableName',
       hot: true,
       cold: true
     }
@@ -209,7 +214,7 @@ export default {
     border-color: rgb(253, 202, 124);
   }
   .tableName {
-    color : red;
+    color : rgb(184, 136, 93);
   }
   .kitchen{
     margin-top: 1%;

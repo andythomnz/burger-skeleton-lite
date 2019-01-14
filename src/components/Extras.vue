@@ -1,10 +1,7 @@
 <template>
   <div
     id="ordering"
-    v-if="extras"
-  >
-
-
+    v-if="extras">
     <div class="wrapper">
       <Ingredient
         ref="ingredient"

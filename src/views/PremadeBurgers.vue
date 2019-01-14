@@ -51,13 +51,10 @@ export default {
     //Not that data is a function!
     return {
       chosenBurger: [],
-      price: 0,
-      orderNumber: "",
       bun: Object,
       protein: Object,
       vegetables: [],
       sauces: [],
-      // ingredients: this.$store.state.ingredients
     };
   },
   mounted: function() {
