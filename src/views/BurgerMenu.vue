@@ -9,20 +9,14 @@
       showCart='true'
     >
       <div slot="center-component">
-        <!-- <button
-          v-for="tab in tabs"
-          v-bind:key="tab"
-          v-bind:class="['navbutton', { active: currentTab === tab }]"
-          v-on:click="changeTab(tab)"
-        > -->
         <button
          v-for="(tab,index) in tabs"
          v-bind:key="tab"
          :class="[ 'navbutton', tab == currentTab ? 'actives': '' ]"
          @click="changeTab(tab); changeSingClass(index);">
-          {{ tab }}
-
-        </button>
+          <span v-if="lang=='en'">{{ tab }}</span>
+          <span v-else> {{ tabsSV[index] }} </span>
+         </button>
       </div>
     </NavBar>
     <div class="page">
@@ -82,6 +76,7 @@ export default {
   data: function () {        //Not that data is a function!
     return {
       tabs: ['Buns', 'Protein', 'Vegetables', 'Sauces', 'Extras'],
+      tabsSV: ['Bröd', 'Protein', 'Grönsaker', 'Såser', 'Extra Tillbehör'],
       currentId:-1,
     }
   },
