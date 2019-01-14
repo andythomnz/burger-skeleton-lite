@@ -53,5 +53,8 @@
   "payment" : "Välj din betalningsmetod",
   "cash" : "Kontanter",
   "card" : "Kort",
-  "stock" : "Lager"
+  "stock" : "Lager",
+  "lactose" : "Denna produkt är laktosfri.",
+  "gluten" : "Denna produkt är glutenfri.",
+  "vegan" : "Denna produkt är vegan."
 }

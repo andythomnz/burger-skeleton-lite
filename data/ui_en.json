@@ -53,5 +53,8 @@
   "payment" : "Choose your payment method",
   "cash" : "Cash",
   "card" : "Card",
-  "stock" : "Stock"
+  "stock" : "Stock",
+  "lactose" : "This item is lactose-free.",
+  "gluten" : "This item is gluten-free.",
+  "vegan" : "This item in vegan."
 }
