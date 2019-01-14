@@ -474,8 +474,8 @@ text-align: center}
   font-weight: bold;
   border-style:inset;
   border-radius: 10%;
-  border-color: rgb(253, 202, 124);
-  background-color:rgb(255, 225, 185);
+  border-color: #f2f2f2;
+  background-color:#f2f2f2;
   width: 25%;
   margin-top: 5%;
   margin-bottom: 5%;
@@ -491,8 +491,9 @@ text-align: center}
   padding-right: 2%;
   border-style: inset;
   border-radius: 5%;
-  border-color: rgb(253, 202, 124);
-  background-color: rgb(255, 225, 185);
+  border-color: #f2f2f2;
+  /*background-color: rgb(255, 225, 185);*/
+  background-color:#f2f2f2;
   border-width:medium;
   font-size:1.2vw
 }
@@ -512,8 +513,8 @@ text-align: center}
 .ingredients {
   border-style:inset;
   border-radius: 10%;
-  border-color: rgb(253, 202, 124);
-  background-color:rgb(255, 225, 185);
+  border-color: #f2f2f2;
+  background-color:#f2f2f2;
   width: 70%;
   margin-top: 3%;
   font-size: 1vw;
@@ -546,7 +547,5 @@ text-align: center}
     left: 115%
   }
 }
-
-
 
 </style>

@@ -355,8 +355,8 @@ h2 {
   position: relative;
   border-style:inset;
   border-radius: 8px;
-  border-color: rgb(253, 202, 124);
-  background-color:rgb(255, 225, 185);
+  border-color: #f2f2f2;
+  background-color:#f2f2f2;
   padding: 0.5% 0 0.5% 2%;
   margin-bottom: 0.5%
 }
