@@ -21,13 +21,6 @@
          :class="[ 'navbutton', tab == currentTab ? 'actives': '' ]"
          @click="changeTab(tab); changeSingClass(index);">
           {{ tab }}
-        > -->
-        <button
-         v-for="(tab,index) in tabs"
-         v-bind:key="tab"
-         :class="[ 'navbutton', tab == currentTab ? 'actives': '' ]"
-         @click="changeTab(tab); changeSingClass(index);">
-          {{ tab }}
 
         </button>
       </div>
