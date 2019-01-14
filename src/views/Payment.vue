@@ -3,16 +3,16 @@
   <NavBar
     nextRoute=""
     backRoute="MainMenu"
-    :showCart=false><h1 slot="center-component">Choose your payment method</h1>
+    showCart=''><h1 slot="center-component">{{ uiLabels.payment }}</h1>
   </NavBar>
 
   <div>
     <SplitPage>
       <template slot="left">
-        <basicButton :text="text1" :icon="icon1"></basicButton>
+        <basicButton :text="uiLabels.cash" :icon="icon1" v-on:buttonclick="Welcome()"></basicButton>
       </template>
       <template slot="right">
-        <basicButton :text="text2" :icon="icon2"></basicButton>
+        <basicButton :text="uiLabels.card" :icon="icon2" v-on:buttonclick="Welcome()"></basicButton>
       </template>
     </SplitPage>
   </div>
@@ -24,7 +24,7 @@
 import SplitPage from '@/components/SplitPage.vue'
 import basicButton from '@/components/basicButton.vue'
 import NavBar from '@/components/NavBar.vue'
-
+import sharedVueStuff from "@/components/sharedVueStuff.js";
 export default {
   name: 'Payment',
   components: {
@@ -32,18 +32,18 @@ export default {
     basicButton,
     NavBar
   },
-  // mixins: [sharedVueStuff], // include stuff that is used in both
+  mixins: [sharedVueStuff], // include stuff that is used in both
                             //the ordering system and the kitchen
   data: function(){
     return {
-      text1:'Cash',
-      text2:'Credit Card',
       icon1:require('../assets/Cash-Pay.png'),
       icon2:require('../assets/credit-card.png')
     }
   },
   methods: {
-
+    Welcome: function() {
+      this.$router.push({ name: "Welcome" });
+    }
   }
 }
 </script>

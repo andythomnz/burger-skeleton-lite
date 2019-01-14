@@ -11,8 +11,7 @@ export default {
   name: 'basicButton',
   props: {
     text: String,
-    icon: String,
-    secondaryText: Number
+    icon: String
   },
     data: function () {
     return {

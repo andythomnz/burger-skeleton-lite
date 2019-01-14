@@ -7,9 +7,9 @@ Vue.use(Router)
 let router = new Router({
   routes: [
     {
-      path: '/',
+      path: '/Ordering',
       meta: {
-        title: 'Kraft Burgers',
+        title: 'Ordering',
       },
       name: 'ordering',
       component: Ordering
@@ -26,9 +26,9 @@ let router = new Router({
       component: () => import(/* webpackChunkName: "read" */ './views/Kitchen.vue')
     },
     {
-      path: '/Welcome',
+      path: '/',
       meta: {
-        title: 'Welcome',
+        title: 'Crafty Burgers',
       },
       name: 'Welcome',
       // route level code-splitting

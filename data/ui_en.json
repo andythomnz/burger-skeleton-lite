@@ -49,5 +49,9 @@
   "eatin" : "Eat in",
   "takeaway" : "Take Away",
   "number" : "Number",
-  "chooseSauces" : "Choose up to two sauces."
+  "chooseSauces" : "Choose up to two sauces.",
+  "payment" : "Choose your payment method",
+  "cash" : "Cash",
+  "card" : "Card",
+  "stock" : "Stock"
 }

@@ -84,8 +84,6 @@ export default {
                             //the ordering system and the kitchen
   data: function(){
     return {
-      chosenIngredients: [],
-      price: 0,
       tableComplete: 'tableName',
       tableProtein: '',
       tableBuns: '',

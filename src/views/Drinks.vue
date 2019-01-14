@@ -18,25 +18,6 @@
         :key="item.ingredient_id"
       ></Ingredient>
     </div>
-
-    <!-- <h1>{{ uiLabels.order }}</h1>
-    {{ chosenIngredients.map(item => item["ingredient_"+lang]).join(', ') }},
-    {{ price }} kr
-    <button
-      v-on:click="placeOrder()"
-    >{{ uiLabels.placeOrder }}</button>
-
-    <h1>{{ uiLabels.ordersInQueue }}</h1>
-    <div>
-      <OrderItem
-        v-for="(order, key) in orders"
-        :order-id="key"
-        :order="order"
-        :ui-labels="uiLabels"
-        :lang="lang"
-        :key="key"
-      ></OrderItem>
-    </div> -->
   </div>
 </template>
 <script>
@@ -67,20 +48,9 @@ export default {
   data: function() {
     //Not that data is a function!
     return {
-      chosenIngredients: [],
-      price: 0,
-      orderNumber: "",
       id: Number
     };
   },
-  // created: function() {
-  //   this.$store.state.socket.on(
-  //     "orderNumber",
-  //     function(data) {
-  //       this.orderNumber = data;
-  //     }.bind(this)
-  //   );
-  // },
   mounted: function() {
     this.$store.state.socket.on(
       "incrementCounterDrinks", function(data) {
@@ -99,30 +69,11 @@ export default {
   },
   methods: {
     addToOrder: function(item) {
-      this.chosenIngredients.push(item);
-      this.price += +item.selling_price;
       this.$store.state.drinks=item;
       this.$store.state.socket.emit('popup', {data: 'Drinks', counter:this.$refs.ingredient[item.ingredient_id -57].counter, cart: false});
       this.$router.push({ name: "Popup" })
 
-    },
-    // placeOrder: function() {
-    //   var i,
-    //     //Wrap the order in an object
-    //     order = {
-    //       ingredients: this.$store.state.drinks,
-    //       price: this.price
-    //     };
-    //   // make use of socket.io's magic to send the stuff to the kitchen via the server (app.js)
-    //   this.$store.state.socket.emit("order", { order: order });
-    //   //set all counters to 0. Notice the use of $refs
-    //   for (i = 0; i < this.$refs.ingredient.length; i += 1) {
-    //     this.$refs.ingredient[i].resetCounter();
-    //   }
-    //   this.price = 0;
-    //   // this.chosenIngredients = [];
-    //   this.$router.push({ name: "payment" });
-    // }
+    }
   }
 };
 </script>

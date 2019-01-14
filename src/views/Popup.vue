@@ -49,17 +49,6 @@
                 </ul></p>
             </div>
           </div>
-
-          <!-- <div v-if="itemCategory === 'PremadeBurger'" class='ingredients'>
-            <div style="padding-left: 5px; padding-right: 5px">
-              <p style="font-weight: bold; font-size: 16pt">{{ uiLabels.PremadeBurgerIngredients }}: </p>
-              <p>{{ uiLabels.bun }}: {{ bun }}</p>
-              <p>{{ uiLabels.protein }}: {{ protein }}</p>
-              <p>{{ uiLabels.vegetables }}: {{ vegetables }}</p>
-              <p>{{ uiLabels.sauces }}: {{ sauces }}</p>
-            </div>
-          </div> -->
-
           <div class="price">
             <p>{{ uiLabels.price }}:
               <span v-if="itemCategory === 'CustomBurger' || itemCategory==='PremadeBurger'">{{ price }} kr</span>
@@ -487,7 +476,7 @@ text-align: center}
   border-radius: 10%;
   border-color: rgb(253, 202, 124);
   background-color:rgb(255, 225, 185);
-  width: 20%;
+  width: 25%;
   margin-top: 5%;
   margin-bottom: 5%;
 }

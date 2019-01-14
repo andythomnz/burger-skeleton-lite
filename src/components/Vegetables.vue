@@ -70,7 +70,6 @@ export default {
           this.$store.state.selectedBurger.splice(i, 1)
         }
       }
-      //delete
     }
   }
 };

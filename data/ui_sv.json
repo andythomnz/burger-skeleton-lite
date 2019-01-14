@@ -49,5 +49,9 @@
   "eatin" : "Äta Här",
   "takeaway" : "Ta Med",
   "number" : "Antal",
-  "chooseSauces" : "Välja upp till två såser."
+  "chooseSauces" : "Välj upp till två såser.",
+  "payment" : "Välj din betalningsmetod",
+  "cash" : "Kontanter",
+  "card" : "Kort",
+  "stock" : "Lager"
 }
