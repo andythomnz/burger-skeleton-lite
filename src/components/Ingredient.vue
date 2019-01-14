@@ -7,15 +7,15 @@
     <div class='icons'>
     <span v-if="item.milk_free" v-on:click="clickInfo('lactose')" id='info'>
       <img src="../assets/milkfree.png" class="icon">
-      <p v-if='showLactose'><span class="popuptext" id="myInfo">This item is lactose-free</span></p>
+      <p v-if='showLactose'><span class="popuptext" id="myInfo">{{ uiLabels.lactose }}</span></p>
     </span>
     <span v-if="item.gluten_free" v-on:click="clickInfo('gluten')" id='info'>
       <img src="../assets/glutenfree.png" class="icon">
-      <p v-if='showGluten'><span class="popuptext" id="myInfo">This item is gluten-free</span></p>
+      <p v-if='showGluten'><span class="popuptext" id="myInfo">{{ uiLabels.gluten }}</span></p>
     </span>
     <span v-if="item.vegan" v-on:click="clickInfo('vegan')" id='info'>
       <img src="../assets/vegan.png" class="icon">
-      <p v-if='showVegan'><span class="popuptext" id="myInfo">This item is vegan</span></p>
+      <p v-if='showVegan'><span class="popuptext" id="myInfo">{{ uiLabels.vegan }}</span></p>
     </span></div>
     <label>
       <button
@@ -30,9 +30,7 @@
         >
         <div class="price_number">
         <p v-if="item.category === 5 || item.category === 6 || item.category === 7">{{uiLabels.price}}: {{item.selling_price}} kr</p>
-        <!--p>{{uiLabels.stock}}: {{item.stock}}</p-->
         <p v-if="item.addi_cost>0">+ {{item.addi_cost}}kr</p>
-        <!-- <p>Stock: {{item.stock}}</p> -->
         <p id="counter" v-if="this.counter>0">{{ counter }}</p></div>
       </button>
     </label>

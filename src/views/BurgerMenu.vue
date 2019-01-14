@@ -10,7 +10,7 @@
     >
       <!--button slot="center-component" v-on:click="switchLang()">{{ uiLabels.language }}</button-->
       <div slot="center-component">
-        <button
+        <!--button
           v-for="tab in tabs"
           v-bind:key="tab"
           v-bind:class="['tab-button', { active: currentTab === tab }]"
@@ -27,7 +27,6 @@
          @click="changeTab(tab); changeSingClass(index);">
           <span v-if="lang=='en'">{{ tab }}</span>
           <span v-else> {{ tabsSV[index] }} </span>
->>>>>>> Stashed changes
         </button>
       </div>
     </NavBar>

@@ -48,5 +48,8 @@
   "welcome" : "Welcome to Crafty Burgers",
   "eatin" : "Eat in",
   "takeaway" : "Take Away",
-  "number" : "Number"
+  "number" : "Number",
+  "lactose" : "This item is lactose-free.",
+  "gluten" : "This item is gluten-free.",
+  "vegan" : "This item in vegan."
 }

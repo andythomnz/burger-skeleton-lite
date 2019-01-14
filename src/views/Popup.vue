@@ -19,15 +19,15 @@
           <div class='icons'>
           <div v-if="menuItem.milk_free" v-on:click="clickInfo('lactose')" id='info'>
             <img src="../assets/milkfree.png" class="icon">
-            <p v-if='showLactose'><span class="popuptext" id="myInfo">This item is lactose-free</span></p>
+            <p v-if='showLactose'><span class="popuptext" id="myInfo">{{ uiLabels.lactose }}</span></p>
           </div>
           <div v-if="menuItem.gluten_free" v-on:click="clickInfo('gluten')" id='info'>
             <img src="../assets/glutenfree.png" class="icon">
-            <p v-if='showGluten'><span class="popuptext" id="myInfo">This item is gluten-free</span></p>
+            <p v-if='showGluten'><span class="popuptext" id="myInfo">{{ uiLabels.gluten }}</span></p>
           </div>
           <div v-if="menuItem.vegan" v-on:click="clickInfo('vegan')" id='info'>
             <img src="../assets/vegan.png" class="icon">
-            <p v-if='showVegan'><span class="popuptext" id="myInfo">This item is vegan</span></p>
+            <p v-if='showVegan'><span class="popuptext" id="myInfo">{{ uiLabels.vegan }}</span></p>
           </div></div>
           <div v-if="itemCategory === 'CustomBurger' || itemCategory==='PremadeBurger'" class='ingredients'>
             <div style="padding-left: 5%">

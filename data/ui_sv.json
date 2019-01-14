@@ -48,5 +48,8 @@
   "welcome" : "Välkommen till Crafty Burgers",
   "eatin" : "Äta Här",
   "takeaway" : "Ta Med",
-  "number" : "Antal"
+  "number" : "Antal",
+  "lactose" : "Denna produkt är laktosfri.",
+  "gluten" : "Denna produkt är glutenfri.",
+  "vegan" : "Denna produkt är vegan."
 }
