@@ -15,8 +15,19 @@
           v-bind:key="tab"
           v-bind:class="['tab-button', { active: currentTab === tab }]"
           v-on:click="changeTab(tab)"
+<<<<<<< Updated upstream
         >
           {{ tab }}
+=======
+        > -->
+        <button
+         v-for="(tab,index) in tabs"
+         v-bind:key="tab"
+         :class="[ 'navbutton', tab == currentTab ? 'actives': '' ]"
+         @click="changeTab(tab); changeSingClass(index);">
+          <span v-if="lang=='en'">{{ tab }}</span>
+          <span v-else> {{ tabsSV[index] }} </span>
+>>>>>>> Stashed changes
         </button>
       </div>
     </NavBar>
@@ -80,9 +91,11 @@ export default {
     return {
       // currentTab: 'Buns',
       tabs: ['Buns', 'Protein', 'Vegetables', 'Sauces', 'Extras'],
-      chosenIngredients: [],
-      price: 0,
-      orderNumber: "",
+      tabsSV: ['Bröd', 'Protein', 'Grönsaker', 'Såser', 'Extra Tillbehör'],
+      // chosenIngredients: [],
+      // price: 0,
+      // orderNumber: "",
+      currentId:-1,
     }
   },
   activated () {
