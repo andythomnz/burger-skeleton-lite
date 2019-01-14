@@ -94,7 +94,7 @@ export default {
       cat: 0,
       kitchenHot: '',
       kitchenCold: '',
-      kitchenAll: '',
+      kitchenAll: 'tableName',
       hot: true,
       cold: true
     }
@@ -214,7 +214,7 @@ export default {
     border-color: rgb(253, 202, 124);
   }
   .tableName {
-    color : red;
+    color : rgb(184, 136, 93);
   }
   .kitchen{
     margin-top: 1%;
