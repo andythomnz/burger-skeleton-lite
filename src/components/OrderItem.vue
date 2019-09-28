@@ -29,7 +29,6 @@ export default {
   mixins: [sharedVueStuff],
   data: function () {
     return {
-
     }
   },
   methods: {
@@ -53,13 +52,11 @@ export default {
   button {
     font-size: 1vw
   }
-
   .content {
     padding-right: 5%;
     margin-left: 5%;
     padding-top: 2%;
   }
-
   td {
     vertical-align: top;
   }

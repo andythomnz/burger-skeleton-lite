@@ -7,12 +7,10 @@
 </template>
 
 <script>
-import Ordering from "./views/Ordering.vue"
 
 export default {
   name: 'app',
   components: {
-    Ordering
   }
 }
 </script>

@@ -1,30 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Ordering from './views/Ordering.vue'
 
 Vue.use(Router)
 
 let router = new Router({
   routes: [
-    {
-      path: '/Ordering',
-      meta: {
-        title: 'Ordering',
-      },
-      name: 'ordering',
-      component: Ordering
-    },
-    {
-      path: '/kitchen',
-      meta: {
-        title: 'Kitchen',
-      },
-      name: 'kitchen',
-      // route level code-splitting
-      // this generates a separate chunk (read.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "read" */ './views/Kitchen.vue')
-    },
     {
       path: '/stock',
       meta: {
@@ -70,20 +50,20 @@ let router = new Router({
       component: () => import(/* webpackChunkName: "read" */ './views/Payment.vue')
     },
     {
-      path: '/Ordering',
-      meta: {
-        title: 'Ordering',
-      },
-      name: 'Ordering',
-      component: () => import(/* webpackChunkName: "read" */ './views/Ordering.vue')
-    },
-    {
       path: '/BurgerMenu',
       meta: {
         title: 'BurgerMenu',
       },
       name: 'BurgerMenu',
       component: () => import(/* webpackChunkName: "read" */ './views/BurgerMenu.vue')
+    },
+    {
+      path: '/PremadeBurgers',
+      meta: {
+        title: 'PremadeBurgers',
+      },
+      name: 'PremadeBurgers',
+      component: () => import(/* webpackChunkName: "read" */ './views/PremadeBurgers.vue')
     },
     {
       path: '/Drinks',
@@ -110,20 +90,12 @@ let router = new Router({
       component: () => import(/* webpackChunkName: "read" */ './views/Cart.vue')
     },
     {
-      path: '/Popup',
+      path: '/Popup', //Confirm Item 
       meta: {
         title: 'Popup',
       },
       name: 'Popup',
       component: () => import(/* webpackChunkName: "read" */ './views/Popup.vue')
-    },
-    {
-      path: '/PremadeBurgers',
-      meta: {
-        title: 'PremadeBurgers',
-      },
-      name: 'PremadeBurgers',
-      component: () => import(/* webpackChunkName: "read" */ './views/PremadeBurgers.vue')
     }
   ]
 })
