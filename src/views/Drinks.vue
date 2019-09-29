@@ -70,7 +70,7 @@ export default {
   methods: {
     addToOrder: function(item) {
       this.$store.state.drinks=item;
-      this.$store.state.socket.emit('popup', {data: 'Drinks', counter:this.$refs.ingredient[item.ingredient_id -57].counter, cart: false});
+      this.$store.state.socket.emit('popup', {data: 'Drinks', counter:this.$refs.ingredient[item.ingredient_id-57].counter, cart: false});
       this.$router.push({ name: "Popup" })
 
     }

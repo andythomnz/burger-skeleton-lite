@@ -9,10 +9,10 @@
       <SplitPage>
         <template slot="left">
           <basicButton
-            :text="uiLabels.myob"
+            :text="'Recommended Item!'"
             :icon="require('../assets/restaurant.png')"
-            v-on:buttonclick="NextPage('BurgerMenu')"
-          ></basicButton>
+            v-on:buttonclick="NextPage('MainMenu')"  
+          ></basicButton> <!-- Nextpage should redirect to another page -->
         </template>
         <template slot="right" >
           <div class="side-grid">

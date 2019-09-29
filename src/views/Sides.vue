@@ -11,9 +11,9 @@
       <Ingredient
         ref="ingredient"
         v-for="item in ingredients"
+        v-if="item.category == 5"
         v-on:increment="addToOrder(item)"
         :item="item"
-        v-if="item.category == 5"
         :lang="lang"
         :key="item.ingredient_id"
       ></Ingredient>
@@ -44,7 +44,7 @@ export default {
     NavBar
   },
   mixins: [sharedVueStuff], // include stuff that is used in both
-  // the ordering system and the kitchen
+                            // the ordering system and the kitchen
   data: function() {
     //Not that data is a function!
     return {
@@ -69,8 +69,13 @@ export default {
   },
   methods: {
     addToOrder: function(item) {
+      //new Work
+      this.$store.dispatch('confirmItemAsync', {
+        item: item
+      })
+      //Old work
       this.$store.state.sides=item;
-      this.$store.state.socket.emit('popup', {data: 'Sides', counter:this.$refs.ingredient[item.ingredient_id -54].counter, cart:false});
+      this.$store.state.socket.emit('popup', {data: 'Sides', counter:this.$refs.ingredient[item.ingredient_id-54].counter, cart:false});
       this.$router.push({ name: "Popup" })
     }
   }

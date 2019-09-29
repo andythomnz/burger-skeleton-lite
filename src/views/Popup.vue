@@ -9,53 +9,75 @@
     <div class='OrderItem'>
       <div class='wrapper'>
         <div id='half1'>
-          <div id="item_name" v-if="itemCategory!= 'CustomBurger'" style="font-weight:bold; font-size:2vw; margin-bottom:10px"> {{ menuItem["ingredient_" +lang] }} </div>
-          <div><img id="image" v-bind:src="menuItem.image" width="50%"></div>
-          <div style="padding-top:2%"><span><button v-if="this.cart==false" id='btn' v-on:click='decrement(menuItem)' style="font-size:0.8vw">-</button>
-            <span :id="counterID">{{this.counter}}</span>
-            <button v-if="this.cart==false" v-on:click='increment(menuItem)' id='btn' style="font-size:0.8vw">+</button></span></div>
+          <div id="item_name" v-if="itemCategory != 'CustomBurger'" style="font-weight:bold; font-size:2vw; margin-bottom:10px"> 
+            {{ menuItem["ingredient_" +lang] }} 
+          </div>
+          <img id="image" v-bind:src="menuItem.image" width="50%">
+          <div style="padding-top:2%">
+            <span>
+              <button v-if="this.cart==false" id='btn' v-on:click='decrement(menuItem)' style="font-size:0.8vw">
+                -
+              </button>
+              <span :id="counterID">
+                {{this.counter}}
+              </span>
+              <button v-if="this.cart==false" v-on:click='increment(menuItem)' id='btn' style="font-size:0.8vw">
+                +
+              </button>
+            </span>
+          </div>
         </div>
         <div id='half2'>
           <div class='icons' v-if="itemCategory!= 'CustomBurger'" >
-          <div v-if="menuItem.milk_free" v-on:click="clickInfo('lactose')" id='info'>
-            <img src="../assets/milkfree.png" class="icon">
-            <p v-if='showLactose'><span class="popuptext" id="myInfo">{{ uiLabels.lactose }}</span></p>
-          </div>
-          <div v-if="menuItem.gluten_free" v-on:click="clickInfo('gluten')" id='info'>
-            <img src="../assets/glutenfree.png" class="icon">
-            <p v-if='showGluten'><span class="popuptext" id="myInfo">{{ uiLabels.gluten }}</span></p>
-          </div>
-          <div v-if="menuItem.vegan" v-on:click="clickInfo('vegan')" id='info'>
-            <img src="../assets/vegan.png" class="icon">
-            <p v-if='showVegan'><span class="popuptext" id="myInfo">{{ uiLabels.vegan }}</span></p>
-          </div></div>
-          <div v-if="itemCategory === 'CustomBurger' || itemCategory==='PremadeBurger'" class='ingredients'>
-            <div style="padding-left: 5%">
-              <p style="font-weight: bold; font-size: 1.5vw">{{ uiLabels.ingredients }}: </p>
-              <p>{{ uiLabels.bun }}: {{ bun["ingredient_"+lang] }}</p>
-              <p>{{ uiLabels.protein }}: {{ protein['ingredient_'+lang]}}
-                <span v-if="protein.addi_cost>0"> (+ {{ protein.addi_cost }} kr)</span></p>
-              <p>{{ uiLabels.vegetables }}:
-                <ul v-for="item in vegetables" :key="item.ingredient_id">
-                  <li>{{ item['ingredient_'+lang] }} <span v-if="item.addi_cost>0"> (+ {{ item.addi_cost }} kr)</span><span v-if="vegetables.length>0"> <button id='btn' v-on:click="removeIngredient('vegetables', item)">x</button></span></li>
-                </ul></p>
-              <p>{{ uiLabels.sauces }}:
-                <ul v-for="item in sauces" :key="item.ingredient_id">
-                  <li>{{ item['ingredient_'+lang] }} <span v-if="item.addi_cost>0"> (+ {{ item.addi_cost }} kr)</span><span v-if="sauces.length>0"> <button id='btn' v-on:click="removeIngredient('sauces', item)">x</button></span></li>
-                </ul></p>
-              <p v-if="extras.length>0">{{ uiLabels.extras }}:
-                <ul v-for="item in extras" :key="item.ingredient_id">
-                  <li>{{ item['ingredient_'+lang] }} <span v-if="item.addi_cost>0"> (+ {{ item.addi_cost }} kr)</span><span v-if="extras.length>0"> <button id='btn' v-on:click="removeIngredient('extras', item)">x</button></span></li>
-                </ul></p>
+            <div v-if="menuItem.milk_free" v-on:click="clickInfo('lactose')" id='info'>
+              <img src="../assets/milkfree.png" class="icon">
+              <p v-if='showLactose'><span class="popuptext" id="myInfo">{{ uiLabels.lactose }}</span></p>
             </div>
-          </div>
+            <div v-if="menuItem.gluten_free" v-on:click="clickInfo('gluten')" id='info'>
+              <img src="../assets/glutenfree.png" class="icon">
+              <p v-if='showGluten'><span class="popuptext" id="myInfo">{{ uiLabels.gluten }}</span></p>
+            </div>
+            <div v-if="menuItem.vegan" v-on:click="clickInfo('vegan')" id='info'>
+              <img src="../assets/vegan.png" class="icon">
+              <p v-if='showVegan'><span class="popuptext" id="myInfo">{{ uiLabels.vegan }}</span></p>
+            </div></div>
+            <div v-if="itemCategory === 'CustomBurger' || itemCategory==='PremadeBurger'" class='ingredients'>
+              <div style="padding-left: 5%">
+                <p style="font-weight: bold; font-size: 1.5vw">{{ uiLabels.ingredients }}: </p>
+                <p>{{ uiLabels.bun }}: {{ bun["ingredient_"+lang] }}</p>
+                <p>{{ uiLabels.protein }}: {{ protein['ingredient_'+lang]}}
+                  <span v-if="protein.addi_cost>0"> (+ {{ protein.addi_cost }} kr)</span></p>
+                <p>{{ uiLabels.vegetables }}:
+                  <ul v-for="item in vegetables" :key="item.ingredient_id">
+                    <li>{{ item['ingredient_'+lang] }} <span v-if="item.addi_cost>0"> (+ {{ item.addi_cost }} kr)</span><span v-if="vegetables.length>0"> <button id='btn' v-on:click="removeIngredient('vegetables', item)">x</button></span></li>
+                  </ul></p>
+                <p>{{ uiLabels.sauces }}:
+                  <ul v-for="item in sauces" :key="item.ingredient_id">
+                    <li>{{ item['ingredient_'+lang] }} <span v-if="item.addi_cost>0"> (+ {{ item.addi_cost }} kr)</span><span v-if="sauces.length>0"> <button id='btn' v-on:click="removeIngredient('sauces', item)">x</button></span></li>
+                  </ul></p>
+                <p v-if="extras.length>0">{{ uiLabels.extras }}:
+                  <ul v-for="item in extras" :key="item.ingredient_id">
+                    <li>{{ item['ingredient_'+lang] }} <span v-if="item.addi_cost>0"> (+ {{ item.addi_cost }} kr)</span><span v-if="extras.length>0"> <button id='btn' v-on:click="removeIngredient('extras', item)">x</button></span></li>
+                  </ul>
+                </p>
+              </div>
+            </div>
           <div class="price">
             <p>{{ uiLabels.price }}:
-              <span v-if="itemCategory === 'CustomBurger' || itemCategory==='PremadeBurger'">{{ price }} kr</span>
-              <span v-else >{{ menuItem.selling_price }} kr</span></p>
+              <span v-if="itemCategory === 'CustomBurger' || itemCategory==='PremadeBurger'">
+                {{ price }} kr
+              </span>
+              <span v-else >
+                {{ menuItem.selling_price }} kr
+              </span>
+            </p>
             <p>{{ uiLabels.sum }}:
-              <span v-if="itemCategory === 'CustomBurger' || itemCategory==='PremadeBurger'">{{ price*counter }} kr</span>
-              <span v-else >{{ menuItem.selling_price*this.counter }} kr</span></p>
+              <span v-if="itemCategory === 'CustomBurger' || itemCategory==='PremadeBurger'">
+                {{ price*counter }} kr
+              </span>
+              <span v-else >
+                {{ menuItem.selling_price*this.counter }} kr
+              </span></p>
           </div>
         </div>
       </div>
@@ -151,7 +173,7 @@ export default {
 
         this.calculatePrice();
       }
-      else if (data.data=='Drinks') {
+      else if (data.data =='Drinks') {
         this.menuItem=this.$store.state.drinks;
         this.itemCategory='Drinks';
         this.title=this.uiLabels.drink +' '+(this.$store.state.orderedDrinks.length+1);

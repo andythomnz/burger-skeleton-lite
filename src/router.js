@@ -50,14 +50,6 @@ let router = new Router({
       component: () => import(/* webpackChunkName: "read" */ './views/Payment.vue')
     },
     {
-      path: '/BurgerMenu',
-      meta: {
-        title: 'BurgerMenu',
-      },
-      name: 'BurgerMenu',
-      component: () => import(/* webpackChunkName: "read" */ './views/BurgerMenu.vue')
-    },
-    {
       path: '/PremadeBurgers',
       meta: {
         title: 'PremadeBurgers',
